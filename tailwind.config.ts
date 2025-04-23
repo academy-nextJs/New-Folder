@@ -22,6 +22,7 @@ const config: Config = {
     //     "2xl": "1.5rem",
     //   },
     },
+    
   },
   plugins: [],
 };
