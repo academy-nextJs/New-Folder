@@ -1,15 +1,18 @@
-import React from 'react'
+import React from "react";
 
 const layout = ({
-    children,
-  }: Readonly<{
-    children: React.ReactNode;
-  }>) => {
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) => {
   return (
-    <div>
-      {children}
-    </div>
-  )
-}
+    <html lang="en">
+      <body>
+        Dashboaaarrddddd
+        {children}
+      </body>
+    </html>
+  );
+};
 
-export default layout
+export default layout;
