@@ -10,9 +10,9 @@ const TimerButton: FC<IButtonWithoutTitle> = ({ onclick }) => {
   const timerRef = useRef(null);
 
   const handleClick = () => {
-    if (timerRef.current) {
-      timerRef.current.reset();
-    }
+    // if (timerRef.current) {
+    //   timerRef.current.reset();
+    // }
     if (onclick) {
       onclick();
     }

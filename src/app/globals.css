@@ -51,6 +51,7 @@
 
 body {
   font-family: "IRANSans", sans-serif;
+  direction: rtl;
 }
 
 :root {
