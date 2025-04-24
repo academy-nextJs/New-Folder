@@ -8,7 +8,7 @@ import { ILinkButton } from '@/types/buttons-type/buttons-type'
 const LinkButtons: FC<ILinkButton> = ({ title, classname, link }) => {
   return (
     <div>
-      <Button variant={'scale'} onClick={() => redirect(link)} className={`cursor-pointer rounded-xl h-[36px] flex ${classname}`}>  
+      <Button variant={'scale'} onClick={() => redirect(link)} className={`cursor-pointer rounded-xl flex ${classname}`}>  
         <ChevronLeft />
         {title}
        </Button>

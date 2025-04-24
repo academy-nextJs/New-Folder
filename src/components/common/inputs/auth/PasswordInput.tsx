@@ -1,0 +1,45 @@
+'use client'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { IPasswordInput } from '@/types/input-type/input-types'
+import { Eye, EyeOff } from 'lucide-react'
+import React, { FC, useState } from 'react'
+
+const PasswordInput: FC<IPasswordInput> = ({ label, placeholder, classname, background, color, onchange, mandatory }) => {
+    const [showPassword, setShowPassword] = useState<boolean>(false)
+
+    return (
+        <div className='rtl flex flex-col gap-2'>
+            <Label htmlFor={label} className={`text-[13px] text-white flex gap-0.5 ${color}`}>
+                <span> {label} </span>
+                {mandatory === true ? <p className='text-red-500'> * </p> : <></>}
+                <span> : </span>
+            </Label>
+            <div className='relative w-fit'>
+                <Input
+                    onChange={onchange}
+                    type={showPassword ? 'text' : 'password'}
+                    placeholder={placeholder || ''}
+                    id={label}
+                    className={`py-3 border border-border px-4  text-[#FFFFFF] rounded-[16px] text-[16px] ${classname} ${color} ${background}`}
+                />
+                <Button
+                    onClick={() => {
+                        if (showPassword) {
+                            setShowPassword(false)
+                        }
+                        else {
+                            setShowPassword(true)
+                        }
+                    }}
+                    className='cursor-pointer absolute left-3 top-2.5'
+                >
+                    {showPassword ? <EyeOff className={`size-[20px] ${color}`} /> : <Eye className={`size-[20px] ${color}`} />}
+                </Button>
+            </div>
+        </div>
+    )
+}
+
+export default PasswordInput

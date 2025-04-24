@@ -130,3 +130,7 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+.rtl {
+  direction: rtl;
+}
