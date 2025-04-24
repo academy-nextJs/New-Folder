@@ -1,7 +1,7 @@
 import { ChangeEvent } from "react";
 
 export interface IInput {
-    label: string;
+    label?: string;
     placeholder?: string;
     classname?: string;
     type?: string;
@@ -12,7 +12,7 @@ export interface IInput {
 }
 
 export interface IPasswordInput {
-    label: string;
+    label?: string;
     placeholder?: string;
     classname?: string;
     color?: string;
@@ -24,3 +24,15 @@ export interface IPasswordInput {
 export interface IOTPInput {
     onchange?: (val: string) => void;
 }
+
+export interface IDatePicker {
+    label?: string
+    onChange?: (date: any) => void
+    placeholder?: string
+    mandatory?: boolean
+    background?: string
+    color?: string
+    className?: string
+    icon?: React.ReactNode
+  }
+  
