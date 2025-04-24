@@ -7,7 +7,7 @@ export interface IButtonWithTitle {
 }
 
 export interface IButtonWithIcon {
-    icon: ReactNode;
+    icon?: ReactNode;
     title: string;
     classname?: string;
     onclick?: () => void;
