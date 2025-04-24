@@ -1,9 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+
 import { getToken } from '../cookie/auth'
 
 const baseURL = 'https://delta-project.liara.run/api'
 
 async function fetchWithAuth(url: string, options: RequestInit = {}) {
-  const token = getToken()
+  const token =await getToken()
   
   const headers = {
     'Content-Type': 'application/json',

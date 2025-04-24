@@ -1,6 +1,5 @@
 import authBanner from "../../assets/auth banner.svg";
 import Image from "next/image";
-import { Icon } from "lucide-react";
 
 const Container = ({children}:{children: React.ReactNode;}) => {
   return (
