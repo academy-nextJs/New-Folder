@@ -1,10 +1,10 @@
 'use client'
 import { Button } from '@/components/ui/button'
-import { ILoginButton } from '@/types/buttons-type/loginButton-type'
 import Image from 'next/image'
 import React, { FC } from 'react'
 import Google from '@/assets/google.png'
 import Apple from '@/assets/apple.png'
+import { ILoginButton } from '@/types/buttons-type/buttons-type'
 
 const LoginButton: FC<ILoginButton> = ({ title, classname, onclick, icon }) => {
     return (
