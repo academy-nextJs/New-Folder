@@ -1,6 +1,7 @@
 import AboutBox from '@/components/contact-us/AboutBox'
 import ContactForm from '@/components/contact-us/ContactForm'
 import { AtSign, ChevronLeft, Phone } from 'lucide-react'
+import Link from 'next/link'
 import React from 'react'
 
 const page = () => {
@@ -9,9 +10,9 @@ const page = () => {
     <div className='flex xl:flex-row flex-col gap-[100px] my-[50px] text-white'>
       <div className='flex gap-6 flex-col'>
         <div className='flex gap-3 items-center w-fit text-[13px]'>
-          <h2 > خانه </h2>
+          <Link href={`/`}> خانه </Link>
           <ChevronLeft className='text-[#AAAAAA]' size={20} />
-          <h2 className='text-[#8CFF45]'> ارتباط با ما </h2>
+          <Link href={`/contact-us`} className='text-[#8CFF45]'> ارتباط با ما </Link>
         </div>
         <div className="flex flex-row w-fit items-center gap-4 justify-end">
           <span className="xl:text-base text-[#8CFF45] text-sm"> ارتباط با ما </span>
