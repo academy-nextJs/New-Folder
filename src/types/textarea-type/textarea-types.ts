@@ -7,4 +7,5 @@ export interface ITextarea {
     background?: string;
     label?: string;
     mandatory?: boolean;
+    placeholder?: string;
 }

@@ -2,6 +2,7 @@ import { Providers } from "@/utils/service/TanstakProvider";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Footer from "@/components/common/footer/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,10 +27,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-secondary-foreground`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#232323]`}
       >
-        <div className="w-11/12 mx-auto ">
-          <Providers>{children}</Providers>
+        <div className="md:px-8 px-0 mx-auto ">
+          <Providers>
+            {children}
+            <Footer />
+          </Providers>
         </div>
       </body>
     </html>

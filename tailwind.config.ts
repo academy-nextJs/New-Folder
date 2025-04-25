@@ -7,7 +7,7 @@ const config: Config = {
     extend: {
       colors: {
         primary: "#8CFF45", // سبز فسفری
-        secondary: "#1A1A1A", // پس‌زمینه اصلی
+        secondary: "#232323", // پس‌زمینه اصلی
         foreground: "#F2F2F2", // متن اصلی
         muted: "#B3B3B3", // متن کم‌رنگ
         accent: "#A08CFF", // دکمه‌های خاص مثل "ثبت آگهی"

@@ -4,9 +4,9 @@ import React, { useRef, FC } from 'react';
 import { Button } from '@/components/ui/button';
 import TimerTwoMinutes from '@/utils/helper/Timer/TowMinuteTimer';
 import { ChevronLeft, Clock } from 'lucide-react';
-import { IButtonWithoutTitle } from '@/types/buttons-type/buttons-type';
+import { IButton } from '@/types/buttons-type/buttons-type';
 
-const TimerButton: FC<IButtonWithoutTitle> = ({ onclick }) => {
+const TimerButton: FC<IButton> = ({ onclick }) => {
   const timerRef = useRef(null);
 
   const handleClick = () => {
