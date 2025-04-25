@@ -6,7 +6,7 @@ import React from 'react'
 const page = () => {
 
   return (
-    <div className='flex gap-[100px] my-[50px] text-white'>
+    <div className='flex xl:flex-row flex-col xl:p-0 p-8 gap-[100px] my-[50px] text-white'>
       <div className='flex gap-6 flex-col'>
         <div className='flex gap-3 items-center w-fit text-[13px]'>
           <h2 > خانه </h2>
@@ -23,13 +23,22 @@ const page = () => {
             </svg>
           </div>
         </div>
-        <h2 className='text-[32px] font-[300]'> هر ساعت از شبانه روز که باشه ،<span className='font-semibold'> ما کنارتیم </span> ! </h2>
-        <p className='font-[400]'> هر ساعت از شبانه روز که باشه تیم پیشتیبانی دلتا پاسخگوی سوالات و انتقادات شما هستند تا در اسرع وقت مشکلتان را حل کنیم ! </p>
+        <h2 className='xl:text-[32px] lg:text-[24px] text-[20px] font-[300]'> هر ساعت از شبانه روز که باشه ،<span className='font-semibold'> ما کنارتیم </span> ! </h2>
+        <p className='font-[400] xl:text-base text-sm'> هر ساعت از شبانه روز که باشه تیم پیشتیبانی دلتا پاسخگوی سوالات و انتقادات شما هستند تا در اسرع وقت مشکلتان را حل کنیم ! </p>
         <AboutBox title='09229167194 - 098541612310' icon={<Phone />} />
         <AboutBox title='Delta@gmail.com' icon={<AtSign />} />
         <AboutBox title='گیلان ، رشت ، میدان آزادی ، جنب چهار راه عظیمی زاده' icon={<AtSign />} />
       </div>
-      <ContactForm />
+      <div className='bg-[#3B3B3B] mx-[100px] min-w-[387.89453125] rounded-[32px] h-[365.8563232421875] my-auto relative hidden xl:flex justify-center items-center'>
+        <div className='w-[479] h-[340.15728759765625] bg-[#2D2D2D] rounded-[32px] absolute flex justify-center items-center'>
+          <div className='bg-[#1C1C1C] w-[575] h-[315] absolute rounded-[32px]'>
+            <ContactForm />
+          </div>
+        </div>
+      </div>
+      <div className='bg-[#1C1C1C] rounded-[32px] xl:hidden block'>
+        <ContactForm />
+      </div>
     </div>
   )
 }
