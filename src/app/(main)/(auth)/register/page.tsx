@@ -5,7 +5,7 @@ import React from 'react'
 const RegisterPage = () => {
   return (
     <div className=''>
-       <AuthHeader pageName='ورود به حساب کاربری'/>
+       <AuthHeader pageName='ثبت نام'/>
        <RegisterForm/>
     </div>
   )
