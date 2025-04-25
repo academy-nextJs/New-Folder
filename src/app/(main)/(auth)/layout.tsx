@@ -1,4 +1,4 @@
-import Container from "@/components/auth/container";
+import AuthContainer from "@/components/auth/container";
 import type { Metadata } from "next";
 // import { Geist, Geist_Mono } from "next/font/google";
 
@@ -24,7 +24,7 @@ export default function AuthLayout({
 }>) {
   return (
     <div>
-      <Container>{children}</Container>
+      <AuthContainer>{children}</AuthContainer>
     </div>
   );
 }

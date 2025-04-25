@@ -26,7 +26,7 @@ async function fetchWithAuth(url: string, options: RequestInit = {}) {
   return response.json()
 }
 
-export const api = {
+export const fetchApi = {
   get: (url: string, options?: RequestInit) => 
     fetchWithAuth(url, { ...options, method: 'GET' }),
   
