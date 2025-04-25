@@ -16,7 +16,7 @@ const DatePickerInput: FC<IDatePicker> = ({
   icon
 }) => {
   return (
-    <div className="rtl flex flex-col gap-2">
+    <div className="rtl flex flex-col gap-1">
       {label && (
         <Label htmlFor={label} className={`text-[13px] flex gap-0.5 text-[#AAAAAA] ${color}`}>
           <span>{label}</span>

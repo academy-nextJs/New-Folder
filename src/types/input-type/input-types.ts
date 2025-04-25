@@ -1,4 +1,5 @@
 import { ChangeEvent } from "react";
+import { DateObject } from "react-multi-date-picker";
 
 export interface IInput {
     label?: string;
@@ -27,7 +28,14 @@ export interface IOTPInput {
 
 export interface IDatePicker {
     label?: string
-    onChange?: (date: any) => void
+    onChange?: (
+        date: DateObject | null,
+        options: {
+          validatedValue: string | string[]
+          input: HTMLElement
+          isTyping: boolean
+        }
+      ) => false | void
     placeholder?: string
     mandatory?: boolean
     background?: string
