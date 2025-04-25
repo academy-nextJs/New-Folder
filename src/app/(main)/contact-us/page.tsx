@@ -6,7 +6,7 @@ import React from 'react'
 const page = () => {
 
   return (
-    <div className='flex xl:flex-row flex-col xl:p-0 p-8 gap-[100px] my-[50px] text-white'>
+    <div className='flex xl:flex-row flex-col gap-[100px] my-[50px] text-white'>
       <div className='flex gap-6 flex-col'>
         <div className='flex gap-3 items-center w-fit text-[13px]'>
           <h2 > خانه </h2>
