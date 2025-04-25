@@ -1,29 +1,32 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
+'use client'
 import { api } from '@/core/interceptore/fetchApi'
 import { IFooterForm } from '@/types/footer-type/footer-types'
 import { ChevronLeft } from 'lucide-react'
 import React, { FC } from 'react'
+import { useForm } from 'react-hook-form'
 
+type FormValues = {
+    name: string
+    email: string
+    message: string
+}
 
 const FooterForm: FC<IFooterForm> = ({ classname }) => {
-    const handleSubmitMessage = async (formData: FormData) => {
-        "use server"
+    const { register, handleSubmit, reset } = useForm<FormValues>()
 
+    const onSubmit = async (data: FormValues) => {
         try {
-            const response = await api.post('/contact-us', {
-                name: formData.get('name'),
-                email: formData.get('email'),
-                message: formData.get('message'),
-            })
+            const response = await api.post('/contact-us', data)
             console.log(response)
+            reset()
         } catch (error: any) {
             console.log(error)
         }
     }
 
     return (
-        <form className={`flex flex-col gap-6 ${classname}`} action={handleSubmitMessage}>
+        <form className={`flex flex-col gap-6 ${classname}`} onSubmit={handleSubmit(onSubmit)}>
             <div className='flex gap-4 md:flex-row flex-col w-full'>
                 <div className="flex flex-col gap-1 md:w-1/2 w-full">
                     <label htmlFor="name" className="text-black text-sm">
@@ -31,7 +34,7 @@ const FooterForm: FC<IFooterForm> = ({ classname }) => {
                     </label>
                     <input
                         id="name"
-                        name='name'
+                        {...register('name')}
                         className="border w-full border-black px-4 py-2 placeholder:text-black rounded-2xl outline-0"
                         placeholder="وارد کنید..."
                     />
@@ -42,7 +45,7 @@ const FooterForm: FC<IFooterForm> = ({ classname }) => {
                     </label>
                     <input
                         id="email"
-                        name='email'
+                        {...register('email')}
                         className="border w-full border-black px-4 py-2 placeholder:text-black rounded-2xl outline-0"
                         placeholder="وارد کنید..."
                     />
@@ -54,7 +57,7 @@ const FooterForm: FC<IFooterForm> = ({ classname }) => {
                 </label>
                 <textarea
                     id="message"
-                    name='message'
+                    {...register('message')}
                     className="border h-[156px] border-black px-4 py-2 placeholder:text-black rounded-2xl outline-0"
                     placeholder="....."
                 />
