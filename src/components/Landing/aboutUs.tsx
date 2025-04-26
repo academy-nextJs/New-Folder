@@ -23,7 +23,7 @@ export default function DeltaAboutUsSection() {
     bgColor = "#232323",
   }: Props) => {
     return (
-      <div className="relative w-full" style={{ paddingTop: "66.56%" }}>
+      <div className="relative w-full" style={{ paddingTop: "57.56%" }}>
         <svg
           className="absolute inset-0 w-full h-full"
           viewBox="0 0 445 205"
@@ -149,7 +149,7 @@ export default function DeltaAboutUsSection() {
 
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col md:flex-row sm:flex-col justify-center gap-6">
-          <div className="w-full md:w-1/3 flex flex-col gap-4">
+          <div className="w-full md:w-1/3 flex flex-col gap-0">
             <CustomCard
               icon={<HomeIcon className="text-secondary w-10 h-10" />}
               title="+۱۲۰۰۰ خونه فعال"
@@ -166,7 +166,7 @@ export default function DeltaAboutUsSection() {
             />
           </div>
 
-          <div className="w-full md:w-1/3 flex justify-center items-center">
+          <div className="w-full  md:w-1/3 flex justify-center items-center">
             <CenterCard />
           </div>
 
