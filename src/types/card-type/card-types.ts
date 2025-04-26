@@ -10,5 +10,5 @@ export interface ICard {
     transaction_type?: string;
     price?: string;
     id: string;
-    discount_percentage?: number;
+    discountedPrice?: number;
   }

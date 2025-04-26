@@ -10,7 +10,7 @@ export default async function Home() {
 
     <div className="w-full flex flex-col gap-16 my-[100px]">
       <div className="relative">
-        <div className="w-[218] h-[218] bg-[#7569FF52] blur-[256px] absolute right-[-150px]"> </div>
+        <div className="w-[218] h-[218] bg-[#7569FF52] blur-[256px] z-10 absolute right-[-150px]"> </div>
         <SpecialOffer />
       </div>
       <div className="relative">

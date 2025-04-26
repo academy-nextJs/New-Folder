@@ -5,8 +5,8 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination, Autoplay } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/pagination'
-import CardComponent from '@/components/landing/cards/CardComponent'
 import { ISlider } from '@/types/slider-type/slider-types'
+import CardComponent from '../cards/CardComponent'
 
 export default function SliderComponent({ items, view }: ISlider) {
   return (
