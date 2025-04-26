@@ -8,6 +8,9 @@ const config: Config = {
       colors: {
         primary: "#8CFF45", // سبز فسفری
         secondary: "#1A1A1A", // پس‌زمینه اصلی
+        subBg: "#363636", // پس‌زمینه فرعی
+        subBg2: "#4A4A4A", // پس‌زمینه فرعی کم‌رنگ
+        subText: "#AAAAAA", // متن فرعی
         foreground: "#F2F2F2", // متن اصلی
         muted: "#B3B3B3", // متن کم‌رنگ
         accent: "#A08CFF", // دکمه‌های خاص مثل "ثبت آگهی"
@@ -25,6 +28,30 @@ const config: Config = {
         destructive: "oklch(var(--destructive))",
         ring: "oklch(var(--ring))",
         input: "oklch(var(--input))",
+      },
+      keyframes: {
+        popover: {
+          "0%": { transform: "scale(0.95)", opacity: "0" },
+          "100%": { transform: "scale(1)", opacity: "1" },
+        },
+        overlayShow: {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
+        drawerSlideIn: {
+          "0%": { transform: "translateX(100%)" },
+          "100%": { transform: "translateX(0)" },
+        },
+        drawerSlideOut: {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(100%)" },
+        },
+      },
+      animation: {
+        popover: "popover 0.2s ease-out",
+        overlayShow: "overlayShow 0.15s ease-out",
+        drawerSlideIn: "drawerSlideIn 0.25s ease-out",
+        drawerSlideOut: "drawerSlideOut 0.2s ease-out",
       },
       fontFamily: {
         sans: ["IRANSans", "sans-serif"],
