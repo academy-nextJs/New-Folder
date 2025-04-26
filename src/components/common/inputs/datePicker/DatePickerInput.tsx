@@ -20,7 +20,7 @@ const DatePickerInput: FC<IDatePicker> = ({
       {label && (
         <Label htmlFor={label} className={`text-[13px] flex gap-0.5 text-[#AAAAAA] ${color}`}>
           <span>{label}</span>
-          {mandatory && <p className="text-red-500">*</p>}
+          {mandatory && <p className="text-danger">*</p>}
           <span>:</span>
         </Label>
       )}

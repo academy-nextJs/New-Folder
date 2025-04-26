@@ -2,6 +2,7 @@ import { Providers } from "@/utils/service/TanstakProvider";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import 'swiper/css';
 import Footer from "@/components/common/footer/Footer";
 
 const geistSans = Geist({
@@ -27,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#232323]`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-secondary`}
       >
         <div className="md:px-8 px-0 mx-auto ">
           <Providers>

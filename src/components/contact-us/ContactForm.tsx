@@ -62,7 +62,7 @@ const ContactForm = () => {
                     placeholder="....."
                 />
             </div>
-            <button type='submit' className='bg-[#8CFF45] text-black text-[13px] rounded-2xl flex gap-2 justify-center items-center px-4 py-2 cursor-pointer hover:scale-[1.01] transition-all duration-100'>
+            <button type='submit' className='bg-primary text-black text-[13px] rounded-2xl flex gap-2 justify-center items-center px-4 py-2 cursor-pointer hover:scale-[1.01] transition-all duration-100'>
                 <span>  ارسال درخواست  </span>
                 <ChevronLeft />
             </button>
