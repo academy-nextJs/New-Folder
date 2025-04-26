@@ -35,7 +35,7 @@ const ContactForm = () => {
                     <input
                         id="name"
                         {...register('name')}
-                        className="border w-full border-[#AAAAAA] bg-transparent group-hover:border-white group-hover:placeholder:text-white px-4 py-2 placeholder:text-[#AAAAAA] rounded-2xl outline-0"
+                        className="border w-full outline-none border-[#AAAAAA] bg-transparent group-hover:border-white group-hover:placeholder:text-white px-4 py-2 placeholder:text-[#AAAAAA] rounded-2xl outline-0"
                         placeholder="وارد کنید..."
                     />
                 </div>
@@ -46,7 +46,7 @@ const ContactForm = () => {
                     <input
                         id="email"
                         {...register('email')}
-                        className="border w-full border-[#AAAAAA] bg-transparent group-hover:border-white group-hover:placeholder:text-white px-4 py-2 placeholder:text-[#AAAAAA] rounded-2xl outline-0"
+                        className="border w-full outline-none border-[#AAAAAA] bg-transparent group-hover:border-white group-hover:placeholder:text-white px-4 py-2 placeholder:text-[#AAAAAA] rounded-2xl outline-0"
                         placeholder="وارد کنید..."
                     />
                 </div>
@@ -58,7 +58,7 @@ const ContactForm = () => {
                 <textarea
                     id="message"
                     {...register('message')}
-                    className="border h-[109px] border-[#AAAAAA] bg-transparent group-hover:border-white group-hover:placeholder:text-white px-4 py-2 placeholder:text-[#AAAAAA] rounded-2xl outline-0"
+                    className="border h-[109px] outline-none border-[#AAAAAA] bg-transparent group-hover:border-white group-hover:placeholder:text-white px-4 py-2 placeholder:text-[#AAAAAA] rounded-2xl outline-0"
                     placeholder="....."
                 />
             </div>

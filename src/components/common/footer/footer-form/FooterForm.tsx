@@ -35,7 +35,7 @@ const FooterForm: FC<IFooterForm> = ({ classname }) => {
                     <input
                         id="name"
                         {...register('name')}
-                        className="border w-full border-black bg-transparent px-4 py-2 placeholder:text-black rounded-2xl outline-0"
+                        className="border w-full outline-none border-black bg-transparent px-4 py-2 placeholder:text-black rounded-2xl outline-0"
                         placeholder="وارد کنید..."
                     />
                 </div>
@@ -46,7 +46,7 @@ const FooterForm: FC<IFooterForm> = ({ classname }) => {
                     <input
                         id="email"
                         {...register('email')}
-                        className="border w-full border-black bg-transparent px-4 py-2 placeholder:text-black rounded-2xl outline-0"
+                        className="border w-full outline-none border-black bg-transparent px-4 py-2 placeholder:text-black rounded-2xl outline-0"
                         placeholder="وارد کنید..."
                     />
                 </div>
@@ -58,7 +58,7 @@ const FooterForm: FC<IFooterForm> = ({ classname }) => {
                 <textarea
                     id="message"
                     {...register('message')}
-                    className="border h-[156px] border-black bg-transparent px-4 py-2 placeholder:text-black rounded-2xl outline-0"
+                    className="border h-[156px] outline-none border-black bg-transparent px-4 py-2 placeholder:text-black rounded-2xl outline-0"
                     placeholder="....."
                 />
             </div>
