@@ -1,0 +1,217 @@
+import React, { ReactNode } from "react";
+import productMangment from "@/assets/3d-icon-product-management_23-2150459932.png";
+import Image, { StaticImageData } from "next/image";
+import Jam from "@/assets/m502t0008_06jun22_trophy_02 1.png";
+import Speaker from "@/assets/a.png";
+import Love from "@/assets/heart3 1.png";
+import { ClockIcon, HomeIcon, SmileIcon, TrophyIcon } from "lucide-react";
+import arrow from "../../assets/arrow.svg";
+
+interface Props {
+  icon: ReactNode;
+  title: string;
+  description: string;
+  image: string | StaticImageData;
+}
+export default function DeltaAboutUsSection() {
+  const CustomCard = ({ icon, title, description, image }: Props) => {
+    return (
+      <div className="relative w-full" style={{ paddingTop: "66.56%" }}>
+        <svg
+          className="absolute inset-0 w-full h-full"
+          viewBox="0 0 445 205"
+          preserveAspectRatio="xMidYMid meet"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M285 35C290.7 35 296.3 32.9 300.6 29.1L322.8 10.4C327.1 6.6 332.7 4.5 338.4 4.5L428 4.5C441.3 4.5 452 15.2 452 28.5V206.5C452 219.8 441.3 230.5 428 230.5H28C14.7 230.5 4 219.8 4 206.5V58.5C4 45.2 14.7 34.5 28 34.5H285Z"
+            fill="#444444"
+          />
+
+          <g transform="scale(0.9) translate(30, 16)">
+            <path
+              d="M285 35C290.7 35 296.3 32.9 300.6 29.1L322.8 10.4C327.1 6.6 332.7 4.5 338.4 4.5L428 4.5C441.3 4.5 452 15.2 452 28.5V206.5C452 219.8 441.3 230.5 428 230.5H28C14.7 230.5 4 219.8 4 206.5V58.5C4 45.2 14.7 34.5 28 34.5H285Z"
+              fill="#232323"
+            />
+
+            <foreignObject
+              width="100%"
+              height="225"
+              style={{
+                padding: "24px",
+                paddingTop: "80px",
+                paddingBottom: "48px",
+                position: "relative",
+                margin: "auto",
+              }}
+            >
+              <div className="absolute top-6 right-6 h-14 w-14 bg-white rounded-md flex items-center justify-center">
+                {icon}
+              </div>
+
+              <div
+                className="flex flex-row-reverse items-center h-full gap-6 md:gap-3"
+                dir="ltr"
+              >
+                <div className="flex flex-col text-right">
+                  <h3 className="text-xl font-bold text-white">{title}</h3>
+                  <p className="text-sm text-gray-300">{description}</p>
+                </div>
+
+                <div className="w-[115px] h-[115px] mr-auto overflow-hidden relative right-5 bottom-[42px] ">
+                  <div className="absolute right-6 bottom-">
+                    <Image src={image} alt="icon" className="rounded-full" />
+                  </div>
+                </div>
+              </div>
+            </foreignObject>
+          </g>
+        </svg>
+      </div>
+    );
+  };
+
+  const CenterCard = () => {
+    return (
+      <svg
+        width="100%"
+        height="470"
+        viewBox="0 0 446 470"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="h-auto max-w-full"
+      >
+        <path
+          d="M280.324 31C286.111 31 291.702 28.9092 296.07 25.1127L318.185 5.8873C322.552 2.09078 328.144 0 333.931 0L422 0C435.255 0 446 10.7452 446 24V446C446 459.255 435.255 470 422 470H24C10.7452 470 0 459.255 0 446L0 55C0 41.7452 10.7452 31 24 31H280.324Z"
+          fill="#393939"
+        />
+
+        <svg
+          x="12"
+          y="40"
+          width="422"
+          height="406"
+          viewBox="0 0 422 446"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M277.751 29.417C283.704 29.417 289.444 27.205 293.857 23.2105L312.643 6.20648C317.056 2.212 322.796 0 328.749 0L398 0C411.255 0 422 10.7452 422 24V422C422 435.255 411.255 446 398 446H24C10.7452 446 0 435.255 0 422L0 53.417C0 40.1622 10.7452 29.417 24 29.417H277.751Z"
+            fill="#7569FF"
+          />
+          <foreignObject x="20" y="60" width="380" height="360">
+            <div
+              dir="rtl"
+              className="text-white text-base sm:text-lg md:text-xl leading-7 text-center px-2 sm:px-4"
+            >
+              لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
+              استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله
+              در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد
+              نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.
+              کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان
+              جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای
+              طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو د...
+            </div>
+          </foreignObject>
+        </svg>
+      </svg>
+    );
+  };
+
+  return (
+    <div className="min-h-screen  text-white p-4">
+      <div className="flex justify-center items-center gap-2 py-4 mb-4 text-[#8eff59]">
+        <Image
+          src={arrow}
+          className="w-16 h-16 rotate-180 text-[#8eff59]"
+          alt="arrow"
+        />
+        <span>درباره ما</span>
+        <Image src={arrow} className="w-16 h-16   text-[#8eff59]" alt="arrow" />
+      </div>
+
+      <h1 className="text-center text-3xl sm:text-3xl font-bold mb-4">
+        دلتا را بیشتر بشناس!
+      </h1>
+
+      <p className="text-center sm:text-sm mb-8 sm:mb-12 mx-auto max-w-xl font-sans">
+        {" "}
+        تیم دلتا با ارائه بهترین تورهای خدماتی و سرویس های آنلاین سعی دارد تا
+        بتواند در تمام لحظات کنار شما باشد.
+      </p>
+
+      <div className="max-w-6xl mx-auto">
+        <div className="md:hidden flex flex-col gap-4">
+          <CustomCard
+            icon={<HomeIcon className="text-black w-10 h-10" />}
+            title="+۱۲۰۰۰ خونه فعال"
+            description="خانه‌هایی که نظافت و امنیت‌شان تأمین شده!"
+            image={productMangment}
+          />
+
+          <CustomCard
+            icon={<TrophyIcon className="text-black w-10 h-10" />}
+            title="+۱۲۰۰۰ خونه فعال"
+            description="خانه‌هایی که نظافت و امنیت‌شان تأمین شده!"
+            image={Jam}
+          />
+
+          <div className="my-6">
+            <CenterCard />
+          </div>
+
+          <CustomCard
+            icon={<ClockIcon className="text-black w-10 h-10" />}
+            title="+۱۲۰۰۰ خونه فعال"
+            description="خانه‌هایی که نظافت و امنیت‌شان تأمین شده!"
+            image={Speaker}
+          />
+
+          <CustomCard
+            icon={<SmileIcon className="text-black w-10 h-10" />}
+            title="+۱۲۰۰۰ خونه فعال"
+            description="خانه‌هایی که نظافت و امنیت‌شان تأمین شده!"
+            image={Love}
+          />
+        </div>
+
+        <div className="hidden md:flex flex-row justify-center gap-6">
+          <div className="lg:w-1/4 md:w-1/3 flex flex-col ">
+            <CustomCard
+              icon={<HomeIcon className="text-black w-10 h-10" />}
+              title="+۱۲۰۰۰ خونه فعال"
+              description="خانه‌هایی که نظافت و امنیت‌شان تأمین شده!"
+              image={productMangment}
+            />
+
+            <CustomCard
+              icon={<TrophyIcon className="text-black w-10 h-10" />}
+              title="+10 سال سابقه درخشان"
+              description="در مهمان نوازی به شما مسافران عزیز"
+              image={Jam}
+            />
+          </div>
+
+          <div className="lg:w-1/3 md:w-1/3 sm:w-1/5  sm:mt-[10px] sm:text-xl">
+            <CenterCard />
+          </div>
+
+          <div className="lg:w-1/4 md:w-1/3 flex flex-col md:gap-1">
+            <CustomCard
+              icon={<ClockIcon className="text-black w-10 h-10" />}
+              title="27/7 ساعت شبانه روز"
+              description="تیم پشتیبانی در تمام طول روز همراه شما هستن"
+              image={Speaker}
+            />
+
+            <CustomCard
+              icon={<SmileIcon className="text-black w-10 h-10 " />}
+              title="15,000+ نظرات کاربران"
+              description="رضایت مسافرانی که از پلتفرم دلتا استفاده کردن"
+              image={Love}
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

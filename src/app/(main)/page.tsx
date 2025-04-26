@@ -1,11 +1,13 @@
-import {fetchApi} from "../../core/interceptore/fetchApi"
-
+import AboutUs from "@/components/Landing/aboutUs";
+import { fetchApi } from "../../core/interceptore/fetchApi";
 
 export default async function Home() {
-  const res = await fetchApi.get('/houses')
+  const res = await fetchApi.get("/houses");
 
-  console.log(res)
+  console.log(res);
   return (
-    <div></div>
+    <div>
+      <AboutUs />
+    </div>
   );
 }
