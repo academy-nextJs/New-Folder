@@ -12,9 +12,16 @@ interface Props {
   title: string;
   description: string;
   image: string | StaticImageData;
+  bgColor?: string;
 }
 export default function DeltaAboutUsSection() {
-  const CustomCard = ({ icon, title, description, image }: Props) => {
+  const CustomCard = ({
+    icon,
+    title,
+    description,
+    image,
+    bgColor = "#232323",
+  }: Props) => {
     return (
       <div className="relative w-full" style={{ paddingTop: "66.56%" }}>
         <svg
@@ -25,13 +32,13 @@ export default function DeltaAboutUsSection() {
         >
           <path
             d="M285 35C290.7 35 296.3 32.9 300.6 29.1L322.8 10.4C327.1 6.6 332.7 4.5 338.4 4.5L428 4.5C441.3 4.5 452 15.2 452 28.5V206.5C452 219.8 441.3 230.5 428 230.5H28C14.7 230.5 4 219.8 4 206.5V58.5C4 45.2 14.7 34.5 28 34.5H285Z"
-            fill="#444444"
+            fill="#393939"
           />
 
           <g transform="scale(0.9) translate(30, 16)">
             <path
               d="M285 35C290.7 35 296.3 32.9 300.6 29.1L322.8 10.4C327.1 6.6 332.7 4.5 338.4 4.5L428 4.5C441.3 4.5 452 15.2 452 28.5V206.5C452 219.8 441.3 230.5 428 230.5H28C14.7 230.5 4 219.8 4 206.5V58.5C4 45.2 14.7 34.5 28 34.5H285Z"
-              fill="#232323"
+              fill={bgColor}
             />
 
             <foreignObject
@@ -54,8 +61,10 @@ export default function DeltaAboutUsSection() {
                 dir="ltr"
               >
                 <div className="flex flex-col text-right">
-                  <h3 className="text-xl font-bold text-white">{title}</h3>
-                  <p className="text-sm text-gray-300">{description}</p>
+                  <h3 className="text-xl pt-2 font-bold text-foreground">
+                    {title}
+                  </h3>
+                  <p className="text-xs pt-4 text-ring">{description}</p>
                 </div>
 
                 <div className="w-[115px] h-[115px] mr-auto overflow-hidden relative right-5 bottom-[42px] ">
@@ -101,7 +110,7 @@ export default function DeltaAboutUsSection() {
           <foreignObject x="20" y="60" width="380" height="360">
             <div
               dir="rtl"
-              className="text-white text-base sm:text-lg md:text-xl leading-7 text-center px-2 sm:px-4"
+              className="text-foreground text-base sm:text-lg md:text-xl leading-7 text-center px-2 sm:px-4"
             >
               لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
               استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله
@@ -118,96 +127,63 @@ export default function DeltaAboutUsSection() {
   };
 
   return (
-    <div className="min-h-screen  text-white p-4">
-      <div className="flex justify-center items-center gap-2 py-4 mb-4 text-[#8eff59]">
+    <div className="min-h-screen  text-foreground p-4">
+      <div className="flex justify-center items-center gap-2 py-4 mb-4 text-primary">
         <Image
           src={arrow}
-          className="w-16 h-16 rotate-180 text-[#8eff59]"
+          className="w-16 h-16 rotate-180   text-primary"
           alt="arrow"
         />
         <span>درباره ما</span>
-        <Image src={arrow} className="w-16 h-16   text-[#8eff59]" alt="arrow" />
+        <Image src={arrow} className="w-16 h-16    text-primary" alt="arrow" />
       </div>
 
-      <h1 className="text-center text-3xl sm:text-3xl font-bold mb-4">
+      <h1 className="text-center text-3xl sm:text-3xl font-bold mb-4 text-foreground">
         دلتا را بیشتر بشناس!
       </h1>
 
-      <p className="text-center sm:text-sm mb-8 sm:mb-12 mx-auto max-w-xl font-sans">
-        {" "}
+      <p className="text-center sm:text-sm mb-8 sm:mb-12 mx-auto max-w-full font-sans break-words">
         تیم دلتا با ارائه بهترین تورهای خدماتی و سرویس های آنلاین سعی دارد تا
         بتواند در تمام لحظات کنار شما باشد.
       </p>
 
       <div className="max-w-6xl mx-auto">
-        <div className="md:hidden flex flex-col gap-4">
-          <CustomCard
-            icon={<HomeIcon className="text-black w-10 h-10" />}
-            title="+۱۲۰۰۰ خونه فعال"
-            description="خانه‌هایی که نظافت و امنیت‌شان تأمین شده!"
-            image={productMangment}
-          />
-
-          <CustomCard
-            icon={<TrophyIcon className="text-black w-10 h-10" />}
-            title="+۱۲۰۰۰ خونه فعال"
-            description="خانه‌هایی که نظافت و امنیت‌شان تأمین شده!"
-            image={Jam}
-          />
-
-          <div className="my-6">
-            <CenterCard />
-          </div>
-
-          <CustomCard
-            icon={<ClockIcon className="text-black w-10 h-10" />}
-            title="+۱۲۰۰۰ خونه فعال"
-            description="خانه‌هایی که نظافت و امنیت‌شان تأمین شده!"
-            image={Speaker}
-          />
-
-          <CustomCard
-            icon={<SmileIcon className="text-black w-10 h-10" />}
-            title="+۱۲۰۰۰ خونه فعال"
-            description="خانه‌هایی که نظافت و امنیت‌شان تأمین شده!"
-            image={Love}
-          />
-        </div>
-
-        <div className="hidden md:flex flex-row justify-center gap-6">
-          <div className="lg:w-1/4 md:w-1/3 flex flex-col ">
+        <div className="flex flex-col md:flex-row sm:flex-col justify-center gap-6">
+          <div className="w-full md:w-1/3 flex flex-col gap-4">
             <CustomCard
-              icon={<HomeIcon className="text-black w-10 h-10" />}
+              icon={<HomeIcon className="text-secondary w-10 h-10" />}
               title="+۱۲۰۰۰ خونه فعال"
               description="خانه‌هایی که نظافت و امنیت‌شان تأمین شده!"
               image={productMangment}
+              bgColor="#444444"
             />
 
             <CustomCard
-              icon={<TrophyIcon className="text-black w-10 h-10" />}
+              icon={<TrophyIcon className="text-secondary w-10 h-10" />}
               title="+10 سال سابقه درخشان"
               description="در مهمان نوازی به شما مسافران عزیز"
               image={Jam}
             />
           </div>
 
-          <div className="lg:w-1/3 md:w-1/3 sm:w-1/5  sm:mt-[10px] sm:text-xl">
+          <div className="w-full md:w-1/3 flex justify-center items-center">
             <CenterCard />
           </div>
 
-          <div className="lg:w-1/4 md:w-1/3 flex flex-col md:gap-1">
+          <div className="w-full md:w-1/3 flex flex-col gap-4">
             <CustomCard
-              icon={<ClockIcon className="text-black w-10 h-10" />}
+              icon={<ClockIcon className="text-secondary w-10 h-10" />}
               title="27/7 ساعت شبانه روز"
               description="تیم پشتیبانی در تمام طول روز همراه شما هستن"
               image={Speaker}
             />
 
             <CustomCard
-              icon={<SmileIcon className="text-black w-10 h-10 " />}
+              icon={<SmileIcon className="text-secondary w-10 h-10" />}
               title="15,000+ نظرات کاربران"
               description="رضایت مسافرانی که از پلتفرم دلتا استفاده کردن"
               image={Love}
+              bgColor="#444444"
             />
           </div>
         </div>

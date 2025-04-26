@@ -6,13 +6,8 @@ export default async function Home() {
 
   console.log(res);
   return (
-<<<<<<< HEAD
-    <div>
+    <div className=" text-primary font-bold w-full h-100">
       <AboutUs />
-=======
-    <div className="bg-danger text-primary font-bold w-full h-100">
-      <h1>Hello</h1>
->>>>>>> 86b44e04a73ef0a36c9b8a2f61fcb5d2ba3b18d8
     </div>
   );
 }
