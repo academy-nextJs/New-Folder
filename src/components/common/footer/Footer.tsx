@@ -55,7 +55,7 @@ const Footer = () => {
                 </div>
                 <div>
                     <div className='flex flex-col items-end'>
-                        <Image className='grayscale-100 relative left-[40px] xl:block hidden' alt='' src={Person} width={524} height={40} />
+                        <Image className='grayscale-[100] relative left-[40px] xl:block hidden' alt='' src={Person} width={524} height={40} />
                         <FooterInfo />
                     </div>
                 </div>
