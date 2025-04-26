@@ -1,4 +1,4 @@
-import {api} from "../../core/interceptore/fetchApi"
+import {fetchApi} from "../../core/interceptore/fetchApi"
 
 
 const RegisterForm = () => {
@@ -6,7 +6,7 @@ const RegisterForm = () => {
         "use server";
     
         try {
-          const res = await api.post('/auth/register', {
+          const res = await fetchApi.post('/auth/register', {
             email: formData.get('email'),
             password: formData.get('password'),
             firstName: formData.get('firstName'),

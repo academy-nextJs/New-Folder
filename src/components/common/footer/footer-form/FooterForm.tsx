@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
-import { api } from '@/core/interceptore/fetchApi'
+import { fetchApi } from '@/core/interceptore/fetchApi'
 import { IFooterForm } from '@/types/footer-type/footer-types'
 import { ChevronLeft } from 'lucide-react'
 import React, { FC } from 'react'
@@ -17,7 +17,7 @@ const FooterForm: FC<IFooterForm> = ({ classname }) => {
 
     const onSubmit = async (data: FormValues) => {
         try {
-            const response = await api.post('/contact-us', data)
+            const response = await fetchApi.post('/contact-us', data)
             console.log(response)
             reset()
         } catch (error: any) {
@@ -35,7 +35,7 @@ const FooterForm: FC<IFooterForm> = ({ classname }) => {
                     <input
                         id="name"
                         {...register('name')}
-                        className="border w-full border-black px-4 py-2 placeholder:text-black rounded-2xl outline-0"
+                        className="border w-full border-black bg-transparent px-4 py-2 placeholder:text-black rounded-2xl outline-0"
                         placeholder="وارد کنید..."
                     />
                 </div>
@@ -46,7 +46,7 @@ const FooterForm: FC<IFooterForm> = ({ classname }) => {
                     <input
                         id="email"
                         {...register('email')}
-                        className="border w-full border-black px-4 py-2 placeholder:text-black rounded-2xl outline-0"
+                        className="border w-full border-black bg-transparent px-4 py-2 placeholder:text-black rounded-2xl outline-0"
                         placeholder="وارد کنید..."
                     />
                 </div>
@@ -58,7 +58,7 @@ const FooterForm: FC<IFooterForm> = ({ classname }) => {
                 <textarea
                     id="message"
                     {...register('message')}
-                    className="border h-[156px] border-black px-4 py-2 placeholder:text-black rounded-2xl outline-0"
+                    className="border h-[156px] border-black bg-transparent px-4 py-2 placeholder:text-black rounded-2xl outline-0"
                     placeholder="....."
                 />
             </div>

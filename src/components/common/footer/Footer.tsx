@@ -13,10 +13,17 @@ const Footer = () => {
                 <div className='bg-[#8CFF45] w-4/12 px-8 py-6 rounded-2xl'>
                     <div className='bg-[#232323] text-[#FFFFFF] flex flex-row-reverse gap-3 w-fit px-4 py-2 rounded-2xl'> <PhoneCall className='w-[20px]' /> <span> 09229167194 - 09154569872 </span> </div>
                 </div>
-                <div className='bg-[#232323] w-10/12 flex justify-end relative after:content-[""] after:absolute after:top- after:right-0 after:w-13 after:h-50 after:rotate-[30deg]
-                 after:bg-[#8CFF45]' >
-                    <Image alt='' className='' src={DeltaLogo} />
+                <div
+                    className={`
+                        bg-[#232323] w-10/12 flex justify-end relative
+                        after:content-[''] after:absolute after:top-[2] after:right-[-12]
+                        after:w-[33px] after:h-[100px] after:rotate-[20deg]
+                        after:bg-[#8CFF45]
+                    `}
+                >
+                    <Image alt="" src={DeltaLogo} />
                 </div>
+
             </div>
             <div className='bg-[#232323] w-full md:flex justify-end xl:hidden rounded'>
                 <Image alt='' className='' src={DeltaLogo} />
