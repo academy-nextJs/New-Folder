@@ -6,6 +6,8 @@ export default async function Home() {
 
   console.log(res)
   return (
-    <div></div>
+    <div className="bg-danger text-primary font-bold w-full h-100">
+      <h1>Hello</h1>
+    </div>
   );
 }
