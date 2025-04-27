@@ -1,7 +1,6 @@
 import AboutUs from "@/components/Landing/aboutUs";
 import { fetchApi } from "../../core/interceptore/fetchApi";
 import SpecialOffer from "@/components/Landing/SpecialOffer";
-
 export default async function Home() {
   const res = await fetchApi.get("/houses");
 

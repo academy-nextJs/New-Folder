@@ -3,7 +3,7 @@ import { Providers } from "@/utils/service/TanstakProvider";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import 'swiper/css';
+// import "swiper/css";
 import Footer from "@/components/common/footer/Footer";
 
 const geistSans = Geist({
@@ -34,6 +34,7 @@ export default function RootLayout({
         <div className="md:px-8 flex flex-col justify-between px-0 mx-auto max-w-[1400px] h-screen">
           <Providers>
             <Header />
+
             <div className="md:px-0 px-8 my-20">
               {children}
             </div>
