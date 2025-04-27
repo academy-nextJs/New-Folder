@@ -31,13 +31,14 @@ const ContactForm = () => {
         }
 
         try {
-            const response = await fetchApi.post('/contact-u', postData)
+            const response = await fetchApi.post('/contact-us', postData)
             if (response.id) {
                 showToast('success', ' تایید درخواست ', ' بستن ', ' درخواست شما با موفقیت ارسال شد ')
             }
             reset()
         } catch (error: any) {
             console.log(error)
+            showToast('error', ' ارور ', ' بستن ', ' مشکلی در درخواست پیدا شد ')
         }
     }
 
