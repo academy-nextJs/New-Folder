@@ -1,3 +1,4 @@
+import Header from "@/components/common/header/Header";
 import { Providers } from "@/utils/service/TanstakProvider";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -29,7 +30,10 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-secondary-foreground`}
       >
         <div className="w-11/12 mx-auto ">
-          <Providers>{children}</Providers>
+          <Providers>
+            <Header />
+            {children}
+          </Providers>
         </div>
       </body>
     </html>
