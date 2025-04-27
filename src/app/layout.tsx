@@ -35,7 +35,7 @@ export default function RootLayout({
           <Providers>
             <Header />
 
-            <div className="md:px-0 px-8 my-20">
+            <div className="md:px-0 px-8 my-20 ">
               {children}
             </div>
             <Footer />
