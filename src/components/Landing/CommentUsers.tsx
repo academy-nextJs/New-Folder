@@ -2,7 +2,7 @@
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import arrow from "../../assets/arrow.svg";
-import { FaStar, FaRegCalendarAlt } from "react-icons/fa";
+import { Star, Calendar } from "lucide-react";
 import plygen from "@/assets/Polygon 1.png";
 
 interface Comment {
@@ -191,7 +191,7 @@ const CommentCard = ({ comment, isSmallScreen }: CommentCardProps) => {
             <span className="text-secondary text-xs sm:text-sm md:text-base">
               {comment.rating}
             </span>
-            <FaStar className="text-secondary ml-1 text-xs sm:text-sm md:text-base" />
+            <Star className="text-secondary fill-secondary ml-1 text-xs sm:text-sm md:text-base" />
           </div>
         </div>
 
@@ -223,7 +223,7 @@ const CommentCard = ({ comment, isSmallScreen }: CommentCardProps) => {
               </p>
               <div className="flex items-center text-[6px] sm:text-[8px] md:text-[10px] lg:text-xs text-ring mt-0.5">
                 <span>{comment.date}</span>
-                <FaRegCalendarAlt className="mx-1 text-[6px] sm:text-[8px] md:text-[10px] lg:text-xs" />
+                <Calendar className="mx-1 text-[6px] sm:text-[8px] md:text-[10px] lg:text-xs" />
                 <span>{comment.time}</span>
               </div>
             </div>
