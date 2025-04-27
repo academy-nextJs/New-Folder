@@ -191,7 +191,7 @@ const CommentCard = ({ comment, isSmallScreen }: CommentCardProps) => {
             <span className="text-secondary text-xs sm:text-sm md:text-base">
               {comment.rating}
             </span>
-            <Star className="text-secondary fill-secondary ml-1 text-xs sm:text-sm md:text-base" />
+            <Star className="text-secondary fill-secondary ml-1 w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5" />
           </div>
         </div>
 
@@ -221,9 +221,12 @@ const CommentCard = ({ comment, isSmallScreen }: CommentCardProps) => {
               <p className="font-semibold text-[8px] sm:text-[10px] md:text-xs lg:text-sm">
                 {comment.author}
               </p>
+
               <div className="flex items-center text-[6px] sm:text-[8px] md:text-[10px] lg:text-xs text-ring mt-0.5">
+                <Calendar className="mx-1 w-2 h-2 sm:w-3 sm:h-3 md:w-4 md:h-4 lg:w-5 lg:h-5" />
+
                 <span>{comment.date}</span>
-                <Calendar className="mx-1 text-[6px] sm:text-[8px] md:text-[10px] lg:text-xs" />
+
                 <span>{comment.time}</span>
               </div>
             </div>
