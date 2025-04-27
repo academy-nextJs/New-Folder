@@ -51,7 +51,7 @@ const Header = () => {
       {/* Overlay */}
       {isDrawerOpen && (
         <div
-          className="fixed inset-0 bg-black/50 z-40  animate-overlayShow"
+          className="relative inset-0 bg-black/50 z-40  animate-overlayShow"
           onClick={() => setIsDrawerOpen(false)}
         />
       )}
@@ -93,7 +93,7 @@ const Header = () => {
         </div>
       </div>
 
-      <div className="w-full max-w-[1376px] mx-auto flex items-center justify-between lg:h-[48px] md:h-[36px] h-[40px] absolute top-[24px] bg-subBg text-subText rounded-[16px]  z-30">
+      <div className="w-[95%] max-w-[1376px] mx-auto flex items-center justify-between lg:h-[48px] md:h-[36px] h-[40px] fixed top-[24px] bg-subBg text-subText rounded-[16px]  z-30">
         {/* Desktop Layout */}
         <div className="hidden md:flex items-center h-full gap-5 ">
           <LogoSection />
