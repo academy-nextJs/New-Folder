@@ -10,7 +10,7 @@ export default async function Home() {
   console.log(res);
   return (
     <div className="w-full flex flex-col gap-16 my-[-81px] overflow-x-hidden">
-      <HeroSection />
+      {/* <HeroSection /> */}
 
       <div className="relative">
         <div className="w-[218] h-[218] bg-[#7569FF52] blur-[256px] z-10 absolute right-[-150px]">
