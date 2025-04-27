@@ -38,6 +38,7 @@ const FooterForm: FC<IFooterForm> = ({ classname }) => {
             reset()
         } catch (error: any) {
             console.log(error)
+            showToast('error', ' ارور ', ' بستن ', ' مشکلی در درخواست پیدا شد ')
         }
     }
 
