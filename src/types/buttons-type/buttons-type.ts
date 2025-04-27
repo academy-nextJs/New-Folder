@@ -1,19 +1,9 @@
 import { ReactNode } from "react";
 
-export interface IButtonWithTitle {
-    title: string;
-    classname?: string;
-    onclick?: () => void;
-}
-
-export interface IButtonWithIcon {
+export interface IButton {
     icon?: ReactNode;
-    title: string;
-    classname?: string;
-    onclick?: () => void;
-}
-
-export interface IButtonWithoutTitle {
+    type?: "button" | "submit" | "reset";
+    title?: string;
     classname?: string;
     onclick?: () => void;
 }
@@ -22,12 +12,7 @@ export interface ILinkButton {
     title: string;
     classname?: string;
     link: string;
-}
-
-export interface IIconButton {
-    classname?: string;
-    icon: ReactNode;
-    onclick?: () => void;
+    type?: "button" | "submit" | "reset";
 }
 
 export interface ILoginButton {

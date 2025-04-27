@@ -1,10 +1,10 @@
 import { Button } from '@/components/ui/button'
-import { IButtonWithIcon } from '@/types/buttons-type/buttons-type'
+import { IButton } from '@/types/buttons-type/buttons-type'
 import React, { FC } from 'react'
 
-const CommonButton: FC<IButtonWithIcon> = ({ title, classname, onclick, icon }) => {
+const CommonButton: FC<IButton> = ({ title, classname, onclick, icon, type }) => {
     return (
-        <Button variant={'scale'} onClick={onclick} className={`cursor-pointer rounded-[14px] flex text-black bg-[#8CFF45] ${classname}`}>
+        <Button variant={'scale'} type={type} onClick={onclick} className={`cursor-pointer rounded-[14px] flex text-black bg-primary ${classname}`}>
             {title}
             {icon}
         </Button>

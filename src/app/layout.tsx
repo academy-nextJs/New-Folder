@@ -1,7 +1,10 @@
+import Header from "@/components/common/header/Header";
 import { Providers } from "@/utils/service/TanstakProvider";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+// import "swiper/css";
+import Footer from "@/components/common/footer/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,10 +29,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-secondary-foreground`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-secondary`}
       >
-        <div className="w-11/12 mx-auto ">
-          <Providers>{children}</Providers>
+        <div className="md:px-8 flex flex-col justify-between px-0 mx-auto max-w-[1400px] h-screen">
+          <Providers>
+            <Header />
+
+            <div className="md:px-0 px-8 my-20">
+              {children}
+            </div>
+            <Footer />
+          </Providers>
         </div>
       </body>
     </html>
