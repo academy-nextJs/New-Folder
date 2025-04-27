@@ -7,7 +7,7 @@ const config: Config = {
     extend: {
       colors: {
         primary: "#8CFF45", // سبز فسفری
-        secondary: "#1A1A1A", // پس‌زمینه اصلی
+        secondary: "#232323", // پس‌زمینه اصلی
         subBg: "#363636", // پس‌زمینه فرعی
         subBg2: "#4A4A4A", // پس‌زمینه فرعی کم‌رنگ
         subText: "#AAAAAA", // متن فرعی

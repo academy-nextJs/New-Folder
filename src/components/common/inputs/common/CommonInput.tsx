@@ -8,7 +8,7 @@ const CommonInput: FC<IInput> = ({ label, placeholder, classname, type, color, b
         <div className='rtl flex flex-col gap-2'>
             <Label htmlFor={label} className={`text-[13px] flex gap-0.5 ${color}`}>
                 <span> {label} </span>
-                {mandatory === true ? <p className='text-red-500'> * </p> : <></>}
+                {mandatory === true ? <p className='text-danger'> * </p> : <></>}
                 <span> : </span>
             </Label>
             <Input

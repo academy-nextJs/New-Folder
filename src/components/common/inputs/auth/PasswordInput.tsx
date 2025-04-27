@@ -13,7 +13,7 @@ const PasswordInput: FC<IPasswordInput> = ({ label, placeholder, classname, back
         <div className='rtl flex flex-col gap-2'>
             <Label htmlFor={label} className={`text-[13px] text-white flex gap-0.5 ${color}`}>
                 <span> {label} </span>
-                {mandatory === true ? <p className='text-red-500'> * </p> : <></>}
+                {mandatory === true ? <p className='text-danger'> * </p> : <></>}
                 <span> : </span>
             </Label>
             <div className='relative w-fit'>
