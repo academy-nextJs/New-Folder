@@ -35,7 +35,7 @@ export default function DeltaAboutUsSection() {
             fill="#393939"
           />
 
-          <g transform="scale(0.9) translate(30, 16)">
+          <g transform="scale(0.9) translate(30, 18)">
             <path
               d="M285 35C290.7 35 296.3 32.9 300.6 29.1L322.8 10.4C327.1 6.6 332.7 4.5 338.4 4.5L428 4.5C441.3 4.5 452 15.2 452 28.5V206.5C452 219.8 441.3 230.5 428 230.5H28C14.7 230.5 4 219.8 4 206.5V58.5C4 45.2 14.7 34.5 28 34.5H285Z"
               fill={bgColor}
@@ -84,7 +84,7 @@ export default function DeltaAboutUsSection() {
     return (
       <svg
         width="100%"
-        height="470"
+        height="300"
         viewBox="0 0 446 470"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -97,7 +97,7 @@ export default function DeltaAboutUsSection() {
 
         <svg
           x="12"
-          y="40"
+          y="30"
           width="422"
           height="406"
           viewBox="0 0 422 446"
@@ -107,10 +107,11 @@ export default function DeltaAboutUsSection() {
             d="M277.751 29.417C283.704 29.417 289.444 27.205 293.857 23.2105L312.643 6.20648C317.056 2.212 322.796 0 328.749 0L398 0C411.255 0 422 10.7452 422 24V422C422 435.255 411.255 446 398 446H24C10.7452 446 0 435.255 0 422L0 53.417C0 40.1622 10.7452 29.417 24 29.417H277.751Z"
             fill="#7569FF"
           />
-          <foreignObject x="20" y="60" width="380" height="360">
+          <foreignObject x="20" y="0" width="406" height="470">
             <div
+              // xmlns="http://www.w3.org/1999/xhtml"
               dir="rtl"
-              className="text-foreground text-base sm:text-lg md:text-xl leading-7 text-center px-2 sm:px-4"
+              className="flex items-center justify-center h-full text-foreground text-base sm:text-lg md:text-xl text-center px-2 sm:px-4 leading-relaxed"
             >
               لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
               استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله
