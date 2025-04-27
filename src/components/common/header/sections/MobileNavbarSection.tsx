@@ -169,7 +169,7 @@ const MobileNavbarSection = () => {
             viewBox="0 0 20 20"
             fill="none"
             stroke="currentColor"
-            stroke-width="1.5"
+            strokeWidth="1.5"
             className="w-5 h-5 ml-1"
           >
             <path d="M2 10V7a2 2 0 012-2h2.382a2 2 0 001.447-.618l2.382-2.618A1 1 0 0112 3v14a1 1 0 01-1.789.707l-2.382-2.618A2 2 0 016.382 15H4a2 2 0 01-2-2v-3z" />
