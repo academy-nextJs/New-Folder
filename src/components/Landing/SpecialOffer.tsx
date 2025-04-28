@@ -5,15 +5,15 @@ import { fetchApi } from '@/core/interceptore/fetchApi'
 import CountdownTimer from '@/utils/helper/Timer/CountdownTimer'
 
 const SpecialOffer = async () => {
-  const houses = await fetchApi.get('/houses?page=1&limit=4&sort=last_updated&order=DESC');
+  const houses = await fetchApi.get('/houses');
 
   return (
-    <div className="w-full h-fit bg-[#2D2D2D] px-8 py-12 rounded-[40px] relative">
+    <div className="w-full h-fit bg-secondary-light px-8 py-12 rounded-[40px] relative">
       <div className="
         after:content-['']
         after:absolute after:right-0 after:top-[-50px]
         after:w-[220px] after:h-[80px]
-        after:bg-[#2D2D2D]
+        after:bg-secondary-light
         after:rounded-tr-[40px] after:rounded-tl-[70px]
       ">
         <div className="bg-danger text-white px-4 py-2 w-fit z-[1] absolute rounded-2xl flex gap-2 items-center right-[25px] top-[-35px]">

@@ -16,8 +16,9 @@ const config: Config = {
         accent: "#A08CFF", // دکمه‌های خاص مثل "ثبت آگهی"
         danger: "#FF4D4D", // برای هشدار یا تایمر
         border: "#2E2E2E", // خطوط حاشیه
-        "blur-primary": '#8CFF4552',
-        "blur-blue": '#7569FF52',
+        "secondary-light": "#2D2D2D", // خاکستری کاپوننت های لندینگ
+        "blur-primary": '#8CFF4552', // بلور سبز 
+        "blur-blue": '#7569FF52', // بلور سرمه ای
         background: "oklch(var(--background))",
         card: "oklch(var(--card))",
         "card-foreground": "oklch(var(--card-foreground))",
