@@ -5,6 +5,8 @@ import SpecialOffer from "@/components/Landing/SpecialOffer";
 import DivBlur from "@/components/common/blurFilter/DivBlur";
 import HeroSection from "@/components/Landing/hero-section/HeroSection";
 import DestinationOfDreams from "@/components/Landing/DestinationOfDreams";
+import RealStateTraveling from "@/components/Landing/RealStateTraveling";
+import NewPlaces from "@/components/Landing/NewPlaces";
 
 export default async function Home() {
   const res = await fetchApi.get("/houses");
@@ -14,18 +16,23 @@ export default async function Home() {
     <div className="w-full flex flex-col gap-16 overflow-x-hidden">
       <HeroSection />
 
-      <div className="relative">
+      <div className="relative px-8">
         <DivBlur className="bg-blur-blue right-[-150px]" />
         <SpecialOffer />
       </div>
       <div className="relative">
         <DivBlur className="bg-blur-primary left-[-150px] top-[150px]" />
-        <DivBlur className="bg-blur-blue right-[-150px] bottom-[100px]" />
         <DestinationOfDreams />
       </div>
       <div className="relative">
-        <DivBlur className="bg-blur-primary left-[-150px]" />
+        <DivBlur className="bg-blur-primary left-[-150px] bottom-0" />
+        <DivBlur className="bg-blur-blue right-[-150px]" />
         <AboutUs />
+      </div>
+      <div className="relative bg-secondary-light flex flex-col gap-32 py-[40px] rounded-[64px] px-8">
+        <DivBlur className="bg-blur-blue right-[-150px] bottom-[500px]" />
+        <RealStateTraveling />
+        <NewPlaces />
       </div>
       <div className="relative">
         <CommentUsers />

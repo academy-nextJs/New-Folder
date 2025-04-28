@@ -32,11 +32,13 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-secondary`}
       >
-        <div className="flex flex-col justify-between px-0 mx-auto max-w-[1440px] h-screen">
+        <div className="flex flex-col justify-between mx-auto max-w-[1440px] h-screen">
           <Providers>
             <Header />
             <div className="">{children}</div>
-            <Footer />
+            <div className="xl:px-8 px-0">
+              <Footer />
+            </div>
             <Toaster />
           </Providers>
         </div>
