@@ -4,7 +4,6 @@ import CommentUsers from "@/components/Landing/CommentUsers";
 import SpecialOffer from "@/components/Landing/SpecialOffer";
 import DivBlur from "@/components/common/blurFilter/DivBlur";
 import DestinationOfDreams from "@/components/Landing/DestinationOfDreams";
-import HeroSection from "@/components/Landing/hero-section/HeroSection";
 
 export default async function Home() {
   const res = await fetchApi.get("/houses");
@@ -12,7 +11,7 @@ export default async function Home() {
   console.log(res);
   return (
     <div className="w-full flex flex-col gap-16">
-      <HeroSection />
+      {/* <HeroSection /> */}
 
       <div className="relative">
         <DivBlur className="bg-blur-blue right-[-150px]" />

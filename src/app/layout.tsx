@@ -32,7 +32,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-secondary`}
       >
-        <div className="flex flex-col justify-between px-0 mx-auto max-w-[1400px] h-screen">
+        <div className="flex flex-col justify-between px-0 mx-auto max-w-[1440px] h-screen">
           <Providers>
             <Header />
             {children}
