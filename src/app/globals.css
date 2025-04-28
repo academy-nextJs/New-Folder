@@ -16,6 +16,7 @@ body {
   direction: rtl;
   background: #232323;
   color: white;
+  overflow-x: hidden;
 }
 
 :root {
