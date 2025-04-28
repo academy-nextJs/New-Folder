@@ -10,7 +10,7 @@ import InfoIndicator from "./section/InfoIndicator";
 
 const HeroSection = () => {
   return (
-    <div className="relative w-full h-[901px] ">
+    <div className="relative w-full h-[901px] sm:h-[565px] md:h-[675px] lg:h-[640px] xl:h-[901px] ">
       {/* تصویر پس‌زمینه */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -23,27 +23,30 @@ const HeroSection = () => {
       </div>
 
       {/* تصویر ساختمان */}
-      <div className="absolute bottom-0 left-3/8 transform -translate-x-1/4 z-40">
+      <div className="absolute bottom-0 left-1/2 lg:left-3/8 md:left-1/2 sm:left-3/8 transform -translate-x-1/4 md: z-40">
         <Image src={building} alt="building" className="object-contain" />
       </div>
 
       {/* محتوای اصلی */}
-      <div className="relative z-20 h-full w-full px-8 py-6 flex flex-col">
+      <div className="relative z-20 h-full w-full px-8 py-6 flex flex-col justify-center">
         {/* بخش میانی */}
-        <div className="flex flex-col items-start h-full max-w-5xl mx-auto">
+        <div className="flex flex-col border-2 border-red-500 items-start  mx-auto">
           {/* لوگو */}
           <HeroLogo />
         </div>
-        <div className="matnOAmar absolute left-0 top-1/2 transform -translate-y-2/2 translate-x-1/4 z-30">
-          {/* متن و دکمه‌ها */}
-          <HeroContent />
+        <div className="flex  w-full border-2 border-green-500  justify-between items-center z-30">
+          <div className="border-2 flex flex-col justify-center items-end border-red-500 w-[20%] ">
+            <InfoIndicator />
+          </div>
 
-          {/* آمار */}
-          <StatisticSection />
+          <div className="border-2 border-blue-500 w-[30%] ">
+            {/* متن و دکمه‌ها */}
+            <HeroContent />
+
+            {/* آمار */}
+            <StatisticSection />
+          </div>
         </div>
-
-        {/* متن و نماد سمت راست */}
-        <InfoIndicator />
       </div>
       {/* نوار جستجو پایین */}
       <SearchBar />
