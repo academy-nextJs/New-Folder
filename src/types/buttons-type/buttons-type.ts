@@ -13,6 +13,7 @@ export interface ILinkButton {
   classname?: string;
   link: string;
   type?: "button" | "submit" | "reset";
+  size?: "default" | "sm" | "lg" | "icon";
   variant?:
     | "default"
     | "destructive"

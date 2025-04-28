@@ -28,15 +28,15 @@ const SearchBar = () => {
   return (
     <div className="absolute bottom-12 left-0 right-0 mx-auto w-full max-w-5xl z-50 px-4">
       {/* Mobile Search Button */}
-      <div className="md:hidden flex justify-center mb-4">
+      <div className="md:hidden flex justify-center -mb-10 ">
         <button
           onClick={() => setIsOpen(true)}
-          className={`bg-primary text-secondary p-3 rounded-full ${
+          className={`bg-primary text-secondary p-2 text-xs rounded-full ${
             isOpen ? "hidden" : "block"
           }`}
         >
           <span className="flex items-center gap-2">
-            <Search size={20} />
+            <Search size={12} />
             <span>جستجوی پیشرفته</span>
           </span>
         </button>

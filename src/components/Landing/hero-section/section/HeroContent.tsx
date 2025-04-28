@@ -6,21 +6,19 @@ const HeroContent = () => {
   return (
     <>
       {/* متن زیر لوگو */}
-      <div className="text-foreground mb-8 text-right">
-        <p className="text-lg mb-1 flex items-center gap-2">
-          {" "}
-          <Sparkle />
-          رزرو، رهن، اجاره و حتی خرید و فروش ملک مورد
-        </p>
-        <p className="text-lg text-foreground">
-          نظرتون مثل آب خوردن فقط در دلتا ________________{" "}
+      <div className="text-foreground mb-4 md:mb-8 text-center md:text-right">
+        <p className="text-sm sm:text-xs md:text-sm mb-1 flex items-center justify-center  gap-2">
+          <Sparkle className="w-5 h-5" />
+          رزرو، رهن، اجاره و حتی خرید و فروش ملک مورد{" "}
+          <br className="md:hidden lg:block" />
+          نظرتون مثل آب خوردن فقط در دلتا___________
         </p>
       </div>
 
       {/* دکمه‌های عمل */}
-      <div className="flex gap-4 mb-12 text-right">
-        <LinkButtons variant="default" link="/" title="آسون رزرو کن" />
-        <LinkButtons variant="secondary" link="/" title="رهن و اجاره ملک" />
+      <div className="flex  justify-center align-center  gap-2 sm:gap-4 md:gap-8 text-center  md:text-right">
+        <LinkButtons variant="default" classname="text-xs md:text-sm lg:text-base w-[80px] md:w-[120px] lg:w-[150px]" link="/" title="آسون رزرو کن" />
+        <LinkButtons variant="secondary" classname="text-xs md:text-sm lg:text-base w-[90px] md:w-[130px] lg:w-[160px]" link="/" title="رهن و اجاره ملک" />
       </div>
     </>
   );

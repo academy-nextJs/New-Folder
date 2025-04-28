@@ -10,7 +10,7 @@ import InfoIndicator from "./section/InfoIndicator";
 
 const HeroSection = () => {
   return (
-    <div className="relative w-full h-[901px] sm:h-[565px] md:h-[675px] lg:h-[640px] xl:h-[901px] ">
+    <div className="relative w-full h-[500px] sm:h-[565px] md:h-[775px] lg:h-[901px] xl:h-[901px] 2xl:h-[901px]  ">
       {/* تصویر پس‌زمینه */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -28,18 +28,18 @@ const HeroSection = () => {
       </div>
 
       {/* محتوای اصلی */}
-      <div className="relative z-20 h-full w-full px-8 py-6 flex flex-col justify-center">
+      <div className="relative -top-10 z-20 h-full w-full px-8 py-6 gap-8 flex flex-col justify-center">
         {/* بخش میانی */}
-        <div className="flex flex-col border-2 border-red-500 items-start  mx-auto">
+        <div className="flex flex-col items-start  mx-auto">
           {/* لوگو */}
           <HeroLogo />
         </div>
-        <div className="flex  w-full border-2 border-green-500  justify-between items-center z-30">
-          <div className="border-2 flex flex-col justify-center items-end border-red-500 w-[20%] ">
+        <div className="flex  w-full  justify-between items-center z-30">
+          <div className=" flex flex-col justify-center items-end border-red-500 w-[25%] ">
             <InfoIndicator />
           </div>
 
-          <div className="border-2 border-blue-500 w-[30%] ">
+          <div className=" gap-10 w-[40%] ">
             {/* متن و دکمه‌ها */}
             <HeroContent />
 
