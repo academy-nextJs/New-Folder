@@ -11,7 +11,7 @@ export default async function Home() {
 
   console.log(res);
   return (
-    <div className="w-full flex flex-col gap-16 my-[-160px] overflow-x-hidden">
+    <div className="w-full flex flex-col gap-16 overflow-x-hidden">
       <HeroSection />
 
       <div className="relative">

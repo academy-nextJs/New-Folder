@@ -42,12 +42,11 @@ const HeroSection = () => {
           <StatisticSection />
         </div>
 
-        {/* نوار جستجو پایین */}
-        <SearchBar />
-
         {/* متن و نماد سمت راست */}
         <InfoIndicator />
       </div>
+      {/* نوار جستجو پایین */}
+      <SearchBar />
     </div>
   );
 };
