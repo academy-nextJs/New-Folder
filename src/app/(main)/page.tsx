@@ -3,13 +3,14 @@ import { fetchApi } from "../../core/interceptore/fetchApi";
 import CommentUsers from "@/components/Landing/CommentUsers";
 import SpecialOffer from "@/components/Landing/SpecialOffer";
 import DivBlur from "@/components/common/blurFilter/DivBlur";
+import HeroSection from "@/components/Landing/hero-section/HeroSection";
 
 export default async function Home() {
   const res = await fetchApi.get("/houses");
 
   console.log(res);
   return (
-    <div className="w-full flex flex-col gap-16 my-[-81px] overflow-x-hidden">
+    <div className="w-full flex flex-col gap-16 my-[-160px] overflow-x-hidden">
       <HeroSection />
 
       <div className="relative">
