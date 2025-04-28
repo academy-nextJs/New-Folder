@@ -13,7 +13,7 @@ const DestinationOfDreams = async () => {
     const mortgageHouses = houses.filter((house: any) => house.transaction_type === 'mortgage')
 
     return (
-        <div className='flex justify-center items-center py-[50px] gap-16 flex-col relative bg-secondary-light xl:rounded-b-[64px] rounded-[64px]'>
+        <div className='flex justify-center items-center py-[50px] gap-16 flex-col relative bg-secondary-light rounded-b-[64px]'>
             <div className='w-full h-fit flex flex-col justify-center items-center gap-4 px-8'>
                 <div className='flex gap-1 justify-center items-center'>
                     <div className="flex flex-row w-fit items-center gap-4">
@@ -58,12 +58,12 @@ const DestinationOfDreams = async () => {
                     <div className='flex justify-between w-full flex-wrap items-center gap-4'>
                         <div className='flex gap-4'>
                             <h2 className='lg:text-2xl md:text-xl text-base font-[500]'> رهن و اجاره ملک در دلتا </h2>
-                            <span className='lg:block hidden'> | </span>
+                            <span className='lg:block hidden text-2xl'> | </span>
                         </div>
                         <ViewAllButton classname='max-md:border-none max-md:p-0' />
                     </div>
                     <Tabs defaultValue="rental" className='rtl'>
-                        <TabsList className='bg-subBg text-subText lg:absolute lg:mt-0 mt-4 right-[300px] top-1' >
+                        <TabsList className='bg-subBg text-subText lg:absolute lg:mt-0 mt-4 right-[265px] top-0.5' >
                             <TabsTrigger value="rental" className='bg-subBg'> اجاره ملک </TabsTrigger>
                             <TabsTrigger value="mortgage" className='bg-subBg'> رهن خونه </TabsTrigger>
                         </TabsList>

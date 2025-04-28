@@ -95,7 +95,7 @@ const CommentUsers = () => {
   }
 
   return (
-    <div className="min-h-screen text-foreground p-2 sm:p-4">
+    <div className="min-h-screen text-foreground px-8">
       <div className="flex justify-center items-center gap-2 py-2 sm:py-4 mb-2 sm:mb-4 text-primary">
         <Image
           src={arrow}
