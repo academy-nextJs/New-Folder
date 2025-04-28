@@ -33,7 +33,8 @@ const HeroSection = () => {
         <div className="flex flex-col items-start h-full max-w-5xl mx-auto">
           {/* لوگو */}
           <HeroLogo />
-
+        </div>
+        <div className="matnOAmar absolute left-0 top-1/2 transform -translate-y-2/2 translate-x-1/4 z-30">
           {/* متن و دکمه‌ها */}
           <HeroContent />
 

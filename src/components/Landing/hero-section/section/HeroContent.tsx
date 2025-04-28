@@ -1,3 +1,4 @@
+import { Sparkle } from "lucide-react";
 import React from "react";
 
 const HeroContent = () => {
@@ -5,9 +6,13 @@ const HeroContent = () => {
     <>
       {/* متن زیر لوگو */}
       <div className="text-foreground mb-8 text-right">
-        <p className="text-lg mb-1">خرید، رهن، اجاره و فروش ملک خود</p>
-        <p className="text-sm text-muted">
-          بهترین آپارتمان و خانه را با ما پیدا کنید
+        <p className="text-lg mb-1 flex items-center gap-2">
+          {" "}
+          <Sparkle />
+          رزرو، رهن، اجاره و حتی خرید و قروش ملک مورد
+        </p>
+        <p className="text-lg text-foreground">
+          نظرتون مثل آب خوردن فقط در دلتا _____________{" "}
         </p>
       </div>
 
