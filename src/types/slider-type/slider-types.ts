@@ -15,4 +15,10 @@ type TItems = {
     price?: string;
     id: string;
     discountedPrice?: number;
+    categories: TCategories;
+}
+
+export type TCategories = {
+    id: number;
+    name: string;
 }

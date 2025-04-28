@@ -5,7 +5,7 @@ import { Bath, Bed, Car, MapPin, Trees } from 'lucide-react'
 import Link from 'next/link'
 import React, { FC } from 'react'
 
-const CardComponent: FC<ICard> = ({ view, image, rate, title, address, rooms, parking, bathrooms, transaction_type, price, id, discountedPrice }) => {
+const CardComponent: FC<ICard> = ({ view, image, rate, title, address, rooms, parking, bathrooms, transaction_type, price, id, discountedPrice, categories }) => {
 const discount_percentage = discountedPrice ? Math.ceil(((Number(price) - discountedPrice) / Number(price)) * 100) : 0
 
     return (
@@ -26,7 +26,7 @@ const discount_percentage = discountedPrice ? Math.ceil(((Number(price) - discou
                         </svg> </Link>
                     </div>
                     <div className='relative w-full h-full flex justify-center'>
-                        <img alt={``} src={`${image}` || ''} className='bg-[#444444] w-full h-[full] rounded-[20px]' />
+                        <img alt={``} src={`${image}` || ''} className='bg-[#444444] w-full h-[full] rounded-[20px]' width={234} height={154} />
                         {!image && <svg className='absolute bottom-5' width="80" height="16" viewBox="0 0 80 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M9.73205 3C8.96225 1.66667 7.03775 1.66667 6.26795 3L2.80385 9C2.03405 10.3333 2.9963 12 4.5359 12L11.4641 12C13.0037 12 13.966 10.3333 13.1962 9L9.73205 3Z" fill="white" />
                             <circle cx="28" cy="8" r="4" fill="#D9D9D9" />
@@ -38,7 +38,7 @@ const discount_percentage = discountedPrice ? Math.ceil(((Number(price) - discou
                     </div>
                 </div>
             </div>
-            <h2 className='text-[16px] flex justify-between'> <span> {title} </span> {discountedPrice && <div className='bg-danger rounded-[12px] px-4 text-sm py-1 w-fit'> %{discount_percentage} </div>} </h2>
+            <h2 className='text-[16px] flex justify-between'> <span className='flex gap-2 flex-wrap whitespace-nowrap'> {title} <p className='text-subText'> ( {categories.name} ) </p> </span> {discountedPrice && <div className='bg-danger rounded-[12px] px-4 text-sm py-1 w-fit'> %{discount_percentage} </div>} </h2>
             {view === '2' && <div className='flex flex-col gap-4'>
                 <div className='flex flex-col gap-4'>
                     <div className='flex gap-2 text-[#AAAAAA] h-[40px] text-sm items-center'>
