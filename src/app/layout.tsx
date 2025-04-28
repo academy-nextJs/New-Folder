@@ -35,7 +35,7 @@ export default function RootLayout({
         <div className="flex flex-col justify-between px-0 mx-auto max-w-[1440px] h-screen">
           <Providers>
             <Header />
-            {children}
+            <div className="">{children}</div>
             <Footer />
             <Toaster />
           </Providers>
