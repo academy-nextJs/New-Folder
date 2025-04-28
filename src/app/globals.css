@@ -6,7 +6,8 @@
 
 @font-face {
   font-family: "IRANSans";
-  src: url("/fonts/IRANSans.ttf") format("truetype");
+  src: url("/fonts/IRANSansX-Light.ttf") format("truetype");
+  src: url("/fonts/IRANSansXFaNum-Medium.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
@@ -16,6 +17,7 @@ body {
   direction: rtl;
   background: #232323;
   color: white;
+  overflow-x: hidden;
 }
 
 :root {
