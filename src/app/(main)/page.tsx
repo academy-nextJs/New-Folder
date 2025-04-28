@@ -4,6 +4,7 @@ import CommentUsers from "@/components/Landing/CommentUsers";
 import SpecialOffer from "@/components/Landing/SpecialOffer";
 import DivBlur from "@/components/common/blurFilter/DivBlur";
 import HeroSection from "@/components/Landing/hero-section/HeroSection";
+import DestinationOfDreams from "@/components/Landing/DestinationOfDreams";
 
 export default async function Home() {
   const res = await fetchApi.get("/houses");
@@ -16,6 +17,11 @@ export default async function Home() {
       <div className="relative">
         <DivBlur className="bg-blur-blue right-[-150px]" />
         <SpecialOffer />
+      </div>
+      <div className="relative">
+        <DivBlur className="bg-blur-primary left-[-150px] top-[150px]" />
+        <DivBlur className="bg-blur-blue right-[-150px] bottom-[100px]" />
+        <DestinationOfDreams />
       </div>
       <div className="relative">
         <DivBlur className="bg-blur-primary left-[-150px]" />
