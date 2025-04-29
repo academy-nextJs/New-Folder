@@ -1,10 +1,8 @@
 import React from 'react'
-import ViewAllButton from '../common/buttons/common/ViewAllButton'
-import SliderComponent from './sliders/SliderComponent'
-import { fetchHouses } from '@/utils/service/api/fetchHouses'
+import ViewAllButton from '../../common/buttons/common/ViewAllButton'
+import CallSlider from './CallSlider'
 
-const RealStateTraveling = async () => {
-    const houses = await fetchHouses('last_updated', 'DESC')
+const RealStateTraveling = () => {
 
     return (
         <div className='w-full h-fit flex flex-col gap-4'>
@@ -29,7 +27,7 @@ const RealStateTraveling = async () => {
                 </div>
             </div>
             <div className='w-full'>
-                <SliderComponent items={houses} view='1' />
+                <CallSlider />
             </div>
         </div>
     )

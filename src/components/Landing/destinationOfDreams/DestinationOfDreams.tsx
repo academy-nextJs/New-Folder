@@ -1,17 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import React from 'react'
-import SliderComponent from './sliders/SliderComponent'
-import ViewAllButton from '../common/buttons/common/ViewAllButton';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs';
-import { fetchHouses } from '@/utils/service/api/fetchHouses';
-import { fetchRentalHouses } from '@/utils/service/api/fetchRentalHouses';
-import { fetchMortgageHouses } from '@/utils/service/api/fetchMortgageHouses';
+import ViewAllButton from '../../common/buttons/common/ViewAllButton';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../ui/tabs';
+import { CallSliderDreams, CallSliderMortgage, CallSliderRental } from './CallSlider';
 
-const DestinationOfDreams = async () => {
-    const dreamHouses = await fetchHouses('rate', 'DESC')
-    const rentalHouses = await fetchRentalHouses()
-    const mortgageHouses = await fetchMortgageHouses()
+const DestinationOfDreams = () => {
 
     return (
         <div className='flex justify-center items-center py-[50px] gap-16 flex-col relative bg-secondary-light rounded-b-[64px]'>
@@ -38,7 +30,7 @@ const DestinationOfDreams = async () => {
                 <h2 className='lg:text-2xl md:text-xl text-base font-[500]'> اجاره ویلا در محبوب ترین مقاصد این ماه </h2>
                 <span className='text-subText md:text-sm text-xs'> در اینجا می توانید محبوب ترین مقصد هارا از بین انتخاب کاربران مشاهده کنید و آن ها بررسی کنید ! </span>
                 <div className='mt-[20px] w-full'>
-                    <SliderComponent items={dreamHouses} view='1' />
+                    <CallSliderDreams />
                 </div>
 
             </div>
@@ -69,10 +61,10 @@ const DestinationOfDreams = async () => {
                             <TabsTrigger value="mortgage" className='bg-subBg'> رهن خونه </TabsTrigger>
                         </TabsList>
                         <TabsContent value="rental" className='mt-[30px]'>
-                            <SliderComponent items={rentalHouses} view='2' />
+                            <CallSliderRental />
                         </TabsContent>
                         <TabsContent value="mortgage" className='mt-[30px]'>
-                            <SliderComponent items={mortgageHouses} view='2' />
+                            <CallSliderMortgage />
                         </TabsContent>
                     </Tabs>
                 </div>

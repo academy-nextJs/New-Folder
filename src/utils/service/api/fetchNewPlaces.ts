@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 export const fetchNewPlaces = async () => {
     const item = {
         id: '2',
@@ -8,7 +6,7 @@ export const fetchNewPlaces = async () => {
         categories: {
             id: 1,
             name: ' 11.000 نفر بازدید کننده '
-        }
+        },
     }
     const items = [
         item,

@@ -1,11 +1,9 @@
 import { Clock } from 'lucide-react'
 import React from 'react'
-import SliderComponent from './sliders/SliderComponent'
 import CountdownTimer from '@/utils/helper/Timer/CountdownTimer'
-import { fetchHouses } from '@/utils/service/api/fetchHouses'
+import CallSlider from './CallSlider'
 
-const SpecialOffer = async () => {
-  const houses = await fetchHouses('', '')
+const SpecialOffer = () => {
 
   return (
     <div className="w-full h-fit bg-secondary-light px-8 py-12 rounded-[40px] relative">
@@ -38,7 +36,7 @@ const SpecialOffer = async () => {
             </div>
           </div>
 
-          <SliderComponent items={houses} view='2' />
+          <CallSlider />
         </div>
 
       </div>

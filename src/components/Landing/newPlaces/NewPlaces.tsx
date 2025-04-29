@@ -1,10 +1,8 @@
 import React from 'react'
-import ViewAllButton from '../common/buttons/common/ViewAllButton'
-import SliderComponent from './sliders/SliderComponent'
-import { fetchNewPlaces } from '@/utils/service/api/fetchNewPlaces'
+import ViewAllButton from '../../common/buttons/common/ViewAllButton'
+import CallSlider from './CallSlider'
 
-const NewPlaces = async () => {
-    const items = await fetchNewPlaces()
+const NewPlaces = () => {
 
     return (
         <div className="w-full h-fit flex flex-col gap-4 relative px-8 py-8 bg-secondary rounded-[40px] 
@@ -38,7 +36,7 @@ const NewPlaces = async () => {
                 </div>
             </div>
             <div className='w-full'>
-                <SliderComponent items={items} view='1' />
+                <CallSlider />
             </div>
         </div>
     )
