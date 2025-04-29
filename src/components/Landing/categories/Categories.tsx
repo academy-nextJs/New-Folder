@@ -57,8 +57,8 @@ const Categories = () => {
         setCardsToShow(3);
       } else if (width >= 680) {
         setCardsToShow(2);
-      } else if (width >= 350) {
-        setCardsToShow(1);
+      } else if (width >= 450) {
+        setCardsToShow(2);
       } else {
         setCardsToShow(1);
       }
@@ -126,7 +126,7 @@ const Categories = () => {
 
               {/* دکمه بعدی */}
               <div
-                className="absolute left-6 bottom-16 sm:bottom-20"
+                className="absolute left-6 bottom-20 sm:bottom-20"
                 onClick={handleNextSlide}
               >
                 <MoveLeftIcon className="w-8 h-6 text-white" />
