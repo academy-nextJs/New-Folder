@@ -7,7 +7,6 @@ import star from "@/assets/Star 7.png";
 import { MoveLeftIcon } from "lucide-react";
 import Bstar from "@/assets/Star 5.png";
 
-// کامپوننت پس زمینه SVG با افکت hover
 const CardSvgBackground = ({ isHovered }: { isHovered: boolean }) => (
   <svg className="w-full" xmlns="http://www.w3.org/2000/svg">
     <path
@@ -22,7 +21,7 @@ const Categories = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [cardsToShow, setCardsToShow] = useState(6);
-  const [isSmallScreen, setIsSmallScreen] = useState(false); // اینجا اضافه شده
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   const totalCards = 6;
 
@@ -124,7 +123,6 @@ const Categories = () => {
                 <CardSvgBackground isHovered={hoveredIndex === cardIndex} />
               </div>
 
-              {/* دکمه بعدی */}
               <div
                 className="absolute left-6 bottom-20 sm:bottom-20"
                 onClick={handleNextSlide}
@@ -132,7 +130,6 @@ const Categories = () => {
                 <MoveLeftIcon className="w-8 h-6 text-white" />
               </div>
 
-              {/* آیکون ویلا */}
               <div
                 className={`absolute bottom-16 ${
                   isSmallScreen ? "left-36" : "right-2"
@@ -145,7 +142,6 @@ const Categories = () => {
                 <Image alt="villa" src={villaIcon} className="w-6 h-6" />
               </div>
 
-              {/* متن و ستاره‌ها */}
               <div
                 className={`absolute bottom-4 flex items-center gap-1 ${
                   hoveredIndex === cardIndex ? "text-[#2E2E2E]" : "text-[#fff]"
