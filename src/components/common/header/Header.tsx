@@ -51,7 +51,7 @@ const Header = () => {
       {/* Overlay */}
       {isDrawerOpen && (
         <div
-          className="relative inset-0 bg-black/50 z-40  animate-overlayShow"
+          className="relative inset-0 bg-black/50 z-60  animate-overlayShow"
           onClick={() => setIsDrawerOpen(false)}
         />
       )}
@@ -59,11 +59,11 @@ const Header = () => {
       {/* Mobile Drawer */}
       <div
         ref={drawerRef}
-        className={`fixed top-0 right-0 h-full w-72 bg-secondary z-50 shadow-lg transform ${
+        className={`fixed md:hidden top-0 right-0 h-full w-72 bg-secondary z-[100] shadow-lg transform ${
           isDrawerOpen ? "animate-drawerSlideIn" : "translate-x-full"
         } overflow-y-auto`}
       >
-        <div className="p-6">
+        <div className="p-6 ">
           <div className="flex items-center justify-between mb-8">
             <LogoSection />
             <button
