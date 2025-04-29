@@ -3,6 +3,7 @@ import { fetchApi } from "../../core/interceptore/fetchApi";
 import CommentUsers from "@/components/Landing/CommentUsers";
 import SpecialOffer from "@/components/Landing/SpecialOffer";
 import DivBlur from "@/components/common/blurFilter/DivBlur";
+import HeroSection from "@/components/Landing/hero-section/HeroSection";
 import DestinationOfDreams from "@/components/Landing/DestinationOfDreams";
 import RealStateTraveling from "@/components/Landing/RealStateTraveling";
 import NewPlaces from "@/components/Landing/NewPlaces";
@@ -13,8 +14,8 @@ export default async function Home() {
 
   console.log(res);
   return (
-    <div className="w-full flex flex-col gap-16 mt-[100px]">
-      {/* <HeroSection /> */}
+    <div className="w-full flex flex-col gap-16 overflow-x-hidden">
+      <HeroSection />
 
       <div className="relative mt-36">
         <Categories />
