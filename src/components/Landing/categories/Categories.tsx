@@ -76,7 +76,7 @@ const Categories = () => {
   }).map((_, idx) => (currentSlide + idx) % categoryData.length);
 
   return (
-    <div className="min-h-screen text-foreground p-2 sm:p-4">
+    <div className="mb-32 text-foreground p-2 sm:p-4">
       <div className="flex justify-center items-center gap-2 py-2 sm:py-4 mb-2 sm:mb-4 text-primary">
         <Image
           src={arrow}

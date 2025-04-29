@@ -1,21 +1,22 @@
 export interface ISlider {
     items: TItems[];
     view: '1' | '2';
+    loading: boolean;
 }
 
 type TItems = {
     photos?: string[]
-    rate: string;
-    title: string;
+    rate?: string;
+    title?: string;
     address?: string;
     rooms?: number;
     bathrooms?: number;
     parking?: number;
     transaction_type?: string;
     price?: string;
-    id: string;
+    id?: string;
     discountedPrice?: number;
-    categories: TCategories;
+    categories?: TCategories;
 }
 
 export type TCategories = {

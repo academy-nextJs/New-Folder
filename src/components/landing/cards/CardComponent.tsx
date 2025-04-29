@@ -9,7 +9,7 @@ const CardComponent: FC<ICard> = ({ view, image, rate, title, address, rooms, pa
     const discount_percentage = discountedPrice ? Math.ceil(((Number(price) - discountedPrice) / Number(price)) * 100) : 0
 
     return (
-        <motion.div className='flex flex-col gap-4 text-white group w-fit h-full my-10 mx-auto'>
+        <motion.div whileHover={{ scale: 1.02 }} transition={{ duration: 0.2 }} className='flex flex-col gap-4 text-white group w-fit h-full my-10 mx-auto'>
             <div className='relative '>
                 <div className="bg-secondary-light2 w-full p-4 group-hover:bg-primary relative h-[190] rounded-[24px] flex justify-center items-center after:content-['']
                         after:w-[90px] after:h-[50px] after:group-hover:bg-primary after:absolute after:top-[-34] after:rounded-tr-2xl after:rounded-tl-[40px] after:right-0 after:bg-secondary-light2">
@@ -27,25 +27,24 @@ const CardComponent: FC<ICard> = ({ view, image, rate, title, address, rooms, pa
                     </div>
                     <div className='relative w-full h-full flex justify-center'>
                         <img alt={``} src={`${image}` || ''} className='bg-[#444444] w-full h-[full] rounded-[20px]' width={234} height={154} />
-                        {!image && <svg className='absolute bottom-5' width="80" height="16" viewBox="0 0 80 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg className='absolute bottom-1' width="80" height="16" viewBox="0 0 80 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M9.73205 3C8.96225 1.66667 7.03775 1.66667 6.26795 3L2.80385 9C2.03405 10.3333 2.9963 12 4.5359 12L11.4641 12C13.0037 12 13.966 10.3333 13.1962 9L9.73205 3Z" fill="white" />
                             <circle cx="28" cy="8" r="4" fill="#D9D9D9" />
                             <circle cx="44" cy="8" r="4" fill="#D9D9D9" />
                             <circle cx="60" cy="8" r="4" fill="#D9D9D9" />
                             <circle cx="76" cy="8" r="4" fill="#D9D9D9" />
-                        </svg>
-                        }
+                        </svg>             
                     </div>
                 </div>
             </div>
-            <h2 className='text-[16px] flex justify-between'> <span className='flex gap-2 flex-wrap whitespace-nowrap'> {title} <p className='text-subText'> ( {categories.name} ) </p> </span> {discountedPrice && <div className='bg-danger rounded-[12px] px-4 text-sm py-1 w-fit'> %{discount_percentage} </div>} </h2>
+            <h2 className='text-[16px] flex justify-between'> <span className='flex gap-2 flex-wrap whitespace-nowrap'> {title} <p className='text-subText'> ( {categories?.name} ) </p> </span> {discountedPrice && <div className='bg-danger rounded-[12px] px-4 text-sm py-1 w-fit'> %{discount_percentage} </div>} </h2>
             {view === '2' && <div className='flex flex-col gap-4'>
                 <div className='flex flex-col gap-4'>
                     <div className='flex gap-2 text-[#AAAAAA] h-[40px] text-sm items-center'>
                         <MapPin size={20} />
                         {address}
                     </div>
-                    <div className="flex flex-row flex-wrap items-center text-sm text-[#AAAAAA] gap-1">
+                    <div className="flex flex-row flex-wrap items-center text-sm text-[#AAAAAA] gap-1 h-[45px]">
                         <span className='flex gap-1'> <Bed size={20} /> <p> {rooms} </p> <p> خوابه </p> </span> |
                         <span className='flex gap-1'> <Car size={20} /> <p> {parking} </p> <p> پارکینگ </p> </span> |
                         <span className='flex gap-1'> <Bath size={20} /> <p> {bathrooms} </p> <p> حمام </p> </span> |
