@@ -7,6 +7,7 @@ import HeroSection from "@/components/Landing/hero-section/HeroSection";
 import DestinationOfDreams from "@/components/Landing/DestinationOfDreams";
 import RealStateTraveling from "@/components/Landing/RealStateTraveling";
 import NewPlaces from "@/components/Landing/NewPlaces";
+import Categories from "@/components/Landing/categories/Categories";
 
 export default async function Home() {
   const res = await fetchApi.get("/houses");
@@ -16,6 +17,9 @@ export default async function Home() {
     <div className="w-full flex flex-col gap-16 overflow-x-hidden">
       <HeroSection />
 
+      <div className="relative mt-36">
+        <Categories />
+      </div>
       <div className="relative px-8">
         <DivBlur className="bg-blur-blue right-[-150px]" />
         <SpecialOffer />

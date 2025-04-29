@@ -23,7 +23,10 @@ export default function DeltaAboutUsSection() {
     bgColor = "#232323",
   }: Props) => {
     return (
-      <div className="relative w-full" style={{ paddingTop: "57.56%" }}>
+      <div
+        className="relative w-full max-w-[450px] mx-auto"
+        style={{ paddingTop: "57.56%" }}
+      >
         <svg
           className="absolute inset-0 w-full h-full"
           viewBox="0 0 445 205"
@@ -60,16 +63,20 @@ export default function DeltaAboutUsSection() {
                 className="flex flex-row-reverse items-center h-full gap-6 md:gap-3"
                 dir="ltr"
               >
-                <div className="flex flex-col text-right">
-                  <h3 className="text-xl pt-2 font-bold text-foreground">
+                <div className="flex flex-col w-full  items-center gap-2 text-right">
+                  <h3 className="text-xl font-bold text-foreground w-full">
                     {title}
                   </h3>
-                  <p className="text-xs pt-4 text-ring">{description}</p>
+                  <p className="text-xs text-ring w-full">{description}</p>
                 </div>
 
-                <div className="w-[115px] h-[115px] mr-auto overflow-hidden relative right-5 bottom-[42px] ">
-                  <div className="absolute right-6 bottom-">
-                    <Image src={image} alt="icon" className="rounded-full" />
+                <div className="flex justify-end w-full h-full">
+                  <div className="absolute left-[4px] bottom-[76px] w-[135px] h-[115px] overflow-hidden rounded-3xl rotate-8">
+                    <Image
+                      src={image}
+                      alt="icon"
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                 </div>
               </div>
@@ -109,7 +116,6 @@ export default function DeltaAboutUsSection() {
           />
           <foreignObject x="20" y="0" width="406" height="470">
             <div
-              // xmlns="http://www.w3.org/1999/xhtml"
               dir="rtl"
               className="flex items-center justify-center h-full text-foreground text-base sm:text-lg md:text-xl text-center px-2 sm:px-4 leading-relaxed"
             >
