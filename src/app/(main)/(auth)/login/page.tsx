@@ -5,8 +5,8 @@ import React from 'react'
 const LoginPage = () => {
   return (
     <div>
-       <AuthHeader pageName='ثبت نام'/>
-        <LoginForm/>
+       <AuthHeader pageName=' ورود به حساب کاربری '/>
+       <LoginForm/>
     </div>
   )
 }
