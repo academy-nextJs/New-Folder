@@ -1,12 +1,13 @@
 'use client'
 
-import React from 'react'
+import React, { Suspense } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination, Autoplay } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import { ISlider } from '@/types/slider-type/slider-types'
 import CardComponent from '../cards/CardComponent'
+import SkeletonCardComponent from '../cards/SkeletonCardComponent'
 
 export default function SliderComponent({ items, view }: ISlider) {
   return (
@@ -24,11 +25,13 @@ export default function SliderComponent({ items, view }: ISlider) {
       >
         {items.map((item, index) => (
           <SwiperSlide key={index}>
+            <Suspense fallback={<SkeletonCardComponent />}>
               <CardComponent
                 {...item}
                 image={item.photos?.[0]}
                 view={view}
               />
+            </Suspense>
           </SwiperSlide>
         ))}
       </Swiper>

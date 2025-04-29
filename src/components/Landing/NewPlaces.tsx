@@ -1,24 +1,10 @@
 import React from 'react'
 import ViewAllButton from '../common/buttons/common/ViewAllButton'
 import SliderComponent from './sliders/SliderComponent'
+import { fetchNewPlaces } from '@/utils/service/api/fetchNewPlaces'
 
-const NewPlaces = () => {
-    const item = {
-        id: '2',
-        title: ' اقمتگاه دال در قشم ',
-        rate: '3.2',
-        categories: {
-            id: 1,
-            name: ' 11.000 نفر بازدید کننده '
-        }
-    }
-    const items = [
-        item,
-        item,
-        item,
-        item,
-        item,
-    ]
+const NewPlaces = async () => {
+    const items = await fetchNewPlaces()
 
     return (
         <div className="w-full h-fit flex flex-col gap-4 relative px-8 py-8 bg-secondary rounded-[40px] 
