@@ -67,8 +67,8 @@ export default function DeltaAboutUsSection() {
                   <p className="text-xs pt-4 text-ring">{description}</p>
                 </div>
 
-                <div className="w-[115px] h-[115px] mr-auto overflow-hidden relative right-5 bottom-[42px] ">
-                  <div className="absolute right-6 bottom-">
+                <div className="w-[115px] h-[115px] mr-auto overflow-hidden relative right-0 bottom-[40px] ">
+                  <div className="absolute right-8 top-4">
                     <Image src={image} alt="icon" className="rounded-full" />
                   </div>
                 </div>
