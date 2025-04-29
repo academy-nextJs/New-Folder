@@ -7,7 +7,7 @@ import star from "@/assets/Star 7.png";
 import Bstar from "@/assets/Star 5.png";
 import { MoveLeftIcon } from "lucide-react";
 import { fetchApi } from "@/core/interceptore/fetchApi";
-import { Loader } from "@/components/common/inputs/common/Loader";
+import { Loader } from "@/app/Loader";
 
 type Category = {
   id: string;
