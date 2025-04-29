@@ -3,12 +3,13 @@ import { SplitNumber } from '@/utils/helper/spliter/SplitNumber'
 import { Bath, Bed, Car, MapPin, Trees } from 'lucide-react'
 import Link from 'next/link'
 import React, { FC } from 'react'
+import { motion } from 'framer-motion'
 
 const CardComponent: FC<ICard> = ({ view, image, rate, title, address, rooms, parking, bathrooms, transaction_type, price, id, discountedPrice, categories }) => {
-const discount_percentage = discountedPrice ? Math.ceil(((Number(price) - discountedPrice) / Number(price)) * 100) : 0
+    const discount_percentage = discountedPrice ? Math.ceil(((Number(price) - discountedPrice) / Number(price)) * 100) : 0
 
     return (
-        <div className='flex flex-col gap-4 text-white group w-fit h-full my-10 mx-auto'>
+        <motion.div className='flex flex-col gap-4 text-white group w-fit h-full my-10 mx-auto'>
             <div className='relative '>
                 <div className="bg-secondary-light2 w-full p-4 group-hover:bg-primary relative h-[190] rounded-[24px] flex justify-center items-center after:content-['']
                         after:w-[90px] after:h-[50px] after:group-hover:bg-primary after:absolute after:top-[-34] after:rounded-tr-2xl after:rounded-tl-[40px] after:right-0 after:bg-secondary-light2">
@@ -56,7 +57,7 @@ const discount_percentage = discountedPrice ? Math.ceil(((Number(price) - discou
                     <span className='flex whitespace-nowrap'> <p className={`text-white group-hover:text-[#444444]`}> {discountedPrice ? SplitNumber(discountedPrice) : SplitNumber(price || '')} ت </p>{transaction_type === 'rental' && " /هر ماه  "} </span>
                 </div>
             </div>}
-        </div>
+        </motion.div>
     )
 }
 
