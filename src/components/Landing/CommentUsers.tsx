@@ -83,27 +83,52 @@ const CommentUsers = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const slideGroupsCount = Math.ceil(comments.length / (isSmallScreen ? 1 : 2));
+  const commentsPerSlide = isSmallScreen ? 1 : 2;
+  const slideGroupsCount = Math.ceil(comments.length / commentsPerSlide);
+
+  const goToNextSlide = () => {
+    if (activeSlideGroup < slideGroupsCount - 1) {
+      setActiveSlideGroup(activeSlideGroup + 1);
+    } else {
+      setActiveSlideGroup(0);
+    }
+  };
+
+  const goToPrevSlide = () => {
+    if (activeSlideGroup > 0) {
+      setActiveSlideGroup(activeSlideGroup - 1);
+    } else {
+      setActiveSlideGroup(slideGroupsCount - 1);
+    }
+  };
 
   const goToSlideGroup = (groupIndex: number) => {
     setActiveSlideGroup(groupIndex);
   };
 
   const commentPairs = [];
-  for (let i = 0; i < comments.length; i += isSmallScreen ? 1 : 2) {
-    commentPairs.push(comments.slice(i, i + (isSmallScreen ? 1 : 2)));
+  for (let i = 0; i < comments.length; i += commentsPerSlide) {
+    commentPairs.push(comments.slice(i, i + commentsPerSlide));
   }
+
+  const sliderPosition = 100 * activeSlideGroup;
 
   return (
     <div className="min-h-screen text-foreground px-8">
       <div className="flex justify-center items-center gap-2 py-2 sm:py-4 mb-2 sm:mb-4 text-primary">
         <Image
           src={arrow}
-          className="w-8 h-8 sm:w-12 sm:h-12 rotate-180"
+          className="w-8 h-8 sm:w-12 sm:h-12 rotate-180 cursor-pointer"
           alt="arrow"
+          onClick={goToPrevSlide}
         />
         <span className="text-sm sm:text-base md:text-lg">نظرات کاربران</span>
-        <Image src={arrow} className="w-8 h-8 sm:w-12 sm:h-12" alt="arrow" />
+        <Image
+          src={arrow}
+          className="w-8 h-8 sm:w-12 sm:h-12 cursor-pointer"
+          alt="arrow"
+          onClick={goToNextSlide}
+        />
       </div>
 
       <h1 className="text-center text-xl sm:text-2xl md:text-3xl font-bold mb-2 sm:mb-4">
@@ -119,7 +144,8 @@ const CommentUsers = () => {
         <div className="w-full overflow-hidden">
           <div
             className="flex transition-transform duration-500 ease-in-out"
-            style={{ transform: `translateX(${-activeSlideGroup * 100}%)` }}
+            style={{ transform: `translateX(${sliderPosition}%)` }}
+            dir="rtl"
           >
             {commentPairs.map((pair, pairIndex) => (
               <div
@@ -185,7 +211,6 @@ const CommentCard = ({ comment, isSmallScreen }: CommentCardProps) => {
         />
       </svg>
       <div className="relative z-10 flex flex-col h-full p-4 sm:p-6 md:p-8 lg:p-10 justify-between text-foreground overflow-hidden">
-        {/* Top section with Rating */}
         <div className="flex items-center justify-start w-full" dir="rtl">
           <div className="w-10 h-6 sm:w-12 sm:h-7 md:w-14 md:h-8 lg:w-16 lg:h-10 flex items-center justify-center rounded-md bg-foreground">
             <span className="text-secondary text-xs sm:text-sm md:text-base">
