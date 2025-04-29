@@ -11,7 +11,7 @@ const CardSvgBackground = ({ isHovered }: { isHovered: boolean }) => (
   <svg className="w-full" xmlns="http://www.w3.org/2000/svg">
     <path
       d="M103.688 23.5C108.543 23.5 113.052 20.9839 115.602 16.8515L121.898 6.6485C124.448 2.51609 128.956 0 133.812 0H199C206.732 0 213 6.26801 213 14V75C213 82.732 206.732 89 199 89H14C6.26802 89 0 82.732 0 75V37.5C0 29.768 6.26801 23.5 14 23.5H103.688Z"
-      fill={isHovered ? "#7FFF00" : "#2E2E2E"}
+      fill={isHovered ? "#8CFF45" : "#2E2E2E"}
       className="transition-all duration-300"
     />
   </svg>
@@ -127,11 +127,11 @@ const Categories = () => {
                 className="absolute left-6 bottom-20 sm:bottom-20"
                 onClick={handleNextSlide}
               >
-                <MoveLeftIcon className="w-8 h-6 text-white" />
+                <MoveLeftIcon className="w-8 h-6 text-foreground" />
               </div>
 
               <div
-                className={`absolute bottom-16 ${
+                className={`absolute bottom-14 ${
                   isSmallScreen ? "left-36" : "right-2"
                 } w-12 h-12 flex items-center justify-center rounded-md ${
                   hoveredIndex === cardIndex
@@ -144,7 +144,9 @@ const Categories = () => {
 
               <div
                 className={`absolute bottom-4 flex items-center gap-1 ${
-                  hoveredIndex === cardIndex ? "text-[#2E2E2E]" : "text-[#fff]"
+                  hoveredIndex === cardIndex
+                    ? "text-secondary"
+                    : "text-foreground"
                 } font-bold`}
                 style={{
                   position: "absolute",
