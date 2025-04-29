@@ -45,7 +45,7 @@ const SearchBar = () => {
       <div
         ref={searchRef}
         className={`flex justify-between items-center w-full bg-subBg2 backdrop-blur-sm rounded-xl p-4 transition-all duration-300 ${
-          isOpen ? "h-auto opacity-100" : "h-0 overflow-hidden md:h-auto"
+          isOpen ? "h-auto opacity-100" : "h-0 overflow-visible md:h-auto"
         } ${isOpen ? "opacity-100" : "opacity-0 md:opacity-100"}`}
       >
         {/* Close Button for Mobile */}
