@@ -3,7 +3,7 @@ import { getToken, removeToken } from '../cookie/auth';
 
 const baseURL = 'https://delta-project.liara.run/api';
 
-const instance = axios.create({
+const axiosApi = axios.create({
     baseURL: baseURL,
 });
 
@@ -31,9 +31,9 @@ const onError = (err: AxiosError) => {
     return Promise.reject(err);
 }
 
-instance.interceptors.response.use(onSuccess, onError);
+axiosApi.interceptors.response.use(onSuccess, onError);
 
-instance.interceptors.request.use(async (opt) => {
+axiosApi.interceptors.request.use(async (opt) => {
     const token = await getToken();
     if (token) {
         opt.headers.Authorization = 'Bearer ' + token;
@@ -41,4 +41,4 @@ instance.interceptors.request.use(async (opt) => {
     return opt;
 });
 
-export default instance;
+export default axiosApi;
