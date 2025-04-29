@@ -17,6 +17,7 @@ const config: Config = {
         danger: "#FF4D4D", // برای هشدار یا تایمر
         border: "#2E2E2E", // خطوط حاشیه
         "secondary-light": "#2D2D2D", // خاکستری کاپوننت های لندینگ
+        "secondary-light2": "#393939", // خاکستری کاپوننت های کارت
         "blur-primary": '#8CFF4552', // بلور سبز 
         "blur-blue": '#7569FF52', // بلور سرمه ای
         background: "oklch(var(--background))",

@@ -2,15 +2,16 @@
 
 import React from 'react'
 import SliderComponent from './sliders/SliderComponent'
-import { fetchApi } from '@/core/interceptore/fetchApi';
 import ViewAllButton from '../common/buttons/common/ViewAllButton';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs';
+import { fetchHouses } from '@/utils/service/api/fetchHouses';
+import { fetchRentalHouses } from '@/utils/service/api/fetchRentalHouses';
+import { fetchMortgageHouses } from '@/utils/service/api/fetchMortgageHouses';
 
 const DestinationOfDreams = async () => {
-    const houses = await fetchApi.get('/houses');
-    const dreamHouses = await fetchApi.get('/houses?sort=rate&order=DESC')
-    const rentalHouses = houses.filter((house: any) => house.transaction_type === 'rental')
-    const mortgageHouses = houses.filter((house: any) => house.transaction_type === 'mortgage')
+    const dreamHouses = await fetchHouses('rate', 'DESC')
+    const rentalHouses = await fetchRentalHouses()
+    const mortgageHouses = await fetchMortgageHouses()
 
     return (
         <div className='flex justify-center items-center py-[50px] gap-16 flex-col relative bg-secondary-light rounded-b-[64px]'>
