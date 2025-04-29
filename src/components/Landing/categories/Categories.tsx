@@ -4,8 +4,15 @@ import React, { useEffect, useState } from "react";
 import arrow from "../../../assets/arrow.svg";
 import villaIcon from "../../../assets/villa.png";
 import star from "@/assets/Star 7.png";
-import { MoveLeftIcon } from "lucide-react";
 import Bstar from "@/assets/Star 5.png";
+import { MoveLeftIcon } from "lucide-react";
+import { fetchApi } from "@/core/interceptore/fetchApi";
+import { Loader } from "@/components/common/inputs/common/Loader";
+
+type Category = {
+  id: string;
+  name: string;
+};
 
 const CardSvgBackground = ({ isHovered }: { isHovered: boolean }) => (
   <svg className="w-full" xmlns="http://www.w3.org/2000/svg">
@@ -20,64 +27,53 @@ const CardSvgBackground = ({ isHovered }: { isHovered: boolean }) => (
 const Categories = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [cardsToShow, setCardsToShow] = useState(6);
+  const [cardsToShow, setCardsToShow] = useState(1);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [categoryData, setCategoryData] = useState<Category[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const totalCards = 6;
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const Data = await fetchApi.get("/categories");
+        setCategoryData(Data);
+      } catch (error) {
+        console.error("Failed to fetch categories:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-  type TitleType = {
-    title: string;
-  };
-
-  const Titles: TitleType[] = [
-    { title: "املاک" },
-    { title: "ویلایی" },
-    { title: "تجاری" },
-    { title: "زمین" },
-    { title: "صنعتی" },
-    { title: "اداری" },
-  ];
+    fetchData();
+  }, []);
 
   useEffect(() => {
     const updateCardsToShow = () => {
       const width = window.innerWidth;
 
-      if (width <= 439) {
-        setIsSmallScreen(true);
-      } else {
-        setIsSmallScreen(false);
-      }
+      setIsSmallScreen(width <= 439);
 
-      if (width >= 1346) {
-        setCardsToShow(6);
-      } else if (width >= 1024) {
-        setCardsToShow(4);
-      } else if (width >= 640) {
-        setCardsToShow(3);
-      } else if (width >= 680) {
-        setCardsToShow(2);
-      } else if (width >= 450) {
-        setCardsToShow(2);
-      } else {
-        setCardsToShow(1);
-      }
+      if (width >= 1346) setCardsToShow(6);
+      else if (width >= 1024) setCardsToShow(4);
+      else if (width >= 640) setCardsToShow(3);
+      else if (width >= 450) setCardsToShow(2);
+      else setCardsToShow(1);
     };
 
     updateCardsToShow();
     window.addEventListener("resize", updateCardsToShow);
-
-    return () => {
-      window.removeEventListener("resize", updateCardsToShow);
-    };
+    return () => window.removeEventListener("resize", updateCardsToShow);
   }, []);
 
   const handleNextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % totalCards);
+    setCurrentSlide((prev) =>
+      categoryData.length === 0 ? 0 : (prev + 1) % categoryData.length
+    );
   };
 
-  const visibleCards = Array.from({ length: cardsToShow }).map(
-    (_, idx) => (currentSlide + idx) % totalCards
-  );
+  const visibleCards = Array.from({
+    length: Math.min(cardsToShow, categoryData.length),
+  }).map((_, idx) => (currentSlide + idx) % categoryData.length);
 
   return (
     <div className="min-h-screen text-foreground p-2 sm:p-4">
@@ -86,19 +82,11 @@ const Categories = () => {
           src={arrow}
           className="w-8 h-8 sm:w-12 sm:h-12 rotate-180"
           alt="arrow"
-          width={48}
-          height={48}
         />
         <span className="text-sm sm:text-base md:text-lg">
           دسته بندی املاک دلتا
         </span>
-        <Image
-          src={arrow}
-          className="w-8 h-8 sm:w-12 sm:h-12"
-          alt="arrow"
-          width={48}
-          height={48}
-        />
+        <Image src={arrow} className="w-8 h-8 sm:w-12 sm:h-12" alt="arrow" />
       </div>
 
       <h1 className="text-center text-xl sm:text-2xl md:text-3xl font-bold mb-2 sm:mb-4">
@@ -111,64 +99,72 @@ const Categories = () => {
       </p>
 
       <div className="relative w-full flex items-center justify-center">
-        <div className="flex gap-8 overflow-x-auto px-6">
-          {visibleCards.map((cardIndex) => (
-            <div
-              key={cardIndex}
-              className="w-full sm:w-[210px] h-[100px] relative flex items-center justify-center cursor-pointer transition-all duration-300"
-              onMouseEnter={() => setHoveredIndex(cardIndex)}
-              onMouseLeave={() => setHoveredIndex(null)}
-            >
-              <div className="w-full h-full rounded-lg overflow-hidden">
-                <CardSvgBackground isHovered={hoveredIndex === cardIndex} />
-              </div>
+        {isLoading ? (
+          <div className="w-full flex justify-center items-center h-[120px]">
+            <Loader />
+          </div>
+        ) : (
+          <div className="flex gap-8 overflow-x-auto px-6">
+            {visibleCards.map((cardIndex) => {
+              const category = categoryData[cardIndex];
+              return (
+                <div
+                  key={cardIndex}
+                  className="w-full sm:w-[210px] h-[100px] relative flex items-center justify-center cursor-pointer transition-all duration-300"
+                  onMouseEnter={() => setHoveredIndex(cardIndex)}
+                  onMouseLeave={() => setHoveredIndex(null)}
+                >
+                  <div className="w-full h-full rounded-lg overflow-hidden">
+                    <CardSvgBackground isHovered={hoveredIndex === cardIndex} />
+                  </div>
 
-              <div
-                className="absolute left-6 bottom-20 sm:bottom-20"
-                onClick={handleNextSlide}
-              >
-                <MoveLeftIcon className="w-8 h-6 text-foreground" />
-              </div>
+                  <div
+                    className="absolute left-6 bottom-20 sm:bottom-20"
+                    onClick={handleNextSlide}
+                  >
+                    <MoveLeftIcon className="w-8 h-6 text-foreground" />
+                  </div>
 
-              <div
-                className={`absolute bottom-14 ${
-                  isSmallScreen ? "left-36" : "right-2"
-                } w-12 h-12 flex items-center justify-center rounded-md ${
-                  hoveredIndex === cardIndex
-                    ? "bg-secondary-light"
-                    : "bg-secondary"
-                } backdrop-blur-md transition-all duration-300`}
-              >
-                <Image alt="villa" src={villaIcon} className="w-6 h-6" />
-              </div>
+                  <div
+                    className={`absolute bottom-14 ${
+                      isSmallScreen ? "left-36" : "right-2"
+                    } w-12 h-12 flex items-center justify-center rounded-md ${
+                      hoveredIndex === cardIndex
+                        ? "bg-secondary-light"
+                        : "bg-secondary"
+                    } backdrop-blur-md transition-all duration-300`}
+                  >
+                    <Image alt="villa" src={villaIcon} className="w-6 h-6" />
+                  </div>
 
-              <div
-                className={`absolute bottom-4 flex items-center gap-1 ${
-                  hoveredIndex === cardIndex
-                    ? "text-secondary"
-                    : "text-foreground"
-                } font-bold`}
-                style={{
-                  position: "absolute",
-                  bottom: "20px",
-                  left: "55px",
-                }}
-              >
-                <Image
-                  alt="star"
-                  src={hoveredIndex === cardIndex ? Bstar : star}
-                  className="w-4 h-4 transition-all duration-300"
-                />
-                <span>{Titles[currentSlide + cardIndex]?.title}</span>
-                <Image
-                  alt="star"
-                  src={hoveredIndex === cardIndex ? Bstar : star}
-                  className="w-4 h-4 transition-all duration-300"
-                />
-              </div>
-            </div>
-          ))}
-        </div>
+                  <div
+                    className={`absolute bottom-4 flex items-center gap-1 ${
+                      hoveredIndex === cardIndex
+                        ? "text-secondary"
+                        : "text-foreground"
+                    } font-bold`}
+                    style={{
+                      bottom: "20px",
+                      left: "55px",
+                    }}
+                  >
+                    <Image
+                      alt="star"
+                      src={hoveredIndex === cardIndex ? Bstar : star}
+                      className="w-4 h-4 transition-all duration-300"
+                    />
+                    <span>{category?.name || "بدون عنوان"}</span>
+                    <Image
+                      alt="star"
+                      src={hoveredIndex === cardIndex ? Bstar : star}
+                      className="w-4 h-4 transition-all duration-300"
+                    />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
     </div>
   );
