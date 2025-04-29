@@ -1,10 +1,10 @@
 import React from 'react'
 import ViewAllButton from '../common/buttons/common/ViewAllButton'
 import SliderComponent from './sliders/SliderComponent'
-import { fetchApi } from '@/core/interceptore/fetchApi'
+import { fetchHouses } from '@/utils/service/api/fetchHouses'
 
 const RealStateTraveling = async () => {
-    const houses = await fetchApi.get('/houses?sort=last_updated&order=DESC')
+    const houses = await fetchHouses('last_updated', 'DESC')
 
     return (
         <div className='w-full h-fit flex flex-col gap-4'>

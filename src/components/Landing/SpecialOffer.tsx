@@ -1,11 +1,11 @@
 import { Clock } from 'lucide-react'
 import React from 'react'
 import SliderComponent from './sliders/SliderComponent'
-import { fetchApi } from '@/core/interceptore/fetchApi'
 import CountdownTimer from '@/utils/helper/Timer/CountdownTimer'
+import { fetchHouses } from '@/utils/service/api/fetchHouses'
 
 const SpecialOffer = async () => {
-  const houses = await fetchApi.get('/houses');
+  const houses = await fetchHouses('', '')
 
   return (
     <div className="w-full h-fit bg-secondary-light px-8 py-12 rounded-[40px] relative">
