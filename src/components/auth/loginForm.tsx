@@ -1,62 +1,95 @@
-import { setToken } from "@/core/cookie/serverAuth";
-import {fetchApi} from "../../core/interceptore/fetchApi"
+"use client";
+import { setToken } from "@/core/cookie/auth";
+import { fetchApi } from "../../core/interceptore/fetchApi";
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
+import { useForm } from "react-hook-form";
+import axiosApi from "@/core/interceptore/axiosApi";
 
+interface LoginResponse {
+  accessToken: string;
+  refreshToken: string;
+}
 
 const LoginForm = () => {
-  const handleLogin =  async (formData: FormData) => {
-            "use server";
-        
-            try {
-              const res = await fetchApi.post('/auth/login', {
-                email: formData.get('email'),
-                password: formData.get('password'),
-              });
-              console.log(res)
+  // const handleLogin = async (formData: FormData) => {
+  //   "use server";
 
-              if (res.accessToken) {
-                setToken(res.accessToken);
-              }
-            } catch (error) {
-                console.log(error)
-            }
+  //   try {
+  //     const res = await fetchApi.post<LoginResponse>('/auth/login', {
+  //       email: formData.get('email'),
+  //       password: formData.get('password'),
+  //     });
+
+  //     console.log(res)
+
+  //     if (res.accessToken) {
+  //       await setToken(res.accessToken);
+  //     }
+  //   } catch (error) {
+  //     console.error('Login error:', error);
+  //   }
+  // };
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+
+  const handleLogin = async (values: any) => {
+    try {
+      const res : LoginResponse = await axiosApi.post("/auth/login", values);
+      console.log(res);
+
+      if (res.accessToken) {
+        await setToken(res.accessToken);
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+    }
   };
+
   return (
     <div>
-      <form className="mt-8 space-y-6" action={handleLogin}>
+      <form className="mt-8 space-y-6 text-black" onSubmit={handleSubmit(handleLogin)}>
         <div className="rounded-md shadow-sm -space-y-px flex flex-wrap">
           <div className="w-1/2">
             <label htmlFor="email" className="sr-only">
               ایمیل
             </label>
-            <input
+            <Input
               id="email"
-              name="email"
+              // name="email"
               type="text"
-              className="appearance-none bg-white rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              // className="appearance-none bg-white rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
               placeholder="ایمیل"
+              {...register("email")}
             />
           </div>
           <div className="w-1/2">
             <label htmlFor="password" className="sr-only">
               رمز عبور
             </label>
-            <input
+            <Input
               id="password"
-              name="password"
+              // name="password"
               type="password"
-              className="appearance-none bg-white rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              // className="appearance-none bg-white rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
               placeholder="رمز عبور"
+              {...register("password")}
             />
           </div>
         </div>
 
         <div>
-          <button
+          <Button
             type="submit"
-            className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            // className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
             ورود
-          </button>
+          </Button>
         </div>
       </form>
     </div>

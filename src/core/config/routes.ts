@@ -5,10 +5,10 @@ export const publicRoutes = [
 ]
 
 export const privateRoutes = [
-    '/userInfo',
     '/dashboard',
-    '/profile',
-    '/settings'
+    // '/userInfo',
+    // '/profile',
+    // '/settings'
 ]
 
 export const authRoutes = [
