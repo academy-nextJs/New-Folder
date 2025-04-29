@@ -1,25 +1,31 @@
-import { setToken } from "@/core/cookie/serverAuth";
-import {fetchApi} from "../../core/interceptore/fetchApi"
+import { setToken } from "@/core/cookie/auth";
+import { fetchApi } from "../../core/interceptore/fetchApi"
 
+interface LoginResponse {
+  accessToken: string;
+  refreshToken: string;
+}
 
 const LoginForm = () => {
-  const handleLogin =  async (formData: FormData) => {
-            "use server";
-        
-            try {
-              const res = await fetchApi.post('/auth/login', {
-                email: formData.get('email'),
-                password: formData.get('password'),
-              });
-              console.log(res)
+  const handleLogin = async (formData: FormData) => {
+    "use server";
+    
+    try {
+      const res = await fetchApi.post<LoginResponse>('/auth/login', {
+        email: formData.get('email'),
+        password: formData.get('password'),
+      });
 
-              if (res.accessToken) {
-                setToken(res.accessToken);
-              }
-            } catch (error) {
-                console.log(error)
-            }
+      console.log(res)
+
+      if (res.accessToken) {
+        await setToken(res.accessToken);
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+    }
   };
+
   return (
     <div>
       <form className="mt-8 space-y-6" action={handleLogin}>
