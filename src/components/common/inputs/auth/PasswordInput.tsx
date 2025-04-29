@@ -6,7 +6,7 @@ import { IPasswordInput } from '@/types/input-type/input-types'
 import { Eye, EyeOff } from 'lucide-react'
 import React, { FC, useState } from 'react'
 
-const PasswordInput: FC<IPasswordInput> = ({ label, placeholder, classname, background, color, onchange, mandatory }) => {
+const PasswordInput: FC<IPasswordInput> = ({ label, placeholder, classname, background, color, onchange, mandatory, id, name }) => {
     const [showPassword, setShowPassword] = useState<boolean>(false)
 
     return (
@@ -16,13 +16,14 @@ const PasswordInput: FC<IPasswordInput> = ({ label, placeholder, classname, back
                 {mandatory === true ? <p className='text-danger'> * </p> : <></>}
                 <span> : </span>
             </Label>
-            <div className='relative w-fit'>
+            <div className='relative w-full'>
                 <Input
                     onChange={onchange}
-                    type={showPassword ? 'text' : 'password'}
+                    type={showPassword ? 'password' : 'text'}
                     placeholder={placeholder || ''}
-                    id={label}
-                    className={`py-3 border border-border px-4  text-[#FFFFFF] rounded-[16px] text-[16px] ${classname} ${color} ${background}`}
+                    id={id}
+                    name={name}
+                    className={`py-3 border border-border px-4 text-[#FFFFFF] rounded-[16px] text-sm ${color} ${background} ${classname}`}
                 />
                 <Button
                     onClick={() => {
@@ -33,7 +34,8 @@ const PasswordInput: FC<IPasswordInput> = ({ label, placeholder, classname, back
                             setShowPassword(true)
                         }
                     }}
-                    className='cursor-pointer absolute left-3 top-2.5'
+                    className='cursor-pointer bg-transparent absolute left-3 top-2'
+                    variant={'scale'}
                 >
                     {showPassword ? <EyeOff className={`size-[20px] ${color}`} /> : <Eye className={`size-[20px] ${color}`} />}
                 </Button>

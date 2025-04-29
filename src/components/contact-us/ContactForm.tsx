@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 import { fetchApi } from '@/core/interceptore/fetchApi'
-import { ChevronLeft } from 'lucide-react'
+import { ChevronLeft, Loader } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { schemaContactValidation } from '@/utils/validations/contact-validation'
@@ -10,6 +10,7 @@ import { Label } from '../ui/label'
 import { Textarea } from '../ui/textarea'
 import { Input } from '../ui/input'
 import { showToast } from '@/core/toast/toast'
+import CommonButton from '../common/buttons/common/CommonButton'
 
 type FormValues = {
     name: string
@@ -19,12 +20,14 @@ type FormValues = {
 
 const ContactForm = () => {
 
+    const [isLoading, setIsLoading] = useState<boolean>(false)
+
     const { register, handleSubmit, reset, formState: { errors } } = useForm<FormValues>({
         resolver: zodResolver(schemaContactValidation)
     })
 
     const onSubmit = async (data: FormValues) => {
-
+        setIsLoading(true)
         const postData = {
             title: data.title,
             message: data.message
@@ -32,12 +35,14 @@ const ContactForm = () => {
 
         try {
             const response = await fetchApi.post('/contact-us', postData)
-            if (response.id) {
+            if (response) {
                 showToast('success', ' تایید درخواست ', ' بستن ', ' درخواست شما با موفقیت ارسال شد ')
             }
+            setIsLoading(false)
             reset()
         } catch (error: any) {
             console.log(error)
+            setIsLoading(false)
             showToast('error', ' ارور ', ' بستن ', ' مشکلی در درخواست پیدا شد ')
         }
     }
@@ -82,10 +87,11 @@ const ContactForm = () => {
                 />
                 {errors.message && <p className='text-danger text-sm font-semibold'>{errors.message.message} </p>}
             </div>
-            <button type='submit' className='bg-primary text-black text-[13px] rounded-2xl flex gap-2 justify-center items-center px-4 py-2 cursor-pointer hover:scale-[1.01] transition-all duration-100'>
-                <span>  ارسال درخواست  </span>
-                <ChevronLeft />
-            </button>
+            <CommonButton type="submit" title={isLoading ? "در حال ارسال..." : " ارسال درخواست "}
+                icon={isLoading ? <Loader /> : <ChevronLeft size={16} />}
+                classname="w-full"
+                disabled={isLoading}
+            />
         </form>
 
     )

@@ -1,91 +1,57 @@
-import {fetchApi} from "../../core/interceptore/fetchApi"
+import { ChevronLeft } from "lucide-react";
+import { fetchApi } from "../../core/interceptore/fetchApi"
+import CommonButton from "../common/buttons/common/CommonButton";
+import PasswordInput from "../common/inputs/auth/PasswordInput";
+import CommonInput from "../common/inputs/common/CommonInput";
 
 
-const RegisterForm = () => {
-    const handleRegister = async (formData: FormData) => {
-        "use server";
-    
-        try {
-          const res = await fetchApi.post('/auth/register', {
-            email: formData.get('email'),
-            password: formData.get('password'),
-            firstName: formData.get('firstName'),
-            lastName: formData.get('lastName'),
-          });
-          
-          console.log(res)
-        } catch (error) {
-            console.log(error)
-        }
-      };
-    
+const RegisterForm =  () => {
+  const handleRegister = async (formData: FormData) => {
+    "use server";
+
+    try {
+      const res = await fetchApi.post('/auth/register', {
+        email: formData.get('email'),
+        password: formData.get('password'),
+        firstName: formData.get('firstName'),
+        lastName: formData.get('lastName'),
+      });
+
+      console.log(res)
+    } catch (error) {
+      console.log(error)
+    }
+  };
+
   return (
     <div>
-      <form className="mt-8 space-y-6" action={handleRegister}>
-        <div className="rounded-md shadow-sm -space-y-px flex flex-wrap">
-          <div className="w-1/2">
-            <label htmlFor="email" className="sr-only">
-              ایمیل 
-            </label>
-            <input
-              id="email"
-              name="email"
-              type="text"
-              
-              className="appearance-none bg-white rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-              placeholder="ایمیل"
-            />
+      <form className="mt-8 space-y-10" action={handleRegister}>
+        <div className="flex flex-col gap-4">
+          <div className="w-full flex gap-4">
+            <div className="w-1/2">
+              <CommonInput type="text" label=" ایمیل شما " mandatory={true} placeholder=" ایمیل را وارد کنید... " classname="placeholder:text-white text-sm w-full border-white" color="text-white" background="bg-transparent" id="email" name="email" />
+            </div>
+            <div className="w-1/2">
+              <label htmlFor="password" className="sr-only">
+                رمز عبور
+              </label>
+              <PasswordInput label=" رمز عبور " placeholder=" رمز عبور را وارد کنید... " mandatory={true} id="password" name="password" color="text-white" background="bg-transparent" classname="text-sm w-full placeholder:text-white border-white" />
+            </div>
           </div>
-          <div className="w-1/2">
-            <label htmlFor="password" className="sr-only">
-              رمز عبور
-            </label>
-            <input
-              id="password"
-              name="password"
-              type="password"
-              
-              className="appearance-none bg-white rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-              placeholder="رمز عبور"
-            />
-          </div>
-          <div className="w-1/2">
-            <label htmlFor="firstName" className="sr-only">
-               نام
-            </label>
-            <input
-              id="firstName"
-              name="firstName"
-              type="text"
-              
-              className="appearance-none bg-white rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-              placeholder="نام "
-            />
-          </div>
-          <div className="w-1/2">
-            <label htmlFor="lastName" className="sr-only">
-                نام خانوادگی
-            </label>
-            <input
-              id="lastName"
-              name="lastName"
-              type="text"
-              
-              className="appearance-none bg-white rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-              placeholder="نام خانوادگی "
-            />
+          <div className="w-full flex gap-4">
+            <div className="w-1/2">
+              <CommonInput type="firstName" label=" نام " mandatory={true} placeholder=" نام را وارد کنید... " classname="w-full placeholder:text-white text-sm border-white" color="text-white" background="bg-transparent" id="firstName" name="firstName" />
+            </div>
+            <div className="w-1/2">
+              <CommonInput type="lastName" label=" نام خانوادگی " mandatory={true} placeholder=" نام خانوادگی را وارد کنید... " classname="text-sm placeholder:text-white w-full border-white" color="text-white" background="bg-transparent" id="lastName" name="lastName" />
+            </div>
           </div>
         </div>
 
 
 
         <div>
-          <button
-            type="submit"
-            className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-          >
-            ورود
-          </button>
+          <CommonButton icon={<ChevronLeft size={16} />} title=" ساخت حساب کاربری " classname="w-full"  />
         </div>
       </form>
     </div>

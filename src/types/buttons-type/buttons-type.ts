@@ -6,6 +6,7 @@ export interface IButton {
   title?: string;
   classname?: string;
   onclick?: () => void;
+  disabled?: boolean;
 }
 
 export interface ILinkButton {

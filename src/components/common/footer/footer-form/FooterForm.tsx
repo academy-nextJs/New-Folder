@@ -5,12 +5,13 @@ import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { fetchApi } from '@/core/interceptore/fetchApi'
 import { IFooterForm } from '@/types/footer-type/footer-types'
-import { ChevronLeft } from 'lucide-react'
-import React, { FC } from 'react'
+import { ChevronLeft, Loader } from 'lucide-react'
+import React, { FC, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { schemaContactValidation } from '@/utils/validations/contact-validation'
 import { showToast } from '@/core/toast/toast'
+import CommonButton from '../../buttons/common/CommonButton'
 
 type FormValues = {
     name: string
@@ -19,12 +20,13 @@ type FormValues = {
 }
 
 const FooterForm: FC<IFooterForm> = ({ classname }) => {
+    const [isLoading, setIsLoading] = useState<boolean>(false)
     const { register, handleSubmit, reset, formState: { errors } } = useForm<FormValues>({
         resolver: zodResolver(schemaContactValidation)
     })
 
     const onSubmit = async (data: FormValues) => {
-
+        setIsLoading(true)
         const postData = {
             title: data.title,
             message: data.message
@@ -32,12 +34,14 @@ const FooterForm: FC<IFooterForm> = ({ classname }) => {
 
         try {
             const response = await fetchApi.post('/contact-us', postData)
-            if (response.id) {
+            if (response) {
                 showToast('success', ' تایید درخواست ', ' بستن ', ' درخواست شما با موفقیت ارسال شد ')
             }
+            setIsLoading(false)
             reset()
         } catch (error: any) {
             console.log(error)
+            setIsLoading(false)
             showToast('error', ' ارور ', ' بستن ', ' مشکلی در درخواست پیدا شد ')
         }
     }
@@ -84,10 +88,11 @@ const FooterForm: FC<IFooterForm> = ({ classname }) => {
                 />
                 {errors.message && <p className='text-danger text-sm font-semibold'>*{errors.message.message}</p>}
             </div>
-            <button type='submit' className='bg-[#363636] text-white text-[13px] rounded-2xl flex gap-2 justify-center items-center px-4 py-2 cursor-pointer hover:scale-[1.01] transition-all duration-100'>
-                <span>  ارسال پیام  </span>
-                <ChevronLeft />
-            </button>
+            <CommonButton type="submit" title={isLoading ? "در حال ارسال..." : " ارسال پیام "}
+                icon={isLoading ? <Loader /> : <ChevronLeft size={16} />}
+                classname="w-full bg-secondary-light text-white"
+                disabled={isLoading}
+            />
         </form>
     )
 }
