@@ -2,12 +2,18 @@
 
 "use client";
 import { setToken } from "@/core/cookie/auth";
-import { fetchApi } from "../../core/interceptore/fetchApi";
 import { Input } from "../ui/input";
-import { Button } from "../ui/button";
 import { useForm } from "react-hook-form";
 import axiosApi from "@/core/interceptore/axiosApi";
 import { Label } from "../ui/label";
+import { ArrowLeft, Eye, EyeOff, Loader } from "lucide-react";
+import CommonButton from "../common/buttons/common/CommonButton";
+import { zodResolver } from '@hookform/resolvers/zod'
+import { schemaLoginValidation } from "@/utils/validations/login-validation";
+import { Button } from "../ui/button";
+import { useState } from "react";
+import { showToast } from "@/core/toast/toast";
+import { redirect } from "next/navigation";
 
 interface LoginResponse {
   accessToken: string;
@@ -15,6 +21,9 @@ interface LoginResponse {
 }
 
 const LoginForm = () => {
+  const [showPassword, setShowPassword] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+
   // const handleLogin = async (formData: FormData) => {
   //   "use server";
 
@@ -37,20 +46,28 @@ const LoginForm = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    resolver: zodResolver(schemaLoginValidation)
+  });
 
   const handleLogin = async (values: any) => {
+    setIsLoading(true)
     try {
       const res: LoginResponse = await axiosApi.post("/auth/login", values);
-      console.log(res);
 
       if (res.accessToken) {
         await setToken(res.accessToken);
+        showToast("success", " تایید ورود ", " بستن ", " کاربر با موفقیت وارد شد. ")
+        setIsLoading(false)
+        setTimeout(() => {
+          redirect('/dashboard')
+        }, 2000)
       }
     } catch (error) {
       console.error("Login error:", error);
+      setIsLoading(false)
+      showToast("error", " ارور در ورود ", " بستن ", " مشکلی در وارد شدن به حساب کاربری پیدا شد ")
     }
   };
 
@@ -71,29 +88,49 @@ const LoginForm = () => {
               placeholder="مثال : dakjsbd@email.com"
               {...register("email")}
             />
+            {errors.email && <p className='text-danger text-sm font-semibold'>{errors.email.message} </p>}
           </div>
-          <div className="w-1/2 flex gap-1 flex-col text-white">
-            <Label htmlFor="email" className={`text-[13px] flex gap-0.5`}>
-              <span> رمز عبور </span>
-              <p className='text-danger'> * </p>
-              <span> : </span>
-            </Label>
-            <Input
-              id="password"
-              type="password"
-              className="bg-transparent placeholder:text-white text-sm outline-none w-full py-3 border border-white text-white px-4 rounded-[16px] text-[16px]"
-              {...register("password")}
-            />
+          <div className="flex flex-col gap-3 w-1/2">
+            <div className="w-full flex gap-1 flex-col text-white">
+              <Label htmlFor="email" className={`text-[13px] flex gap-0.5`}>
+                <span> رمز عبور </span>
+                <p className='text-danger'> * </p>
+                <span> : </span>
+              </Label>
+              <div className='relative w-full'>
+                <Input
+                  id="password"
+                  type={showPassword ? 'password' : 'text'}
+                  className="bg-transparent placeholder:text-white text-sm outline-none w-full py-3 border border-white text-white px-4 rounded-[16px] text-[16px]"
+                  {...register("password")}
+                />
+                <Button
+                  variant={"scale"}
+                  onClick={() => {
+                    if (showPassword) {
+                      setShowPassword(false)
+                    }
+                    else {
+                      setShowPassword(true)
+                    }
+                  }}
+                  className='cursor-pointer bg-transparent text-white absolute left-3 top-2'
+                >
+                  {showPassword ? <EyeOff className={`size-[20px]`} /> : <Eye className={`size-[20px]`} />}
+                </Button>
+                <div />
+                {errors.password && <p className='text-danger text-sm mt-0.5 font-semibold'>{errors.password.message} </p>}
+              </div>
+              <span className="text-white flex gap-2 text-sm cursor-pointer"> <p>  رمز عبور خود را فراموش کردم  </p> <ArrowLeft size={20} /> </span>
+            </div>
           </div>
         </div>
-
         <div>
-          <Button
-            type="submit"
-          // className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-          >
-            ورود
-          </Button>
+          <CommonButton type="submit" title={isLoading ? "در حال ورود..." : "ورود به حساب کاربری"}
+            icon={isLoading ? <Loader /> : <ArrowLeft size={16} />}
+            classname="w-full"
+            disabled={isLoading}
+            />
         </div>
       </form>
     </div>

@@ -1,8 +1,22 @@
+'use client'
+import { getToken } from "@/core/cookie/auth";
+import { User } from "lucide-react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
-const LoginSection = () => (
-  <div className="flex items-center justify-end gap-2 text-[10px] lg:text-[16px] md:text-[11px] ml-7">
-    <Link
+const LoginSection = () => {
+  const [token, setToken] = useState<string | undefined>()
+
+  const getTokenData = async () => {
+    const token = await getToken()
+    setToken(token)
+  }
+  useEffect(() => {
+    getTokenData()
+  }, [])
+
+  return <div className="flex items-center justify-end gap-2 text-[10px] lg:text-[16px] md:text-[11px] ml-7">
+    {!token ? <Link
       href="/login"
       className="text-subText hover:text-primary transition-colors flex items-center gap-1"
     >
@@ -22,7 +36,12 @@ const LoginSection = () => (
       </svg>
       <span>ورود / ثبت نام</span>
     </Link>
+      :
+      <Link href={'/dashboard'} className="min-w-[40px] min-h-[40px] rounded-full bg-subBg2 cursor-pointer flex justify-center items-center">
+        <User />
+      </Link>
+    }
   </div>
-);
+};
 
 export default LoginSection;

@@ -10,6 +10,8 @@ export interface IInput {
     background?: string;
     onchange?: (e: ChangeEvent<HTMLInputElement>) => void;
     mandatory?: boolean;
+    name?: string;
+    id?: string;
 }
 
 export interface IPasswordInput {
@@ -20,6 +22,8 @@ export interface IPasswordInput {
     background?: string;
     onchange?: (e: ChangeEvent<HTMLInputElement>) => void;
     mandatory?: boolean;
+    name?: string;
+    id?: string;
 }
 
 export interface IOTPInput {
