@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 "use client";
 import { setToken } from "@/core/cookie/auth";
 import { fetchApi } from "../../core/interceptore/fetchApi";
@@ -5,6 +7,7 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { useForm } from "react-hook-form";
 import axiosApi from "@/core/interceptore/axiosApi";
+import { Label } from "../ui/label";
 
 interface LoginResponse {
   accessToken: string;
@@ -40,7 +43,7 @@ const LoginForm = () => {
 
   const handleLogin = async (values: any) => {
     try {
-      const res : LoginResponse = await axiosApi.post("/auth/login", values);
+      const res: LoginResponse = await axiosApi.post("/auth/login", values);
       console.log(res);
 
       if (res.accessToken) {
@@ -54,30 +57,31 @@ const LoginForm = () => {
   return (
     <div>
       <form className="mt-8 space-y-6 text-black" onSubmit={handleSubmit(handleLogin)}>
-        <div className="rounded-md shadow-sm -space-y-px flex flex-wrap">
-          <div className="w-1/2">
-            <label htmlFor="email" className="sr-only">
-              ایمیل
-            </label>
+        <div className="rounded-md shadow-sm -space-y-px flex gap-4">
+          <div className="w-1/2 flex gap-1 flex-col text-white">
+            <Label htmlFor="email" className={`text-[13px] flex gap-0.5`}>
+              <span> ایمیل شما </span>
+              <p className='text-danger'> * </p>
+              <span> : </span>
+            </Label>
             <Input
               id="email"
-              // name="email"
               type="text"
-              // className="appearance-none bg-white rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-              placeholder="ایمیل"
+              className="bg-transparent placeholder:text-white text-sm outline-none w-full py-3 border border-white text-white px-4 rounded-[16px] text-[16px]"
+              placeholder="مثال : dakjsbd@email.com"
               {...register("email")}
             />
           </div>
-          <div className="w-1/2">
-            <label htmlFor="password" className="sr-only">
-              رمز عبور
-            </label>
+          <div className="w-1/2 flex gap-1 flex-col text-white">
+            <Label htmlFor="email" className={`text-[13px] flex gap-0.5`}>
+              <span> رمز عبور </span>
+              <p className='text-danger'> * </p>
+              <span> : </span>
+            </Label>
             <Input
               id="password"
-              // name="password"
               type="password"
-              // className="appearance-none bg-white rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-              placeholder="رمز عبور"
+              className="bg-transparent placeholder:text-white text-sm outline-none w-full py-3 border border-white text-white px-4 rounded-[16px] text-[16px]"
               {...register("password")}
             />
           </div>
@@ -86,7 +90,7 @@ const LoginForm = () => {
         <div>
           <Button
             type="submit"
-            // className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          // className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
             ورود
           </Button>
