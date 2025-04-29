@@ -164,7 +164,7 @@ const CommentUsers = () => {
 
 const CommentCard = ({ comment, isSmallScreen }: CommentCardProps) => {
   const trimmedText = isSmallScreen
-    ? comment.text.slice(0, 80) + (comment.text.length > 50 ? "..." : "")
+    ? comment.text.slice(0, 78) + (comment.text.length > 50 ? "..." : "")
     : comment.text;
 
   return (
