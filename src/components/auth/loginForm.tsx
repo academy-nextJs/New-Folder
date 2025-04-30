@@ -74,8 +74,8 @@ const LoginForm = () => {
   return (
     <div>
       <form className="mt-8 space-y-6 text-black" onSubmit={handleSubmit(handleLogin)}>
-        <div className="rounded-md shadow-sm -space-y-px flex gap-4">
-          <div className="w-1/2 flex gap-1 flex-col text-white">
+        <div className="rounded-md shadow-sm -space-y-px flex md:flex-nowrap flex-wrap gap-4">
+          <div className="md:w-1/2 w-full flex gap-1 flex-col text-white">
             <Label htmlFor="email" className={`text-[13px] flex gap-0.5`}>
               <span> ایمیل شما </span>
               <p className='text-danger'> * </p>
@@ -90,7 +90,7 @@ const LoginForm = () => {
             />
             {errors.email && <p className='text-danger text-sm font-semibold'>{errors.email.message} </p>}
           </div>
-          <div className="flex flex-col gap-3 w-1/2">
+          <div className="flex flex-col gap-3 md:w-1/2 w-full">
             <div className="w-full flex gap-1 flex-col text-white">
               <Label htmlFor="email" className={`text-[13px] flex gap-0.5`}>
                 <span> رمز عبور </span>

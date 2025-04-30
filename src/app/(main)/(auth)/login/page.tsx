@@ -14,12 +14,12 @@ const LoginPage = () => {
           <TabsTrigger value="login" className='bg-subBg w-1/2'> ورود به حساب کاربری </TabsTrigger>
           <TabsTrigger value="register" className='bg-subBg w-1/2'> ساخت حساب کاربری </TabsTrigger>
         </TabsList>
-        <div className="flex gap-4 w-full my-8">
-          <div className="w-1/2">
-            <LoginButton icon="google" title="ورود با حساب گوگل" classname="w-full py-5" />
+        <div className="flex md:flex-nowrap flex-wrap gap-4 w-full my-8">
+          <div className="md:w-1/2 w-full">
+            <LoginButton icon="google" title="ورود با حساب گوگل" classname="w-full py-5 md:text-base text-sm" />
           </div>
-          <div className="w-1/2">
-            <LoginButton icon="apple" title=" ورود با حساب اپل " classname="w-full bg-transparent bg-[#303030] text-white py-5" />
+          <div className="md:w-1/2 w-full">
+            <LoginButton icon="apple" title=" ورود با حساب اپل " classname="w-ful md:text-base text-sm bg-transparent bg-[#303030] text-white py-5" />
           </div>
         </div>
         <div className="flex gap-2 flex-row-reverse items-center text-sm w-full justify-center text-subText">
@@ -32,7 +32,7 @@ const LoginPage = () => {
               </linearGradient>
             </defs>
           </svg>
-          <span> یا میتوانید </span>
+          <span className='whitespace-nowrap'> یا میتوانید </span>
           <svg width="251" height="2" viewBox="0 0 251 2" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M1.875 1H250" stroke="url(#paint0_linear_1_8424)" stroke-width="2" strokeLinecap="round" />
             <defs>
