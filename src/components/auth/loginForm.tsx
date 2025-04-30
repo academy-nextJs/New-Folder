@@ -98,6 +98,7 @@ const LoginForm = () => {
                     }
                   }}
                   className='cursor-pointer bg-transparent text-white absolute left-3 top-2'
+                  type="button"
                 >
                   {showPassword ? <EyeOff className={`size-[20px]`} /> : <Eye className={`size-[20px]`} />}
                 </Button>

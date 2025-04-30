@@ -3,16 +3,15 @@
 'use client'
 import { ChevronLeft, Loader } from "lucide-react";
 import CommonButton from "../common/buttons/common/CommonButton";
-import PasswordInput from "../common/inputs/auth/PasswordInput";
-import CommonInput from "../common/inputs/common/CommonInput";
 import { useForm } from "react-hook-form";
 import { zodResolver } from '@hookform/resolvers/zod'
 import { schemaRegisterValidation } from "@/utils/validations/register-validation";
 import { showToast } from "@/core/toast/toast";
 import { useState } from "react";
 import axiosApi from "@/core/interceptore/axiosApi";
-import { removeToken } from "@/core/cookie/auth";
 import { redirect } from "next/navigation";
+import { Label } from "../ui/label";
+import { Input } from "../ui/input";
 
 const RegisterForm = () => {
 
@@ -31,18 +30,18 @@ const RegisterForm = () => {
     setIsLoading(true)
     try {
 
-      const res = await axiosApi.post('/auth/register', values)
+      localStorage.setItem("email", values.email)
+      const res = await axiosApi.post('/auth/start-registration', values)
 
       if (res) {
-        showToast("success", " تایید ثبت نام ", " بستن ", " ثبت نام با موفقیت انجام شد ")
+        showToast("success", " کد ارسال شد ", " بستن ", " کد تایید برای ایمیل شما ارسال شد ")
         setIsLoading(false)
         reset()
-        await removeToken()
-        redirect("/login")
+        redirect("/verifyCode")
       }
     } catch (error) {
       console.log(error)
-      // showToast("error", " ارور در ثبت نام ", " بستن ", " مشکلی در ثبت نام پیدا شد ")
+      showToast("error", " ارور در ارسال کد ", " بستن ", " مشکلی در ارسال کد پیدا شد ")
       setIsLoading(false)
     }
   }
@@ -51,30 +50,25 @@ const RegisterForm = () => {
     <div>
       <form className="mt-8 space-y-10" onSubmit={handleSubmit(handleRegister)}>
         <div className="flex flex-col gap-4">
-          <div className="w-full flex sm:flex-nowrap flex-wrap gap-4">
-            <div className="sm:w-1/2 w-full flex flex-col gap-1">
-              <CommonInput register={register} type="text" label=" ایمیل شما " mandatory={true} placeholder=" ایمیل را وارد کنید... " classname="placeholder:text-white text-sm w-full border-white" color="text-white" background="bg-transparent" id="email" name="email" />
-              {errors.email && <p className='text-danger text-sm font-semibold'>{errors.email.message} </p>}
-            </div>
-            <div className="sm:w-1/2 w-full flex flex-col gap-1">
-              <PasswordInput register={register} label=" رمز عبور " placeholder=" رمز عبور را وارد کنید... " mandatory={true} id="password" name="password" color="text-white" background="bg-transparent" classname="text-sm w-full placeholder:text-white border-white" />
-              {errors.password && <p className='text-danger text-sm font-semibold'>{errors.password.message} </p>}
-            </div>
-          </div>
-          <div className="w-full flex sm:flex-nowrap flex-wrap gap-4">
-            <div className="sm:w-1/2 w-full flex flex-col gap-1">
-              <CommonInput register={register} type="firstName" label=" نام " mandatory={true} placeholder=" نام را وارد کنید... " classname="w-full placeholder:text-white text-sm border-white" color="text-white" background="bg-transparent" id="firstName" name="firstName" />
-              {errors.firstName && <p className='text-danger text-sm font-semibold'>{errors.firstName.message} </p>}
-            </div>
-            <div className="sm:w-1/2 w-full flex flex-col gap-1">
-              <CommonInput register={register} type="lastName" label=" نام خانوادگی " mandatory={true} placeholder=" نام خانوادگی را وارد کنید... " classname="text-sm placeholder:text-white w-full border-white" color="text-white" background="bg-transparent" id="lastName" name="lastName" />
-              {errors.lastName && <p className='text-danger text-sm font-semibold'>{errors.lastName.message} </p>}
-            </div>
+          <div className="w-full flex gap-1 flex-col text-white">
+            <Label htmlFor="email" className={`text-[13px] flex gap-0.5`}>
+              <span> ایمیل شما </span>
+              <p className='text-danger'> * </p>
+              <span> : </span>
+            </Label>
+            <Input
+              id="email"
+              type="text"
+              className="bg-transparent placeholder:text-white text-sm outline-none w-full py-3 border border-white text-white px-4 rounded-[16px] text-[16px]"
+              placeholder=" لطفا ایمیل خود را وارد فرمایید... "
+              {...register("email")}
+            />
+            {errors.email && <p className='text-danger text-sm font-semibold'>{errors.email.message} </p>}
           </div>
         </div>
 
         <div>
-          <CommonButton title={isLoading ? "در حال ورود..." : " ساخت حساب کاربری"}
+          <CommonButton title={isLoading ? "در حال ارسال..." : " ارسال کد تایید "}
             icon={isLoading ? <Loader /> : <ChevronLeft size={16} />} classname="w-full" />
         </div>
       </form>

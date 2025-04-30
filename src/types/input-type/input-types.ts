@@ -1,5 +1,4 @@
 import { ChangeEvent } from "react";
-import { UseFormRegister } from "react-hook-form";
 import { DateObject } from "react-multi-date-picker";
 
 export interface IInput {
@@ -11,16 +10,8 @@ export interface IInput {
   background?: string;
   onchange?: (e: ChangeEvent<HTMLInputElement>) => void;
   mandatory?: boolean;
-  name?: keyof RegisterFields;
+  name?: string;
   id?: string;
-  register?: UseFormRegister<RegisterFields>;
-}
-
-type RegisterFields = {
-  email: string;
-  password: string;
-  firstName: string;
-  lastName: string;
 }
 
 export interface IPasswordInput {
@@ -31,9 +22,8 @@ export interface IPasswordInput {
   background?: string;
   onchange?: (e: ChangeEvent<HTMLInputElement>) => void;
   mandatory?: boolean;
-  name?: keyof RegisterFields;
+  name?: string;
   id?: string;
-  register?: UseFormRegister<RegisterFields>;
 }
 
 export interface IOTPInput {
