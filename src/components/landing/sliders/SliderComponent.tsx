@@ -9,7 +9,7 @@ import { ISlider } from '@/types/slider-type/slider-types'
 import CardComponent from '../cards/CardComponent'
 import SkeletonCardComponent from '../cards/SkeletonCardComponent'
 
-export default function SliderComponent({ items, view, loading = true }: ISlider) {
+export default function SliderComponent({ items, view, loading }: ISlider) {
   const loadingMap = [1, 2, 3, 4]
   return (
     <div className="w-full">
@@ -32,7 +32,7 @@ export default function SliderComponent({ items, view, loading = true }: ISlider
           ))
           : items.map((item, index) => (
             <SwiperSlide key={index}>
-              <CardComponent {...item} image={item.photos?.[0]} view={view} />
+              <CardComponent {...item} view={view} />
             </SwiperSlide>
           ))}
       </Swiper>

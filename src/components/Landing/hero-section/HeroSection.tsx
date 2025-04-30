@@ -10,7 +10,7 @@ import InfoIndicator from "./section/InfoIndicator";
 
 const HeroSection = () => {
   return (
-    <div className="relative w-full h-[500px] sm:h-[565px] md:h-[775px] lg:h-[901px] xl:h-[901px] 2xl:h-[901px]  ">
+    <div className="relative w-full h-[500px] sm:h-[565px] md:h-[775px] lg:h-[901px] xl:h-[901px] 2xl:h-[901px] ">
       {/* تصویر پس‌زمینه */}
       <div className="absolute inset-0 z-0">
         <Image

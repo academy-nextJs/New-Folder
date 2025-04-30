@@ -4,6 +4,10 @@ export interface ISlider {
     loading: boolean;
 }
 
+export interface ISliderPhotos {
+    photos: string[];
+}
+
 type TItems = {
     photos?: string[]
     rate?: string;
