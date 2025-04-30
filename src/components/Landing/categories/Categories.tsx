@@ -1,13 +1,16 @@
 "use client";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import arrow from "../../../assets/arrow.svg";
-import villaIcon from "../../../assets/villa.png";
+import villaIcon from "../../../assets/images/categories/house.png";
+import villaIcon2 from "../../../assets/images/categories/cottage.png";
+import villaIcon3 from "../../../assets/images/categories/wooden-house.png";
+import villaIcon4 from "../../../assets/images/categories/apartment.png";
 import star from "@/assets/Star 7.png";
 import Bstar from "@/assets/Star 5.png";
 import { MoveLeftIcon } from "lucide-react";
 import { fetchApi } from "@/core/interceptore/fetchApi";
 import { Loader } from "@/app/Loader";
+import arrow from "@/assets/arrow.svg";
 
 type Category = {
   id: string;
@@ -23,6 +26,7 @@ const CardSvgBackground = ({ isHovered }: { isHovered: boolean }) => (
     />
   </svg>
 );
+const categoryIcons = [villaIcon4, villaIcon2, villaIcon, villaIcon3];
 
 const Categories = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -35,7 +39,7 @@ const Categories = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const Data = await fetchApi.get("/categories");
+        const Data = await fetchApi.get<Category[]>("/categories");
         setCategoryData(Data);
       } catch (error) {
         console.error("Failed to fetch categories:", error);
@@ -51,7 +55,7 @@ const Categories = () => {
     const updateCardsToShow = () => {
       const width = window.innerWidth;
 
-      setIsSmallScreen(width <= 439);
+      setIsSmallScreen(width <= 448);
 
       if (width >= 1346) setCardsToShow(6);
       else if (width >= 1024) setCardsToShow(4);
@@ -75,6 +79,9 @@ const Categories = () => {
     length: Math.min(cardsToShow, categoryData.length),
   }).map((_, idx) => (currentSlide + idx) % categoryData.length);
 
+  const getCategoryIcon = (index: number) => {
+    return categoryIcons[index % categoryIcons.length];
+  };
   return (
     <div className="mb-32 text-foreground p-2 sm:p-4">
       <div className="flex justify-center items-center gap-2 py-2 sm:py-4 mb-2 sm:mb-4 text-primary">
@@ -107,6 +114,7 @@ const Categories = () => {
           <div className="flex gap-8 overflow-x-auto px-6">
             {visibleCards.map((cardIndex) => {
               const category = categoryData[cardIndex];
+              const icon = getCategoryIcon(cardIndex);
               return (
                 <div
                   key={cardIndex}
@@ -114,7 +122,7 @@ const Categories = () => {
                   onMouseEnter={() => setHoveredIndex(cardIndex)}
                   onMouseLeave={() => setHoveredIndex(null)}
                 >
-                  <div className="w-full h-full rounded-lg overflow-hidden">
+                  <div className="w-full h-full rounded-lg overflow-hidden ">
                     <CardSvgBackground isHovered={hoveredIndex === cardIndex} />
                   </div>
 
@@ -134,7 +142,7 @@ const Categories = () => {
                         : "bg-secondary"
                     } backdrop-blur-md transition-all duration-300`}
                   >
-                    <Image alt="villa" src={villaIcon} className="w-6 h-6" />
+                    <Image alt="villa" src={icon} className="w-6 h-6" />
                   </div>
 
                   <div

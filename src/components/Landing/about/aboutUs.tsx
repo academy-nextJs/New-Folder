@@ -5,7 +5,7 @@ import Jam from "@/assets/m502t0008_06jun22_trophy_02 1.png";
 import Speaker from "@/assets/a.png";
 import Love from "@/assets/heart3 1.png";
 import { ClockIcon, HomeIcon, SmileIcon, TrophyIcon } from "lucide-react";
-import arrow from "../../assets/arrow.svg";
+import arrow from "@/assets/arrow.svg";
 
 interface Props {
   icon: ReactNode;
@@ -51,11 +51,12 @@ export default function DeltaAboutUsSection() {
                 padding: "24px",
                 paddingTop: "80px",
                 paddingBottom: "48px",
-                position: "relative",
+                // position: "relative",
                 margin: "auto",
+                gap: "10px",
               }}
             >
-              <div className="absolute top-6 right-6 h-14 w-14 bg-white rounded-md flex items-center justify-center">
+              <div className="absolute  mt-2 top-2 right-6 h-14 w-14 bg-white rounded-md flex items-center justify-center">
                 {icon}
               </div>
 
@@ -63,11 +64,13 @@ export default function DeltaAboutUsSection() {
                 className="flex flex-row-reverse items-center h-full gap-6 md:gap-3"
                 dir="ltr"
               >
-                <div className="flex flex-col w-full  items-center gap-2 text-right">
-                  <h3 className="text-xl font-bold text-foreground w-full">
+                <div className="flex flex-col w-full items-center gap-2 text-right">
+                  <h3 className="text-xl font-bold text-foreground w-full truncate overflow-hidden whitespace-nowrap">
                     {title}
                   </h3>
-                  <p className="text-xs text-ring w-full">{description}</p>
+                  <p className="text-md text-ring w-full truncate overflow-hidden whitespace-nowrap">
+                    {description}
+                  </p>
                 </div>
 
                 <div className="flex justify-end w-full h-full">
@@ -117,7 +120,7 @@ export default function DeltaAboutUsSection() {
           <foreignObject x="20" y="0" width="406" height="470">
             <div
               dir="rtl"
-              className="flex items-center justify-center h-full text-foreground text-base sm:text-lg md:text-xl text-center px-2 sm:px-4 leading-relaxed"
+              className="flex items-center justify-center h-full text-foreground text-[20px] sm:text-xl md:text-xl lg:text-[22px] text-center px-2 sm:px-4 leading-relaxed"
             >
               لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
               استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله
@@ -134,7 +137,7 @@ export default function DeltaAboutUsSection() {
   };
 
   return (
-    <div className="min-h-screen text-foreground">
+    <div className=" text-foreground">
       <div className="flex justify-center items-center gap-2 py-4 mb-4 text-primary">
         <Image
           src={arrow}
@@ -155,8 +158,8 @@ export default function DeltaAboutUsSection() {
       </p>
 
       <div className="max-w-6xl mx-auto">
-        <div className="flex flex-col md:flex-row sm:flex-col justify-center gap-6">
-          <div className="w-full md:w-1/3 flex flex-col gap-0">
+        <div className="flex flex-col min-[540px]:flex-row justify-center gap-4">
+          <div className="w-full min-[540px]:w-1/3 flex flex-col gap-0">
             <CustomCard
               icon={<HomeIcon className="text-secondary w-10 h-10" />}
               title="+۱۲۰۰۰ خونه فعال"
@@ -173,11 +176,11 @@ export default function DeltaAboutUsSection() {
             />
           </div>
 
-          <div className="w-full  md:w-1/3 flex justify-center items-center">
+          <div className="w-full min-[540px]:w-1/3 flex justify-center items-center">
             <CenterCard />
           </div>
 
-          <div className="w-full md:w-1/3 flex flex-col gap-4">
+          <div className="w-full min-[540px]:w-1/3 flex flex-col gap-0">
             <CustomCard
               icon={<ClockIcon className="text-secondary w-10 h-10" />}
               title="27/7 ساعت شبانه روز"

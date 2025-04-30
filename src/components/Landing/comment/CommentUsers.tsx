@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
-import arrow from "../../assets/arrow.svg";
+import arrow from "@/assets/arrow.svg";
 import { Star, Calendar } from "lucide-react";
 import plygen from "@/assets/Polygon 1.png";
 
@@ -43,7 +43,7 @@ const CommentUsers = () => {
     {
       id: 3,
       rating: "۴.۵",
-      text: "لورم ایپسوم متن ساختگی برای پر کردن فضا در طراحی گرافیک است...",
+      text: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است...",
       author: "محمد رضا ساداتی",
       date: "۱۲ مرداد - ۱۴۰۱",
       time: "۱۲:۳۳",
@@ -51,7 +51,7 @@ const CommentUsers = () => {
     {
       id: 4,
       rating: "۴.۳",
-      text: "متن دیگری برای نمایش در اسلاید دوم. این متن نیز ساختگی است...",
+      text: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است...",
       author: "علی احمدی",
       date: "۵ شهریور - ۱۴۰۱",
       time: "۱۵:۲۰",
@@ -59,7 +59,7 @@ const CommentUsers = () => {
     {
       id: 5,
       rating: "۴.۷",
-      text: "این یک نظر تستی برای اسلاید پنجم است...",
+      text: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است...",
       author: "مریم رضایی",
       date: "۱۴ آذر - ۱۴۰۱",
       time: "۱۱:۲۵",
@@ -67,7 +67,7 @@ const CommentUsers = () => {
     {
       id: 6,
       rating: "۴.۹",
-      text: "این نظر برای اسلاید ششم است. ما به کیفیت خدمات خود افتخار می‌کنیم...",
+      text: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است...",
       author: "امیر کاظمی",
       date: "۲۹ دی - ۱۴۰۱",
       time: "۱۸:۰۵",
@@ -112,9 +112,17 @@ const CommentUsers = () => {
   }
 
   const sliderPosition = 100 * activeSlideGroup;
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveSlideGroup((prev) =>
+        prev < slideGroupsCount - 1 ? prev + 1 : 0
+      );
+    }, 9000);
 
+    return () => clearInterval(interval);
+  }, [slideGroupsCount]);
   return (
-    <div className="min-h-screen text-foreground px-8">
+    <div className=" text-foreground px-8">
       <div className="flex justify-center items-center gap-2 py-2 sm:py-4 mb-2 sm:mb-4 text-primary">
         <Image
           src={arrow}
@@ -143,7 +151,7 @@ const CommentUsers = () => {
       <div className="flex flex-col items-center">
         <div className="w-full overflow-hidden">
           <div
-            className="flex transition-transform duration-500 ease-in-out"
+            className="flex transition-all duration-700 ease-in-out"
             style={{ transform: `translateX(${sliderPosition}%)` }}
             dir="rtl"
           >
@@ -194,7 +202,7 @@ const CommentCard = ({ comment, isSmallScreen }: CommentCardProps) => {
     : comment.text;
 
   return (
-    <div className="relative w-[50vw] sm:w-[70vw] md:w-[40vw] lg:w-[50vw] h-full">
+    <div className="relative w-[65vw] sm:w-[70vw] md:w-[40vw] lg:w-[40vw] h-full">
       {" "}
       <svg
         width="100%"
