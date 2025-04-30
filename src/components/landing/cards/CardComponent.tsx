@@ -4,12 +4,13 @@ import { Bath, Bed, Car, MapPin, Trees } from 'lucide-react'
 import Link from 'next/link'
 import React, { FC } from 'react'
 import { motion } from 'framer-motion'
+import SliderPhotos from '../sliders/SliderPhotos'
 
-const CardComponent: FC<ICard> = ({ view, image, rate, title, address, rooms, parking, bathrooms, transaction_type, price, id, discountedPrice, categories }) => {
+const CardComponent: FC<ICard> = ({ view, photos, rate, title, address, rooms, parking, bathrooms, transaction_type, price, id, discountedPrice, categories }) => {
     const discount_percentage = discountedPrice ? Math.ceil(((Number(price) - discountedPrice) / Number(price)) * 100) : 0
 
     return (
-        <motion.div whileHover={{ scale: 1.02 }} transition={{ duration: 0.2 }} className='flex flex-col gap-4 text-white group w-fit h-full my-10 mx-auto'>
+        <motion.div whileHover={{ scale: 1.02 }} transition={{ duration: 0.2 }} className='flex flex-col gap-4 text-white group w-full h-full my-10 mx-auto'>
             <div className='relative '>
                 <div className="bg-secondary-light2 w-full p-4 group-hover:bg-primary relative h-[190] rounded-[24px] flex justify-center items-center after:content-['']
                         after:w-[90px] after:h-[50px] after:group-hover:bg-primary after:absolute after:top-[-34] after:rounded-tr-2xl after:rounded-tl-[40px] after:right-0 after:bg-secondary-light2">
@@ -26,14 +27,7 @@ const CardComponent: FC<ICard> = ({ view, image, rate, title, address, rooms, pa
                         </svg> </Link>
                     </div>
                     <div className='relative w-full h-full flex justify-center'>
-                        <img alt={``} src={`${image}` || ''} className='bg-[#444444] w-full h-[full] rounded-[20px]' width={234} height={154} />
-                        <svg className='absolute bottom-1' width="80" height="16" viewBox="0 0 80 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M9.73205 3C8.96225 1.66667 7.03775 1.66667 6.26795 3L2.80385 9C2.03405 10.3333 2.9963 12 4.5359 12L11.4641 12C13.0037 12 13.966 10.3333 13.1962 9L9.73205 3Z" fill="white" />
-                            <circle cx="28" cy="8" r="4" fill="#D9D9D9" />
-                            <circle cx="44" cy="8" r="4" fill="#D9D9D9" />
-                            <circle cx="60" cy="8" r="4" fill="#D9D9D9" />
-                            <circle cx="76" cy="8" r="4" fill="#D9D9D9" />
-                        </svg>             
+                        { photos && photos?.length > 0 ? <SliderPhotos photos={photos || []} /> : <div className='w-[272px] h-[157px] bg-secondary-light rounded-2xl'>  </div>}            
                     </div>
                 </div>
             </div>

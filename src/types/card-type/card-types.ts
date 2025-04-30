@@ -1,7 +1,7 @@
 import { TCategories } from "../slider-type/slider-types";
 
 export interface ICard {
-  image?: string;
+  photos?: string[];
   rate?: string;
   title?: string;
   address?: string;
