@@ -1,3 +1,4 @@
+'use client'
 import AuthHeader from '@/components/auth/authHeader'
 import LoginForm from '@/components/auth/loginForm'
 import RegisterForm from '@/components/auth/registerForm'

@@ -3,7 +3,7 @@ import { Label } from '@/components/ui/label'
 import { IInput } from '@/types/input-type/input-types'
 import React, { FC } from 'react'
 
-const CommonInput: FC<IInput> = ({ label, placeholder, classname, type, color, background, onchange, mandatory, name, id }) => {
+const CommonInput: FC<IInput> = ({ label, placeholder, classname, type, color, background, onchange, mandatory, name, id, register }) => {
     return (
         <div className='rtl flex flex-col gap-2'>
             <Label htmlFor={label} className={`text-[13px] flex gap-0.5 ${color}`}>
@@ -12,7 +12,7 @@ const CommonInput: FC<IInput> = ({ label, placeholder, classname, type, color, b
                 <span> : </span>
             </Label>
             <Input
-                name={name}
+                {...(name && register ? register(name) : {})} name={name}
                 id={id}
                 onChange={onchange}
                 type={type || ''}

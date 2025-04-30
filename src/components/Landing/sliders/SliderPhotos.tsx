@@ -23,7 +23,7 @@ export default function SliderPhotos({ photos }: ISliderPhotos) {
             <img
               src={photo}
               alt={`Slide ${index + 1}`}
-              className="w-[272px] h-[157px] object-cover"
+              className="w-full h-[157px] object-cover"
             />
           </SwiperSlide>
         ))}

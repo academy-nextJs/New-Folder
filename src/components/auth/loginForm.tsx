@@ -21,31 +21,13 @@ interface LoginResponse {
 }
 
 const LoginForm = () => {
-  const [showPassword, setShowPassword] = useState<boolean>(false)
+  const [showPassword, setShowPassword] = useState<boolean>(true)
   const [isLoading, setIsLoading] = useState<boolean>(false)
-
-  // const handleLogin = async (formData: FormData) => {
-  //   "use server";
-
-  //   try {
-  //     const res = await fetchApi.post<LoginResponse>('/auth/login', {
-  //       email: formData.get('email'),
-  //       password: formData.get('password'),
-  //     });
-
-  //     console.log(res)
-
-  //     if (res.accessToken) {
-  //       await setToken(res.accessToken);
-  //     }
-  //   } catch (error) {
-  //     console.error('Login error:', error);
-  //   }
-  // };
 
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(schemaLoginValidation)
@@ -60,6 +42,7 @@ const LoginForm = () => {
         await setToken(res.accessToken);
         showToast("success", " تایید ورود ", " بستن ", " کاربر با موفقیت وارد شد. ")
         setIsLoading(false)
+        reset()
         setTimeout(() => {
           redirect('/dashboard')
         }, 2000)
@@ -67,7 +50,7 @@ const LoginForm = () => {
     } catch (error) {
       console.error("Login error:", error);
       setIsLoading(false)
-      showToast("error", " ارور در ورود ", " بستن ", " مشکلی در وارد شدن به حساب کاربری پیدا شد ")
+      showToast("error", " کاربر پیدا نشد ", " بستن ", " کاربر با این مشخصات پیدا نشد ")
     }
   };
 
