@@ -9,7 +9,7 @@ import star from "@/assets/Star 7.png";
 import Bstar from "@/assets/Star 5.png";
 import { MoveLeftIcon } from "lucide-react";
 import { fetchApi } from "@/core/interceptore/fetchApi";
-import { Loader } from "@/app/Loader";
+import { Loader } from "@/components/common/Loader";
 import arrow from "@/assets/arrow.svg";
 
 type Category = {

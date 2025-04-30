@@ -1,7 +1,9 @@
 import React from 'react'
 import ViewAllButton from '../../common/buttons/common/ViewAllButton';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../ui/tabs';
-import { CallSliderDreams, CallSliderMortgage, CallSliderRental } from './CallSlider';
+import { CallSliderDreams } from './CallSlider';
+import { CallSliderRental } from './CallSliderRental';
+import { CallSliderMortgage } from './CallSliderMortgage';
 
 const DestinationOfDreams = () => {
 
