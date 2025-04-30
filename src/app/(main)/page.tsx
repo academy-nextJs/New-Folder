@@ -1,5 +1,5 @@
-import AboutUs from "@/components/Landing/aboutUs";
-import CommentUsers from "@/components/Landing/CommentUsers";
+import AboutUs from "@/components/Landing/about/aboutUs";
+import CommentUsers from "@/components/Landing/comment/CommentUsers";
 import SpecialOffer from "@/components/Landing/specialOffer/SpecialOffer";
 import DivBlur from "@/components/common/blurFilter/DivBlur";
 import HeroSection from "@/components/Landing/hero-section/HeroSection";
@@ -9,12 +9,11 @@ import NewPlaces from "@/components/Landing/newPlaces/NewPlaces";
 import Categories from "@/components/Landing/categories/Categories";
 
 export default async function Home() {
-
   return (
     <div className="w-full flex flex-col gap-16 overflow-x-hidden">
       <HeroSection />
 
-      <div className="relative mt-36">
+      <div className="relative">
         <Categories />
       </div>
       <div className="relative px-8">
