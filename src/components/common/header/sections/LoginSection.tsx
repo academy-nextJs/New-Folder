@@ -1,47 +1,83 @@
-'use client'
-import { getToken } from "@/core/cookie/auth";
-import { User } from "lucide-react";
+"use client";
+import { getToken, removeToken } from "@/core/cookie/auth";
+import { User, LogOut, LayoutDashboard } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import { useRouter } from "next/navigation";
 
 const LoginSection = () => {
-  const [token, setToken] = useState<string | undefined>()
+  const [token, setToken] = useState<string | undefined>();
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
   const getTokenData = async () => {
-    const token = await getToken()
-    setToken(token)
-  }
-  useEffect(() => {
-    getTokenData()
-  }, [])
+    const token = await getToken();
+    setToken(token);
+  };
 
-  return <div className="flex items-center justify-end gap-2 text-[10px] lg:text-[16px] md:text-[11px] ml-7">
-    {!token ? <Link
-      href="/login"
-      className="text-subText hover:text-primary transition-colors flex items-center gap-1"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth={1.5}
-        stroke="currentColor"
-        className="w-5 h-5"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
-        />
-      </svg>
-      <span>ورود / ثبت نام</span>
-    </Link>
-      :
-      <Link href={'/dashboard'} className="min-w-[40px] min-h-[40px] rounded-full bg-subBg2 cursor-pointer flex justify-center items-center">
-        <User />
-      </Link>
-    }
-  </div>
+  const handleLogout = async () => {
+    await removeToken();
+    setToken(undefined);
+    router.push("/login");
+  };
+
+  useEffect(() => {
+    getTokenData();
+  }, []);
+
+  // بررسی مجدد توکن هر 2 ثانیه برای نمایش فوری تغییرات لاگین
+  useEffect(() => {
+    const checkTokenInterval = setInterval(() => {
+      getTokenData();
+    }, 2000);
+
+    return () => clearInterval(checkTokenInterval);
+  }, []);
+
+  return (
+    <div className="flex items-center justify-end gap-2 text-[10px] lg:text-[16px] md:text-[11px] ml-7">
+      {!token ? (
+        <Link
+          href="/login"
+          className="text-subText hover:text-primary transition-colors flex items-center gap-1"
+        >
+          <User className="w-4 h-4 sm:w-5 sm:h-5 md:w-5 md:h-4 lg:w-6 lg:h-6" />
+          <span>ورود / ثبت نام</span>
+        </Link>
+      ) : (
+        <div className="relative group" ref={dropdownRef}>
+          <div className="flex items-center gap-2 px-3 py-2 rounded-2lg border border-zinc-500 hover:bg-subBg text-foreground cursor-pointer transition-colors rounded-full">
+            <User className="text-subText w-4 h-4 sm:w-5 sm:h-5 md:w-5 md:h-4 lg:w-6 lg:h-6" />
+          </div>
+
+          <div className="absolute top-full left-0 mt-1 w-36 sm:w-44 md:w-48 lg:w-56 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-10">
+            <div className="bg-secondary border border-border rounded-md shadow-lg py-1 text-right">
+              <Link
+                href="/dashboard"
+                className="block px-2 sm:px-3 md:px-4 py-2 md:py-3 text-[10px] sm:text-xs md:text-sm text-foreground hover:bg-subBg transition-colors flex items-center gap-1 sm:gap-2"
+              >
+                <LayoutDashboard
+                  size={14}
+                  className="text-primary sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-6 lg:h-6"
+                />
+                <span>ورود به حساب کاربری</span>
+              </Link>
+              <button
+                onClick={handleLogout}
+                className="block w-full px-2 sm:px-3 md:px-4 py-2 md:py-3 text-[10px] sm:text-xs md:text-sm text-foreground hover:bg-subBg transition-colors flex items-center gap-1 sm:gap-2"
+              >
+                <LogOut
+                  size={14}
+                  className="text-danger sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-6 lg:h-6"
+                />
+                <span>خروج از حساب</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default LoginSection;
