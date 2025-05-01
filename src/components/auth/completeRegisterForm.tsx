@@ -9,13 +9,16 @@ import { schemaCompleteRegisterValidation } from "@/utils/validations/register-v
 import { showToast } from "@/core/toast/toast";
 import { useState } from "react";
 import axiosApi from "@/core/interceptore/axiosApi";
-import { redirect } from "next/navigation";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
+import { useUserStore } from "@/utils/zustand/store";
+import { useRouter } from "next/navigation";
 
 const CompleteRegisterForm = () => {
 
     const [isLoading, setIsLoading] = useState<boolean>(false)
+    const router = useRouter()
+    const userId = useUserStore(state => state.userId)
 
     const {
         handleSubmit,
@@ -29,23 +32,28 @@ const CompleteRegisterForm = () => {
     const handleRegister = async (values: any) => {
         setIsLoading(true)
         try {
-
-            localStorage.setItem("email", values.email)
-            const res = await axiosApi.post('/auth/complete-registration', {
-                userId: 1,
+            const data = {
+                userId: userId,
                 password: values.password,
                 phoneNumber: `${"+98" + values.phoneNumber}`
-            })
-
+            }
+            console.log(data)
+            const res = await axiosApi.post('/auth/complete-registration', data)
+            console.log(res)
             if (res) {
                 showToast("success", " تایید ثبت نام ", " بستن ", " ثبت نام با موفقیت انجام شد ")
                 setIsLoading(false)
                 reset()
-                redirect("/login")
+                router.push("/login")
             }
-        } catch (error) {
+        } catch (error: any) {
             console.log(error)
-            showToast("error", " ارور در ساخت حساب کاربری ", " بستن ", " مشکلی در ساخت حساب کاربری پیدا شد ")
+            if (error.response.data.message) {
+                showToast("error", " ارور در ارسال کد ", " بستن ", error.response.data.message, 5000)
+            }
+            else {
+                showToast("error", " ارور در ساخت حساب کاربری ", " بستن ", " مشکلی در ساخت حساب کاربری پیدا شد ")
+            }
             setIsLoading(false)
         }
     }

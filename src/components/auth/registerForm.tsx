@@ -8,14 +8,18 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { schemaRegisterValidation } from "@/utils/validations/register-validation";
 import { showToast } from "@/core/toast/toast";
 import { useState } from "react";
-import axiosApi from "@/core/interceptore/axiosApi";
-import { redirect } from "next/navigation";
+import axiosApi from "@/core/interceptore/axiosApi";;
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
+import {useUserStore, useEmailStore} from "@/utils/zustand/store";
+import { useRouter } from "next/navigation";
 
 const RegisterForm = () => {
 
+  const router = useRouter()
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const setTempUserId = useUserStore(state => state.setTempUserId)
+  const setEmail = useEmailStore(state => state.setEmail)
 
   const {
     handleSubmit,
@@ -29,19 +33,25 @@ const RegisterForm = () => {
   const handleRegister = async (values: any) => {
     setIsLoading(true)
     try {
-
-      localStorage.setItem("email", values.email)
-      const res = await axiosApi.post('/auth/start-registration', values)
-
+      setEmail(values.email)
+      const res = await axiosApi.post('/auth/start-registration', values) as any
+      if (res.tempUserId) {
+        setTempUserId(res.tempUserId)
+      }
       if (res) {
         showToast("success", " کد ارسال شد ", " بستن ", " کد تایید برای ایمیل شما ارسال شد ")
         setIsLoading(false)
         reset()
-        redirect("/verifyCode")
+        router.push("/verifyCode")
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log(error)
-      showToast("error", " ارور در ارسال کد ", " بستن ", " مشکلی در ارسال کد پیدا شد ")
+      if (error.response.data.message) {
+        showToast("error", " ارور در ارسال کد ", " بستن ", error.response.data.message, 5000)
+      }
+      else {
+        showToast("error", " ارور در ارسال کد ", " بستن ", " مشکلی در ارسال کد پیدا شد ")
+      }
       setIsLoading(false)
     }
   }

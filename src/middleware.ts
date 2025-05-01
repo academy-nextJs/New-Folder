@@ -29,6 +29,7 @@ export const config = {
   matcher: [
     '/dashboard/:path*',
     '/login',
-    '/register'
+    '/completeRegister',
+    '/verifyCode'
   ]
 } 
