@@ -6,8 +6,8 @@ import SliderComponent from '../sliders/SliderComponent'
 
 const CallSlider = () => {
     const { data: houses, isLoading } = useQuery({
-        queryKey: ['houses'],
-        queryFn: () => fetchHouses('', '')
+        queryKey: ['specialOfferHouses'],
+        queryFn: () => fetchHouses('rate', 'DESC', '')
     })
 
     return (

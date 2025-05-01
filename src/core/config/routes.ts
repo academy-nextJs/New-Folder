@@ -1,7 +1,8 @@
 export const publicRoutes = [
     '/',
     '/login',
-    '/register'
+    '/verifyCode',
+    '/completeRegister'
 ]
 
 export const privateRoutes = [
@@ -13,5 +14,6 @@ export const privateRoutes = [
 
 export const authRoutes = [
     '/login',
-    '/register'
+    '/verifyCode',
+    '/completeRegister'
 ] 

@@ -4,11 +4,11 @@ import Image from "next/image";
 
 const AuthContainer = ({ children }: { children: React.ReactNode; }) => {
   return (
-    <div className="flex gap-16 text-white h-fit mt-10 lg:pr-8 px-8 my-[100px]">
+    <div className="flex gap-16 text-white h-fit mt-10 lg:pr-8 px-8 my-[100px] items-center">
       <div className="lg:w-1/2 w-full">
         {children}
       </div>
-      <div className="w-1/2 relative lg:flex justify-center hidden">
+      <div className="w-1/2 h-4/5 relative lg:flex justify-center hidden">
         <Image src={authBanner} width={200} height={40} className="w-full" alt="none" />
         <div className="w-10/12 mx-[20px] h-[97] px-4 py-2 bg-[#363636C7] backdrop-blur-[8] border-[#686868] text-white absolute bottom-14 flex justify-between items-center rounded-[32px]">
 
