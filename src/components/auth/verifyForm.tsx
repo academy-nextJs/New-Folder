@@ -63,7 +63,7 @@ const VerifyForm = () => {
         <div>
             <form className="mt-8 space-y-10" onSubmit={handleSubmit(handleRegister)}>
                 <div className="flex flex-col gap-4">
-                    <div className="w-full flex gap-4 justify-between items-center text-white">
+                    <div className="w-full flex xl:flex-row flex-col xl:gap-4 gap-8 justify-between xl:items-center items-start text-white">
                         <OtpInput onchange={(e) => setCode(e)} />
                         <TimerButton classname="flex-row" onclick={async () => {
                             try {

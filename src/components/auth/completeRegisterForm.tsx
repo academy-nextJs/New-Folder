@@ -61,8 +61,8 @@ const CompleteRegisterForm = () => {
     return (
         <div>
             <form className="mt-8 space-y-10" onSubmit={handleSubmit(handleRegister)}>
-                <div className="flex gap-4">
-                    <div className="w-1/2 flex gap-1 flex-col text-white">
+                <div className="flex md:flex-row flex-col gap-4">
+                    <div className="md:w-1/2 w-full flex gap-1 flex-col text-white">
                         <Label htmlFor="password" className={`text-[13px] flex gap-0.5`}>
                             <span> رمز عبور </span>
                             <p className='text-danger'> * </p>
@@ -77,7 +77,7 @@ const CompleteRegisterForm = () => {
                         />
                         {errors.password && <p className='text-danger text-sm font-semibold'>{errors.password.message} </p>}
                     </div>
-                    <div className="w-1/2 flex gap-1 flex-col text-white">
+                    <div className="md:w-1/2 w-full flex gap-1 flex-col text-white">
                         <Label htmlFor="phoneNumber" className={`text-[13px] flex gap-0.5`}>
                             <span> شماره تلفن </span>
                             <p className='text-danger'> * </p>
