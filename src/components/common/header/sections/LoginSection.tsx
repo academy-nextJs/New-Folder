@@ -1,42 +1,27 @@
 "use client";
-import { getToken, removeToken } from "@/core/cookie/auth";
 import { User, LogOut, LayoutDashboard } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useState, useRef } from "react";
+import { useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useUserStore } from "@/utils/zustand/store";
 
 const LoginSection = () => {
-  const [token, setToken] = useState<string | undefined>();
+  const { isLoggedIn, logout, checkAuthStatus } = useUserStore();
   const dropdownRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
-  const getTokenData = async () => {
-    const token = await getToken();
-    setToken(token);
-  };
-
   const handleLogout = async () => {
-    await removeToken();
-    setToken(undefined);
+    await logout();
     router.push("/login");
   };
 
   useEffect(() => {
-    getTokenData();
-  }, []);
-
-  // بررسی مجدد توکن هر 2 ثانیه برای نمایش فوری تغییرات لاگین
-  useEffect(() => {
-    const checkTokenInterval = setInterval(() => {
-      getTokenData();
-    }, 2000);
-
-    return () => clearInterval(checkTokenInterval);
-  }, []);
+    checkAuthStatus();
+  }, [checkAuthStatus]);
 
   return (
     <div className="flex items-center justify-end gap-2 text-[10px] lg:text-[16px] md:text-[11px] ml-7">
-      {!token ? (
+      {!isLoggedIn ? (
         <Link
           href="/login"
           className="text-subText hover:text-primary transition-colors flex items-center gap-1"
