@@ -1,12 +1,14 @@
 "use client";
-import { User, LogOut, LayoutDashboard } from "lucide-react";
+import { User, LogOut, LayoutDashboard, Moon, Sun } from "lucide-react";
 import Link from "next/link";
 import { useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useUserStore } from "@/utils/zustand/store";
+import { useTheme } from "@/utils/service/TanstakProvider";
 
 const LoginSection = () => {
   const { isLoggedIn, logout, checkAuthStatus } = useUserStore();
+  const { theme, toggleTheme } = useTheme();
   const dropdownRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
@@ -20,7 +22,19 @@ const LoginSection = () => {
   }, [checkAuthStatus]);
 
   return (
-    <div className="flex items-center justify-end gap-2 text-[10px] lg:text-[16px] md:text-[11px] ml-7">
+    <div className="flex items-center justify-end gap-3 text-[10px] lg:text-[16px] md:text-[11px] ml-7">
+      <button
+        onClick={toggleTheme}
+        className="flex items-center justify-center w-8 h-8 rounded-full hover:bg-subBg2 transition-colors"
+        aria-label={theme === "dark" ? "تغییر به حالت روشن" : "تغییر به حالت تاریک"}
+      >
+        {theme === "dark" ? (
+          <Sun className="w-4 h-4 sm:w-5 sm:h-5 text-subText hover:text-primary" />
+        ) : (
+          <Moon className="w-4 h-4 sm:w-5 sm:h-5 text-subText hover:text-primary" />
+        )}
+      </button>
+
       {!isLoggedIn ? (
         <Link
           href="/login"
