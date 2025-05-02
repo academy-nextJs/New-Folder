@@ -5,7 +5,7 @@ import React from 'react'
 
 const CompleteRegister = () => {
     return (
-        <div className='my-[100px]'>
+        <div>
             <AuthHeader pageName=' ثبت نام ' />
             <TabContent defaultValue="register" registerElement={<CompleteRegisterForm />} />
         </div>

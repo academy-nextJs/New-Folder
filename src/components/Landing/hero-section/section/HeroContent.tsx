@@ -4,7 +4,7 @@ import LinkButtons from "@/components/common/buttons/common/LinkButtons";
 
 const HeroContent = () => {
   return (
-    <>
+    <div className="">
       {/* متن زیر لوگو */}
       <div className="text-foreground mb-4 md:mb-8 text-center md:text-right">
         <p className="text-sm sm:text-xs md:text-sm mb-1 flex items-center justify-center  gap-2">
@@ -20,7 +20,7 @@ const HeroContent = () => {
         <LinkButtons variant="default" classname="text-xs md:text-sm lg:text-base w-[80px] md:w-[120px] lg:w-[150px]" link="/" title="آسون رزرو کن" />
         <LinkButtons variant="secondary" classname="text-xs md:text-sm lg:text-base w-[90px] md:w-[130px] lg:w-[160px]" link="/" title="رهن و اجاره ملک" />
       </div>
-    </>
+    </div>
   );
 };
 

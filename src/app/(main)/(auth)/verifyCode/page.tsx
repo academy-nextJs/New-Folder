@@ -5,7 +5,7 @@ import React from 'react'
 
 const VerifyCode = () => {
     return (
-        <div className='my-[100px]'>
+        <div>
             <AuthHeader pageName=' تایید کد ' />
             <TabContent defaultValue="register" registerElement={<VerifyForm />} />
         </div>

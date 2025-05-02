@@ -35,7 +35,7 @@ export default function RootLayout({
         <div className="flex flex-col justify-between mx-auto max-w-[1550px] w-screen h-screen">
           <Providers>
             <Header />
-            <div className="">{children}</div>
+            <div className="mb-[100px]">{children}</div>
             <div className="xl:px-8 px-0">
               <Footer />
             </div>

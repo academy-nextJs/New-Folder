@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const AuthContainer = ({ children }: { children: React.ReactNode; }) => {
   return (
-    <div className="flex gap-16 text-white h-fit mt-10 lg:pr-8 px-8 my-[100px] items-center">
+    <div className="flex gap-16 text-white h-fit lg:pr-8 px-8 mt-[100px] items-center">
       <div className="lg:w-1/2 w-full">
         {children}
       </div>
