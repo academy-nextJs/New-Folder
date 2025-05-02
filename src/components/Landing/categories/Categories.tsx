@@ -34,8 +34,6 @@ const Categories = () => {
   const [cardsToShow, setCardsToShow] = useState(1);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [categoryData, setCategoryData] = useState<Category[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -43,8 +41,6 @@ const Categories = () => {
         setCategoryData(Data);
       } catch (error) {
         console.error("Failed to fetch categories:", error);
-      } finally {
-        setIsLoading(false);
       }
     };
 
@@ -106,71 +102,75 @@ const Categories = () => {
       </p>
 
       <div className="relative w-full flex items-center justify-center">
-        {isLoading ? (
+        {categoryData.length === 0 ? (
           <div className="w-full flex justify-center items-center h-[120px]">
             <Loader />
           </div>
         ) : (
-          <div className="flex gap-8 overflow-x-auto px-6">
-            {visibleCards.map((cardIndex) => {
-              const category = categoryData[cardIndex];
-              const icon = getCategoryIcon(cardIndex);
-              return (
-                <div
-                  key={cardIndex}
-                  className="w-full sm:w-[210px] h-[100px] relative flex items-center justify-center cursor-pointer transition-all duration-300"
-                  onMouseEnter={() => setHoveredIndex(cardIndex)}
-                  onMouseLeave={() => setHoveredIndex(null)}
-                >
-                  <div className="w-full h-full rounded-lg overflow-hidden ">
-                    <CardSvgBackground isHovered={hoveredIndex === cardIndex} />
-                  </div>
-
+          <div className="flex justify-center items-center w-full">
+            <div className="flex gap-4 sm:gap-8 overflow-x-auto px-2 sm:px-6 mx-auto">
+              {visibleCards.map((cardIndex) => {
+                const category = categoryData[cardIndex];
+                const icon = getCategoryIcon(cardIndex);
+                return (
                   <div
-                    className="absolute left-6 bottom-20 sm:bottom-20"
-                    onClick={handleNextSlide}
+                    key={cardIndex}
+                    className="w-[210px] h-[100px] relative flex items-center justify-center cursor-pointer transition-all duration-300"
+                    onMouseEnter={() => setHoveredIndex(cardIndex)}
+                    onMouseLeave={() => setHoveredIndex(null)}
                   >
-                    <MoveLeftIcon className="w-8 h-6 text-foreground" />
-                  </div>
+                    <div className="w-full h-full rounded-lg overflow-hidden">
+                      <CardSvgBackground
+                        isHovered={hoveredIndex === cardIndex}
+                      />
+                    </div>
 
-                  <div
-                    className={`absolute bottom-14 ${
-                      isSmallScreen ? "left-36" : "right-2"
-                    } w-12 h-12 flex items-center justify-center rounded-md ${
-                      hoveredIndex === cardIndex
-                        ? "bg-secondary-light"
-                        : "bg-secondary"
-                    } backdrop-blur-md transition-all duration-300`}
-                  >
-                    <Image alt="villa" src={icon} className="w-6 h-6" />
-                  </div>
+                    <div
+                      className="absolute left-6 bottom-20"
+                      onClick={handleNextSlide}
+                    >
+                      <MoveLeftIcon className="w-8 h-6 text-foreground" />
+                    </div>
 
-                  <div
-                    className={`absolute bottom-4 flex items-center gap-1 ${
-                      hoveredIndex === cardIndex
-                        ? "text-secondary"
-                        : "text-foreground"
-                    } font-bold`}
-                    style={{
-                      bottom: "20px",
-                      left: "55px",
-                    }}
-                  >
-                    <Image
-                      alt="star"
-                      src={hoveredIndex === cardIndex ? Bstar : star}
-                      className="w-4 h-4 transition-all duration-300"
-                    />
-                    <span>{category?.name || "بدون عنوان"}</span>
-                    <Image
-                      alt="star"
-                      src={hoveredIndex === cardIndex ? Bstar : star}
-                      className="w-4 h-4 transition-all duration-300"
-                    />
+                    <div
+                      className={`absolute bottom-14 ${
+                        isSmallScreen ? "right-4" : "right-2"
+                      } w-12 h-12 flex items-center justify-center rounded-md ${
+                        hoveredIndex === cardIndex
+                          ? "bg-secondary-light"
+                          : "bg-secondary"
+                      } backdrop-blur-md transition-all duration-300`}
+                    >
+                      <Image alt="villa" src={icon} className="w-6 h-6" />
+                    </div>
+
+                    <div
+                      className={`absolute bottom-4 flex items-center gap-1 ${
+                        hoveredIndex === cardIndex
+                          ? "text-secondary"
+                          : "text-foreground"
+                      } font-bold text-center`}
+                      style={{
+                        bottom: "20px",
+                        right: isSmallScreen ? "60px" : "55px",
+                      }}
+                    >
+                      <Image
+                        alt="star"
+                        src={hoveredIndex === cardIndex ? Bstar : star}
+                        className="w-4 h-4 transition-all duration-300"
+                      />
+                      <span>{category?.name || "بدون عنوان"}</span>
+                      <Image
+                        alt="star"
+                        src={hoveredIndex === cardIndex ? Bstar : star}
+                        className="w-4 h-4 transition-all duration-300"
+                      />
+                    </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
         )}
       </div>
