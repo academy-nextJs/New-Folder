@@ -69,7 +69,7 @@ const RegisterForm = () => {
             <Input
               id="email"
               type="text"
-              className="bg-transparent placeholder:text-card-foreground text-sm outline-none w-full py-3 border border-white text-card-foreground px-4 rounded-[16px] text-[16px]"
+              className="bg-transparent placeholder:text-card-foreground text-sm outline-none w-full py-3 border border-card-foreground text-card-foreground px-4 rounded-[16px] text-[16px]"
               placeholder=" لطفا ایمیل خود را وارد فرمایید... "
               {...register("email")}
             />
@@ -79,7 +79,7 @@ const RegisterForm = () => {
 
         <div>
           <CommonButton title={isLoading ? "در حال ارسال..." : " ارسال کد تایید "}
-            icon={isLoading ? <Loader /> : <ChevronLeft size={16} />} classname="w-full" />
+            icon={isLoading ? <Loader /> : <ChevronLeft size={16} />} classname="w-full text-primary-foreground" />
         </div>
       </form>
     </div>

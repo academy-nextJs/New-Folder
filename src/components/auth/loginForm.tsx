@@ -67,10 +67,10 @@ const LoginForm = () => {
   return (
     <div>
       <form
-        className="mt-8 space-y-6 text-black"
+        className="mt-8 space-y-6 text-foreground"
         onSubmit={handleSubmit(handleLogin)}
       >
-        <div className="rounded-md shadow-sm -space-y-px flex md:flex-nowrap flex-wrap gap-4">
+        <div className="rounded-md -space-y-px flex md:flex-nowrap flex-wrap gap-4">
           <div className="md:w-1/2 w-full flex gap-1 flex-col text-card-foreground">
             <Label htmlFor="email" className={`text-[13px] flex gap-0.5`}>
               <span> ایمیل شما </span>
@@ -80,7 +80,7 @@ const LoginForm = () => {
             <Input
               id="email"
               type="text"
-              className="bg-transparent placeholder:text-card-foreground text-sm outline-none w-full py-3 border border-white text-card-foreground px-4 rounded-[16px] text-[16px]"
+              className="bg-transparent placeholder:text-card-foreground text-sm outline-none w-full py-3 border border-card-foreground text-card-foreground px-4 rounded-[16px] text-[16px]"
               placeholder="مثال : dakjsbd@email.com"
               {...register("email")}
             />
@@ -101,7 +101,7 @@ const LoginForm = () => {
                 <Input
                   id="password"
                   type={showPassword ? "password" : "text"}
-                  className="bg-transparent placeholder:text-card-foreground text-sm outline-none w-full py-3 border border-white text-card-foreground px-4 rounded-[16px] text-[16px]"
+                  className="bg-transparent placeholder:text-card-foreground text-sm outline-none w-full py-3 border border-card-foreground text-card-foreground px-4 rounded-[16px] text-[16px]"
                   {...register("password")}
                 />
                 <Button
@@ -141,7 +141,7 @@ const LoginForm = () => {
             type="submit"
             title={isLoading ? "در حال ورود..." : "ورود به حساب کاربری"}
             icon={isLoading ? <Loader /> : <ArrowLeft size={16} />}
-            classname="w-full"
+            classname="w-full text-primary-foreground"
             disabled={isLoading}
           />
         </div>

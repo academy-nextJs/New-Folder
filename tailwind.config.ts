@@ -9,6 +9,7 @@ const config: Config = {
         primary: "var(--primary)", // سبز فسفری
         "primary-foreground": "var(--primary-foreground)",
         secondary: "var(--secondary)", // پس‌زمینه اصلی
+        "secondary-static": "var(--secondary-static)", // پس‌زمینه ثابت
         "secondary-foreground": "var(--secondary-foreground)",
         background: "var(--background)",
         foreground: "var(--foreground)", // متن اصلی

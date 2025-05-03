@@ -5,7 +5,7 @@ import Frame from "@/assets/images/heroSection/Frame.svg";
 const InfoIndicator = () => {
   return (
     <div className=" text-right flex items-center  ">
-      <div className="mb-4 text-foreground">
+      <div className="mb-4 text-white">
         <p className="md:text-xl sm:text-xs mb-1">بیش از ۷۰۰۰+</p>
         <p className="text-sm sm:text-xs">رضایت مشتریانی که به دلتا اعتماد کرده اند</p>
       </div>

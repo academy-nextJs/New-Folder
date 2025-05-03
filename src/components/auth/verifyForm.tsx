@@ -96,10 +96,10 @@ const VerifyForm = () => {
 
                 <div className="flex flex-row-reverse gap-4 md:flex-nowrap flex-wrap">
                     <CommonButton type="submit" title={isLoading ? "در حال تایید..." : " ساخت حساب کاربری "}
-                        icon={isLoading ? <Loader /> : <ChevronLeft size={16} />} classname="md:w-1/2 w-full" />
+                        icon={isLoading ? <Loader /> : <ChevronLeft size={16} />} classname="md:w-1/2 w-full text-primary-foreground" />
                     <CommonButton type="button" title={" تغییر ایمیل "}
                         onclick={() => redirect('/login')}
-                        icon={<RefreshCcw size={16} />} classname="bg-transparent border border-white text-card-foreground md:w-1/2 w-full" />
+                        icon={<RefreshCcw size={16} />} classname="bg-transparent border border-card-foreground text-card-foreground md:w-1/2 w-full" />
                 </div>
             </form>
         </div>

@@ -47,50 +47,52 @@ const FooterForm: FC<IFooterForm> = ({ classname }) => {
     }
 
     return (
-        <form className={`flex flex-col gap-6 ${classname}`} onSubmit={handleSubmit(onSubmit)}>
+        <form className={`flex flex-col text-primary-foreground gap-6 ${classname}`} onSubmit={handleSubmit(onSubmit)}>
             <div className='flex gap-4 md:flex-row flex-col w-full'>
                 <div className="flex flex-col gap-1 md:w-1/2 w-full">
-                    <Label htmlFor="name" className="text-black text-sm">
+                    <Label htmlFor="name" className=" text-sm">
                         نام و نام خانوادگی:
                     </Label>
                     <Input
                         type='text'
                         id="name"
                         {...register('name')}
-                        className="border w-full outline-none border-black bg-transparent px-4 py-2 placeholder:text-black rounded-2xl outline-0"
+                        className="border w-full outline-none border-border bg-transparent px-4 py-2 placeholder:text-muted rounded-2xl"
                         placeholder="وارد کنید..."
                     />
-                    {errors.name && <p className='text-danger text-sm font-semibold'>{errors.name.message} </p>}
+                    {errors.name && <p className='text-danger text-sm font-semibold'>{errors.name.message}</p>}
                 </div>
                 <div className="flex flex-col gap-1 md:w-1/2 w-full">
-                    <Label htmlFor="title" className="text-black text-sm">
+                    <Label htmlFor="title" className=" text-sm">
                         عنوان:
                     </Label>
                     <Input
                         type='title'
                         id="title"
                         {...register('title')}
-                        className="border w-full outline-none border-black bg-transparent px-4 py-2 placeholder:text-black rounded-2xl outline-0"
+                        className="border w-full outline-none border-border-form bg-transparent px-4 py-2 placeholder:text-muted rounded-2xl"
                         placeholder="وارد کنید..."
                     />
                     {errors.title && <p className='text-danger text-sm font-semibold'>*{errors.title.message}</p>}
                 </div>
             </div>
             <div className="flex flex-col gap-1">
-                <Label htmlFor="message" className="text-black text-sm">
+                <Label htmlFor="message" className=" text-sm">
                     پیام شما:
                 </Label>
                 <Textarea
                     id="message"
                     {...register('message')}
-                    className="border h-[156px] outline-none border-black bg-transparent px-4 py-2 placeholder:text-black rounded-2xl outline-0"
+                    className="border h-[156px] outline-none border-border bg-transparent px-4 py-2 placeholder:text-muted rounded-2xl"
                     placeholder="....."
                 />
                 {errors.message && <p className='text-danger text-sm font-semibold'>*{errors.message.message}</p>}
             </div>
-            <CommonButton type="submit" title={isLoading ? "در حال ارسال..." : " ارسال پیام "}
+            <CommonButton
+                type="submit"
+                title={isLoading ? "در حال ارسال..." : " ارسال پیام "}
                 icon={isLoading ? <Loader /> : <ChevronLeft size={16} />}
-                classname="w-full bg-[#232323] text-white"
+                classname="w-full bg-secondary text-foreground"
                 disabled={isLoading}
             />
         </form>
