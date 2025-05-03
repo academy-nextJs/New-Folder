@@ -14,7 +14,7 @@ const SpecialOffer = () => {
         after:bg-secondary-light
         after:rounded-tr-[40px] after:rounded-tl-[70px]
       ">
-        <div className="bg-danger text-white px-4 py-2 w-fit z-[1] absolute rounded-2xl flex gap-2 items-center right-[25px] top-[-35px]">
+        <div className="bg-danger text-card-foreground px-4 py-2 w-fit z-[1] absolute rounded-2xl flex gap-2 items-center right-[25px] top-[-35px]">
           <CountdownTimer initialSeconds={36000} classname='text-lg' /> <Clock size={16} />
         </div>
 

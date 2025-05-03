@@ -137,22 +137,22 @@ export default function DeltaAboutUsSection() {
   };
 
   return (
-    <div className=" text-foreground">
-      <div className="flex justify-center items-center gap-2 py-4 mb-4 text-primary">
+    <div className=" text-foreground px-8">
+      <div className="flex justify-center items-center gap-2 py-4 text-primary">
         <Image
           src={arrow}
           className="w-16 h-16 rotate-180 text-primary"
           alt="arrow"
         />
-        <span>درباره ما</span>
+        <span className="text-sm">درباره ما</span>
         <Image src={arrow} className="w-16 h-16 text-primary" alt="arrow" />
       </div>
 
-      <h1 className="text-center text-3xl sm:text-3xl font-bold mb-4 text-foreground">
+      <h1 className="text-center md:text-3xl text-xl font-bold mb-4 text-foreground">
         دلتا را بیشتر بشناس!
       </h1>
 
-      <p className="text-center sm:text-sm mb-8 sm:mb-12 mx-auto max-w-full font-sans break-words">
+      <p className="text-center md:text-base text-sm md:mb-8 mb-12 mx-auto max-w-full font-sans break-words">
         تیم دلتا با ارائه بهترین تورهای خدماتی و سرویس های آنلاین سعی دارد تا
         بتواند در تمام لحظات کنار شما باشد.
       </p>

@@ -8,14 +8,14 @@ import FooterForm from './footer-form/FooterForm'
 
 const Footer = () => {
     return (
-        <div className='bg-[#8CFF45] text-black w-full rounded-2xl'>
+        <div className='bg-primary text-black w-full rounded-2xl'>
             <div className='xl:flex hidden'>
                 <div className='bg-primary w-4/12 px-8 py-6 rounded-2xl'>
-                    <div className='bg-[#232323] text-[#FFFFFF] flex flex-row-reverse gap-3 w-fit px-4 py-2 rounded-2xl'> <PhoneCall className='w-[20px]' /> <span> 09229167194 - 09154569872 </span> </div>
+                    <div className='bg-secondary text-card-foreground flex flex-row-reverse gap-3 w-fit px-4 py-2 rounded-2xl'> <PhoneCall className='w-[20px]' /> <span> 09229167194 - 09154569872 </span> </div>
                 </div>
                 <div
                     className={`
-                        bg-[#232323] w-10/12 flex justify-end relative
+                        bg-[#232323] w-10/12 dark:flex hidden justify-end relative
                         after:content-[''] after:absolute after:top-[2] after:right-[-12]
                         after:w-[33px] after:h-[100px] after:rotate-[20deg]
                         after:bg-primary
@@ -25,7 +25,7 @@ const Footer = () => {
                 </div>
 
             </div>
-            <div className='bg-secondary w-full md:flex justify-end xl:hidden rounded'>
+            <div className='bg-secondary w-full max-md:dark:flex max-md:hidden justify-end md:hidden rounded'>
                 <Image alt='' className='' src={DeltaLogo} />
             </div>
             <div className='py-6 px-8 relative'>

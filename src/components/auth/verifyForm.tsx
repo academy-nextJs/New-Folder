@@ -63,7 +63,7 @@ const VerifyForm = () => {
         <div>
             <form className="mt-8 space-y-10" onSubmit={handleSubmit(handleRegister)}>
                 <div className="flex flex-col gap-4">
-                    <div className="w-full flex xl:flex-row flex-col xl:gap-4 gap-8 justify-between xl:items-center items-start text-white">
+                    <div className="w-full flex xl:flex-row flex-col xl:gap-4 gap-8 justify-between xl:items-center items-start text-card-foreground">
                         <OtpInput onchange={(e) => setCode(e)} />
                         <TimerButton classname="flex-row" onclick={async () => {
                             try {
@@ -99,7 +99,7 @@ const VerifyForm = () => {
                         icon={isLoading ? <Loader /> : <ChevronLeft size={16} />} classname="md:w-1/2 w-full" />
                     <CommonButton type="button" title={" تغییر ایمیل "}
                         onclick={() => redirect('/login')}
-                        icon={<RefreshCcw size={16} />} classname="bg-transparent border border-white text-white md:w-1/2 w-full" />
+                        icon={<RefreshCcw size={16} />} classname="bg-transparent border border-white text-card-foreground md:w-1/2 w-full" />
                 </div>
             </form>
         </div>

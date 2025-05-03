@@ -1,14 +1,19 @@
-'use client'
 import AboutBox from '@/components/contact-us/AboutBox'
 import ContactForm from '@/components/contact-us/ContactForm'
 import { AtSign, ChevronLeft, Phone } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 
+export const metadata = {
+  title: "ارتباط با ما | ",
+  description: "هر ساعت از شبانه روز که باشه تیم پشتیبانی دلتا پاسخگوی سوالات و انتقادات شما هستند.",
+  keywords: ["ارتباط با ما", "دلتا", "پشتیبانی", "تماس"],
+};
+
 const page = () => {
 
   return (
-    <div className='flex xl:flex-row flex-col gap-[100px] my-[100px] px-8 text-white'>
+    <div className='flex xl:flex-row flex-col gap-[100px] mt-[100px] px-8 text-card-foreground'>
       <div className='flex gap-6 flex-col'>
         <div className='flex gap-3 items-center w-fit text-[13px]'>
           <Link href={`/`}> خانه </Link>

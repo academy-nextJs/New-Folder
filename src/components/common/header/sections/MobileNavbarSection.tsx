@@ -182,7 +182,7 @@ const MobileNavbarSection = () => {
       <div className="pt-4 mt-2 border-t border-border">
         <Link
           href="/become-seller"
-          className="bg-accent text-white px-4 py-2 rounded-[10px] hover:opacity-90 transition-opacity flex items-center justify-center"
+          className="bg-accent text-card-foreground px-4 py-2 rounded-[10px] hover:opacity-90 transition-opacity flex items-center justify-center"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

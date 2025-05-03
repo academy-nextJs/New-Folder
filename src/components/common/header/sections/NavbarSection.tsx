@@ -2,7 +2,7 @@
 import Link from "next/link";
 
 const NavbarSection = () => (
-  <nav className="flex items-center justify-evenly lg:gap-6 md:gap-3 text-[14px] lg:text-[16px] md:text-[12px] h-full relative">
+  <nav className="flex items-center justify-center lg:gap-6 md:gap-3 text-[14px] lg:text-[16px] md:text-[12px] h-full relative">
     {/* رزرو سریع */}
     <div className="relative group flex items-center h-full">
       <Link
@@ -141,7 +141,7 @@ const NavbarSection = () => (
     </div>
     <Link
       href="/become-seller"
-      className="bg-accent text-foreground lg:w-[138px] h-[80%] px-4 py-1.5 rounded-[10px] hover:opacity-90 transition-opacity flex items-center justify-center lg:text-[14px] md:text-[12px] md:px-3 md:py-1"
+      className="bg-accent hidden text-foreground lg:w-[138px] h-[80%] px-4 py-1.5 rounded-[10px] hover:opacity-90 transition-opacity lg:flex items-center justify-center lg:text-[14px] md:text-[12px] md:px-3 md:py-1"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
