@@ -141,7 +141,7 @@ const NavbarSection = () => (
     </div>
     <Link
       href="/become-seller"
-      className="bg-accent hidden text-foreground lg:w-[138px] h-[80%] px-4 py-1.5 rounded-[10px] hover:opacity-90 transition-opacity lg:flex items-center justify-center lg:text-[14px] md:text-[12px] md:px-3 md:py-1"
+      className="bg-accent hidden text-[#f2f2f2] lg:w-[138px] h-[80%] px-4 py-1.5 rounded-[10px] hover:opacity-90 transition-opacity lg:flex items-center justify-center lg:text-[14px] md:text-[12px] md:px-3 md:py-1"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
