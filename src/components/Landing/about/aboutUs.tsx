@@ -138,7 +138,7 @@ export default function DeltaAboutUsSection() {
 
   return (
     <div className=" text-foreground px-8">
-      <div className="flex justify-center items-center gap-2 py-4 mb-4 text-primary">
+      <div className="flex justify-center items-center gap-2 py-4 text-primary">
         <Image
           src={arrow}
           className="w-16 h-16 rotate-180 text-primary"

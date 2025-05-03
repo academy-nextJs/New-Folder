@@ -31,8 +31,8 @@ const LoginSection = () => {
         </Link>
       ) : (
         <div className="relative group" ref={dropdownRef}>
-          <div className="flex items-center gap-2 px-3 py-2 rounded-2lg border border-zinc-500 hover:bg-subBg text-foreground cursor-pointer transition-colors rounded-full">
-            <User className="text-subText w-4 h-4 sm:w-5 sm:h-5 md:w-5 md:h-4 lg:w-6 lg:h-6" />
+          <div className="flex items-center gap-2 px-3 py-2 rounded-2lg hover:bg-subBg text-foreground cursor-pointer transition-colors rounded-full">
+            <User className="text-subText w-6 h-6" />
           </div>
 
           <div className="absolute top-full left-0 mt-1 w-36 sm:w-44 md:w-48 lg:w-56 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-10">

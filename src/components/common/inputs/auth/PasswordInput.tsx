@@ -6,7 +6,7 @@ import { IPasswordInput } from '@/types/input-type/input-types'
 import { Eye, EyeOff } from 'lucide-react'
 import React, { FC, useState } from 'react'
 
-const PasswordInput: FC<IPasswordInput> = ({ label, placeholder, classname, background, color, onchange, mandatory, id, name, register }) => {
+const PasswordInput: FC<IPasswordInput> = ({ label, placeholder, classname, background, color, onchange, mandatory, id, name }) => {
     const [showPassword, setShowPassword] = useState<boolean>(true)
 
     return (
@@ -18,7 +18,6 @@ const PasswordInput: FC<IPasswordInput> = ({ label, placeholder, classname, back
             </Label>
             <div className='relative w-full'>
                 <Input
-                    {...(name && register ? register(name) : {})}
                     onChange={onchange}
                     type={showPassword ? 'password' : 'text'}
                     placeholder={placeholder || ''}

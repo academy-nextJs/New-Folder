@@ -4,6 +4,8 @@ import TabContent from '@/components/auth/tabContent'
 import React from 'react'
 
 const CompleteRegister = () => {
+    
+
     return (
         <div>
             <AuthHeader pageName=' ثبت نام ' />
