@@ -1,8 +1,11 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
+import { useTheme } from "@/utils/service/TanstakProvider";
+import { Moon, Sun } from "lucide-react";
 
 const MobileNavbarSection = () => {
+  const { theme, toggleTheme } = useTheme();
   const [openMenus, setOpenMenus] = useState<{ [key: string]: boolean }>({
     quickReserve: false,
     rent: false,
@@ -157,6 +160,23 @@ const MobileNavbarSection = () => {
         >
           تماس با ما
         </Link>
+      </div>
+
+      <div className="flex items-center pt-2">
+        <span className="text-foreground ml-3">تغییر تم:</span>
+        <button
+          onClick={toggleTheme}
+          className="p-2 rounded-full hover:bg-subBg2 transition-colors"
+          aria-label={
+            theme === "dark" ? "تغییر به حالت روشن" : "تغییر به حالت تاریک"
+          }
+        >
+          {theme === "dark" ? (
+            <Sun className="w-5 h-5" />
+          ) : (
+            <Moon className="w-5 h-5" />
+          )}
+        </button>
       </div>
 
       <div className="pt-4 mt-2 border-t border-border">
