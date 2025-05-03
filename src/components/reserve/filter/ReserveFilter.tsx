@@ -37,7 +37,7 @@ const ReserveFilter = () => {
                     <Megaphone size={20} />
                     <span className='whitespace-nowrap'> تعداد آگهی : 33 </span>
                 </div>
-                <CommonButton icon={<MapPin />} title='نقشه' classname='bg-transparent border-foreground border text-foreground' />
+                <CommonButton icon={<MapPin />} title='نقشه' classname='bg-transparent border-foreground border text-foreground flex xl:hidden' />
             </div>
         </div>
     )
