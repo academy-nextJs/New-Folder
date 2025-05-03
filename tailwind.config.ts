@@ -25,6 +25,7 @@ const config: Config = {
         border: "var(--border)", // خطوط حاشیه
         "secondary-light": "var(--secondary-light)", // خاکستری کاپوننت های لندینگ
         "secondary-light2": "var(--secondary-light2)", // خاکستری کاپوننت های کارت
+        "secondary-light3": "var(--secondary-light3)", // 2 خاکستری کاپوننت های کارت
         "blur-primary": "var(--blur-primary)", // بلور سبز
         "blur-blue": "var(--blur-blue)", // بلور سرمه ای
         card: "var(--card)",

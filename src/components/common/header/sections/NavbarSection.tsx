@@ -31,10 +31,10 @@ const NavbarSection = () => (
       <div className="absolute top-full right-0 w-48 bg-subBg rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-10">
         <div className="py-2">
           <Link
-            href="/quick-reserve/daily"
+            href="/reserve/reserve-house"
             className="block px-4 py-2 text-subText hover:bg-subBg2 transition-colors md:text-[12px]"
           >
-            رزرو روزانه
+            رزرو
           </Link>
           <Link
             href="/quick-reserve/monthly"

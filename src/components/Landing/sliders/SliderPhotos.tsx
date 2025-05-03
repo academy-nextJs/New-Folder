@@ -22,7 +22,7 @@ export default function SliderPhotos({ photos }: ISliderPhotos) {
           <SwiperSlide key={index} className="flex justify-center">
             <img
               src={photo}
-              alt={`Slide ${index + 1}`}
+              alt={``}
               className="w-full h-[157px] object-cover"
             />
           </SwiperSlide>

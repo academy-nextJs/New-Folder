@@ -5,7 +5,7 @@ import React, { FC } from 'react'
 
 const CommonSelect: FC<ISelect> = ({ background, color, label, mandatory, classname, placeholder, selectItems, onValueChange, icon }) => {
     return (
-        <div className='rtl flex flex-col gap-1'>
+        <div className='rtl flex flex-col gap-1 group'>
             <Label htmlFor={label} className={`text-[13px] flex gap-0.5 ${color}`}>
                 <span> {label} </span>
                 {mandatory === true ? <p className='text-danger'> * </p> : <></>}

@@ -46,6 +46,7 @@
   --secondary-light: #b0b0b0;
   /* پس‌زمینه بسیار روشن */
   --secondary-light2: #393939;
+  --secondary-light3: #303030;
   /* پس‌زمینه روشن‌تر */
   --blur-primary: #6bcf3f52;
   /* سبز شفاف برای افکت‌ها */
@@ -92,7 +93,8 @@
   --accent-foreground: #f2f2f2;
   --border: #232323;
   --secondary-light: #2d2d2d;
-  --secondary-light2: #393939;
+  --secondary-light2: #303030;
+  --secondary-light3: #262626;
   --blur-primary: #8cff4552;
   --blur-blue: #7569ff52;
   --danger: #ff4d4d;
