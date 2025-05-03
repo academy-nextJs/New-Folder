@@ -10,7 +10,7 @@ const CardComponent: FC<ICard> = ({ view, photos, rate, title, address, rooms, p
     const discount_percentage = discountedPrice ? Math.ceil(((Number(price) - discountedPrice) / Number(price)) * 100) : 0
 
     return (
-        <motion.div whileHover={{ scale: 1.02 }} transition={{ duration: 0.2 }} className='flex flex-col gap-4 text-card-foreground group w-full h-full my-10 mx-auto'>
+        <motion.div whileHover={{ scale: 1.02 }} whileInView={{ scale: 1 }} initial={{ scale: 0 }} transition={{ duration: 0.2 }} className='flex flex-col gap-4 text-card-foreground group w-full h-full my-10 mx-auto'>
             <div className='relative '>
                 <div className="bg-secondary-light2 w-full p-4 group-hover:bg-primary relative h-[190] rounded-[24px] flex justify-center items-center after:content-['']
                         after:w-[90px] after:h-[50px] after:group-hover:bg-primary after:absolute after:top-[-34] after:rounded-tr-2xl after:rounded-tl-[40px] after:right-0 after:bg-secondary-light2">

@@ -1,3 +1,4 @@
+'use client'
 import React, { ReactNode } from "react";
 import productMangment from "@/assets/3d-icon-product-management_23-2150459932.png";
 import Image, { StaticImageData } from "next/image";
@@ -6,6 +7,7 @@ import Speaker from "@/assets/a.png";
 import Love from "@/assets/heart3 1.png";
 import { ClockIcon, HomeIcon, SmileIcon, TrophyIcon } from "lucide-react";
 import arrow from "@/assets/arrow.svg";
+import { motion } from "framer-motion";
 
 interface Props {
   icon: ReactNode;
@@ -23,7 +25,9 @@ export default function DeltaAboutUsSection() {
     bgColor = "#232323",
   }: Props) => {
     return (
-      <div
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
         className="relative w-full max-w-[450px] mx-auto"
         style={{ paddingTop: "57.56%" }}
       >
@@ -86,7 +90,7 @@ export default function DeltaAboutUsSection() {
             </foreignObject>
           </g>
         </svg>
-      </div>
+      </motion.div>
     );
   };
 
