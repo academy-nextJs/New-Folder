@@ -18,10 +18,10 @@ const TabContent: FC<IProps> = ({ defaultValue, registerElement }) => {
         </TabsList>
         <div className="flex md:flex-nowrap flex-wrap gap-4 w-full my-8">
           <div className="md:w-1/2 w-full">
-            <LoginButton icon="google" title="ورود با حساب گوگل" classname="w-full py-5 md:text-base text-sm" />
+            <LoginButton icon="google" title="ورود با حساب گوگل" classname="w-full text-primary-foreground py-5 md:text-base text-sm" />
           </div>
           <div className="md:w-1/2 w-full">
-            <LoginButton icon="apple" title=" ورود با حساب اپل " classname="w-ful md:text-base text-sm bg-transparent bg-[#303030] text-card-foreground py-5" />
+            <LoginButton icon="apple" title=" ورود با حساب اپل " classname="w-ful md:text-base text-sm text-white bg-transparent bg-[#303030] py-5" />
           </div>
         </div>
         <div className="flex gap-2 flex-row-reverse items-center text-sm w-full justify-center text-subText">

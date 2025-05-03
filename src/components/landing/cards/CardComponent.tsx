@@ -34,20 +34,20 @@ const CardComponent: FC<ICard> = ({ view, photos, rate, title, address, rooms, p
             <h2 className='text-[16px] flex justify-between'> <span className='flex gap-2 flex-wrap whitespace-nowrap'> {title} <p className='text-subText'> ( {categories?.name} ) </p> </span> {discountedPrice && <div className='bg-danger rounded-[12px] px-4 text-sm py-1 w-fit'> %{discount_percentage} </div>} </h2>
             {view === '2' && <div className='flex flex-col gap-4'>
                 <div className='flex flex-col gap-4'>
-                    <div className='flex gap-2 text-[#AAAAAA] h-[40px] text-sm items-center'>
+                    <div className='flex gap-2 text-subText h-[40px] text-sm items-center'>
                         <MapPin size={20} />
                         {address}
                     </div>
-                    <div className="flex flex-row flex-wrap items-center text-sm text-[#AAAAAA] gap-1 h-[45px]">
+                    <div className="flex flex-row flex-wrap items-center text-sm text-subText gap-1 h-[45px]">
                         <span className='flex gap-1'> <Bed size={20} /> <p> {rooms} </p> <p> خوابه </p> </span> |
                         <span className='flex gap-1'> <Car size={20} /> <p> {parking} </p> <p> پارکینگ </p> </span> |
                         <span className='flex gap-1'> <Bath size={20} /> <p> {bathrooms} </p> <p> حمام </p> </span> |
                         <span className='flex gap-1'> <Trees size={20} /> <p> حیاط </p> </span>
                     </div>
                 </div>
-                <div className='bg-[#444444] group-hover:bg-primary group-hover:text-black text-[#AAAAAA] mt-2 flex flex-wrap justify-between rounded-[12px] w-full px-4 py-2 text-sm'>
-                    <span className={` ${discountedPrice && 'text-[#AAAAAA] line-through'} whitespace-nowrap `}> {discountedPrice ? SplitNumber(Number(price)) + ' ت' : (transaction_type === 'rental' && "  اجاره ماهیانه : ") || (transaction_type === "direct_purchase" && " قیمت خرید : ") || (transaction_type === "mortgage" && " قیمت رهن : ")} </span>
-                    <span className='flex whitespace-nowrap'> <p className={`text-card-foreground group-hover:text-[#444444]`}> {discountedPrice ? SplitNumber(discountedPrice) : SplitNumber(price || '')} ت </p>{transaction_type === 'rental' && " /هر ماه  "} </span>
+                <div className='bg-secondary-light2 group-hover:bg-primary text-muted-foreground mt-2 flex flex-wrap justify-between rounded-[12px] w-full px-4 py-2 text-sm'>
+                    <span className={` ${discountedPrice && 'text-muted line-through'} whitespace-nowrap `}> {discountedPrice ? SplitNumber(Number(price)) + ' ت' : (transaction_type === 'rental' && "  اجاره ماهیانه : ") || (transaction_type === "direct_purchase" && " قیمت خرید : ") || (transaction_type === "mortgage" && " قیمت رهن : ")} </span>
+                    <span className='flex whitespace-nowrap'> <p className={`text-muted`}> {discountedPrice ? SplitNumber(discountedPrice) : SplitNumber(price || '')} ت </p>{transaction_type === 'rental' && " /هر ماه  "} </span>
                 </div>
             </div>}
         </motion.div>

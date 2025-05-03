@@ -43,7 +43,7 @@ const SearchBar = () => {
 
       <div
         ref={searchRef}
-        className={`flex justify-between items-center w-full bg-subBg2 backdrop-blur-sm rounded-[32px] p-4 transition-all duration-300 ${isOpen ? "h-auto opacity-100" : "h-0 overflow-visible md:h-auto"
+        className={`flex justify-between items-center w-full bg-subBg backdrop-blur-sm rounded-[32px] p-4 transition-all duration-300 ${isOpen ? "h-auto opacity-100" : "h-0 overflow-visible md:h-auto"
           } ${isOpen ? "opacity-100" : "opacity-0 md:opacity-100"}`}
       >
         {/* Close Button for Mobile */}
@@ -66,7 +66,7 @@ const SearchBar = () => {
               { value: "kish", label: "کیش" },
               { value: "mashhad", label: "مشهد" },
             ]}
-            background="bg-subBg2"
+            background="bg-subBg"
             color="text-foreground"
             classname="w-full md:w-auto px-6 py-5 border-subText"
           />
@@ -94,14 +94,14 @@ const SearchBar = () => {
               { value: "3", label: "3 نفر" },
               { value: "4", label: "4 نفر" },
             ]}
-            background="bg-subBg2"
+            background="bg-subBg"
             color="text-foreground"
             classname="w-full md:w-auto px-6 py-5 border-subText"
           />
 
           <CommonButton
             title="جستجو کن"
-            classname="px-8 py-7 text-sm font-bold"
+            classname="px-8 py-7 text-sm font-bold text-primary-foreground"
             type="button"
           />
 

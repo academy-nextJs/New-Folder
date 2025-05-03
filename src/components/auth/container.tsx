@@ -10,7 +10,7 @@ const AuthContainer = ({ children }: { children: React.ReactNode; }) => {
       </div>
       <div className="w-1/2 h-4/5 relative lg:flex justify-center hidden">
         <Image src={authBanner} width={200} height={40} className="w-full" alt="none" />
-        <div className="w-10/12 mx-[20px] h-[97] px-4 py-2 bg-[#363636C7] backdrop-blur-[8] border-[#686868] text-card-foreground absolute bottom-14 flex justify-between items-center rounded-[32px]">
+        <div className="w-10/12 mx-[20px] h-[97] px-4 py-2 bg-[#363636C7] backdrop-blur-[8] border-[#686868] text-white absolute bottom-14 flex justify-between items-center rounded-[32px]">
 
           <div className="flex flex-col gap-4">
             <h2 className="text-[20px]"> بیش از 5600+ </h2>

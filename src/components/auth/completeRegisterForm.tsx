@@ -71,7 +71,7 @@ const CompleteRegisterForm = () => {
                         <Input
                             id="password"
                             type="text"
-                            className="bg-transparent placeholder:text-card-foreground text-sm outline-none w-full py-3 border border-white text-card-foreground px-4 rounded-[16px] text-[16px]"
+                            className="bg-transparent placeholder:text-card-foreground text-sm outline-none w-full py-3 border border-card-foreground text-card-foreground px-4 rounded-[16px] text-[16px]"
                             placeholder=" لطفا رمز عبور خود را وارد فرمایید... "
                             {...register("password")}
                         />
@@ -86,7 +86,7 @@ const CompleteRegisterForm = () => {
                         <Input
                             id="phoneNumber"
                             type="text"
-                            className="bg-transparent placeholder:text-card-foreground text-sm outline-none w-full py-3 border border-white text-card-foreground px-4 rounded-[16px] text-[16px]"
+                            className="bg-transparent placeholder:text-card-foreground text-sm outline-none w-full py-3 border border-card-foreground text-card-foreground px-4 rounded-[16px] text-[16px]"
                             placeholder=" لطفا شماره تلفن خود را وارد فرمایید... "
                             {...register("phoneNumber")}
                         />
@@ -96,7 +96,7 @@ const CompleteRegisterForm = () => {
 
                 <div>
                     <CommonButton type="submit" title={isLoading ? "در حال ورود..." : " ساخت حساب کاربری "}
-                        icon={isLoading ? <Loader /> : <ChevronLeft size={16} />} classname="w-full" />
+                        icon={isLoading ? <Loader /> : <ChevronLeft size={16} />} classname="w-full text-primary-foreground" />
                 </div>
             </form>
         </div>
