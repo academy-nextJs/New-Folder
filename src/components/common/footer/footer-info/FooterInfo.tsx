@@ -3,7 +3,7 @@ import React from 'react'
 
 const FooterInfo = () => {
     return (
-        <div className="bg-secondary text-white py-12 lg:px-16 px-8 rounded-[56px]">
+        <div className="bg-secondary text-foreground py-12 lg:px-16 px-8 rounded-[56px]">
             <h2 className="text-2xl font-extrabold mb-4">پلتفرم دلتـا</h2>
             <div className="grid lg:grid-cols-4 gap-8">
                 <div>
@@ -42,7 +42,7 @@ const FooterInfo = () => {
                     <div className='border rounded-2xl p-1.5'><a href="#" aria-label="Whatsapp"> <MessageCircle className='size-[17px]' /></a></div>
                     <div className='border rounded-2xl p-1.5'><a href="#" aria-label="Telegram"> <TextCursor className='size-[17px]' /></a></div>
                     <div className='border rounded-2xl p-1.5'><a href="#" aria-label="Whatsapp"> <Instagram className='size-[17px]' /></a></div>
-                    <div className='text-black bg-white rounded-2xl p-1.5'><a href="#" aria-label="Whatsapp"> <Linkedin className='size-[17px]' /></a></div>
+                    <div className='text-card bg-card-foreground rounded-2xl p-1.5'><a href="#" aria-label="Whatsapp"> <Linkedin className='size-[17px]' /></a></div>
                 </div>
                 <p className="text-base">تمام حقوق مادی و معنوی این اثر برای دلتا محفوظ است.</p>
             </div>

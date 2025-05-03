@@ -11,7 +11,7 @@ const CommonTextarea: FC<ITextarea> = ({ classname, onchange, label, color, back
                 {mandatory === true ? <p className='text-red-500'> * </p> : <></>}
                 <span> : </span>
             </Label>
-            <Textarea placeholder={placeholder} onChange={onchange} id={label} className={`text-white rounded-2xl ${classname} ${color} ${background}`} />
+            <Textarea placeholder={placeholder} onChange={onchange} id={label} className={`text-card-foreground rounded-2xl ${classname} ${color} ${background}`} />
         </div>
     )
 }

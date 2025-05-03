@@ -40,7 +40,7 @@ export default function SliderComponent({ items, view, loading }: ISlider) {
 
       <style jsx global>{`
         .swiper-pagination-bullet-active {
-          background-color: #8CFF45 !important;
+          background-color: var(--primary) !important;
         }
       `}</style>
     </div>

@@ -1,3 +1,4 @@
+'use client'
 import Image from "next/image";
 import React from "react";
 import heroSection from "@/assets/images/heroSection/landingHerosection.png";
@@ -7,6 +8,7 @@ import HeroContent from "./section/HeroContent";
 import StatisticSection from "./section/StatisticSection";
 import SearchBar from "./section/SearchBar";
 import InfoIndicator from "./section/InfoIndicator";
+import { motion } from 'framer-motion'
 
 const HeroSection = () => {
   return (
@@ -23,9 +25,9 @@ const HeroSection = () => {
       </div>
 
       {/* تصویر ساختمان */}
-      <div className="absolute bottom-0 left-1/2 lg:left-3/8 md:left-1/2 sm:left-3/8 transform -translate-x-1/4 md: z-40">
+      <motion.div initial={{ right: 1000 }} whileInView={{ right: 0 }} className="absolute bottom-0 left-1/2 lg:left-3/8 md:left-1/2 sm:left-3/8 transform -translate-x-1/4 md: z-40">
         <Image src={building} alt="building" className="object-contain" />
-      </div>
+      </motion.div>
 
       {/* محتوای اصلی */}
       <div className="relative -top-10 z-20 h-full w-full px-8 py-6 gap-8 flex flex-col justify-center">

@@ -31,9 +31,8 @@ const SearchBar = () => {
       <div className="md:hidden flex justify-center -mb-10 ">
         <button
           onClick={() => setIsOpen(true)}
-          className={`bg-primary text-secondary p-2 text-xs rounded-full ${
-            isOpen ? "hidden" : "block"
-          }`}
+          className={`bg-primary text-secondary p-2 text-xs rounded-full ${isOpen ? "hidden" : "block"
+            }`}
         >
           <span className="flex items-center gap-2">
             <Search size={12} />
@@ -44,24 +43,21 @@ const SearchBar = () => {
 
       <div
         ref={searchRef}
-        className={`flex justify-between items-center w-full bg-subBg2 backdrop-blur-sm rounded-xl p-4 transition-all duration-300 ${
-          isOpen ? "h-auto opacity-100" : "h-0 overflow-visible md:h-auto"
-        } ${isOpen ? "opacity-100" : "opacity-0 md:opacity-100"}`}
+        className={`flex justify-between items-center w-full bg-subBg backdrop-blur-sm rounded-[32px] p-4 transition-all duration-300 ${isOpen ? "h-auto opacity-100" : "h-0 overflow-visible md:h-auto"
+          } ${isOpen ? "opacity-100" : "opacity-0 md:opacity-100"}`}
       >
         {/* Close Button for Mobile */}
         <button
           onClick={() => setIsOpen(false)}
-          className={`md:hidden absolute top-2 left-2 text-gray-500 ${
-            isOpen ? "block" : "hidden"
-          }`}
+          className={`md:hidden absolute top-2 left-2 text-gray-500 ${isOpen ? "block" : "hidden"
+            }`}
         >
           <X size={20} />
         </button>
 
         <div
-          className={`flex-1 flex flex-col md:flex-row justify-around gap-4 ${
-            isOpen ? "block" : "hidden md:flex"
-          }`}
+          className={`flex-1 flex flex-col md:flex-row items-center justify-around gap-4 ${isOpen ? "block" : "hidden md:flex"
+            }`}
         >
           <CommonSelect
             label="مقصد نهایی"
@@ -70,23 +66,23 @@ const SearchBar = () => {
               { value: "kish", label: "کیش" },
               { value: "mashhad", label: "مشهد" },
             ]}
-            background="bg-subBg2"
+            background="bg-subBg"
             color="text-foreground"
-            classname="w-full md:w-auto"
+            classname="w-full md:w-auto px-6 py-5 border-subText"
           />
 
           <DatePickerInput
             label="تاریخ ورود"
-            placeholder="تاریخ ورود"
             background="bg-transparent"
             color="text-foreground"
+            className="px-4 py-2 border-subText"
           />
 
           <DatePickerInput
             label="تاریخ خروج"
-            placeholder="تاریخ خروج"
             background="bg-transparent"
             color="text-foreground"
+            className="placeholder:text-subText border-subText"
           />
 
           <CommonSelect
@@ -98,18 +94,17 @@ const SearchBar = () => {
               { value: "3", label: "3 نفر" },
               { value: "4", label: "4 نفر" },
             ]}
-            background="bg-subBg2"
+            background="bg-subBg"
             color="text-foreground"
-            classname="w-full md:w-auto"
+            classname="w-full md:w-auto px-6 py-5 border-subText"
           />
 
-          <div className="flex items-center justify-center">
-            <CommonButton
-              title="جستجو کن"
-              classname="px-8 py-3 text-sm font-bold h-14 w-full md:w-auto"
-              type="button"
-            />
-          </div>
+          <CommonButton
+            title="جستجو کن"
+            classname="px-8 py-7 text-sm font-bold text-primary-foreground"
+            type="button"
+          />
+
         </div>
       </div>
     </div>

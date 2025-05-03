@@ -62,7 +62,7 @@ const CompleteRegisterForm = () => {
         <div>
             <form className="mt-8 space-y-10" onSubmit={handleSubmit(handleRegister)}>
                 <div className="flex md:flex-row flex-col gap-4">
-                    <div className="md:w-1/2 w-full flex gap-1 flex-col text-white">
+                    <div className="md:w-1/2 w-full flex gap-1 flex-col text-card-foreground">
                         <Label htmlFor="password" className={`text-[13px] flex gap-0.5`}>
                             <span> رمز عبور </span>
                             <p className='text-danger'> * </p>
@@ -71,13 +71,13 @@ const CompleteRegisterForm = () => {
                         <Input
                             id="password"
                             type="text"
-                            className="bg-transparent placeholder:text-white text-sm outline-none w-full py-3 border border-white text-white px-4 rounded-[16px] text-[16px]"
+                            className="bg-transparent placeholder:text-card-foreground text-sm outline-none w-full py-3 border border-card-foreground text-card-foreground px-4 rounded-[16px] text-[16px]"
                             placeholder=" لطفا رمز عبور خود را وارد فرمایید... "
                             {...register("password")}
                         />
                         {errors.password && <p className='text-danger text-sm font-semibold'>{errors.password.message} </p>}
                     </div>
-                    <div className="md:w-1/2 w-full flex gap-1 flex-col text-white">
+                    <div className="md:w-1/2 w-full flex gap-1 flex-col text-card-foreground">
                         <Label htmlFor="phoneNumber" className={`text-[13px] flex gap-0.5`}>
                             <span> شماره تلفن </span>
                             <p className='text-danger'> * </p>
@@ -86,7 +86,7 @@ const CompleteRegisterForm = () => {
                         <Input
                             id="phoneNumber"
                             type="text"
-                            className="bg-transparent placeholder:text-white text-sm outline-none w-full py-3 border border-white text-white px-4 rounded-[16px] text-[16px]"
+                            className="bg-transparent placeholder:text-card-foreground text-sm outline-none w-full py-3 border border-card-foreground text-card-foreground px-4 rounded-[16px] text-[16px]"
                             placeholder=" لطفا شماره تلفن خود را وارد فرمایید... "
                             {...register("phoneNumber")}
                         />
@@ -96,7 +96,7 @@ const CompleteRegisterForm = () => {
 
                 <div>
                     <CommonButton type="submit" title={isLoading ? "در حال ورود..." : " ساخت حساب کاربری "}
-                        icon={isLoading ? <Loader /> : <ChevronLeft size={16} />} classname="w-full" />
+                        icon={isLoading ? <Loader /> : <ChevronLeft size={16} />} classname="w-full text-primary-foreground" />
                 </div>
             </form>
         </div>
