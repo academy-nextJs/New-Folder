@@ -18,7 +18,7 @@ const HeroContent = () => {
       {/* دکمه‌های عمل */}
       <div className="flex  justify-center align-center  gap-2 sm:gap-4 md:gap-8 text-center  md:text-right">
         <LinkButtons variant="scale" classname="bg-primary-foreground text-secondary-static text-xs md:text-sm lg:text-base w-[80px] md:w-[120px] lg:w-[150px]" link="/" title="آسون رزرو کن" />
-        <LinkButtons variant="scale" classname="bg-secondary-static text-primary-foreground md:text-sm lg:text-base w-[90px] md:w-[130px] lg:w-[160px]" link="/" title="رهن و اجاره ملک" />
+        <LinkButtons variant="scale" classname="bg-secondary-static text-primary-foreground text-xs md:text-sm lg:text-base w-[90px] md:w-[130px] lg:w-[160px]" link="/" title="رهن و اجاره ملک" />
       </div>
     </div>
   );
