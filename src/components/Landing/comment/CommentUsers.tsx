@@ -237,15 +237,15 @@ const CommentCard = ({ comment, isSmallScreen }: CommentCardProps) => {
       </svg>
       <div className="relative z-10 flex flex-col h-full p-4 sm:p-6 md:p-8 lg:p-10 justify-between text-primary-foreground overflow-hidden">
         <div className="flex items-center justify-start w-full" dir="rtl">
-          <div className="w-10 h-6 sm:w-12 sm:h-7 md:w-14 md:h-8 lg:w-16 lg:h-10 flex items-center justify-center rounded-md bg-foreground">
-            <span className="text-secondary text-xs sm:text-sm md:text-base">
+          <div className="w-10 h-6 sm:w-12 sm:h-7 gap-1 md:w-14 md:h-8 lg:w-16 lg:h-10 flex items-center justify-center rounded-md bg-foreground">
+            <span className="text-primary-foreground text-xs sm:text-sm md:text-base">
               {comment.rating}
             </span>
-            <Star className="text-secondary fill-secondary ml-1 w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5" />
+            <Star className="text-black fill-secondary ml-1 w-3 h-3 sm:w-4 sm:h-4" />
           </div>
         </div>
 
-        <p className="text-[10px] sm:text-xs md:text-sm lg:text-base leading-relaxed text-right my-2 sm:my-3 md:my-4">
+        <p className="text-[10px] sm:text-xs md:text-sm lg:text-base leading-relaxed text-white my-2 sm:my-3 md:my-4">
           {trimmedText}
         </p>
 
@@ -263,12 +263,12 @@ const CommentCard = ({ comment, isSmallScreen }: CommentCardProps) => {
           </svg>
 
           <div className="relative z-10 flex items-center h-full px-2 sm:px-3 md:px-4 lg:px-5">
-            <div className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 lg:w-10 lg:h-10 rounded-md bg-foreground flex items-center justify-center text-foreground text-[10px] sm:text-xs md:text-sm lg:text-base">
+            <div className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 lg:w-10 lg:h-10 rounded-md bg-foreground flex items-center justify-center text-primary-foreground text-[10px] sm:text-xs md:text-sm lg:text-base">
               {comment.author.charAt(0)}
             </div>
 
             <div className="text-right mr-2 sm:mr-3 md:mr-4">
-              <p className="font-semibold text-[8px] sm:text-[10px] md:text-xs lg:text-sm">
+              <p className="font-semibold text-[8px] text-white sm:text-[10px] md:text-xs lg:text-sm">
                 {comment.author}
               </p>
 

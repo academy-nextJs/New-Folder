@@ -102,7 +102,7 @@
   --popover-foreground: #f2f2f2;
   --destructive: #ff4d4d;
   --input: #363636;
-  --ring: #4a4a4a;
+  --ring: #b0b0b0;
   animation: fadeIn var(--transition-duration) ease;
 }
 

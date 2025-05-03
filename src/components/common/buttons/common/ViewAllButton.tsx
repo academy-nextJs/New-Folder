@@ -7,8 +7,8 @@ import React, { FC } from 'react'
 const ViewAllButton: FC<IButton> = ({ classname, onclick }) => {
     return (
         <div>
-            <Button variant={'scale'} onClick={onclick} className={`cursor-pointer px-4 py-2 w-fit h-fit dark:border border-white border-none rounded-2xl text-sm flex flex-row-reverse text-white dark:bg-transparent bg-secondary-static ${classname}`}>
-                <ChevronLeft className={`text-white`} />
+            <Button variant={'scale'} onClick={onclick} className={`cursor-pointer px-4 py-2 w-fit h-fit border border-white rounded-2xl text-sm flex flex-row-reverse dark:text-white md:text-white text-black dark:bg-transparent md:bg-secondary-static bg-none ${classname}`}>
+                <ChevronLeft className={`dark:text-white md:text-white text-black`} />
                 مشاهده همه
             </Button>
         </div>

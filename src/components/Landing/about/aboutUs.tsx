@@ -65,10 +65,10 @@ export default function DeltaAboutUsSection() {
                 dir="ltr"
               >
                 <div className="flex flex-col w-full items-center gap-2 text-right">
-                  <h3 className="text-xl font-bold text-foreground w-full truncate overflow-hidden whitespace-nowrap">
+                  <h3 className="text-xl font-bold text-white w-full truncate overflow-hidden whitespace-nowrap">
                     {title}
                   </h3>
-                  <p className="text-md text-ring w-full truncate overflow-hidden whitespace-nowrap">
+                  <p className="text-md text-[#aaaaaa] w-full truncate overflow-hidden whitespace-nowrap">
                     {description}
                   </p>
                 </div>
@@ -120,7 +120,7 @@ export default function DeltaAboutUsSection() {
           <foreignObject x="20" y="0" width="406" height="470">
             <div
               dir="rtl"
-              className="flex items-center justify-center h-full text-foreground text-[20px] sm:text-xl md:text-xl lg:text-[22px] text-center px-2 sm:px-4 leading-relaxed"
+              className="flex items-center justify-center h-full text-white text-[20px] sm:text-xl md:text-xl lg:text-[22px] text-center px-2 sm:px-4 leading-relaxed"
             >
               لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
               استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله
@@ -175,7 +175,7 @@ export default function DeltaAboutUsSection() {
         <div className="flex flex-col min-[540px]:flex-row justify-center gap-4">
           <div className="w-full min-[540px]:w-1/3 flex flex-col gap-0">
             <CustomCard
-              icon={<HomeIcon className="text-secondary-static w-10 h-10" />}
+              icon={<HomeIcon className="text-[#232323] w-10 h-10" />}
               title="+۱۲۰۰۰ خونه فعال"
               description="خانه‌هایی که نظافت و امنیت‌شان تأمین شده!"
               image={productMangment}
@@ -183,7 +183,7 @@ export default function DeltaAboutUsSection() {
             />
 
             <CustomCard
-              icon={<TrophyIcon className="text-secondary-static w-10 h-10" />}
+              icon={<TrophyIcon className="text-[$232323] w-10 h-10" />}
               title="+10 سال سابقه درخشان"
               description="در مهمان نوازی به شما مسافران عزیز"
               image={Jam}
@@ -196,14 +196,14 @@ export default function DeltaAboutUsSection() {
 
           <div className="w-full min-[540px]:w-1/3 flex flex-col gap-0">
             <CustomCard
-              icon={<ClockIcon className="text-secondary-static w-10 h-10" />}
+              icon={<ClockIcon className="text-[#232323] w-10 h-10" />}
               title="27/7 ساعت شبانه روز"
               description="تیم پشتیبانی در تمام طول روز همراه شما هستن"
               image={Speaker}
             />
 
             <CustomCard
-              icon={<SmileIcon className="text-secondary-static w-10 h-10" />}
+              icon={<SmileIcon className="text-[#232323] w-10 h-10" />}
               title="15,000+ نظرات کاربران"
               description="رضایت مسافرانی که از پلتفرم دلتا استفاده کردن"
               image={Love}
