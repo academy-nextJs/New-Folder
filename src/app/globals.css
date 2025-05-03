@@ -16,7 +16,7 @@
   /* سبز ملایم برای متن اصلی */
   --primary-foreground: #ffffff;
   /* سفید برای متن روی دکمه‌ها */
-  --secondary: #f9f9f9;
+  --secondary: #dfdfdf;
   --secondary-static: #232323; 
   /* بژ روشن برای پس‌زمینه */
   --secondary-foreground: #afabab;
@@ -29,7 +29,7 @@
   /* پس‌زمینه فرعی */
   --subBg2: #f0f0f0;
   /* پس‌زمینه فرعی روشن‌تر */
-  --subText: #6c6c6c;
+  --subText: #2c2c2c;
   /* متن فرعی با کنتراست مناسب */
   --muted: #c4c2c2;
   /* متن کم‌رنگ‌تر */
@@ -43,7 +43,7 @@
   /* رنگ مرزها */
   --border-form: #f6f6f6;
   /* مرز فرم‌ها */
-  --secondary-light: #dfdfdf;
+  --secondary-light: #b0b0b0;
   /* پس‌زمینه بسیار روشن */
   --secondary-light2: #393939;
   /* پس‌زمینه روشن‌تر */
