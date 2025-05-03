@@ -73,17 +73,16 @@ const SearchBar = () => {
 
           <DatePickerInput
             label="تاریخ ورود"
-            placeholder="تاریخ ورود"
             background="bg-transparent"
             color="text-foreground"
-            className="px-4 py-2"
+            className="px-4 py-2 border-subText"
           />
 
           <DatePickerInput
             label="تاریخ خروج"
-            placeholder="تاریخ خروج"
             background="bg-transparent"
             color="text-foreground"
+            className="placeholder:text-subText border-subText"
           />
 
           <CommonSelect

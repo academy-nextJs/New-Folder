@@ -60,7 +60,7 @@ const RegisterForm = () => {
     <div>
       <form className="mt-8 space-y-10" onSubmit={handleSubmit(handleRegister)}>
         <div className="flex flex-col gap-4">
-          <div className="w-full flex gap-1 flex-col text-white">
+          <div className="w-full flex gap-1 flex-col text-card-foreground">
             <Label htmlFor="email" className={`text-[13px] flex gap-0.5`}>
               <span> ایمیل شما </span>
               <p className='text-danger'> * </p>
@@ -69,7 +69,7 @@ const RegisterForm = () => {
             <Input
               id="email"
               type="text"
-              className="bg-transparent placeholder:text-white text-sm outline-none w-full py-3 border border-white text-white px-4 rounded-[16px] text-[16px]"
+              className="bg-transparent placeholder:text-card-foreground text-sm outline-none w-full py-3 border border-white text-card-foreground px-4 rounded-[16px] text-[16px]"
               placeholder=" لطفا ایمیل خود را وارد فرمایید... "
               {...register("email")}
             />

@@ -13,7 +13,7 @@ export const metadata = {
 const page = () => {
 
   return (
-    <div className='flex xl:flex-row flex-col gap-[100px] mt-[100px] px-8 text-white'>
+    <div className='flex xl:flex-row flex-col gap-[100px] mt-[100px] px-8 text-card-foreground'>
       <div className='flex gap-6 flex-col'>
         <div className='flex gap-3 items-center w-fit text-[13px]'>
           <Link href={`/`}> خانه </Link>

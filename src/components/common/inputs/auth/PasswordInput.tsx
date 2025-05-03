@@ -11,7 +11,7 @@ const PasswordInput: FC<IPasswordInput> = ({ label, placeholder, classname, back
 
     return (
         <div className='rtl flex flex-col gap-2'>
-            <Label htmlFor={label} className={`text-[13px] text-white flex gap-0.5 ${color}`}>
+            <Label htmlFor={label} className={`text-[13px] text-card-foreground flex gap-0.5 ${color}`}>
                 <span> {label} </span>
                 {mandatory === true ? <p className='text-danger'> * </p> : <></>}
                 <span> : </span>

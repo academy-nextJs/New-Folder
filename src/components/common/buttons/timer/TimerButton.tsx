@@ -23,7 +23,7 @@ const TimerButton: FC<IButton> = ({ onclick }) => {
   };
 
   return (
-    <div className="bg-[#7569FF] w-[226px] h-[34px] flex justify-start text-white rounded-[12px]">
+    <div className="bg-[#7569FF] w-[226px] h-[34px] flex justify-start text-card-foreground rounded-[12px]">
       <Button
         type='button'
         variant="none"

@@ -90,7 +90,7 @@ const FooterForm: FC<IFooterForm> = ({ classname }) => {
             </div>
             <CommonButton type="submit" title={isLoading ? "در حال ارسال..." : " ارسال پیام "}
                 icon={isLoading ? <Loader /> : <ChevronLeft size={16} />}
-                classname="w-full bg-secondary-light text-white"
+                classname="w-full bg-[#232323] text-white"
                 disabled={isLoading}
             />
         </form>

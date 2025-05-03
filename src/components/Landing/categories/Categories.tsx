@@ -79,29 +79,27 @@ const Categories = () => {
     return categoryIcons[index % categoryIcons.length];
   };
   return (
-    <div className="mb-32 text-foreground">
-      <div className="px-8">
-        <div className="flex justify-center w-full items-center gap-2 py-2 sm:py-4 mb-2 sm:mb-4 text-primary">
-          <Image
-            src={arrow}
-            className="w-8 h-8 sm:w-12 sm:h-12 rotate-180"
-            alt="arrow"
-          />
-          <span className="text-sm">
-            دسته بندی املاک دلتا
-          </span>
-          <Image src={arrow} className="w-8 h-8 sm:w-12 sm:h-12" alt="arrow" />
-        </div>
-
-        <h1 className="text-center lg:text-2xl text-xl font-bold mb-2 sm:mb-4">
-          هر ملکی بخوای اینجا پیدا میشه !
-        </h1>
-
-        <p className="text-center text-sm mb-16 mx-auto max-w-full font-sans break-words">
-          با کلیک به روی هر دسته بندی می‌توانید تمام آگهی مربوط به آن را مشاهده
-          کنید و به ملک مورد علاقه خود برسید
-        </p>
+    <div className="mb-32 text-foreground p-2 sm:p-4">
+      <div className="flex justify-center items-center gap-2 py-2 sm:py-4 mb-2 sm:mb-4 text-primary">
+        <Image
+          src={arrow}
+          className="w-8 h-8 sm:w-12 sm:h-12 rotate-180"
+          alt="arrow"
+        />
+        <span className="text-sm sm:text-base md:text-lg">
+          دسته بندی املاک دلتا
+        </span>
+        <Image src={arrow} className="w-8 h-8 sm:w-12 sm:h-12" alt="arrow" />
       </div>
+
+      <h1 className="text-center text-xl sm:text-2xl md:text-3xl font-bold mb-2 sm:mb-4">
+        هر ملکی بخوای اینجا پیدا میشه !
+      </h1>
+
+      <p className="text-center sm:text-sm mb-8 sm:mb-12 mx-auto max-w-full font-sans break-words">
+        با کلیک به روی هر دسته بندی می‌توانید تمام آگهی مربوط به آن را مشاهده
+        کنید و به ملک مورد علاقه خود برسید
+      </p>
 
       <div className="relative w-full flex items-center justify-center">
         {categoryData.length === 0 ? (
@@ -126,15 +124,6 @@ const Categories = () => {
                         isHovered={hoveredIndex === cardIndex}
                       />
                     </div>
-                  <div
-                    className={`absolute bottom-14 ${isSmallScreen ? "left-36" : "right-2"
-                      } w-12 h-12 flex items-center justify-center rounded-md ${hoveredIndex === cardIndex
-                        ? "bg-secondary-light"
-                        : "bg-secondary"
-                      } backdrop-blur-md transition-all duration-300`}
-                  >
-                    <Image alt="villa" src={icon} className="w-6 h-6" />
-                  </div>
 
                     <div
                       className="absolute left-6 bottom-20"
