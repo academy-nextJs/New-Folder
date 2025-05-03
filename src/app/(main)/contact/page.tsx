@@ -3,6 +3,7 @@ import ContactForm from '@/components/contact-us/ContactForm'
 import { AtSign, ChevronLeft, Phone } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
+import AnimationForm from '@/components/contact-us/AnimationForm'
 
 export const metadata = {
   title: "ارتباط با ما | ",
@@ -43,13 +44,7 @@ const page = () => {
         <AboutBox title='Delta@gmail.com' icon={<AtSign />} />
         <AboutBox title='گیلان ، رشت ، میدان آزادی ، جنب چهار راه عظیمی زاده' icon={<AtSign />} />
       </div>
-      <div className='bg-[#3B3B3B] mx-[100px] min-w-[387.89453125] rounded-[32px] h-[365.8563232421875] my-auto relative hidden xl:flex justify-center items-center'>
-        <div className='w-[479] h-[340.15728759765625] bg-[#2D2D2D] rounded-[32px] absolute flex justify-center items-center'>
-          <div className='bg-[#1C1C1C] w-[575] h-fit absolute rounded-[32px]'>
-            <ContactForm />
-          </div>
-        </div>
-      </div>
+      <AnimationForm />
       <div className='bg-[#1C1C1C] rounded-[32px] xl:hidden block'>
         <ContactForm />
       </div>
