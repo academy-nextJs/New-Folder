@@ -6,6 +6,8 @@ import "./globals.css";
 // import "swiper/css";
 import Footer from "@/components/common/footer/Footer";
 import { Toaster } from "@/components/ui/sonner";
+import { Suspense } from "react";
+import Loading from "./loading";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,9 +36,7 @@ export default function RootLayout({
       >
         <div className="flex flex-col justify-between mx-auto max-w-[1550px] w-screen h-screen">
           <Providers>
-            <div className="px-8 w-full">
-              <Header />
-            </div>
+            <Header />
             <div className="mb-[100px]">{children}</div>
             <div className="xl:px-8 px-0">
               <Footer />
