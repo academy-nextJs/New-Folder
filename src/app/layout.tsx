@@ -38,9 +38,7 @@ export default function RootLayout({
           <Providers>
             <Header />
             <div className="mb-[100px]">
-              <Suspense fallback={<Loading />} >
                 {children}
-              </Suspense>
             </div>
             <div className="xl:px-8 px-0">
               <Footer />
