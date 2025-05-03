@@ -6,32 +6,32 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: "#8CFF45", // سبز فسفری
-        secondary: "#232323", // پس‌زمینه اصلی
-        subBg: "#363636", // پس‌زمینه فرعی
-        subBg2: "#4A4A4A", // پس‌زمینه فرعی کم‌رنگ
-        subText: "#AAAAAA", // متن فرعی
-        foreground: "#F2F2F2", // متن اصلی
-        muted: "#B3B3B3", // متن کم‌رنگ
-        accent: "#A08CFF", // دکمه‌های خاص مثل "ثبت آگهی"
-        danger: "#FF4D4D", // برای هشدار یا تایمر
-        border: "#2E2E2E", // خطوط حاشیه
-        "secondary-light": "#2D2D2D", // خاکستری کاپوننت های لندینگ
-        "secondary-light2": "#393939", // خاکستری کاپوننت های کارت
-        "blur-primary": '#8CFF4552', // بلور سبز 
-        "blur-blue": '#7569FF52', // بلور سرمه ای
-        background: "oklch(var(--background))",
-        card: "oklch(var(--card))",
-        "card-foreground": "oklch(var(--card-foreground))",
-        popover: "oklch(var(--popover))",
-        "popover-foreground": "oklch(var(--popover-foreground))",
-        "primary-foreground": "oklch(var(--primary-foreground))",
-        "secondary-foreground": "oklch(var(--secondary-foreground))",
-        "muted-foreground": "oklch(var(--muted-foreground))",
-        "accent-foreground": "oklch(var(--accent-foreground))",
-        destructive: "oklch(var(--destructive))",
-        ring: "oklch(var(--ring))",
-        input: "oklch(var(--input))",
+        primary: "var(--primary)", // سبز فسفری
+        "primary-foreground": "var(--primary-foreground)",
+        secondary: "var(--secondary)", // پس‌زمینه اصلی
+        "secondary-foreground": "var(--secondary-foreground)",
+        background: "var(--background)",
+        foreground: "var(--foreground)", // متن اصلی
+        subBg: "var(--subBg)", // پس‌زمینه فرعی
+        subBg2: "var(--subBg2)", // پس‌زمینه فرعی کم‌رنگ
+        subText: "var(--subText)", // متن فرعی
+        muted: "var(--muted)", // متن کم‌رنگ
+        "muted-foreground": "var(--muted-foreground)",
+        accent: "var(--accent)", // دکمه‌های خاص مثل "ثبت آگهی"
+        "accent-foreground": "var(--accent-foreground)",
+        danger: "var(--danger)", // برای هشدار یا تایمر
+        destructive: "var(--destructive)",
+        border: "var(--border)", // خطوط حاشیه
+        "secondary-light": "var(--secondary-light)", // خاکستری کاپوننت های لندینگ
+        "secondary-light2": "var(--secondary-light2)", // خاکستری کاپوننت های کارت
+        "blur-primary": "var(--blur-primary)", // بلور سبز
+        "blur-blue": "var(--blur-blue)", // بلور سرمه ای
+        card: "var(--card)",
+        "card-foreground": "var(--card-foreground)",
+        popover: "var(--popover)",
+        "popover-foreground": "var(--popover-foreground)",
+        input: "var(--input)",
+        ring: "var(--ring)",
       },
       keyframes: {
         popover: {
@@ -60,10 +60,9 @@ const config: Config = {
       fontFamily: {
         sans: ["IRANSans", "sans-serif"],
       },
-      //   borderRadius: {
-      //     xl: "1rem",
-      //     "2xl": "1.5rem",
-      //   },
+      borderRadius: {
+        DEFAULT: "var(--radius)",
+      },
     },
   },
   plugins: [],

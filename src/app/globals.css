@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 @font-face {
   font-family: "IRANSans";
   src: url("/fonts/IRANSansX-Light.ttf") format("truetype");
@@ -12,82 +10,73 @@
   font-style: normal;
 }
 
-body {
-  font-family: "IRANSans", sans-serif;
-  direction: rtl;
-  background: #232323;
-  color: white;
-  overflow-x: hidden;
-}
-
-
 :root {
+  /* تعریف متغیرهای CSS برای حالت روشن */
+  --primary: #8cff45;
+  --primary-foreground: #232323;
+  --secondary: #f2f2f2;
+  --secondary-foreground: #232323;
+  --background: #f2f2f2;
+  --foreground: #232323;
+  --subBg: #e0e0e0;
+  --subBg2: #c8c8c8;
+  --subText: #666666;
+  --muted: #808080;
+  --muted-foreground: #666666;
+  --accent: #a08cff;
+  --accent-foreground: #232323;
+  --border: #d1d1d1;
+  --secondary-light: #f5f5f5;
+  --secondary-light2: #ebebeb;
+  --blur-primary: #8cff4552;
+  --blur-blue: #7569ff52;
+  --danger: #ff4d4d;
   --radius: 0.625rem;
-  --background: 1 0 0;
-  --foreground: 0.145 0 0;
-  --card: 1 0 0;
-  --card-foreground: 0.145 0 0;
-  --popover: 1 0 0;
-  --popover-foreground: 0.145 0 0;
-  --primary: 0.205 0 0;
-  --primary-foreground: 0.985 0 0;
-  --secondary: 0.97 0 0;
-  --secondary-foreground: 0.205 0 0;
-  --muted: 0.97 0 0;
-  --muted-foreground: 0.556 0 0;
-  --accent: 0.97 0 0;
-  --accent-foreground: 0.205 0 0;
-  --destructive: 0.577 0.245 27.325;
-  --border: 0.922 0 0;
-  --input: 0.922 0 0;
-  --ring: 0.708 0 0;
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --card: #ffffff;
+  --card-foreground: #232323;
+  --popover: #ffffff;
+  --popover-foreground: #232323;
+  --destructive: #ff4d4d;
+  --input: #e2e2e2;
+  --ring: #a0a0a0;
 }
 
 .dark {
-  --background: 0.145 0 0;
-  --foreground: 0.985 0 0;
-  --card: 0.205 0 0;
-  --card-foreground: 0.985 0 0;
-  --popover: 0.205 0 0;
-  --popover-foreground: 0.985 0 0;
-  --primary: 0.922 0 0;
-  --primary-foreground: 0.205 0 0;
-  --secondary: 0.269 0 0;
-  --secondary-foreground: 0.985 0 0;
-  --muted: 0.269 0 0;
-  --muted-foreground: 0.708 0 0;
-  --accent: 0.269 0 0;
-  --accent-foreground: 0.985 0 0;
-  --destructive: 0.704 0.191 22.216;
-  --border: 1 0 0;
-  --input: 1 0 0;
-  --ring: 0.556 0 0;
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  /* تعریف متغیرهای CSS برای حالت تاریک */
+  --primary: #8cff45;
+  --primary-foreground: #232323;
+  --secondary: #232323;
+  --secondary-foreground: #f2f2f2;
+  --background: #232323;
+  --foreground: #f2f2f2;
+  --subBg: #363636;
+  --subBg2: #4a4a4a;
+  --subText: #aaaaaa;
+  --muted: #b3b3b3;
+  --muted-foreground: #aaaaaa;
+  --accent: #a08cff;
+  --accent-foreground: #f2f2f2;
+  --border: #2e2e2e;
+  --secondary-light: #2d2d2d;
+  --secondary-light2: #393939;
+  --blur-primary: #8cff4552;
+  --blur-blue: #7569ff52;
+  --danger: #ff4d4d;
+  --card: #2d2d2d;
+  --card-foreground: #f2f2f2;
+  --popover: #2d2d2d;
+  --popover-foreground: #f2f2f2;
+  --destructive: #ff4d4d;
+  --input: #363636;
+  --ring: #4a4a4a;
+}
+
+body {
+  font-family: "IRANSans", sans-serif;
+  direction: rtl;
+  background-color: var(--background);
+  color: var(--foreground);
+  overflow-x: hidden;
 }
 
 @layer base {
