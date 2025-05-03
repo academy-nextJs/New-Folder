@@ -9,7 +9,7 @@ const LogoSection = () => (
         alt="Delta Logo"
         width={50}
         height={50}
-        className="w-auto h-auto max-h-[45px] md:max-h-[40px] lg:max-h-[50px] text-foreground filter invert dark:invert-0"
+        className="w-auto h-auto max-h-[45px] md:max-h-[40px] lg:max-h-[50px] text-foreground filter invert-0 dark:invert"
       />
     </Link>
   </div>
