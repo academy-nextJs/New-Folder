@@ -11,77 +11,50 @@
 }
 
 :root {
-  /* رنگ پس‌زمینه اصلی: روشن و خنثی */
-  --background: #F2F2F2;
-  /* رنگ متن اصلی: تیره برای کانتراست بالا روی پس‌زمینه روشن */
+  --background: #e0dddd;
   --foreground: #1E1E1E;
+  --primary: #467182;
+  --primary-foreground: #FFFFFF;
+  --secondary: #FFFFFF;
+  --secondary-static: #1E1E1E;
+  --secondary-foreground: #333333;
+  --subBg: #EDEDED;
+  --subBg2: #E0E0E0;
+  --secondary-light: #F7F7F7;
+  --secondary-light2: #484848;
+  --secondary-light3: #656565;
+  --secondary-light4: #eaeaea;
+  --subText: #6c6b6b;
+  --muted: #AAAAAA;
+  --muted-foreground: #777777;
+  --accent: #5D3BFF;
+  --accent-foreground: #FFFFFF;
+  --border: #e3e3e3;
+  --ring: #B0B0B0;
+  --card: #FFFFFF;
+  --card-foreground: #1E1E1E;
+  --popover: #FFFFFF;
+  --popover-foreground: #1E1E1E;
+  --danger: #D32F2F;
+  --destructive: #D32F2F;
+  --input: #FFFFFF;
+  --blur-primary: #56A60052;
+  --blur-blue: #7569FF52;
+  --card-secondary: #c0c0c0;
+  --card-secondary2: #9c9c9c;
+  --card-secondary3: #484848;
 
-  /* Primary Accent */
-  /* نگه‌داشتن خودِ سبزِ اصلی با کمی تیرگی بیشتر تا روی پس‌زمینه روشن دیده بشه */
-  --primary: #56A600;               
-  /* متن روی المان‌های primary: به سفید نزدیک می‌شه */
-  --primary-foreground: #FFFFFF;    
-
-  /* Secondary Accent */
-  --secondary: #FFFFFF;            
-  --secondary-static: #1E1E1E;     
-  --secondary-foreground: #333333; 
-
-  /* لایه‌های فرعی (مثل کارت‌ها/بک‌گراند سطوح دوم) */
-  /* پس‌زمینه اصلی لندینگ */
-  --background: #F2F2F2;
-
-  /* کارت‌ها (Sub Background) */
-  --subBg: #EDEDED;         /* کمی تیره‌تر از سفید */  
-  --subBg2: #E0E0E0;        /* برای سطح دوم کمی تیره‌تر */
-
-  /* لایه‌های سبک‌تر برای المان‌های داخلی یا hover */
-  --secondary-light: #F7F7F7;   /* خیلی ملایم، نزدیک به پس‌زمینه اصلی */
-  --secondary-light2: #ededed;  /* دقیقاً برابر با پس‌زمینه اما برای حالت hover */
-  --secondary-light3: #656565;  /* حالت hover/active یا کارت‌های nested */    
-
-  /* متن‌‌های جانبی */
-  --subText: #6c6b6b;              
-  --muted: #AAAAAA;                
-  --muted-foreground: #777777;     
-
-  /* Accent ثانویه رنگی */
-  --accent: #5D3BFF;               
-  --accent-foreground: #FFFFFF;    
-
-  /* حاشیه‌ها */
-  --border: #DDDDDD;               
-  --ring: #B0B0B0;                
-
-  /* کارت‌ها و پاپ‌اور */
-  --card: #FFFFFF;                 
-  --card-foreground: #1E1E1E;      
-  --popover: #FFFFFF;              
-  --popover-foreground: #1E1E1E;   
-
-  /* حالت‌های خطر/حذف */
-  --danger: #D32F2F;               
-  --destructive: #D32F2F;          
-
-  /* ورودی‌ها */
-  --input: #FFFFFF;                
-
-  /* جلوه بلور (تکست‌های نیمه‌شفاف) */
-  --blur-primary: #56A60052;       
-  --blur-blue: #7569FF52;          
-
-  /* انیمیشن */
   animation: fadeIn var(--transition-duration) ease;
 }
 
 
 .dark {
+  --background: #232323;
   --primary: #8cff45;
   --primary-foreground: #232323;
   --secondary: #232323;
-  --secondary-static: #ffffff; 
+  --secondary-static: #ffffff;
   --secondary-foreground: #f2f2f2;
-  --background: #232323;
   --foreground: #f2f2f2;
   --subBg: #363636;
   --subBg2: #4a4a4a;
@@ -92,8 +65,9 @@
   --accent-foreground: #f2f2f2;
   --border: #232323;
   --secondary-light: #2d2d2d;
-  --secondary-light2: #303030;
+  --secondary-light2: #393939;
   --secondary-light3: #262626;
+  --secondary-light4: #303030;
   --blur-primary: #8cff4552;
   --blur-blue: #7569ff52;
   --danger: #ff4d4d;
@@ -104,6 +78,9 @@
   --destructive: #ff4d4d;
   --input: #363636;
   --ring: #b0b0b0;
+  --card-secondary: #3B3B3B;
+  --card-secondary2: #2D2D2D;
+  --card-secondary3: #1C1C1C;
   animation: fadeIn var(--transition-duration) ease;
 }
 
@@ -121,6 +98,7 @@ body {
     opacity: 0;
     transform: scale(0.95);
   }
+
   100% {
     opacity: 1;
     transform: scale(1);

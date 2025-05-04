@@ -18,7 +18,7 @@ const ReserveFilter: FC<IReserveFilter> = ({ setOrder, setSort, setSearch, house
     const [isOpen, setIsOpen] = useState<boolean>(false)
 
     return (
-        <div className='bg-secondary-light2 w-full md:flex-nowrap flex-wrap gap-4 rounded-[24px] px-4 py-3 flex justify-between'>
+        <div className='bg-secondary-light4 w-full md:flex-nowrap flex-wrap gap-4 rounded-[24px] px-4 py-3 flex justify-between'>
             <div className='flex md:flex-row md:flex-wrap flex-col w-full gap-4'>
                 <CommonSelect
                     placeholder='استان ، شهر ، هتل ....'
@@ -33,9 +33,9 @@ const ReserveFilter: FC<IReserveFilter> = ({ setOrder, setSort, setSearch, house
                         { label: 'قم', value: 'qom' },
                         { label: 'اهواز', value: 'ahvaz' },
                     ]}
-                    color='text-subText group-hover:text-white'
+                    color='text-subText dark:group-hover:text-white'
                     label='مقصد یا  هتل شما '
-                    classname='px-4 py-5 border-subText w-full group-hover:text-white group-hover:border-white outline-none'
+                    classname='px-4 py-5 border-subText w-full dark:group-hover:text-white dark:group-hover:border-white outline-none'
                 />
                 <CommonSelect
                     onValueChange={(value => {
@@ -59,15 +59,15 @@ const ReserveFilter: FC<IReserveFilter> = ({ setOrder, setSort, setSearch, house
                         { label: 'ارزان ترین ها', value: 'price_low' },
                         { label: 'گران ترین ها', value: 'price_high' },
                     ]}
-                    color='text-subText group-hover:text-white'
+                    color='text-subText dark:group-hover:text-white'
                     label='مرتب سازی بر اساس'
-                    classname='px-4 py-5 border-subText w-full group-hover:text-white group-hover:border-white outline-none'
+                    classname='px-4 py-5 border-subText w-full dark:group-hover:text-white dark:group-hover:border-white outline-none'
                 />
                 <CommonInput
                     onchange={(e) => setSearch(e.target.value)}
                     label='جستجو'
-                    classname='px-4 py-2 border-subText xl:w-[600px] w-full group-hover:placeholder:text-white placeholder:text-subText group-hover:text-white group-hover:border-white outline-none'
-                    color='text-subText group-hover:text-white'
+                    classname='px-4 py-2 border-subText xl:w-[600px] w-full dark:group-hover:placeholder:text-white placeholder:text-subText dark:group-hover:text-white dark:group-hover:border-white outline-none'
+                    color='text-subText dark:group-hover:text-white'
                     placeholder='نام هتل مورد نظر .....'
                 />
 

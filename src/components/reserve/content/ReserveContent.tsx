@@ -36,7 +36,7 @@ const ReserveContent: React.FC<IReserveContent> = ({ houses, setMaxPrice, setMin
   }
 
   return (
-    <div className="flex xl:flex-row flex-col gap-4 justify-between w-full xl:h-[1080px] overflow-hidden rounded-[40px] bg-secondary-light2 p-4">
+    <div className="flex xl:flex-row flex-col gap-4 justify-between w-full xl:h-[1080px] overflow-hidden rounded-[40px] bg-secondary-light4 p-4">
       <div className="flex gap-6 flex-col xl:w-3/5 w-full">
         <div className="flex gap-4 w-full">
           <div className="w-1/2">
@@ -59,7 +59,7 @@ const ReserveContent: React.FC<IReserveContent> = ({ houses, setMaxPrice, setMin
             />
           </div>
         </div>
-        <div className="w-full border-2 border-[#4E4E4E]" />
+        <div className="w-full border dark:border-[#4E4E4E] border-[#9E9E9E]" />
 
         <div className='flex flex-col justify-between h-full'>
           <div className="flex flex-col gap-6" id='items'>

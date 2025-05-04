@@ -42,9 +42,9 @@ const ReserveModalMap: FC<IReserveModalMap> = ({ isOpen, setIsOpen }) => {
                                     نقشه
                                 </Dialog.Title>
                                 <div className="mt-2">
-                                    <p className="text-sm w-full h-[400px] z-100">
+                                    <div className="text-sm w-full h-[400px] z-100">
                                         <ReserveMap />
-                                    </p>
+                                    </div>
                                 </div>
 
                                 <div className="mt-4">

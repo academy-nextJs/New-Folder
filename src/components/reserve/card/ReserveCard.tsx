@@ -17,7 +17,7 @@ const ReserveCard : FC<IReserveContent> = ({ items }) => {
                     className="bg-secondary-light3 md:min- md:w-[228.35986328125px] w-full h-[144px] group-hover:shadow-[#8CFF451F] group-hover:shadow-2md group-hover:border group-hover:border-primary rounded-[16px]"
                 />
                 <div className="flex flex-col gap-4 items-start justify-between w-full">
-                    <div className="bg-accent text-sm flex gap-2 px-4 py-1 flex-row-reverse rounded-[8px]">
+                    <div className="bg-accent text-white text-sm flex gap-2 px-4 py-1 flex-row-reverse rounded-[8px]">
                         <span>{items.rate} ستاره</span>
                         <Star size={16} />
                     </div>
@@ -46,7 +46,7 @@ const ReserveCard : FC<IReserveContent> = ({ items }) => {
                 <CommonButton
                     icon={<Hotel />}
                     title="بررسی و رزرو هتل"
-                    classname="flex-row-reverse py-3 md:py-5 bg-transparent group-hover:bg-primary text-primary group-hover:text-black border border-primary w-full md:w-auto"
+                    classname="flex-row-reverse py-3 md:py-5 bg-transparent group-hover:bg-primary text-primary group-hover:text-primary-foreground border border-primary w-full md:w-auto"
                 />
             </div>
         </div>

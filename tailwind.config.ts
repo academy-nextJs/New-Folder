@@ -26,6 +26,7 @@ const config: Config = {
         "secondary-light": "var(--secondary-light)", // خاکستری کاپوننت های لندینگ
         "secondary-light2": "var(--secondary-light2)", // خاکستری کاپوننت های کارت
         "secondary-light3": "var(--secondary-light3)", // 2 خاکستری کاپوننت های کارت
+        "secondary-light4": "var(--secondary-light4)", // 2 خاکستری کاپوننت های کارت
         "blur-primary": "var(--blur-primary)", // بلور سبز
         "blur-blue": "var(--blur-blue)", // بلور سرمه ای
         card: "var(--card)",
@@ -34,6 +35,9 @@ const config: Config = {
         "popover-foreground": "var(--popover-foreground)",
         input: "var(--input)",
         ring: "var(--ring)",
+        "card-secondary": "var(--card-secondary)",
+        "card-secondary2": "var(--card-secondary2)",
+        "card-secondary3": "var(--card-secondary3)",
       },
       keyframes: {
         popover: {

@@ -3,7 +3,7 @@ import React from 'react'
 
 const FooterInfo = () => {
     return (
-        <div className="bg-secondary text-foreground py-12 lg:px-16 px-8 rounded-[56px]">
+        <div className="dark:bg-secondary bg-secondary-static dark:text-foreground text-primary-foreground py-12 lg:px-16 px-8 rounded-[56px]">
             <h2 className="text-2xl font-extrabold mb-4">پلتفرم دلتـا</h2>
             <div className="grid lg:grid-cols-4 gap-8">
                 <div>
