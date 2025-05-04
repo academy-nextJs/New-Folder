@@ -37,11 +37,11 @@
 
   /* لایه‌های سبک‌تر برای المان‌های داخلی یا hover */
   --secondary-light: #F7F7F7;   /* خیلی ملایم، نزدیک به پس‌زمینه اصلی */
-  --secondary-light2: #F2F2F2;  /* دقیقاً برابر با پس‌زمینه اما برای حالت hover */
+  --secondary-light2: #ededed;  /* دقیقاً برابر با پس‌زمینه اما برای حالت hover */
   --secondary-light3: #656565;  /* حالت hover/active یا کارت‌های nested */    
 
   /* متن‌‌های جانبی */
-  --subText: #666666;              
+  --subText: #6c6b6b;              
   --muted: #AAAAAA;                
   --muted-foreground: #777777;     
 
