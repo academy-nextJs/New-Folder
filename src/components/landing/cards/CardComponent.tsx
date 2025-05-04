@@ -10,7 +10,7 @@ const CardComponent: FC<ICard> = ({ view, photos, rate, title, address, rooms, p
     const discount_percentage = discountedPrice ? Math.ceil(((Number(price) - discountedPrice) / Number(price)) * 100) : 0
 
     return (
-        <motion.div whileHover={{ scale: 1.02 }} transition={{ duration: 0.2 }} className='flex flex-col gap-4 text-white group w-full h-full my-10 mx-auto'>
+        <motion.div whileHover={{ scale: 1.02 }} whileInView={{ scale: 1 }} initial={{ scale: 0 }} transition={{ duration: 0.2 }} className='flex flex-col gap-4 text-card-foreground group w-full h-full my-10 mx-auto'>
             <div className='relative '>
                 <div className="bg-secondary-light2 w-full p-4 group-hover:bg-primary relative h-[190] rounded-[24px] flex justify-center items-center after:content-['']
                         after:w-[90px] after:h-[50px] after:group-hover:bg-primary after:absolute after:top-[-34] after:rounded-tr-2xl after:rounded-tl-[40px] after:right-0 after:bg-secondary-light2">
@@ -20,7 +20,7 @@ const CardComponent: FC<ICard> = ({ view, photos, rate, title, address, rooms, p
                         </svg>
                         {rate}
                     </div>
-                    <div className='bg-secondary-light2 cursor-pointer text-white px-2 text-sm rounded-[10px] absolute top-[-30] left-0'>
+                    <div className='bg-secondary-light2 cursor-pointer text-card-foreground px-2 text-sm rounded-[10px] absolute top-[-30] left-0'>
                         <Link href={`/houses/${id}`}> <svg width="45" height="22" viewBox="0 0 45 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect width="45" height="22" rx="8" fill="#393939" />
                             <path d="M11.4697 10.4697C11.1768 10.7626 11.1768 11.2374 11.4697 11.5303L16.2426 16.3033C16.5355 16.5962 17.0104 16.5962 17.3033 16.3033C17.5962 16.0104 17.5962 15.5355 17.3033 15.2426L13.0607 11L17.3033 6.75736C17.5962 6.46447 17.5962 5.98959 17.3033 5.6967C17.0104 5.40381 16.5355 5.40381 16.2426 5.6967L11.4697 10.4697ZM33 10.25L12 10.25L12 11.75L33 11.75L33 10.25Z" fill="white" />
@@ -34,20 +34,20 @@ const CardComponent: FC<ICard> = ({ view, photos, rate, title, address, rooms, p
             <h2 className='text-[16px] flex justify-between'> <span className='flex gap-2 flex-wrap whitespace-nowrap'> {title} <p className='text-subText'> ( {categories?.name} ) </p> </span> {discountedPrice && <div className='bg-danger rounded-[12px] px-4 text-sm py-1 w-fit'> %{discount_percentage} </div>} </h2>
             {view === '2' && <div className='flex flex-col gap-4'>
                 <div className='flex flex-col gap-4'>
-                    <div className='flex gap-2 text-[#AAAAAA] h-[40px] text-sm items-center'>
+                    <div className='flex gap-2 text-subText h-[40px] text-sm items-center'>
                         <MapPin size={20} />
                         {address}
                     </div>
-                    <div className="flex flex-row flex-wrap items-center text-sm text-[#AAAAAA] gap-1 h-[45px]">
+                    <div className="flex flex-row flex-wrap items-center text-sm text-subText gap-1 h-[45px]">
                         <span className='flex gap-1'> <Bed size={20} /> <p> {rooms} </p> <p> خوابه </p> </span> |
                         <span className='flex gap-1'> <Car size={20} /> <p> {parking} </p> <p> پارکینگ </p> </span> |
                         <span className='flex gap-1'> <Bath size={20} /> <p> {bathrooms} </p> <p> حمام </p> </span> |
                         <span className='flex gap-1'> <Trees size={20} /> <p> حیاط </p> </span>
                     </div>
                 </div>
-                <div className='bg-[#444444] group-hover:bg-primary group-hover:text-black text-[#AAAAAA] mt-2 flex flex-wrap justify-between rounded-[12px] w-full px-4 py-2 text-sm'>
-                    <span className={` ${discountedPrice && 'text-[#AAAAAA] line-through'} whitespace-nowrap `}> {discountedPrice ? SplitNumber(Number(price)) + ' ت' : (transaction_type === 'rental' && "  اجاره ماهیانه : ") || (transaction_type === "direct_purchase" && " قیمت خرید : ") || (transaction_type === "mortgage" && " قیمت رهن : ")} </span>
-                    <span className='flex whitespace-nowrap'> <p className={`text-white group-hover:text-[#444444]`}> {discountedPrice ? SplitNumber(discountedPrice) : SplitNumber(price || '')} ت </p>{transaction_type === 'rental' && " /هر ماه  "} </span>
+                <div className='bg-secondary-light2 group-hover:bg-primary text-muted-foreground mt-2 flex flex-wrap justify-between rounded-[12px] w-full px-4 py-2 text-sm'>
+                    <span className={` ${discountedPrice && 'text-muted line-through'} whitespace-nowrap `}> {discountedPrice ? SplitNumber(Number(price)) + ' ت' : (transaction_type === 'rental' && "  اجاره ماهیانه : ") || (transaction_type === "direct_purchase" && " قیمت خرید : ") || (transaction_type === "mortgage" && " قیمت رهن : ")} </span>
+                    <span className='flex whitespace-nowrap'> <p className={`text-muted`}> {discountedPrice ? SplitNumber(discountedPrice) : SplitNumber(price || '')} ت </p>{transaction_type === 'rental' && " /هر ماه  "} </span>
                 </div>
             </div>}
         </motion.div>

@@ -5,7 +5,7 @@ import React from 'react'
 
 const LoginPage = () => {
   return (
-    <div className='my-[100px]'>
+    <div>
       <AuthHeader pageName=' ورود به حساب کاربری ' />
       <TabContent registerElement={<RegisterForm />} defaultValue='login' />
     </div>

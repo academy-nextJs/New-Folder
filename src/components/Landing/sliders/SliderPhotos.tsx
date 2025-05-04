@@ -13,7 +13,7 @@ export default function SliderPhotos({ photos }: ISliderPhotos) {
       <Swiper
         modules={[Pagination, Navigation]}
         pagination={{ clickable: true }}
-
+        autoplay
         loop={true}
         slidesPerView={1}
         className="rounded-2xl overflow-hidden shadow-lg"

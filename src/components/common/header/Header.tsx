@@ -131,10 +131,6 @@ const Header = () => {
             </button>
           </div>
 
-          <div className="flex items-center justify-center">
-            <LogoSection />
-          </div>
-
           <div>
             <LoginSection />
           </div>

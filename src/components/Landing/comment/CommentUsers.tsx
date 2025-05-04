@@ -126,14 +126,28 @@ const CommentUsers = () => {
       <div className="flex justify-center items-center gap-2 py-2 sm:py-4 mb-2 sm:mb-4 text-primary">
         <Image
           src={arrow}
-          className="w-8 h-8 sm:w-12 sm:h-12 rotate-180 cursor-pointer"
+          className="w-8 h-8 sm:w-12 sm:h-12 rotate-180 cursor-pointer dark:inline hidden"
           alt="arrow"
           onClick={goToPrevSlide}
         />
+        <div className='flex dark:hidden gap-1 rotate-180 justify-center items-center'>
+          <svg width="48" height="17" viewBox="0 0 48 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M45 10.1598C46.3333 9.38998 46.3333 7.46548 45 6.69568L39 3.23158C37.6667 2.46178 36 3.42403 36 4.96363L36 11.8918C36 13.4314 37.6667 14.3937 39 13.6239L45 10.1598Z" fill="#363636" />
+            <path d="M23.75 9.72677C24.75 9.14942 24.75 7.70605 23.75 7.1287L19.25 4.53062C18.25 3.95327 17 4.67496 17 5.82966L17 11.0258C17 12.1805 18.25 12.9022 19.25 12.3248L23.75 9.72677Z" fill="#363636" fillOpacity="0.5" />
+            <path d="M6.5 9.29376C7.16667 8.90886 7.16667 7.94661 6.5 7.56171L3.5 5.82966C2.83333 5.44476 2 5.92588 2 6.69568L2 10.1598C2 10.9296 2.83333 11.4107 3.5 11.0258L6.5 9.29376Z" fill="#363636" fillOpacity="0.25" />
+          </svg>
+        </div>
         <span className="text-sm sm:text-base md:text-lg">نظرات کاربران</span>
+        <div className='flex gap-1 justify-center items-center dark:hidden'>
+          <svg width="48" height="17" viewBox="0 0 48 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M45 10.1598C46.3333 9.38998 46.3333 7.46548 45 6.69568L39 3.23158C37.6667 2.46178 36 3.42403 36 4.96363L36 11.8918C36 13.4314 37.6667 14.3937 39 13.6239L45 10.1598Z" fill="#363636" />
+            <path d="M23.75 9.72677C24.75 9.14942 24.75 7.70605 23.75 7.1287L19.25 4.53062C18.25 3.95327 17 4.67496 17 5.82966L17 11.0258C17 12.1805 18.25 12.9022 19.25 12.3248L23.75 9.72677Z" fill="#363636" fillOpacity="0.5" />
+            <path d="M6.5 9.29376C7.16667 8.90886 7.16667 7.94661 6.5 7.56171L3.5 5.82966C2.83333 5.44476 2 5.92588 2 6.69568L2 10.1598C2 10.9296 2.83333 11.4107 3.5 11.0258L6.5 9.29376Z" fill="#363636" fillOpacity="0.25" />
+          </svg>
+        </div>
         <Image
           src={arrow}
-          className="w-8 h-8 sm:w-12 sm:h-12 cursor-pointer"
+          className="w-8 h-8 sm:w-12 sm:h-12 cursor-pointer dark:inline hidden"
           alt="arrow"
           onClick={goToNextSlide}
         />
@@ -180,11 +194,14 @@ const CommentUsers = () => {
               className="cursor-pointer"
             >
               {activeSlideGroup === index ? (
-                <Image
-                  src={plygen}
-                  className="w-3 h-3 sm:w-4 sm:h-4"
-                  alt="Active"
-                />
+                <div>
+                  <Image
+                    src={plygen}
+                    className="dark:inline hidden w-3 h-3 sm:w-4 sm:h-4"
+                    alt="Active"
+                  />
+                  <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-secondary-static dark:hidden" />
+                </div>
               ) : (
                 <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-ring" />
               )}
@@ -218,17 +235,17 @@ const CommentCard = ({ comment, isSmallScreen }: CommentCardProps) => {
           fill="#393939"
         />
       </svg>
-      <div className="relative z-10 flex flex-col h-full p-4 sm:p-6 md:p-8 lg:p-10 justify-between text-foreground overflow-hidden">
+      <div className="relative z-10 flex flex-col h-full p-4 sm:p-6 md:p-8 lg:p-10 justify-between text-primary-foreground overflow-hidden">
         <div className="flex items-center justify-start w-full" dir="rtl">
-          <div className="w-10 h-6 sm:w-12 sm:h-7 md:w-14 md:h-8 lg:w-16 lg:h-10 flex items-center justify-center rounded-md bg-foreground">
-            <span className="text-secondary text-xs sm:text-sm md:text-base">
+          <div className="w-10 h-6 sm:w-12 sm:h-7 gap-1 md:w-14 md:h-8 lg:w-16 lg:h-10 flex items-center justify-center rounded-md bg-foreground">
+            <span className="text-primary-foreground text-xs sm:text-sm md:text-base">
               {comment.rating}
             </span>
-            <Star className="text-secondary fill-secondary ml-1 w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5" />
+            <Star className="text-black fill-secondary ml-1 w-3 h-3 sm:w-4 sm:h-4" />
           </div>
         </div>
 
-        <p className="text-[10px] sm:text-xs md:text-sm lg:text-base leading-relaxed text-right my-2 sm:my-3 md:my-4">
+        <p className="text-[10px] sm:text-xs md:text-sm lg:text-base leading-relaxed text-white my-2 sm:my-3 md:my-4">
           {trimmedText}
         </p>
 
@@ -246,12 +263,12 @@ const CommentCard = ({ comment, isSmallScreen }: CommentCardProps) => {
           </svg>
 
           <div className="relative z-10 flex items-center h-full px-2 sm:px-3 md:px-4 lg:px-5">
-            <div className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 lg:w-10 lg:h-10 rounded-md bg-foreground flex items-center justify-center text-foreground text-[10px] sm:text-xs md:text-sm lg:text-base">
+            <div className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 lg:w-10 lg:h-10 rounded-md bg-foreground flex items-center justify-center text-primary-foreground text-[10px] sm:text-xs md:text-sm lg:text-base">
               {comment.author.charAt(0)}
             </div>
 
             <div className="text-right mr-2 sm:mr-3 md:mr-4">
-              <p className="font-semibold text-[8px] sm:text-[10px] md:text-xs lg:text-sm">
+              <p className="font-semibold text-[8px] text-white sm:text-[10px] md:text-xs lg:text-sm">
                 {comment.author}
               </p>
 

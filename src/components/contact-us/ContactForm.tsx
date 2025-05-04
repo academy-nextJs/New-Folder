@@ -89,7 +89,7 @@ const ContactForm = () => {
             </div>
             <CommonButton type="submit" title={isLoading ? "در حال ارسال..." : " ارسال درخواست "}
                 icon={isLoading ? <Loader /> : <ChevronLeft size={16} />}
-                classname="w-full"
+                classname="w-full text-primary-foreground"
                 disabled={isLoading}
             />
         </form>

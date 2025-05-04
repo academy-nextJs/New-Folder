@@ -67,11 +67,11 @@ const LoginForm = () => {
   return (
     <div>
       <form
-        className="mt-8 space-y-6 text-black"
+        className="mt-8 space-y-6 text-foreground"
         onSubmit={handleSubmit(handleLogin)}
       >
-        <div className="rounded-md shadow-sm -space-y-px flex md:flex-nowrap flex-wrap gap-4">
-          <div className="md:w-1/2 w-full flex gap-1 flex-col text-white">
+        <div className="rounded-md -space-y-px flex md:flex-nowrap flex-wrap gap-4">
+          <div className="md:w-1/2 w-full flex gap-1 flex-col text-card-foreground">
             <Label htmlFor="email" className={`text-[13px] flex gap-0.5`}>
               <span> ایمیل شما </span>
               <p className="text-danger"> * </p>
@@ -80,7 +80,7 @@ const LoginForm = () => {
             <Input
               id="email"
               type="text"
-              className="bg-transparent placeholder:text-white text-sm outline-none w-full py-3 border border-white text-white px-4 rounded-[16px] text-[16px]"
+              className="bg-transparent placeholder:text-card-foreground text-sm outline-none w-full py-3 border border-card-foreground text-card-foreground px-4 rounded-[16px] text-[16px]"
               placeholder="مثال : dakjsbd@email.com"
               {...register("email")}
             />
@@ -91,7 +91,7 @@ const LoginForm = () => {
             )}
           </div>
           <div className="flex flex-col gap-3 md:w-1/2 w-full">
-            <div className="w-full flex gap-1 flex-col text-white">
+            <div className="w-full flex gap-1 flex-col text-card-foreground">
               <Label htmlFor="email" className={`text-[13px] flex gap-0.5`}>
                 <span> رمز عبور </span>
                 <p className="text-danger"> * </p>
@@ -101,7 +101,7 @@ const LoginForm = () => {
                 <Input
                   id="password"
                   type={showPassword ? "password" : "text"}
-                  className="bg-transparent placeholder:text-white text-sm outline-none w-full py-3 border border-white text-white px-4 rounded-[16px] text-[16px]"
+                  className="bg-transparent placeholder:text-card-foreground text-sm outline-none w-full py-3 border border-card-foreground text-card-foreground px-4 rounded-[16px] text-[16px]"
                   {...register("password")}
                 />
                 <Button
@@ -113,7 +113,7 @@ const LoginForm = () => {
                       setShowPassword(true);
                     }
                   }}
-                  className="cursor-pointer bg-transparent text-white absolute left-3 top-2"
+                  className="cursor-pointer bg-transparent text-card-foreground absolute left-3 top-2"
                   type="button"
                 >
                   {showPassword ? (
@@ -129,7 +129,7 @@ const LoginForm = () => {
                   </p>
                 )}
               </div>
-              <span className="text-white flex gap-2 text-sm cursor-pointer">
+              <span className="text-card-foreground flex gap-2 text-sm cursor-pointer">
                 {" "}
                 <p> رمز عبور خود را فراموش کردم </p> <ArrowLeft size={20} />{" "}
               </span>
@@ -141,7 +141,7 @@ const LoginForm = () => {
             type="submit"
             title={isLoading ? "در حال ورود..." : "ورود به حساب کاربری"}
             icon={isLoading ? <Loader /> : <ArrowLeft size={16} />}
-            classname="w-full"
+            classname="w-full text-primary-foreground"
             disabled={isLoading}
           />
         </div>

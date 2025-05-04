@@ -12,33 +12,66 @@
 
 :root {
   /* تعریف متغیرهای CSS برای حالت روشن */
-  --primary: #8cff45;
-  --primary-foreground: #232323;
-  --secondary: #f2f2f2;
-  --secondary-foreground: #232323;
-  --background: #f2f2f2;
-  --foreground: #232323;
-  --subBg: #e0e0e0;
-  --subBg2: #c8c8c8;
-  --subText: #666666;
-  --muted: #808080;
-  --muted-foreground: #666666;
+  --primary: #5c9755;
+  /* سبز ملایم برای متن اصلی */
+  --primary-foreground: #ffffff;
+  /* سفید برای متن روی دکمه‌ها */
+  --secondary: #dfdfdf;
+  --secondary-static: #232323; 
+  /* بژ روشن برای پس‌زمینه */
+  --secondary-foreground: #afabab;
+  /* متن تیره‌تر برای کنتراست */
+  --background: #dfdfdf;
+  /* پس‌زمینه سفید خالص */
+  --foreground: #2d2d2d;
+  /* متن اصلی */
+  --subBg: #ffffff;
+  /* پس‌زمینه فرعی */
+  --subBg2: #f0f0f0;
+  /* پس‌زمینه فرعی روشن‌تر */
+  --subText: #2c2c2c;
+  /* متن فرعی با کنتراست مناسب */
+  --muted: #c4c2c2;
+  /* متن کم‌رنگ‌تر */
+  --muted-foreground: #ffffff;
+  /* متن کم‌رنگ‌تر برای دکمه‌ها */
   --accent: #a08cff;
-  --accent-foreground: #232323;
-  --border: #d1d1d1;
-  --secondary-light: #f5f5f5;
-  --secondary-light2: #ebebeb;
-  --blur-primary: #8cff4552;
-  --blur-blue: #7569ff52;
-  --danger: #ff4d4d;
+  /* زرد ملایم برای دکمه‌ها و لینک‌ها */
+  --accent-foreground: #ffffff;
+  /* متن سفید روی دکمه‌های زرد */
+  --border: #e0e0e0;
+  /* رنگ مرزها */
+  --border-form: #f6f6f6;
+  /* مرز فرم‌ها */
+  --secondary-light: #b0b0b0;
+  /* پس‌زمینه بسیار روشن */
+  --secondary-light2: #393939;
+  /* پس‌زمینه روشن‌تر */
+  --blur-primary: #6bcf3f52;
+  /* سبز شفاف برای افکت‌ها */
+  --blur-blue: #ffd54f52;
+  /* زرد شفاف برای افکت‌ها */
+  --danger: #f44336;
+  /* قرمز برای هشدارها */
   --radius: 0.625rem;
+  /* شعاع گوشه‌ها */
   --card: #ffffff;
-  --card-foreground: #232323;
+  /* پس‌زمینه کارت‌ها */
+  --card-foreground: #2d2d2d;
+  /* متن روی کارت‌ها */
   --popover: #ffffff;
-  --popover-foreground: #232323;
-  --destructive: #ff4d4d;
-  --input: #e2e2e2;
-  --ring: #a0a0a0;
+  /* پس‌زمینه پاپ‌آپ‌ها */
+  --popover-foreground: #2d2d2d;
+  /* متن پاپ‌آپ‌ها */
+  --destructive: #f44336;
+  /* قرمز برای دکمه‌های خطر */
+  --input: #f9f9f9;
+  /* پس‌زمینه ورودی‌ها */
+  --ring: #b0b0b0;
+  /* رنگ حلقه فوکوس */
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  /* سایه ملایم */
+  --transition-duration: 0.5s;
 }
 
 .dark {
@@ -46,17 +79,18 @@
   --primary: #8cff45;
   --primary-foreground: #232323;
   --secondary: #232323;
+  --secondary-static: #ffffff; 
   --secondary-foreground: #f2f2f2;
   --background: #232323;
   --foreground: #f2f2f2;
   --subBg: #363636;
   --subBg2: #4a4a4a;
   --subText: #aaaaaa;
-  --muted: #b3b3b3;
+  --muted: #7b7b7b;
   --muted-foreground: #aaaaaa;
   --accent: #a08cff;
   --accent-foreground: #f2f2f2;
-  --border: #2e2e2e;
+  --border: #232323;
   --secondary-light: #2d2d2d;
   --secondary-light2: #393939;
   --blur-primary: #8cff4552;
@@ -68,7 +102,8 @@
   --popover-foreground: #f2f2f2;
   --destructive: #ff4d4d;
   --input: #363636;
-  --ring: #4a4a4a;
+  --ring: #b0b0b0;
+  animation: fadeIn var(--transition-duration) ease;
 }
 
 body {
@@ -77,12 +112,25 @@ body {
   background-color: var(--background);
   color: var(--foreground);
   overflow-x: hidden;
+  transition: background-color var(--transition-duration) ease, color var(--transition-duration) ease;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 @layer base {
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
