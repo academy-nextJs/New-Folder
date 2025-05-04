@@ -1,15 +1,17 @@
+'use client'
 import React, { FC } from "react";
 import { MapPin, Clock, Star, Hotel } from "lucide-react";
 import CommonButton from "@/components/common/buttons/common/CommonButton";
 import { IHouse } from "@/types/houses-type/house-type";
 import { SplitNumber } from "@/utils/helper/spliter/SplitNumber";
+import { motion } from 'framer-motion'
 
 interface IReserveContent {
     items: IHouse
 }
 const ReserveCard : FC<IReserveContent> = ({ items }) => {
     return (
-        <div className="flex flex-col md:flex-row w-full border-b-2 bg-transparent py-6 items-center group justify-between border-[#3B3B3B]">
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} whileHover={{ scale: 1.02 }} className="flex flex-col md:flex-row w-full border-b-2 bg-transparent py-6 items-center group justify-between border-[#3B3B3B]">
             <div className="flex flex-col md:flex-row gap-4 md:w-4/5 w-full">
                 <img
                     alt=""
@@ -49,7 +51,7 @@ const ReserveCard : FC<IReserveContent> = ({ items }) => {
                     classname="flex-row-reverse py-3 md:py-5 bg-transparent group-hover:bg-primary text-primary group-hover:text-primary-foreground border border-primary w-full md:w-auto"
                 />
             </div>
-        </div>
+        </motion.div>
     );
 };
 

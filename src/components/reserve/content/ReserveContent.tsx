@@ -12,6 +12,7 @@ import {
   PaginationNext,
 } from '@/components/ui/pagination'
 import ReserveCardSkeleton from '../card/ReserveCardSkeleton'
+import { motion } from 'framer-motion'
 
 interface IReserveContent {
   houses: IHouse[]
@@ -109,9 +110,9 @@ const ReserveContent: React.FC<IReserveContent> = ({ houses, isLoading, setMaxPr
         </div>
       </div>
 
-      <div className="bg-secondary-light3 rounded-[40px] xl:w-2/5 w-full h-[1032px] xl:block hidden">
+      <motion.div initial={{ opacity: 0, x: -100 }} whileInView={{ opacity: 1, x: 0 }} className="bg-secondary-light3 rounded-[40px] xl:w-2/5 w-full h-[1032px] xl:block hidden">
         <ReserveMap />
-      </div>
+      </motion.div>
     </div>
   )
 }
