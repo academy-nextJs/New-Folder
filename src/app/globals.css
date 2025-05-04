@@ -11,72 +11,71 @@
 }
 
 :root {
-  /* تعریف متغیرهای CSS برای حالت روشن */
-  --primary: #5c9755;
-  /* سبز ملایم برای متن اصلی */
-  --primary-foreground: #ffffff;
-  /* سفید برای متن روی دکمه‌ها */
-  --secondary: #dfdfdf;
-  --secondary-static: #232323; 
-  /* بژ روشن برای پس‌زمینه */
-  --secondary-foreground: #afabab;
-  /* متن تیره‌تر برای کنتراست */
-  --background: #dfdfdf;
-  /* پس‌زمینه سفید خالص */
-  --foreground: #2d2d2d;
-  /* متن اصلی */
-  --subBg: #ffffff;
-  /* پس‌زمینه فرعی */
-  --subBg2: #f0f0f0;
-  /* پس‌زمینه فرعی روشن‌تر */
-  --subText: #2c2c2c;
-  /* متن فرعی با کنتراست مناسب */
-  --muted: #c4c2c2;
-  /* متن کم‌رنگ‌تر */
-  --muted-foreground: #ffffff;
-  /* متن کم‌رنگ‌تر برای دکمه‌ها */
-  --accent: #a08cff;
-  /* زرد ملایم برای دکمه‌ها و لینک‌ها */
-  --accent-foreground: #ffffff;
-  /* متن سفید روی دکمه‌های زرد */
-  --border: #e0e0e0;
-  /* رنگ مرزها */
-  --border-form: #f6f6f6;
-  /* مرز فرم‌ها */
-  --secondary-light: #b0b0b0;
-  /* پس‌زمینه بسیار روشن */
-  --secondary-light2: #393939;
-  --secondary-light3: #303030;
-  /* پس‌زمینه روشن‌تر */
-  --blur-primary: #6bcf3f52;
-  /* سبز شفاف برای افکت‌ها */
-  --blur-blue: #ffd54f52;
-  /* زرد شفاف برای افکت‌ها */
-  --danger: #f44336;
-  /* قرمز برای هشدارها */
-  --radius: 0.625rem;
-  /* شعاع گوشه‌ها */
-  --card: #ffffff;
-  /* پس‌زمینه کارت‌ها */
-  --card-foreground: #2d2d2d;
-  /* متن روی کارت‌ها */
-  --popover: #ffffff;
-  /* پس‌زمینه پاپ‌آپ‌ها */
-  --popover-foreground: #2d2d2d;
-  /* متن پاپ‌آپ‌ها */
-  --destructive: #f44336;
-  /* قرمز برای دکمه‌های خطر */
-  --input: #f9f9f9;
-  /* پس‌زمینه ورودی‌ها */
-  --ring: #b0b0b0;
-  /* رنگ حلقه فوکوس */
-  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  /* سایه ملایم */
-  --transition-duration: 0.5s;
+  /* رنگ پس‌زمینه اصلی: روشن و خنثی */
+  --background: #F2F2F2;
+  /* رنگ متن اصلی: تیره برای کانتراست بالا روی پس‌زمینه روشن */
+  --foreground: #1E1E1E;
+
+  /* Primary Accent */
+  /* نگه‌داشتن خودِ سبزِ اصلی با کمی تیرگی بیشتر تا روی پس‌زمینه روشن دیده بشه */
+  --primary: #56A600;               
+  /* متن روی المان‌های primary: به سفید نزدیک می‌شه */
+  --primary-foreground: #FFFFFF;    
+
+  /* Secondary Accent */
+  --secondary: #FFFFFF;            
+  --secondary-static: #1E1E1E;     
+  --secondary-foreground: #333333; 
+
+  /* لایه‌های فرعی (مثل کارت‌ها/بک‌گراند سطوح دوم) */
+  /* پس‌زمینه اصلی لندینگ */
+  --background: #F2F2F2;
+
+  /* کارت‌ها (Sub Background) */
+  --subBg: #EDEDED;         /* کمی تیره‌تر از سفید */  
+  --subBg2: #E0E0E0;        /* برای سطح دوم کمی تیره‌تر */
+
+  /* لایه‌های سبک‌تر برای المان‌های داخلی یا hover */
+  --secondary-light: #F7F7F7;   /* خیلی ملایم، نزدیک به پس‌زمینه اصلی */
+  --secondary-light2: #F2F2F2;  /* دقیقاً برابر با پس‌زمینه اما برای حالت hover */
+  --secondary-light3: #656565;  /* حالت hover/active یا کارت‌های nested */    
+
+  /* متن‌‌های جانبی */
+  --subText: #666666;              
+  --muted: #AAAAAA;                
+  --muted-foreground: #777777;     
+
+  /* Accent ثانویه رنگی */
+  --accent: #5D3BFF;               
+  --accent-foreground: #FFFFFF;    
+
+  /* حاشیه‌ها */
+  --border: #DDDDDD;               
+  --ring: #B0B0B0;                
+
+  /* کارت‌ها و پاپ‌اور */
+  --card: #FFFFFF;                 
+  --card-foreground: #1E1E1E;      
+  --popover: #FFFFFF;              
+  --popover-foreground: #1E1E1E;   
+
+  /* حالت‌های خطر/حذف */
+  --danger: #D32F2F;               
+  --destructive: #D32F2F;          
+
+  /* ورودی‌ها */
+  --input: #FFFFFF;                
+
+  /* جلوه بلور (تکست‌های نیمه‌شفاف) */
+  --blur-primary: #56A60052;       
+  --blur-blue: #7569FF52;          
+
+  /* انیمیشن */
+  animation: fadeIn var(--transition-duration) ease;
 }
 
+
 .dark {
-  /* تعریف متغیرهای CSS برای حالت تاریک */
   --primary: #8cff45;
   --primary-foreground: #232323;
   --secondary: #232323;
