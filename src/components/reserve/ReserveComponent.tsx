@@ -13,15 +13,20 @@ const ReserveComponent = () => {
     const [minPrice, setMinPrice] = useState<number | ''>('')
     const [maxPrice, setMaxPrice] = useState<number | ''>('')
     const [houses, setHouses] = useState<IHouse[]>([])
+    const [isLoading, setIsLoading] = useState<boolean>(true)
 
     const fetchHouses = async () => {
+        setIsLoading(true)
         try {
-            const response = await getHouses("", search || "", order || "DESC", sort || "last_updated", location || "", minPrice, maxPrice)
+            const response = await getHouses("reservation", search || "", order || "DESC", sort || "last_updated", location || "", minPrice, maxPrice)
             setHouses(response)
         } catch (error) {
             console.error('Error fetching houses:', error)
+        } finally {
+            setIsLoading(false)
         }
     }
+
 
     useEffect(() => {
         fetchHouses()
@@ -43,7 +48,7 @@ const ReserveComponent = () => {
                 houseLength={houses.length}
                 setLocation={setLocation}
             />
-            <ReserveContent houses={houses} setMaxPrice={setMaxPrice} setMinPrice={setMinPrice} setLocation={setLocation} />
+            <ReserveContent isLoading={isLoading} houses={houses} setMaxPrice={setMaxPrice} setMinPrice={setMinPrice} setLocation={setLocation} />
         </div>
     )
 }

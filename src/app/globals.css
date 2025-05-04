@@ -11,20 +11,20 @@
 }
 
 :root {
-  --background: #e0dddd;
+  --background: #9CA3AF;
   --foreground: #1E1E1E;
-  --primary: #467182;
-  --primary-foreground: #FFFFFF;
-  --secondary: #FFFFFF;
+  --primary: #131d2d;
+  --primary-foreground: #ffffff;
+  --secondary: #9CA3AF;
   --secondary-static: #1E1E1E;
   --secondary-foreground: #333333;
-  --subBg: #EDEDED;
+  --subBg: #b8c0d2;
   --subBg2: #E0E0E0;
-  --secondary-light: #F7F7F7;
+  --secondary-light: #b8c0d2;
   --secondary-light2: #484848;
   --secondary-light3: #656565;
-  --secondary-light4: #eaeaea;
-  --subText: #6c6b6b;
+  --secondary-light4: #b8c0d2;
+  --subText: #1d1d1d;
   --muted: #AAAAAA;
   --muted-foreground: #777777;
   --accent: #5D3BFF;
@@ -40,9 +40,9 @@
   --input: #FFFFFF;
   --blur-primary: #56A60052;
   --blur-blue: #7569FF52;
-  --card-secondary: #c0c0c0;
-  --card-secondary2: #9c9c9c;
-  --card-secondary3: #484848;
+  --card-secondary: #9297a5;
+  --card-secondary2: #a9b1be;
+  --card-secondary3: #b8c0d2;
 
   animation: fadeIn var(--transition-duration) ease;
 }

@@ -32,6 +32,9 @@ const ReserveFilter: FC<IReserveFilter> = ({ setOrder, setSort, setSearch, house
                         { label: 'کرج', value: 'karaj' },
                         { label: 'قم', value: 'qom' },
                         { label: 'اهواز', value: 'ahvaz' },
+                        { label: 'کرمان', value: 'kerman' },
+                        { label: 'زنجان', value: 'zanjan' },
+                        { label: 'ساری', value: 'sari' },
                     ]}
                     color='text-subText dark:group-hover:text-white'
                     label='مقصد یا  هتل شما '
@@ -47,8 +50,8 @@ const ReserveFilter: FC<IReserveFilter> = ({ setOrder, setSort, setSearch, house
                             setSort('price')
                             setOrder('ASC')
                         }
-                        if(value === 'price_high') {
-                            setSort('price')
+                        if(value === 'rate') {
+                            setSort('rate')
                             setOrder('DESC')
                         }
                     })}
@@ -57,7 +60,7 @@ const ReserveFilter: FC<IReserveFilter> = ({ setOrder, setSort, setSearch, house
                     selectItems={[
                         { label: 'جدید ترین ها', value: 'last_updated' },
                         { label: 'ارزان ترین ها', value: 'price_low' },
-                        { label: 'گران ترین ها', value: 'price_high' },
+                        { label: 'محبوب ترین ها', value: 'rate' },
                     ]}
                     color='text-subText dark:group-hover:text-white'
                     label='مرتب سازی بر اساس'

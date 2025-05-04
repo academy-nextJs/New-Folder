@@ -11,15 +11,17 @@ import {
   PaginationLink,
   PaginationNext,
 } from '@/components/ui/pagination'
+import ReserveCardSkeleton from '../card/ReserveCardSkeleton'
 
 interface IReserveContent {
   houses: IHouse[]
+  isLoading: boolean
   setMinPrice: React.Dispatch<React.SetStateAction<number | ''>>
   setMaxPrice: React.Dispatch<React.SetStateAction<number | ''>>
   setLocation: React.Dispatch<React.SetStateAction<string>>
 }
 
-const ReserveContent: React.FC<IReserveContent> = ({ houses, setMaxPrice, setMinPrice }) => {
+const ReserveContent: React.FC<IReserveContent> = ({ houses, isLoading, setMaxPrice, setMinPrice }) => {
 
   const [currentPage, setCurrentPage] = useState(1)
   const itemsPerPage = 5
@@ -55,7 +57,7 @@ const ReserveContent: React.FC<IReserveContent> = ({ houses, setMaxPrice, setMin
               classname="px-4 py-2 border-subText w-full outline-none"
               color="text-subText"
               placeholder="0 تومان"
-              
+
             />
           </div>
         </div>
@@ -63,10 +65,17 @@ const ReserveContent: React.FC<IReserveContent> = ({ houses, setMaxPrice, setMin
 
         <div className='flex flex-col justify-between h-full'>
           <div className="flex flex-col gap-6" id='items'>
-            {paginatedHouses.map((item, idx) => (
-              <ReserveCard key={idx} items={item} />
-            ))}
+            {isLoading ? (
+              Array.from({ length: 4 }).map((_, idx) => (
+                <ReserveCardSkeleton key={idx} />
+              ))
+            ) : (
+              paginatedHouses.map((item, idx) => (
+                <ReserveCard key={idx} items={item} />
+              ))
+            )}
           </div>
+          {paginatedHouses.length == 0 && ( <span className='text-sm font-semibold mx-auto'> درحال حاضر هیچ آگهی وجود ندارد </span> )}
 
           <Pagination>
             <PaginationContent>
