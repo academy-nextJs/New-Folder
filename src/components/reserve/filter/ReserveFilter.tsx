@@ -22,7 +22,7 @@ const ReserveFilter: FC<IReserveFilter> = ({ setOrder, setSort, setSearch, house
             <div className='flex md:flex-row md:flex-wrap flex-col w-full gap-4'>
                 <CommonSelect
                     placeholder='استان ، شهر ، هتل ....'
-                    icon={<MapPin size={16} />}
+                    icon={<MapPin size={16} className='text-subText' />}
                     selectItems={[
                         { label: 'تهران', value: 'tehran' },
                         { label: 'اصفهان', value: 'isfahan' },
@@ -56,7 +56,7 @@ const ReserveFilter: FC<IReserveFilter> = ({ setOrder, setSort, setSearch, house
                         }
                     })}
                     placeholder="جدید ترین ها"
-                    icon={<Filter size={16} />}
+                    icon={<Filter size={16} className='text-subText' />}
                     selectItems={[
                         { label: 'جدید ترین ها', value: 'last_updated' },
                         { label: 'ارزان ترین ها', value: 'price_low' },

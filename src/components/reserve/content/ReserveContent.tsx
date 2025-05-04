@@ -46,7 +46,7 @@ const ReserveContent: React.FC<IReserveContent> = ({ houses, isLoading, setMaxPr
               onchange={(e) => setMinPrice(Number(e.target.value))}
               label="حداقل قیمت"
               classname="px-4 py-2 border-subText w-full outline-none"
-              color="text-subText"
+              color="text-subText placeholder:text-subText"
               placeholder="0 تومان"
             />
           </div>
@@ -55,7 +55,7 @@ const ReserveContent: React.FC<IReserveContent> = ({ houses, isLoading, setMaxPr
               onchange={(e) => setMaxPrice(Number(e.target.value))}
               label="حداکثر قیمت"
               classname="px-4 py-2 border-subText w-full outline-none"
-              color="text-subText"
+              color="text-subText placeholder:text-subText"
               placeholder="0 تومان"
 
             />
