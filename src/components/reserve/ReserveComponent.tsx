@@ -18,7 +18,7 @@ const ReserveComponent = () => {
     const fetchHouses = async () => {
         setIsLoading(true)
         try {
-            const response = await getHouses("", search || "", order || "DESC", sort || "last_updated", location || "", minPrice, maxPrice)
+            const response = await getHouses("reservation", search || "", order || "DESC", sort || "last_updated", location || "", minPrice, maxPrice)
             setHouses(response)
         } catch (error) {
             console.error('Error fetching houses:', error)
