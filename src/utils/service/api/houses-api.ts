@@ -25,3 +25,9 @@ export const getHouses = async (
 
     return response
 }
+
+export const getHouseById = async (id: string) => {
+    const url = `/houses/${id}`
+    const response = await fetchApi.get(url) as IHouse
+    return response
+}

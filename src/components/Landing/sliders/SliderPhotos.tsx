@@ -7,7 +7,7 @@ import 'swiper/css/navigation'
 
 import { ISliderPhotos } from '@/types/slider-type/slider-types'
 
-export default function SliderPhotos({ photos }: ISliderPhotos) {
+export default function SliderPhotos({ photos, imageClassName }: ISliderPhotos) {
   return (
     <div className="w-full max-w-xl mx-auto relative">
       <Swiper
@@ -23,7 +23,7 @@ export default function SliderPhotos({ photos }: ISliderPhotos) {
             <img
               src={photo}
               alt={``}
-              className="w-full h-[157px] object-cover"
+              className={`w-full h-[157px] object-cover ${imageClassName}`}
             />
           </SwiperSlide>
         ))}

@@ -1,0 +1,99 @@
+/* eslint-disable @next/next/no-img-element */
+
+'use client'
+import CommonButton from '@/components/common/buttons/common/CommonButton'
+import { IHouse } from '@/types/houses-type/house-type'
+import { ChevronLeft, Copy, MapPin, Share, Star } from 'lucide-react'
+import Link from 'next/link'
+import React, { FC, useState } from 'react'
+
+interface IProps {
+    house: IHouse
+}
+
+const SingleReserveHeader: FC<IProps> = ({ house }) => {
+    const [currentIndex, setCurrentIndex] = useState(0)
+
+    const handleThumbnailClick = (index: number) => {
+        setCurrentIndex(index)
+    }
+
+    return (
+        <div className='flex gap-4 flex-col text-foreground'>
+            <div className='flex gap-2 rtl text-sm items-center'>
+                <Link href={'/'}> خانه </Link>
+                <ChevronLeft size={16} />
+                <Link href={'/reserve/reserve-house'}> رزرو </Link>
+                <ChevronLeft size={16} />
+                <div className='text-primary'> {house.title} </div>
+            </div>
+            <h2 className='text-[28px]'> {house.title} </h2>
+            <div className='flex justify-between'>
+                <p className="flex text-subText items-center gap-2 whitespace-nowrap overflow-hidden w-full text-ellipsis">
+                    <span className="flex gap-2 items-center">
+                        <MapPin size={16} />
+                        <span>آدرس:</span>
+                    </span>
+                    <span className="text-foreground text-ellipsis overflow-hidden whitespace-nowrap w-[598]">
+                        {house.address}
+                    </span>
+                </p>
+                <div className='flex gap-5 items-center'>
+                    <div className="bg-accent items-center text-white text-sm flex gap-2 px-4 py-1 flex-row-reverse rounded-[8px]">
+                        <span className='whitespace-nowrap'>{house.rate} ستاره</span>
+                        <Star size={16} />
+                    </div>
+                    |
+                    <div className='flex gap-4'>
+                        <CommonButton classname='bg-secondary-light2 text-white' icon={<Copy />} />
+                        <CommonButton classname='text-primary-foreground' icon={<Share />} />
+                    </div>
+                </div>
+            </div>
+            <div className='flex gap-6 mt-2'>
+                <div className='w-11/12'>
+                    <div className='w-full h-[444px] bg-secondary-light2 rounded-[40px] overflow-hidden flex items-center justify-center'>
+                        <img
+                            src={house.photos[currentIndex]}
+                            alt={`house-photo-${currentIndex}`}
+                            className='w-full h-full object-cover rounded-[40px]'
+                        />
+                    </div>
+                </div>
+
+                <div className='w-2/12 flex flex-wrap gap-4 justify-between items-center'>
+                    {[...Array(8)].map((_, index) => {
+                        const photo = house.photos[index]
+
+                        if (photo) {
+                            return (
+                                <button
+                                    key={index}
+                                    onClick={() => handleThumbnailClick(index)}
+                                    className={`rounded-[32px] h-[96px] w-[96px] overflow-hidden ${currentIndex === index ? 'ring-2 ring-primary' : ''
+                                        }`}
+                                >
+                                    <img
+                                        src={photo}
+                                        alt={`thumb-${index}`}
+                                        className='w-full h-full object-cover rounded-[32px]'
+                                    />
+                                </button>
+                            )
+                        } else {
+                            return (
+                                <div
+                                    key={index}
+                                    className='rounded-[32px] bg-secondary-light2 h-[96px] w-[96px] pointer-events-none'
+                                />
+                            )
+                        }
+                    })}
+                </div>
+
+            </div>
+        </div>
+    )
+}
+
+export default SingleReserveHeader

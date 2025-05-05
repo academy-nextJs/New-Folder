@@ -6,6 +6,7 @@ export interface ISlider {
 
 export interface ISliderPhotos {
     photos: string[];
+    imageClassName?: string;
 }
 
 type TItems = {

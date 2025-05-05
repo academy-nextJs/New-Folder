@@ -3,6 +3,7 @@ import { MapPin, Clock, Star, Hotel } from "lucide-react";
 import CommonButton from "@/components/common/buttons/common/CommonButton";
 import { IHouse } from "@/types/houses-type/house-type";
 import { SplitNumber } from "@/utils/helper/spliter/SplitNumber";
+import { redirect } from "next/navigation";
 
 interface IReserveContent {
     items: IHouse
@@ -44,6 +45,7 @@ const ReserveCard : FC<IReserveContent> = ({ items }) => {
             <div className="flex flex-col justify-end gap-8 h-full items-center md:w-1/5 w-full mt-4 md:mt-0">
                 <span className="text-primary text-lg md:text-2xl">{SplitNumber(items.price)} ت</span>
                 <CommonButton
+                    onclick={() => redirect(`/reserve/reserve-house/${items.id}`)}
                     icon={<Hotel />}
                     title="بررسی و رزرو هتل"
                     classname="flex-row-reverse py-3 md:py-5 bg-transparent group-hover:bg-primary text-primary group-hover:text-primary-foreground border border-primary w-full md:w-auto"
