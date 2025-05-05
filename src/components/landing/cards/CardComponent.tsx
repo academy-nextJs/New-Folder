@@ -1,6 +1,6 @@
 import { ICard } from '@/types/card-type/card-types'
 import { SplitNumber } from '@/utils/helper/spliter/SplitNumber'
-import { Bath, Bed, Car, MapPin, Trees } from 'lucide-react'
+import { ArrowLeft, Bath, Bed, Car, MapPin, Trees } from 'lucide-react'
 import Link from 'next/link'
 import React, { FC } from 'react'
 import { motion } from 'framer-motion'
@@ -20,14 +20,11 @@ const CardComponent: FC<ICard> = ({ view, photos, rate, title, address, rooms, p
                         </svg>
                         {rate}
                     </div>
-                    <div className='bg-secondary-light2 cursor-pointer text-card-foreground px-2 text-sm rounded-[10px] absolute top-[-30] left-0'>
-                        <Link href={`/houses/${id}`}> <svg width="45" height="22" viewBox="0 0 45 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="45" height="22" rx="8" fill="#393939" />
-                            <path d="M11.4697 10.4697C11.1768 10.7626 11.1768 11.2374 11.4697 11.5303L16.2426 16.3033C16.5355 16.5962 17.0104 16.5962 17.3033 16.3033C17.5962 16.0104 17.5962 15.5355 17.3033 15.2426L13.0607 11L17.3033 6.75736C17.5962 6.46447 17.5962 5.98959 17.3033 5.6967C17.0104 5.40381 16.5355 5.40381 16.2426 5.6967L11.4697 10.4697ZM33 10.25L12 10.25L12 11.75L33 11.75L33 10.25Z" fill="white" />
-                        </svg> </Link>
+                    <div className='bg-secondary-light2 group-hover:bg-primary px-4 cursor-pointer text-card-foreground text-sm rounded-[10px] absolute top-[-30] left-0'>
+                        <Link href={`/houses/${id}`} className=''> <ArrowLeft size={24} className='text-white' /> </Link>
                     </div>
                     <div className='relative w-full h-full flex justify-center'>
-                        { photos && photos?.length > 0 ? <SliderPhotos photos={photos || []} /> : <div className='w-[272px] h-[157px] bg-secondary-light rounded-2xl'>  </div>}            
+                        { photos && photos?.length > 0 ? <SliderPhotos photos={photos || []} /> : <div className='w-[272px] h-[157px] bg-secondary-light3 rounded-2xl'>  </div>}            
                     </div>
                 </div>
             </div>
@@ -45,7 +42,7 @@ const CardComponent: FC<ICard> = ({ view, photos, rate, title, address, rooms, p
                         <span className='flex gap-1'> <Trees size={20} /> <p> حیاط </p> </span>
                     </div>
                 </div>
-                <div className='bg-secondary-light2 group-hover:bg-primary text-muted-foreground mt-2 flex flex-wrap justify-between rounded-[12px] w-full px-4 py-2 text-sm'>
+                <div className='bg-secondary-light2 group-hover:bg-primary text-muted mt-2 flex flex-wrap justify-between rounded-[12px] w-full px-4 py-2 text-sm'>
                     <span className={` ${discountedPrice && 'text-muted line-through'} whitespace-nowrap `}> {discountedPrice ? SplitNumber(Number(price)) + ' ت' : (transaction_type === 'rental' && "  اجاره ماهیانه : ") || (transaction_type === "direct_purchase" && " قیمت خرید : ") || (transaction_type === "mortgage" && " قیمت رهن : ")} </span>
                     <span className='flex whitespace-nowrap'> <p className={`text-muted`}> {discountedPrice ? SplitNumber(discountedPrice) : SplitNumber(price || '')} ت </p>{transaction_type === 'rental' && " /هر ماه  "} </span>
                 </div>

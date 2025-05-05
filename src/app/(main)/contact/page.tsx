@@ -45,7 +45,7 @@ const page = () => {
         <AboutBox title='گیلان ، رشت ، میدان آزادی ، جنب چهار راه عظیمی زاده' icon={<AtSign />} />
       </div>
       <AnimationForm />
-      <div className='bg-[#1C1C1C] rounded-[32px] xl:hidden block'>
+      <div className='bg-card-secondary3 rounded-[32px] xl:hidden block'>
         <ContactForm />
       </div>
     </div>

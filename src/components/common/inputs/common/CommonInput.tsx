@@ -5,7 +5,7 @@ import React, { FC } from 'react'
 
 const CommonInput: FC<IInput> = ({ label, placeholder, classname, type, color, background, onchange, mandatory, name, id }) => {
     return (
-        <div className='rtl flex flex-col gap-2'>
+        <div className='rtl flex flex-col gap-1 group'>
             <Label htmlFor={label} className={`text-[13px] flex gap-0.5 ${color}`}>
                 <span> {label} </span>
                 {mandatory === true ? <p className='text-danger'> * </p> : <></>}
@@ -17,7 +17,7 @@ const CommonInput: FC<IInput> = ({ label, placeholder, classname, type, color, b
                 onChange={onchange}
                 type={type || ''}
                 placeholder={placeholder || ''}
-                className={`w-fit py-3 border border-border px-4 text-[#FFFFFF] rounded-[16px] text-[16px] ${classname} ${color} ${background}`}
+                className={`w-fit py-3 bg-transparent border border-border px-4 text-[#FFFFFF] rounded-[16px] text-sm ${classname} ${color} ${background}`}
             />
         </div>
     )
