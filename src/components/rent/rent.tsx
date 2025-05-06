@@ -1,3 +1,4 @@
+"use client";
 import {
   ArrowLeftCircle,
   Calendar,
@@ -9,13 +10,35 @@ import {
   StarIcon,
 } from "lucide-react";
 import Link from "next/link";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import vilaLafor from "@/assets/images/vilaLafor.png";
 import Image from "next/image";
 import PropertyTabs from "./Tab";
 import SliderComponent from "../Landing/sliders/SliderComponent";
 
 const Rent = () => {
+  const images = [
+    { src: vilaLafor, alt: "کلبه چوبی تصویر 1" },
+    { src: vilaLafor, alt: "کلبه چوبی تصویر 2" },
+    { src: vilaLafor, alt: "کلبه چوبی تصویر 3" },
+    { src: vilaLafor, alt: "کلبه چوبی تصویر 4" },
+    { src: vilaLafor, alt: "کلبه چوبی تصویر 5" },
+  ];
+
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+
+  const nextSlide = () => {
+    setCurrentSlideIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+  };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      nextSlide();
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [currentSlideIndex]);
+
   return (
     <div className=" " dir="ltr">
       {/* Breadcrumb Navigation */}
@@ -23,28 +46,25 @@ const Rent = () => {
         <div className="flex gap-6 flex-col mr-0" dir="rtl">
           <div className="flex flex-wrap sm:flex-nowrap gap-3 items-center w-fit lg:text-[13px] md:text-[13px] sm:text-[10px] text-[9px]">
             <Link href={`/`}> خانه </Link>
-            <ChevronLeft className="text-[#AAAAAA]" size={20} />
+            <ChevronLeft className="text-ring" size={20} />
             <Link href={`/rent`} className="text-secondary-static">
               رهن و اجاره
             </Link>
-            <ChevronLeft className="text-[#AAAAAA]" size={20} />
+            <ChevronLeft className="text-ring" size={20} />
             <Link href={`/`}> رهن و اجاره شیرگاه</Link>
-            <ChevronLeft className="text-[#AAAAAA]" size={20} />
+            <ChevronLeft className="text-ring" size={20} />
             <Link href={`/rent`} className="text-secondary-static">
               رهن و اجاره آپارتمان
             </Link>
-            <ChevronLeft className="text-[#AAAAAA]" size={20} />
+            <ChevronLeft className="text-ring" size={20} />
             <Link href={`/rent`} className="text-primary">
               کلبه بومگردی ساعتی تمام وقت
             </Link>
           </div>
         </div>
       </div>
-      {/* Main content container - Adding responsive flex direction with reordering */}
       <div className="flex mx-4 mt-4 gap-4 flex-col md:flex-row">
-        {/* Contact Card - Full width on mobile and ordered last */}
         <div className="relative w-full md:w-64 flex-shrink-0 mb-16 order-3 md:order-1">
-          {/* قاب پس‌زمینه کل با SVG */}
           <svg
             className="absolute inset-0 w-full h-full z-0"
             viewBox="0 0 217 372"
@@ -63,9 +83,7 @@ const Rent = () => {
             />
           </svg>
 
-          {/* محتوای کارت داخل پس‌زمینه */}
           <div className="relative z-10 rounded-[25px] overflow-hidden p-4">
-            {/* SVG منحنی بالای کارت */}
             <div className="relative flex justify-center items-center gap-2 mb-6 w-36 h-16 m-auto bottom-7">
               <svg
                 className="absolute inset-0 w-full h-full"
@@ -118,7 +136,6 @@ const Rent = () => {
                 </defs>
               </svg>
 
-              {/* آیکون تماس و متن */}
               <div className="z-10 flex items-center gap-2 pb-2">
                 <span className="text-white text-xs ">اطلاعات تماس</span>
                 <div className="p-1">
@@ -142,10 +159,8 @@ const Rent = () => {
 
             <div className="flex flex-col items-center gap-3 sm:max-w-sm w-full px-4 mx-auto">
               <div className="flex justify-center items-center m-auto flex-col gap-3">
-                {/* تصویر پروفایل */}
                 <div className="w-16 h-16 bg-gray-800 rounded-lg mb-2"></div>
 
-                {/* نام کاربر */}
                 <div className="text-white text-sm font-medium mb-1">
                   محمد رضا ساداتی
                 </div>
@@ -174,7 +189,6 @@ const Rent = () => {
                 </div>
               </div>
 
-              {/* دکمه تماس */}
               <button className="lg:w-full  sm:w-56 w-56 bg-primary text-secondary rounded-full py-2 text-sm flex items-center justify-center mb-2">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -193,7 +207,6 @@ const Rent = () => {
                 تماس با ۱۲۳۴۵*****۹
               </button>
 
-              {/* دکمه گفتگو */}
               <button className="lg:w-full  sm:w-56 w-56 border border-gray-700 text-white rounded-full py-2 text-sm flex items-center justify-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -215,10 +228,8 @@ const Rent = () => {
           </div>
         </div>
 
-        {/* Main Content - Image Gallery - Responsive layout with reordering */}
         <div className="flex-grow order-1 md:order-2">
           <div className="flex flex-col md:flex-row gap-2 mt-4">
-            {/* Left column - Two taller images stacked - Full width on mobile and ordered second */}
             <div className="flex flex-col gap-2 w-full md:w-[400px] order-2 md:order-1">
               <div className="w-full h-[208px] overflow-hidden rounded-lg">
                 <Image
@@ -239,21 +250,39 @@ const Rent = () => {
               </div>
             </div>
 
-            {/* Main large image - Full width on mobile and ordered first */}
+            {/* اسلایدر تصویر اصلی */}
             <div className="h-[410px] overflow-hidden rounded-lg relative flex-grow order-1 md:order-2">
-              <Image
-                src={vilaLafor}
-                alt="کلبه چوبی"
-                className="w-full h-full object-cover"
-              />
+              {/* تصاویر اسلایدر */}
+              <div className="relative w-full h-full">
+                {images.map((image, index) => (
+                  <div
+                    key={index}
+                    className={`absolute inset-0 transition-opacity duration-500 ${
+                      index === currentSlideIndex ? "opacity-100" : "opacity-0"
+                    }`}
+                  >
+                    <Image
+                      src={image.src}
+                      alt={image.alt}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                ))}
 
-              {/* Image indicators */}
-              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-1">
-                <div className="w-1.5 h-1.5 bg-green-400 rounded-full"></div>
-                <div className="w-1.5 h-1.5 bg-white opacity-70 rounded-full"></div>
-                <div className="w-1.5 h-1.5 bg-white opacity-70 rounded-full"></div>
-                <div className="w-1.5 h-1.5 bg-white opacity-70 rounded-full"></div>
-                <div className="w-1.5 h-1.5 bg-white opacity-70 rounded-full"></div>
+                {/* نشانگرهای اسلاید */}
+                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-1">
+                  {images.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={nextSlide}
+                      className={`w-1.5 h-1.5 rounded-full transition-all ${
+                        index === currentSlideIndex
+                          ? "bg-primary"
+                          : "bg-white opacity-70"
+                      }`}
+                    ></button>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -279,20 +308,16 @@ const Rent = () => {
           </button>
         </div>
 
-        {/* فاصله بین دو بخش اصلی */}
         <div
           className="mt-6 w-full flex flex-col sm:flex-row justify-between items-start gap-4"
           dir="rtl"
         >
-          {/* بخش متن و موقعیت */}
           <div className="flex flex-col w-full gap-4" dir="rtl">
-            {/* عنوان و آیکون‌ها */}
             <div className="flex flex-row sm:flex-row sm:items-center justify-between w-full gap-2">
-              <span className="text-xl sm:text-2xl md:text-3xl">
+              <span className="lg:text-xl text-md sm:text-xl md:text-xl">
                 فروش آپارتمان 262 متر در شهرک غرب
               </span>
 
-              {/* آیکون‌ها: در موبایل می‌افتن پایین */}
               <div className="flex flex-row items-center gap-2 self-start sm:self-auto">
                 <button className="w-10 h-10 flex items-center justify-center rounded-lg bg-secondary-light2">
                   <HeartIcon className="w-5 h-5 text-gray-500" />
@@ -303,8 +328,7 @@ const Rent = () => {
               </div>
             </div>
 
-            {/* آدرس */}
-            <span className="flex items-center gap-2 text-sm sm:text-base text-foreground ">
+            <span className="flex items-center gap-2 text-xs sm:text-base md:text-base lg:text-base text-foreground ">
               <LocationEdit />
               آدرس : مازندران ٬ ساری ٬ جاده دریا ٬ نبش دنیای آرزو ٬ ساختمان سپهر
             </span>
