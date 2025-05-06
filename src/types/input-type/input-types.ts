@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { ChangeEvent } from "react";
 import { DateObject } from "react-multi-date-picker";
 
@@ -12,6 +14,7 @@ export interface IInput {
   mandatory?: boolean;
   name?: string;
   id?: string;
+  value?: any;
 }
 
 export interface IPasswordInput {

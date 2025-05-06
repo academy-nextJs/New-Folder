@@ -7,7 +7,7 @@ const ReserveHeader = () => {
     <div className='flex gap-2 rtl text-sm items-center'>
       <Link href={'/'}> خانه </Link>
       <ChevronLeft size={16} />
-      <Link className='text-primary' href={'/'}> رزرو </Link>
+      <Link className='text-primary' href={'/reserve/reserve-house'}> رزرو </Link>
     </div>
   )
 }

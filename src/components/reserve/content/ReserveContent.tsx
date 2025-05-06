@@ -12,6 +12,7 @@ import {
   PaginationNext,
 } from '@/components/ui/pagination'
 import ReserveCardSkeleton from '../card/ReserveCardSkeleton'
+import { motion } from 'framer-motion'
 
 interface IReserveContent {
   houses: IHouse[]
@@ -46,7 +47,7 @@ const ReserveContent: React.FC<IReserveContent> = ({ houses, isLoading, setMaxPr
               onchange={(e) => setMinPrice(Number(e.target.value))}
               label="حداقل قیمت"
               classname="px-4 py-2 border-subText w-full outline-none"
-              color="text-subText"
+              color="text-subText placeholder:text-subText"
               placeholder="0 تومان"
             />
           </div>
@@ -55,7 +56,7 @@ const ReserveContent: React.FC<IReserveContent> = ({ houses, isLoading, setMaxPr
               onchange={(e) => setMaxPrice(Number(e.target.value))}
               label="حداکثر قیمت"
               classname="px-4 py-2 border-subText w-full outline-none"
-              color="text-subText"
+              color="text-subText placeholder:text-subText"
               placeholder="0 تومان"
 
             />
@@ -109,9 +110,9 @@ const ReserveContent: React.FC<IReserveContent> = ({ houses, isLoading, setMaxPr
         </div>
       </div>
 
-      <div className="bg-secondary-light3 rounded-[40px] xl:w-2/5 w-full h-[1032px] xl:block hidden">
+      <motion.div initial={{ opacity: 0, x: -100 }} whileInView={{ opacity: 1, x: 0 }} className="bg-secondary-light3 rounded-[40px] xl:w-2/5 w-full h-[1032px] xl:block hidden">
         <ReserveMap />
-      </div>
+      </motion.div>
     </div>
   )
 }
