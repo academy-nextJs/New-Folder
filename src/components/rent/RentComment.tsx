@@ -71,12 +71,10 @@ const RentComment = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < 640) {
+      if (window.innerWidth < 768) {
         setVisibleItems(1);
-      } else if (window.innerWidth < 1024) {
-        setVisibleItems(2);
       } else {
-        setVisibleItems(3);
+        setVisibleItems(2);
       }
     };
 
@@ -89,75 +87,21 @@ const RentComment = () => {
     setCurrentSlide(index);
   };
 
-  const goToNextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % totalSlides);
-  };
-
-  const goToPrevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
-  };
-
   const displayedComments = comments.slice(
     currentSlide * visibleItems,
     (currentSlide + 1) * visibleItems
   );
 
   return (
-    <div
-      className="relative w-full max-w-6xl mx-auto px-2 sm:px-4 py-4 sm:py-8"
-      dir="rtl"
-    >
-      <div className="flex justify-between w-full absolute top-1/2 transform -translate-y-1/2 z-10 px-1">
-        <button
-          onClick={goToPrevSlide}
-          className="bg-black/30 hover:bg-black/50 text-white rounded-full p-1 sm:p-2 transition-all"
-          aria-label="اسلاید قبلی"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="w-4 h-4 sm:w-6 sm:h-6 rotate-180"
-          >
-            <path d="m9 18 6-6-6-6" />
-          </svg>
-        </button>
-        <button
-          onClick={goToNextSlide}
-          className="bg-black/30 hover:bg-black/50 text-white rounded-full p-1 sm:p-2 transition-all"
-          aria-label="اسلاید بعدی"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="w-4 h-4 sm:w-6 sm:h-6"
-          >
-            <path d="m9 18 6-6-6-6" />
-          </svg>
-        </button>
-      </div>
-
+    <div className="relative w-full max-w-6xl mx-auto px-4 py-8" dir="rtl">
       <div
         ref={sliderRef}
-        className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 md:gap-6 items-center w-full transition-all duration-500 ease-in-out"
+        className="flex flex-col md:flex-row justify-center gap-4 md:gap-6 items-center  w-full transition-all duration-500 ease-in-out"
       >
         {displayedComments.map((comment) => (
           <div
             key={comment.id}
-            className="relative w-full sm:max-w-[488px] aspect-auto sm:aspect-[488/466] mb-4 sm:mb-6"
+            className="relative w-full max-w-[488px] aspect-[488/466] mb-8 md:mb-0"
           >
             <svg
               width="100%"
@@ -174,50 +118,51 @@ const RentComment = () => {
               />
             </svg>
 
-            <div className="absolute top-0 right-0 w-full h-full p-3 sm:p-4 md:p-6 flex flex-col">
-              <div className="w-12 sm:w-16 h-6 sm:h-8 flex items-center justify-center rounded-md bg-white shadow-md px-2">
+            <div className="absolute top-0 right-0 w-full h-full p-4 sm:p-5 md:p-6 flex flex-col ">
+              <div className="w-16 h-8 flex items-center justify-center rounded-md mt-2 bg-white shadow-md px-2">
                 <span className="text-black text-xs sm:text-sm">
                   {comment.rating}
                 </span>
                 <Star className="text-black ml-1 w-3 h-3 sm:w-4 sm:h-4" />
               </div>
 
-              <p className="mt-2 sm:mt-4 md:mt-6 lg:mt-8 text-xs sm:text-sm md:text-base line-clamp-3 text-white">
+              <p className=" sm:mt-8  h-28 mt-2 md:mt-1 text-xs sm:text-base md:text-[12px] line-clamp-3 lg:text-base lg:mt-8 text-white">
                 {comment.text}
               </p>
+              <div className="flex w-full h-12 md:h-0 lg:h-0 sm:h-0"></div>
 
-              <div className="w-full flex items-center justify-center gap-2 sm:gap-3 mt-3 sm:mt-6">
-                <span className="flex items-center gap-1 sm:gap-2 px-2 py-1 sm:px-3 sm:py-2 whitespace-nowrap w-auto bg-accent text-[10px] sm:text-xs md:text-sm rounded-xl">
-                  <MessageSquare className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5" />
+              <div className="w-full flex items-center justify-center gap-2 sm:gap-3 md:gap-3 sm:mt-8 lg:mt-6 md:mt-1 text-md">
+                <span className="flex h-6 whitespace-nowrap items-center gap-4 px-2 py-4 sm:px-4 sm:py-2 md:w-48 w-36 md:h-8 sm:w-36  lg:h-8 bg-accent text-[10px] sm:text-sm md:text-xs lg:text-lg rounded-xl">
+                  <MessageSquare size={20} />
                   پاسخ کاربران
                 </span>
 
-                <div className="hidden sm:block flex-grow">
+                <div className=" sm:block">
                   <Image
-                    className="h-1 w-full object-contain flex-shrink-0"
-                    alt="separator"
+                    className="h-1 w-full max-w-[240px] object-contain flex-shrink-0"
+                    alt="img"
                     src={border}
                   />
                 </div>
               </div>
 
-              <div className="w-full flex items-center justify-start gap-1 sm:gap-2 mt-3 sm:mt-4 overflow-hidden">
-                <p className="text-[10px] sm:text-xs md:text-sm whitespace-nowrap text-white">
+              <div className="w-full h-12  flex items-center justify-start gap-2 sm:gap-3 md:gap-4 mt-4 sm:mt-5  overflow-hidden lg:text-base lg:mt-12 ">
+                <p className=" text-xs sm:text-base md:text-sm whitespace-nowrap  text-white">
                   {comment.author}
                 </p>
 
-                <div className="h-3 sm:h-4 md:h-5 w-px bg-gray-300"></div>
+                <div className="h-4 sm:h-5 md:h-6 w-2 bg-gray-300"></div>
 
-                <p className="text-[10px] sm:text-xs md:text-sm text-white whitespace-nowrap overflow-hidden text-ellipsis">
+                <p className="text-[10px] w-full sm:text-base md:text-sm lg:text-base text-white">
                   {comment.date} / {comment.time}
                 </p>
               </div>
 
-              <p className="mt-3 sm:mt-4 md:mt-6 text-[10px] sm:text-xs md:text-sm line-clamp-3 text-white flex-grow">
+              <p className="mt-4  h-28 sm:mt-10 md:mt-6 text-xs sm:text-base md:text-sm line-clamp-3 lg:text-base text-white">
                 {comment.text}
               </p>
 
-              <div className="w-full h-auto aspect-[8.5/1] relative mt-2 sm:mt-4">
+              <div className="w-full h-[45px] sm:h-[45px] md:h-[50px] lg:h-[60px] relative  sm:mt-6  mt-4 ">
                 <svg
                   width="100%"
                   height="100%"
@@ -229,29 +174,30 @@ const RentComment = () => {
                 >
                   <rect width="850" height="90" rx="24" fill="#444444" />
                 </svg>
-                <div className="w-full h-full relative px-2 sm:px-4 py-1 sm:py-2 flex items-center justify-between">
+                <div className="w-full  relative px-3 sm:px-4 md:px-5 lg:px-6 flex items-center justify-around sm:justify-around lg:justify-between md:justify-between ">
+                  {/* سمت راست */}
                   <div className="flex items-center">
-                    <div className="w-5 h-5 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-md bg-foreground flex items-center justify-center text-primary-foreground text-[8px] sm:text-xs md:text-sm">
+                    <div className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 lg:w-10 lg:h-10 rounded-md bg-foreground flex items-center justify-center text-primary-foreground text-[10px] sm:text-xs md:text-sm lg:text-base">
                       {comment.author.charAt(0)}
                     </div>
 
-                    <div className="text-right mr-1 sm:mr-2 md:mr-3">
-                      <p className="font-semibold text-[8px] sm:text-xs md:text-sm text-white">
+                    <div className="text-right mr-2 sm:mr-3 md:mr-4">
+                      <p className="font-semibold text-[8px] text-white sm:text-[10px] md:text-xs lg:text-sm">
                         {comment.author}
                       </p>
 
-                      <div className="flex items-center text-[6px] sm:text-[8px] md:text-xs text-ring mt-0.5">
-                        <Calendar className="mr-0.5 w-2 h-2 sm:w-3 sm:h-3 md:w-4 md:h-4" />
+                      <div className="flex items-center text-[6px] sm:text-[8px] md:text-[10px] lg:text-xs text-ring mt-0.5">
+                        <Calendar className="mx-1 w-2 h-2 sm:w-3 sm:h-3 md:w-4 md:h-4 lg:w-5 lg:h-5" />
                         <span>{comment.date}</span>
-                        <span className="mx-0.5 sm:mx-1">/</span>
+                        <span className="mx-1">/</span>
                         <span>{comment.time}</span>
                       </div>
                     </div>
                   </div>
 
-                  <button className="flex gap-1 sm:gap-2 text-primary text-[8px] sm:text-xs md:text-sm items-center">
+                  <button className="flex gap-1 sm:gap-2 md:gap-3 lg:gap-4 text-primary text-[8px] sm:text-[10px] md:text-xs lg:text-sm items-center">
                     ثبت پاسخ
-                    <ArrowLeftCircle className="w-2 h-2 sm:w-3 sm:h-3 md:w-4 md:h-4" />
+                    <ArrowLeftCircle className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-6 lg:h-6" />
                   </button>
                 </div>
               </div>
@@ -260,15 +206,13 @@ const RentComment = () => {
         ))}
       </div>
 
-      <div className="flex justify-center items-center gap-1 sm:gap-2 mt-2 sm:mt-4">
+      <div className="flex justify-center items-center gap-2 mt-6">
         {Array.from({ length: totalSlides }).map((_, index) => (
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${
-              currentSlide === index
-                ? "bg-primary w-3 h-3 sm:w-4 sm:h-4"
-                : "bg-gray-300"
+            className={`w-3 h-3 rounded-full transition-all duration-300 ${
+              currentSlide === index ? "bg-primary w-4 h-4" : "bg-gray-300"
             }`}
             aria-label={`رفتن به اسلاید ${index + 1}`}
           />
