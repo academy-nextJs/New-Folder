@@ -16,7 +16,6 @@ const SingleReserveComponent = () => {
     const params = useParams()
     const id = params?.id as string
 
-
     const fetchHouse = async () => {
         const houseData = await getHouseById(id) as IHouse
         setHouse(houseData)

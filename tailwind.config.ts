@@ -35,6 +35,7 @@ const config: Config = {
         "popover-foreground": "var(--popover-foreground)",
         input: "var(--input)",
         ring: "var(--ring)",
+        "card-light": "var(--card-light)",
         "card-secondary": "var(--card-secondary)",
         "card-secondary2": "var(--card-secondary2)",
         "card-secondary3": "var(--card-secondary3)",

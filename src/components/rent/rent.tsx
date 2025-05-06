@@ -1,6 +1,5 @@
 "use client";
 import {
-  ArrowLeftCircle,
   ChevronLeft,
   Copy,
   HeartIcon,
@@ -99,10 +98,10 @@ const Rent = () => {
     <div className=" flex justify-around flex-col my-[20px] w-full gap-4 ">
       <div className="w-full flex justify-end my-[15px] lg:flex-row sm:flex-row flex-wrap gap-4">
         <button
-          className="flex justify-center gap-1 items-center w-[100px] h-[36px] rounded-xl bg-[#7569FF]"
+          className="flex flex-row-reverse justify-center gap-2 items-center w-[100px] h-[36px] rounded-xl bg-[#7569FF]"
           dir="rtl"
         >
-          <StarIcon className="w-4 h-4" />5 ستاره
+          <StarIcon className="w-4 h-4" />{house.rate} ستاره
         </button>
         <div className="h-8 w-px bg-subText"></div>
         {house.tags.map((item, idx) => (

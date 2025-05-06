@@ -7,11 +7,11 @@ import {
   Bed,
 } from "lucide-react";
 import SingleReserveForm from "../common/CommentForm";
-import RentComment from "./RentComment";
 import RentMap from "./RentMap";
 import FacilityCard from "../single-reserve/facilitis/FacilityCard";
 import { TFacilities } from "@/types/facilites-type";
 import { IHouse } from "@/types/houses-type/house-type";
+import SingleReserveComments from "../single-reserve/comments/SingleReserveComments";
 
 const tabs = [
   { id: "description", label: "توضیحات ملک" },
@@ -24,24 +24,23 @@ export default function PropertyTabs({ house }: { house: IHouse }) {
   const [activeTab, setActiveTab] = useState("description");
 
   const facilities: TFacilities = []
-    if (house?.parking && house?.parking > 0) { facilities.push({ title: <Car size={24} />, content: ' پارکینگ ' }) }
-    if (house?.rooms && house?.rooms > 0) { facilities.push({ title: <Bed size={24} />, content: ` ${house?.rooms} خوابه ` }) }
-    if (house?.bathrooms && house?.bathrooms > 0) { facilities.push({ title: <Bath size={24} />, content: ` سرویس بهداشتی ` }) }
-    if (house?.yard_type) { facilities.push({ title: ' حیاط ', content: ` ${house?.yard_type} ` }) }
-    if (house?.capacity) { facilities.push({ title: ' ظرفیت ', content: ` ${house?.capacity > 0 ? house?.capacity + " نفر " : ' ندارد '} ` }) }
+  if (house?.parking && house?.parking > 0) { facilities.push({ title: <Car size={24} />, content: ' پارکینگ ' }) }
+  if (house?.rooms && house?.rooms > 0) { facilities.push({ title: <Bed size={24} />, content: ` ${house?.rooms} خوابه ` }) }
+  if (house?.bathrooms && house?.bathrooms > 0) { facilities.push({ title: <Bath size={24} />, content: ` سرویس بهداشتی ` }) }
+  if (house?.yard_type) { facilities.push({ title: ' حیاط ', content: ` ${house?.yard_type} ` }) }
+  if (house?.capacity) { facilities.push({ title: ' ظرفیت ', content: ` ${house?.capacity > 0 ? house?.capacity + " نفر " : ' ندارد '} ` }) }
 
 
   return (
     <div className="w-full">
-      {/* نوار تب‌ها */}
-      <div className="flex overflow-y-hidden custom-scrollbar max-md:overflow-x-scroll whitespace-nowrap gap-4 mb-2 mt-2 pb-2 border-b bg-secondary-light2 items-center rounded-md">
+      <div className="flex px-4 overflow-y-hidden custom-scrollbar max-md:overflow-x-scroll whitespace-nowrap gap-4 mb-2 mt-2 pb-2 border-b bg-secondary-light2 items-center rounded-md">
         {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
             className={`rounded-full px-4 py-1 text-[12px] sm:text-sm md:text-sm lg:text-sm  font-medium transition-all duration-200 mt-2 ${activeTab === tab.id
-                ? "bg-primary text-secondary"
-                : " text-ring hover:bg-blur-primary"
+              ? "bg-primary text-secondary"
+              : " text-ring hover:bg-blur-primary"
               }`}
           >
             {tab.label}
@@ -79,7 +78,9 @@ export default function PropertyTabs({ house }: { house: IHouse }) {
         {activeTab === "reviews" && (
           <div>
             <SingleReserveForm />
-            <RentComment />
+            <div className="my-[100px]">
+              <SingleReserveComments perPageItems={3} />
+            </div>
           </div>
         )}
       </div>

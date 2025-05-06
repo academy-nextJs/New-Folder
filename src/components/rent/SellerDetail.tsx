@@ -38,11 +38,11 @@ const SellerDetail: FC<{ house: IHouse }> = ({ house }) => {
                 </div>}
             </div>
 
-            <button className="bg-primary flex-row-reverse text-primary-foreground w-full py-2 mt-4 rounded-xl flex items-center justify-center gap-2">
+            <button className="bg-primary flex-row-reverse text-primary-foreground text-sm w-full py-2 mt-4 rounded-xl flex items-center justify-center gap-2">
                 <Phone size={16} /> تماس با 09362728628
             </button>
 
-            <button className="mt-2 w-full flex-row-reverse border border-white py-2 rounded-xl flex items-center justify-center gap-2">
+            <button className="mt-2 w-full flex-row-reverse border border-white text-sm py-2 rounded-xl flex items-center justify-center gap-2">
                 <MessageCircle size={16} /> گفتگو با فروشنده
             </button>
         </div>

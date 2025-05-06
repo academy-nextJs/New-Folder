@@ -20,52 +20,9 @@ const NavbarSection = () => (
         className="text-subText transition-colors flex items-center lg:gap-1 pb-1 h-full group-hover:text-primary"
       >
         رهن و اجاره
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
-          className="w-4 h-4 md:w-3 md:h-3"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="m19.5 8.25-7.5 7.5-7.5-7.5"
-          />
-        </svg>
         {/* بردر پایین */}
         <span className="absolute left-0 right-0 bottom-0 h-[2px] bg-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-bottom group-hover:origin-bottom z-20"></span>
       </Link>
-      {/* دراپ‌داون رهن و اجاره */}
-      <div className="absolute top-full right-0 w-48 bg-subBg rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-10">
-        <div className="py-2">
-          <Link
-            href="/rent/apartment"
-            className="block px-4 py-2 text-subText hover:bg-subBg2 transition-colors md:text-[12px]"
-          >
-            آپارتمان
-          </Link>
-          <Link
-            href="/rent/villa"
-            className="block px-4 py-2 text-subText hover:bg-subBg2 transition-colors md:text-[12px]"
-          >
-            ویلا
-          </Link>
-          <Link
-            href="/rent/office"
-            className="block px-4 py-2 text-subText hover:bg-subBg2 transition-colors md:text-[12px]"
-          >
-            دفتر کار
-          </Link>
-          <Link
-            href="/rent/store"
-            className="block px-4 py-2 text-subText hover:bg-subBg2 transition-colors md:text-[12px]"
-          >
-            مغازه
-          </Link>
-        </div>
-      </div>
     </div>
 
     {/* درباره ما */}
