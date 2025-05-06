@@ -8,7 +8,7 @@ import FooterForm from './footer-form/FooterForm'
 
 const Footer = () => {
     return (
-        <div className='bg-primary dark:text-black text-white  w-full md:rounded-2xl'>
+        <div className='bg-primary text-primary-foreground  w-full md:rounded-2xl'>
             <div className='xl:flex hidden'>
                 <div className='bg-primary w-4/12 px-8 py-6 rounded-2xl'>
                     <div className='bg-secondary text-card-foreground flex flex-row-reverse gap-3 w-fit px-4 py-2 rounded-2xl'> <PhoneCall className='w-[20px]' /> <span> 09229167194 - 09154569872 </span> </div>

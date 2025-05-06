@@ -36,7 +36,9 @@ export default function RootLayout({
       >
         <div className="flex flex-col justify-between mx-auto max-w-[1550px] w-screen h-screen">
           <Providers>
-            <Header />
+            <div className="px-8 w-full">
+              <Header />
+            </div>
             <div className="mb-[100px]">
               <Suspense fallback={<Loading />} >
                 {children}

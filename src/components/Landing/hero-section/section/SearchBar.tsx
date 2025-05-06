@@ -3,7 +3,7 @@ import React, { useState, useRef, useEffect } from "react";
 import DatePickerInput from "@/components/common/inputs/datePicker/DatePickerInput";
 import CommonSelect from "@/components/common/inputs/common/CommonSelect";
 import CommonButton from "@/components/common/buttons/common/CommonButton";
-import { Search, X } from "lucide-react";
+import { BookIcon, X } from "lucide-react";
 
 const SearchBar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -27,20 +27,10 @@ const SearchBar = () => {
 
   return (
     <div className="absolute bottom-12 left-0 right-0 mx-auto w-full max-w-5xl z-50 px-4">
-      {/* Mobile Search Button */}
-      <div className="md:hidden flex justify-center -mb-10 ">
-        <button
-          onClick={() => setIsOpen(true)}
-          className={`bg-primary text-secondary p-2 text-xs rounded-full ${isOpen ? "hidden" : "block"
-            }`}
-        >
-          <span className="flex items-center gap-2">
-            <Search size={12} />
-            <span>جستجوی پیشرفته</span>
-          </span>
-        </button>
-      </div>
 
+      <div className="md:flex hidden gap-2 text-base text-foreground mb-2">
+        <label htmlFor="i1" className="flex gap-2 items-center flex-row-reverse cursor-pointer hover:text-primary hover:underline"> رزرو ملک <BookIcon size={16} /> </label>
+      </div>
       <div
         ref={searchRef}
         className={`flex justify-between items-center w-full bg-subBg backdrop-blur-sm rounded-[32px] p-4 transition-all duration-300 ${isOpen ? "h-auto opacity-100" : "h-0 overflow-visible md:h-auto"

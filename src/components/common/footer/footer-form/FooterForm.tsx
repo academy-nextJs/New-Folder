@@ -57,7 +57,7 @@ const FooterForm: FC<IFooterForm> = ({ classname }) => {
                         type='text'
                         id="name"
                         {...register('name')}
-                        className="border w-full outline-none border-border bg-transparent px-4 py-2 placeholder:text-muted rounded-2xl"
+                        className="border w-full outline-none border-border bg-transparent px-4 py-2 placeholder:text-border rounded-2xl"
                         placeholder="وارد کنید..."
                     />
                     {errors.name && <p className='text-danger text-sm font-semibold'>{errors.name.message}</p>}
@@ -70,7 +70,7 @@ const FooterForm: FC<IFooterForm> = ({ classname }) => {
                         type='title'
                         id="title"
                         {...register('title')}
-                        className="border w-full outline-none border-border-form bg-transparent px-4 py-2 placeholder:text-muted rounded-2xl"
+                        className="border w-full outline-none border-border-form bg-transparent px-4 py-2 placeholder:text-border rounded-2xl"
                         placeholder="وارد کنید..."
                     />
                     {errors.title && <p className='text-danger text-sm font-semibold'>*{errors.title.message}</p>}
@@ -83,7 +83,7 @@ const FooterForm: FC<IFooterForm> = ({ classname }) => {
                 <Textarea
                     id="message"
                     {...register('message')}
-                    className="border h-[156px] outline-none border-border bg-transparent px-4 py-2 placeholder:text-muted rounded-2xl"
+                    className="border h-[156px] outline-none border-border bg-transparent px-4 py-2 placeholder:text-border rounded-2xl"
                     placeholder="....."
                 />
                 {errors.message && <p className='text-danger text-sm font-semibold'>*{errors.message.message}</p>}
