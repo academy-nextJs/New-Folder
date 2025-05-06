@@ -63,6 +63,7 @@ const SingleReserveBooking: FC<IProps> = ({ discountedPrice, price }) => {
             <div className='w-full relative'>
                 <CommonInput
                     value={count}
+                    onchange={(e) => setCount(e.target.valueAsNumber)}
                     type='number'
                     label='تعداد مسافران'
                     classname='w-full border-subText'

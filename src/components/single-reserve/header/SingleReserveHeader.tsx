@@ -7,6 +7,7 @@ import { ChevronLeft, Copy, MapPin, Share, Star } from 'lucide-react'
 import Link from 'next/link'
 import React, { FC, useState } from 'react'
 import { motion } from 'framer-motion'
+import { showToast } from '@/core/toast/toast'
 
 interface IProps {
     house: IHouse
@@ -18,6 +19,32 @@ const SingleReserveHeader: FC<IProps> = ({ house }) => {
     const handleThumbnailClick = (index: number) => {
         setCurrentIndex(index)
     }
+
+    const handleCopy = async () => {
+        try {
+            await navigator.clipboard.writeText(window.location.href)
+            showToast('success', ' کپی شد ', ' بستن ')
+        } catch {
+            showToast('error', ' کپی نشد ', ' بستن ')
+        }
+    }
+
+    const handleShare = async () => {
+        if (navigator.share) {
+          try {
+            await navigator.share({
+              title: document.title,
+              text: 'یه رزرو عالی ببین!',
+              url: window.location.href,
+            })
+            showToast('success', ' اشتراک گذاری با موفقیت انجام شد ', ' بستن ')
+          } catch {
+            showToast('success', ' خطا در اشتراک گذاری ', ' بستن ')
+          }
+        } else {
+          console.log('مرورگر شما از اشتراک‌گذاری پشتیبانی نمی‌کند')
+        }
+      }
 
     return (
         <div className='flex gap-4 flex-col text-foreground'>
@@ -46,8 +73,8 @@ const SingleReserveHeader: FC<IProps> = ({ house }) => {
                     </div>
                     |
                     <div className='flex gap-4'>
-                        <CommonButton classname='bg-secondary-light2 text-white' icon={<Copy />} />
-                        <CommonButton classname='text-primary-foreground' icon={<Share />} />
+                        <CommonButton onclick={handleCopy} classname='bg-secondary-light2 text-white' icon={<Copy />} />
+                        <CommonButton onclick={handleShare} classname='text-primary-foreground' icon={<Share />} />
                     </div>
                 </div>
             </div>
