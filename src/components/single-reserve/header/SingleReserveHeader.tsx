@@ -28,7 +28,7 @@ const SingleReserveHeader: FC<IProps> = ({ house }) => {
                 <div className='text-primary'> {house.title} </div>
             </div>
             <h2 className='text-[28px]'> {house.title} </h2>
-            <div className='flex justify-between'>
+            <div className='flex max-md:flex-wrap justify-between gap-4'>
                 <p className="flex text-subText items-center gap-2 whitespace-nowrap overflow-hidden w-full text-ellipsis">
                     <span className="flex gap-2 items-center">
                         <MapPin size={16} />
@@ -50,8 +50,8 @@ const SingleReserveHeader: FC<IProps> = ({ house }) => {
                     </div>
                 </div>
             </div>
-            <div className='flex gap-6 mt-2'>
-                <div className='w-11/12'>
+            <div className='flex max-2xl:flex-col gap-6 mt-2'>
+                <div className='2xl:w-11/12 w-full'>
                     <div className='w-full h-[444px] bg-secondary-light2 rounded-[40px] overflow-hidden flex items-center justify-center'>
                         <img
                             src={house.photos[currentIndex]}
@@ -61,7 +61,7 @@ const SingleReserveHeader: FC<IProps> = ({ house }) => {
                     </div>
                 </div>
 
-                <div className='w-2/12 flex flex-wrap gap-4 justify-between items-center'>
+                <div className='2xl:w-2/12 w-full flex flex-wrap gap-4 2xl:justify-between items-center'>
                     {[...Array(8)].map((_, index) => {
                         const photo = house.photos[index]
 
@@ -84,7 +84,7 @@ const SingleReserveHeader: FC<IProps> = ({ house }) => {
                             return (
                                 <div
                                     key={index}
-                                    className='rounded-[32px] bg-secondary-light2 h-[96px] w-[96px] pointer-events-none'
+                                    className='rounded-[32px] 2xl:block hidden bg-secondary-light2 h-[96px] w-[96px] pointer-events-none'
                                 />
                             )
                         }

@@ -8,7 +8,7 @@ interface IProps {
 
 const SingleReserveFacilities: FC<IProps> = ({ facilities }) => {
   return (
-    <div className='flex flex-wrap gap-4 w-full h-fit'>
+    <div className='grid grid-rows-2 md:flex flex-wrap gap-4 w-full h-fit'>
       {facilities.map((facility, idx) => (
         <FacilityCard key={idx} content={facility.content} title={facility.title} />
       ))}

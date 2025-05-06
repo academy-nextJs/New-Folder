@@ -52,20 +52,20 @@ const SingleReserveForm = () => {
 
     return (
         <form className='flex flex-col w-full gap-4' onSubmit={handleSubmit(onSubmit)}>
-            <div className='flex items-center w-full justify-between gap-4'>
-                <div className='flex flex-col gap-2 text-sm text-subText'>
+            <div className='flex items-center max-md:flex-wrap w-full justify-between gap-4'>
+                <div className='flex flex-col max-md:w-full w-1/5 gap-2 text-sm text-subText'>
                     <Label htmlFor='name' > نام و نام خانوادگی </Label>
                     {errors.name && <span className='text-danger font-semibold text-xs'>{errors.name.message}</span>}
-                    <Input {...register('name')} id='name' name='name' className='px-4 py-2 bg-transparent rounded-[16px] border border-subText' />
+                    <Input {...register('name')} id='name' name='name' className='px-4 w-full py-2 bg-transparent rounded-[16px] border border-subText' />
                 </div>
-                <div className='flex flex-col gap-2 text-sm text-subText'>
+                <div className='flex flex-col gap-2 text-sm w-1/5 text-subText max-md:w-full'>
                     <Label htmlFor='email' > ایمیل شما </Label>
                     {errors.email && <span className='text-danger font-semibold text-xs'>{errors.email.message}</span>}
-                    <Input {...register('email')} id='email' name='email' className='px-4 py-2 bg-transparent rounded-[16px] border border-subText' />
+                    <Input {...register('email')} id='email' name='email' className='px-4 w-full py-2 bg-transparent rounded-[16px] border border-subText' />
                 </div>
-                <div className='flex flex-col gap-2 text-sm text-subText w-full'>
+                <div className='flex flex-col gap-2 text-sm w-3/5 text-subText max-md:w-full'>
                     <Label htmlFor='rating' > امتیاز شما </Label>
-                    <div className="w-full max-w-xl bg-muted/20 rounded-[16px] p-2 flex flex-row-reverse items-center justify-between gap-4 border border-subText">
+                    <div className="w-full bg-muted/20 rounded-[16px] p-2 flex flex-row-reverse items-center justify-between gap-4 border border-subText">
                         <div className="flex items-center gap-2">
                             <span className="font-bold text-md">{rating[0]}</span>
                             <Star className="" size={16} />
@@ -83,13 +83,13 @@ const SingleReserveForm = () => {
                     </div>
                 </div>
             </div>
-            <div className='flex items-end justify-between w-full gap-4'>
+            <div className='flex items-end max-md:flex-wrap justify-between w-full md:gap-4 gap-8'>
                 <div className='flex flex-col gap-2 text-sm w-full text-subText'>
                     <Label htmlFor='caption' > پیام شما </Label>
                     {errors.caption && <span className='text-danger font-semibold text-xs'>{errors.caption.message}</span>}
                     <Input {...register('caption')} id='caption' name='caption' className='px-4 py-2 bg-transparent w-full rounded-[16px] border border-subText' />
                 </div>
-                <CommonButton type='submit' icon={<ChevronLeft />} title='ارسال نظر' />
+                <CommonButton type='submit' classname='max-md:w-full' icon={<ChevronLeft />} title='ارسال نظر' />
             </div>
         </form>
     )
