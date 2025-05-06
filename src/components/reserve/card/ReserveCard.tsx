@@ -4,11 +4,8 @@ import { MapPin, Clock, Star, Hotel } from "lucide-react";
 import CommonButton from "@/components/common/buttons/common/CommonButton";
 import { IHouse } from "@/types/houses-type/house-type";
 import { SplitNumber } from "@/utils/helper/spliter/SplitNumber";
-<<<<<<< HEAD
 import { redirect } from "next/navigation";
-=======
 import { motion } from 'framer-motion'
->>>>>>> c7641846735b70443bcdb8dc06ba4104720bacd1
 
 interface IReserveContent {
     items: IHouse
