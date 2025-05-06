@@ -6,6 +6,7 @@ import { IHouse } from '@/types/houses-type/house-type'
 import { ChevronLeft, Copy, MapPin, Share, Star } from 'lucide-react'
 import Link from 'next/link'
 import React, { FC, useState } from 'react'
+import { motion } from 'framer-motion'
 
 interface IProps {
     house: IHouse
@@ -67,7 +68,9 @@ const SingleReserveHeader: FC<IProps> = ({ house }) => {
 
                         if (photo) {
                             return (
-                                <button
+                                <motion.button
+                                    whileHover={{ y: -4, scale: 1.02 }}
+                                    transition={{ type: "spring", stiffness: 120, damping: 10 }}
                                     key={index}
                                     onClick={() => handleThumbnailClick(index)}
                                     className={`rounded-[32px] h-[96px] w-[96px] overflow-hidden ${currentIndex === index ? 'ring-2 ring-primary' : ''
@@ -78,7 +81,7 @@ const SingleReserveHeader: FC<IProps> = ({ house }) => {
                                         alt={`thumb-${index}`}
                                         className='w-full h-full object-cover rounded-[32px]'
                                     />
-                                </button>
+                                </motion.button>
                             )
                         } else {
                             return (

@@ -9,6 +9,7 @@ import SingleReserveTab from './tab/SingleReserveTab'
 import SingleReserveFooter from './footer/SingleReserveFooter'
 import { Bath, Bed, Car } from 'lucide-react'
 import { TFacilities } from '@/types/facilites-type'
+import { Loader } from '../common/Loader'
 
 const SingleReserveComponent = () => {
     const [house, setHouse] = React.useState<IHouse>()
@@ -32,14 +33,14 @@ const SingleReserveComponent = () => {
     if (house?.yard_type) { facilities.push({ title: ' حیاط ', content: ` ${house?.yard_type} ` }) }
     if (house?.capacity) { facilities.push({ title: ' ظرفیت ', content: ` ${house?.capacity > 0 ? house?.capacity + " نفر " : ' ندارد '} ` }) }
 
-    return house && <div className='px-8 flex flex-col gap-16'>
+    return house ? <div className='px-8 flex flex-col gap-16'>
         <SingleReserveHeader house={house} />
         <div className='flex xl:flex-row flex-col-reverse gap-12 justify-between'>
             <SingleReserveTab facilities={facilities} defaultValue='about' />
             <SingleReserveBooking price={house?.price} discountedPrice={1000000} />
         </div>
         <SingleReserveFooter />
-    </div>
+    </div> : <Loader />
 }
 
 export default SingleReserveComponent

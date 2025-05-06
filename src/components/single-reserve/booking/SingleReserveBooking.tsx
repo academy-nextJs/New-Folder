@@ -6,6 +6,7 @@ import { SplitNumber } from '@/utils/helper/spliter/SplitNumber'
 import { ChevronLeft, Coins, House, Minus, Plus } from 'lucide-react'
 import React, { FC, useState } from 'react'
 import jalaali from 'jalaali-js'
+import { motion } from 'framer-motion'
 
 interface IProps {
     discountedPrice?: number;
@@ -26,11 +27,11 @@ const SingleReserveBooking: FC<IProps> = ({ discountedPrice, price }) => {
 
     const handleSubmit = () => {
         const reservedDates = [startDate, endDate]
-
+        console.log(reservedDates)
     }
 
     return (
-        <div className='bg-secondary-light2 px-6 gap-4 rounded-[32px] pb-[20px] flex flex-col items-center justify-center h-fit xl:w-3/12 w-full'>
+        <motion.div initial={{ x: 50, opacity: 0 }} whileInView={{ x: 0, opacity: 1 }} transition={{ duration: 1 }} className='bg-secondary-light2 px-6 gap-4 rounded-[32px] pb-[20px] flex flex-col items-center justify-center h-fit xl:w-3/12 w-full'>
             <div className='rounded-b-[32px] bg-subBg2 h-[49] mb-[20px] w-2/3 flex gap-2 justify-center items-center text-base max-xl:text-sm flex-row-reverse'>
                 رزرو خونه برای : <House size={20} />
             </div>
@@ -97,7 +98,7 @@ const SingleReserveBooking: FC<IProps> = ({ discountedPrice, price }) => {
                 classname='w-full text-primary-foreground'
                 onclick={handleSubmit}
             />
-        </div>
+        </motion.div>
     )
 }
 
