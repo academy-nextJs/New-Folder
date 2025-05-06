@@ -5,6 +5,7 @@ import CommonSelect from '@/components/common/inputs/common/CommonSelect'
 import { Filter, MapPin, Megaphone } from 'lucide-react'
 import React, { FC, useState } from 'react'
 import ReserveModalMap from '../map/ReserveModalMap'
+import { motion } from 'framer-motion'
 
 interface IReserveFilter {
     setOrder: React.Dispatch<React.SetStateAction<'DESC' | 'ASC'>>
@@ -18,11 +19,11 @@ const ReserveFilter: FC<IReserveFilter> = ({ setOrder, setSort, setSearch, house
     const [isOpen, setIsOpen] = useState<boolean>(false)
 
     return (
-        <div className='bg-secondary-light4 w-full md:flex-nowrap flex-wrap gap-4 rounded-[24px] px-4 py-3 flex justify-between'>
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} className='bg-secondary-light4 w-full md:flex-nowrap flex-wrap gap-4 rounded-[24px] px-4 py-3 flex justify-between'>
             <div className='flex md:flex-row md:flex-wrap flex-col w-full gap-4'>
                 <CommonSelect
                     placeholder='استان ، شهر ، هتل ....'
-                    icon={<MapPin size={16} />}
+                    icon={<MapPin size={16} className='text-subText' />}
                     selectItems={[
                         { label: 'تهران', value: 'tehran' },
                         { label: 'اصفهان', value: 'isfahan' },
@@ -56,7 +57,7 @@ const ReserveFilter: FC<IReserveFilter> = ({ setOrder, setSort, setSearch, house
                         }
                     })}
                     placeholder="جدید ترین ها"
-                    icon={<Filter size={16} />}
+                    icon={<Filter size={16} className='text-subText' />}
                     selectItems={[
                         { label: 'جدید ترین ها', value: 'last_updated' },
                         { label: 'ارزان ترین ها', value: 'price_low' },
@@ -83,7 +84,7 @@ const ReserveFilter: FC<IReserveFilter> = ({ setOrder, setSort, setSearch, house
                 <CommonButton onclick={() => setIsOpen(true)} icon={<MapPin />} title='نقشه' classname='bg-transparent border-foreground border text-foreground flex xl:hidden' />
                     <ReserveModalMap isOpen={isOpen} setIsOpen={setIsOpen} />
             </div>
-        </div>
+        </motion.div>
     )
 }
 
