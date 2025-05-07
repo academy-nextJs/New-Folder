@@ -32,11 +32,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden`}
       >
         <div className="flex flex-col justify-between mx-auto max-w-[1550px] w-screen h-screen">
           <Providers>
-            <Header />
+            <div className="px-8 w-full">
+              <Header />
+            </div>
             <div className="mb-[100px]">
                 {children}
             </div>

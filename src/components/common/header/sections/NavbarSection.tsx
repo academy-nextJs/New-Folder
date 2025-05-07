@@ -4,52 +4,14 @@ import Link from "next/link";
 const NavbarSection = () => (
   <nav className="flex items-center justify-center lg:gap-6 md:gap-3 text-[14px] lg:text-[16px] md:text-[12px] h-full relative">
     {/* رزرو سریع */}
-    <div className="relative group flex items-center h-full">
+    <div className="group flex items-center h-full relative">
       <Link
-        href="/quick-reserve"
-        className="text-subText transition-colors flex items-center lg:gap-1 pb-1 h-full group-hover:text-primary"
+        href="/reserve/reserve-house"
+        className="flex items-center h-full text-subText transition-colors pb-1 group-hover:text-primary"
       >
-        رزرو سریع
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
-          className="w-4 h-4 md:w-3 md:h-3"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="m19.5 8.25-7.5 7.5-7.5-7.5"
-          />
-        </svg>
-        {/* بردر پایین */}
-        <span className="absolute left-0 right-0 bottom-0 h-[2px] bg-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-bottom group-hover:origin-bottom z-20"></span>
+         رزرو سریع 
       </Link>
-      {/* دراپ‌داون رزرو سریع */}
-      <div className="absolute top-full right-0 w-48 bg-subBg rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-10">
-        <div className="py-2">
-          <Link
-            href="/quick-reserve/daily"
-            className="block px-4 py-2 text-subText hover:bg-subBg2 transition-colors md:text-[12px]"
-          >
-            رزرو روزانه
-          </Link>
-          <Link
-            href="/quick-reserve/monthly"
-            className="block px-4 py-2 text-subText hover:bg-subBg2 transition-colors md:text-[12px]"
-          >
-            رزرو ماهانه
-          </Link>
-          <Link
-            href="/quick-reserve/yearly"
-            className="block px-4 py-2 text-subText hover:bg-subBg2 transition-colors md:text-[12px]"
-          >
-            رزرو سالانه
-          </Link>
-        </div>
-      </div>
+      <span className="absolute left-0 right-0 bottom-0 h-[2px] bg-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-bottom group-hover:origin-bottom z-20"></span>
     </div>
     {/* رهن و اجاره */}
     <div className="relative group flex items-center h-full">

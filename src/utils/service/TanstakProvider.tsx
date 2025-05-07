@@ -31,17 +31,14 @@ const queryClient = new QueryClient();
 function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>("dark");
 
-  // تشخیص تم از localStorage در اولین بارگذاری
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") as Theme | null;
 
     if (savedTheme) {
       setTheme(savedTheme);
     }
-    // حذف بررسی تنظیمات سیستم، همیشه دارک به صورت پیش‌فرض
   }, []);
 
-  // بروزرسانی کلاس دارک در المنت html و ذخیره تم در localStorage
   useEffect(() => {
     const root = window.document.documentElement;
 
@@ -54,7 +51,6 @@ function ThemeProvider({ children }: { children: ReactNode }) {
     localStorage.setItem("theme", theme);
   }, [theme]);
 
-  // تابع تغییر تم
   const toggleTheme = () => {
     setTheme((prevTheme) => (prevTheme === "dark" ? "light" : "dark"));
   };

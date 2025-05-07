@@ -16,7 +16,7 @@ const DatePickerInput: FC<IDatePicker> = ({
   icon
 }) => {
   return (
-    <div className="rtl flex flex-col gap-1">
+    <div className={`rtl flex flex-col gap-1 w-full ${className}`}>
       {label && (
         <Label htmlFor={label} className={`text-[13px] flex gap-0.5 text-[#AAAAAA] ${color}`}>
           <span>{label}</span>
@@ -25,28 +25,31 @@ const DatePickerInput: FC<IDatePicker> = ({
         </Label>
       )}
 
-      <div className={`flex items-center gap-2 rounded-[16px]  border-[#AAAAAA] text-[#AAAAAA] px-4 py-2 border ${background} ${color} ${className}`}>
+      <div className={`flex items-center gap-2 rounded-[16px] border border-[#AAAAAA] text-[#AAAAAA] px-4 py-2 ${background} ${color} w-full`}>
         {icon && <span className={`text-[#AAAAAA] ${color}`}>{icon}</span>}
-        <DatePicker
-          id={label}
-          onChange={onChange}
-          calendar={persian}
-          locale={persian_fa}
-          calendarPosition="bottom-right"
-          inputClass="w-full outline-none bg-transparent text-sm"
-          containerClassName="w-full"
-          style={{
-            background: 'transparent',
-            border: 'none',
-            width: '100%',
-            fontSize: '14px',
-            color: 'inherit',
-          }}
-          placeholder={placeholder}
-        />
+        <div className="flex-1">
+          <DatePicker
+            id={label}
+            onChange={onChange}
+            calendar={persian}
+            locale={persian_fa}
+            calendarPosition="bottom-right"
+            inputClass="w-full outline-none bg-transparent text-sm"
+            containerClassName="w-full"
+            style={{
+              background: 'transparent',
+              border: 'none',
+              width: '100%',
+              fontSize: '14px',
+              color: 'inherit',
+            }}
+            placeholder={placeholder}
+          />
+        </div>
       </div>
     </div>
   )
 }
+
 
 export default DatePickerInput

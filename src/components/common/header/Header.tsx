@@ -93,7 +93,7 @@ const Header = () => {
         </div>
       </div>
 
-      <div className="w-[95%] max-w-[1376px] mx-auto flex items-center justify-between lg:h-[48px] md:h-[36px] h-[40px] absolute top-[24px] bg-subBg text-subText rounded-[16px]  z-50">
+      <div className="w-[100%] flex items-center justify-between lg:h-[48px] md:h-[36px] h-[40px] absolute top-[24px] bg-subBg text-subText rounded-[16px]  z-50">
         {/* Desktop Layout */}
         <div className="hidden md:flex items-center h-full gap-5 ">
           <LogoSection />
