@@ -18,7 +18,7 @@ const CommonInput: FC<IInput> = ({ label, placeholder, classname, type, color, b
                 onChange={onchange}
                 type={type || ''}
                 placeholder={placeholder || ''}
-                className={`w-fit py-3 bg-transparent border border-border px-4 text-[#FFFFFF] rounded-[16px] text-sm ${classname} ${color} ${background}`}
+                className={`w-fit py-3 bg-transparent remove-arrows border border-border px-4 text-[#FFFFFF] rounded-[16px] text-sm ${classname} ${color} ${background}`}
             />
         </div>
     )

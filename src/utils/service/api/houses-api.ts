@@ -9,20 +9,33 @@ export const getHouses = async (
     order: "ASC" | "DESC",
     sort: string,
     location?: string,
+    propertyType?: string,
     minPrice?: number | "",
     maxPrice?: number | "",
+    minRent?: number | "",
+    maxRent?: number | "",
+    minMortgage?: number | "",
+    maxMortgage?: number | "",
+    minArea?: number | "",
+    maxArea?: number | "",
 ) => {
     const url =
-        `/houses?transactionType=${transactionType}` +
+        `/houses?limit=10&transactionType=${transactionType}` +
         `&search=${encodeURIComponent(search)}` +
         `&order=${order}` +
         `&sort=${sort}` +
+        `&propertyType=${propertyType || ''}` +
         `&location=${encodeURIComponent(location ?? '')}` +
         (minPrice !== '' ? `&minPrice=${minPrice}` : '') +
-        (maxPrice !== '' ? `&maxPrice=${maxPrice}` : '');
+        (maxPrice !== '' ? `&maxPrice=${maxPrice}` : '') +
+        (minRent !== '' ? `&minRent=${minRent}` : '') +
+        (maxRent !== '' ? `&maxRent=${maxRent}` : '') +
+        (minMortgage !== '' ? `&minMortgage=${minMortgage}` : '') +
+        (maxMortgage !== '' ? `&maxMortgage=${maxMortgage}` : '') +
+        (minArea !== '' ? `&minArea=${minArea}` : '') +
+        (maxArea !== '' ? `&maxArea=${maxArea}` : '');
 
     const response = await fetchApi.get(url) as IHouse[];
-
     return response
 }
 

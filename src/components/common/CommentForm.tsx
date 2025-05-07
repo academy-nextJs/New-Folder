@@ -3,7 +3,7 @@ import CommonButton from '@/components/common/buttons/common/CommonButton'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Slider } from '@/components/ui/slider'
-import { ChevronLeft, Star } from 'lucide-react'
+import { ChevronLeft, RefreshCcw, Star } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -13,7 +13,7 @@ import { fetchApi } from '@/core/interceptore/fetchApi'
 import { useParams } from 'next/navigation'
 import { showToast } from '@/core/toast/toast'
 
-const SingleReserveForm = () => {
+const SingleReserveForm = ({ viewReply, parent_comment, parent_comment_id }: { viewReply: boolean, parent_comment: string, parent_comment_id: string | null }) => {
     const {
         register,
         handleSubmit,
@@ -22,16 +22,18 @@ const SingleReserveForm = () => {
         resolver: zodResolver(schemaCommentFormValidation),
     })
     const [rating, setRating] = useState([4.5])
+    const [isLoading, setIsLoading] = useState<boolean>(false)
 
     const params = useParams()
     const id = params?.id as string
 
     const onSubmit = async (data: IComment) => {
+        setIsLoading(true)
         const commentData = {
             title: data.name,
             caption: data.caption,
             rating: rating[0],
-            parent_comment_id: null
+            parent_comment_id: parent_comment_id
         }
         try {
             const response = await fetchApi.post(`/houses/${id}/comments`, commentData)
@@ -39,9 +41,11 @@ const SingleReserveForm = () => {
             if (response) {
                 showToast('success', ' تایید نظر ', 'بستن', ' نظر شما با موفقیت ارسال شد ')
             }
+            setIsLoading(false)
         } catch (error) {
             console.log(error)
             showToast('success', ' مشکل نظر ', 'بستن', ' مشکلی پیدا شد و نظر شما لغو شد ')
+            setIsLoading(false)
         }
     }
 
@@ -63,7 +67,12 @@ const SingleReserveForm = () => {
                     {errors.email && <span className='text-danger font-semibold text-xs'>{errors.email.message}</span>}
                     <Input {...register('email')} id='email' name='email' className='px-4 w-full py-2 bg-transparent rounded-[16px] border border-subText' />
                 </div>
-                <div className='flex flex-col gap-2 text-sm w-3/5 text-subText max-md:w-full'>
+                {viewReply ? <div className='flex items-end max-md:flex-wrap justify-between w-full md:w-4/6 md:gap-4 gap-8'>
+                    <div className='flex flex-col gap-2 text-sm w-full text-subText'>
+                        <Label> برای نظر </Label>
+                        <div className='px-4 py-2 bg-transparent w-full rounded-[16px] border border-subText'> {parent_comment || 'نامعلوم'} </div>
+                    </div>
+                </div> : <div className='flex flex-col gap-2 text-sm w-3/5 text-subText max-md:w-full'>
                     <Label htmlFor='rating' > امتیاز شما </Label>
                     <div className="w-full bg-muted/20 rounded-[16px] p-2 flex flex-row-reverse items-center justify-between gap-4 border border-subText">
                         <div className="flex items-center gap-2">
@@ -81,7 +90,7 @@ const SingleReserveForm = () => {
                         />
 
                     </div>
-                </div>
+                </div>}
             </div>
             <div className='flex items-end max-md:flex-wrap justify-between w-full md:gap-4 gap-8'>
                 <div className='flex flex-col gap-2 text-sm w-full text-subText'>
@@ -89,7 +98,7 @@ const SingleReserveForm = () => {
                     {errors.caption && <span className='text-danger font-semibold text-xs'>{errors.caption.message}</span>}
                     <Input {...register('caption')} id='caption' name='caption' className='px-4 py-2 bg-transparent w-full rounded-[16px] border border-subText' />
                 </div>
-                <CommonButton type='submit' classname='max-md:w-full' icon={<ChevronLeft />} title='ارسال نظر' />
+                <CommonButton type='submit' classname='max-md:w-full' icon={isLoading ? <RefreshCcw /> : <ChevronLeft />} title={isLoading ? 'در حال ارسال...' : 'ارسال نظر'} />
             </div>
         </form>
     )
