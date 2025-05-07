@@ -10,10 +10,11 @@ interface IReserveFilter {
     setSearch: React.Dispatch<React.SetStateAction<string>>
     setLocation: React.Dispatch<React.SetStateAction<string>>
     setPropertyType: React.Dispatch<React.SetStateAction<string>>
+    setTransactionType: React.Dispatch<React.SetStateAction<string>>
     houseLength?: number
 }
 
-const RentalFilter: FC<IReserveFilter> = ({ setOrder, setSort, setSearch, setPropertyType, houseLength, setLocation }) => {
+const RentalFilter: FC<IReserveFilter> = ({ setOrder, setSort, setSearch, setPropertyType, houseLength, setLocation, setTransactionType }) => {
     return (
         <div className='w-full px-4 py-2 flex 2xl:flex-row flex-col max-2xl:gap-8 justify-between rounded-2xl bg-secondary-light2'>
             <div className='flex xl:flex-row flex-col gap-4'>
@@ -89,7 +90,7 @@ const RentalFilter: FC<IReserveFilter> = ({ setOrder, setSort, setSearch, setPro
                 />
                 <CommonSelect
                     onValueChange={(value => {
-                        setPropertyType(value)
+                        setPropertyType(value === "all" ? "" : value)
                     })}
                     placeholder="آپارتمان"
                     icon={<House size={16} className='text-subText' />}
@@ -97,17 +98,23 @@ const RentalFilter: FC<IReserveFilter> = ({ setOrder, setSort, setSearch, setPro
                         { label: 'آپارتمان', value: 'آپارتمان' },
                         { label: 'ویلا', value: 'ویلا' },
                         { label: 'روستایی', value: 'روستایی' },
+                        { label: 'همه', value: 'all' },
                     ]}
                     color='text-subText dark:group-hover:text-white'
                     label='نوع ملک'
                     classname='px-4 py-5 border-subText w-full dark:group-hover:text-white dark:group-hover:border-white outline-none'
                 />
                 <CommonSelect
+                    onValueChange={(value => {
+                        setTransactionType(value === "all" ? "" : value)
+                    })}
                     placeholder="رهن و اجاره"
                     icon={<Coins size={16} className='text-subText' />}
                     selectItems={[
                         { label: 'رهن', value: 'mortgage' },
                         { label: 'اجاره', value: 'rental' },
+                        { label: 'خرید', value: 'direct_purchase' },
+                        { label: 'همه', value: "all" },
                     ]}
                     color='text-subText dark:group-hover:text-white'
                     label='نوع ملک'

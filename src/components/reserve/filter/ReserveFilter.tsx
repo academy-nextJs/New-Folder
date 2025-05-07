@@ -15,7 +15,7 @@ interface IReserveFilter {
     houseLength?: number
 }
 
-const ReserveFilter: FC<IReserveFilter> = ({ setOrder, setSort, setSearch, houseLength }) => {
+const ReserveFilter: FC<IReserveFilter> = ({ setOrder, setSort, setSearch, houseLength, setLocation }) => {
     const [isOpen, setIsOpen] = useState<boolean>(false)
 
     return (
@@ -23,6 +23,9 @@ const ReserveFilter: FC<IReserveFilter> = ({ setOrder, setSort, setSearch, house
             <div className='flex md:flex-row md:flex-wrap flex-col w-full gap-4'>
                 <CommonSelect
                     placeholder='استان ، شهر ، هتل ....'
+                    onValueChange={(value => {
+                        setLocation(value)
+                    })}
                     icon={<MapPin size={16} className='text-subText' />}
                     selectItems={[
                         { label: 'آبادان', value: 'abadan' },

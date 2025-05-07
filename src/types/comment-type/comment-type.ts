@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 export interface IComment {
     name: string;
     email: string;
@@ -15,6 +13,6 @@ export interface IGetComment {
     rating: string;
     created_at: string;
     parent_comment_id: string | null;
-    user: { full_name: string } | null;
-    parent_comment: any;
+    user: string | null;
+    parent_comment: string;
 }

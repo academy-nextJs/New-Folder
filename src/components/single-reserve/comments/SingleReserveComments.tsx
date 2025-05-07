@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useState, useMemo } from 'react'
+import React, { useEffect, useState, useMemo, Dispatch, SetStateAction } from 'react'
 import { useParams } from 'next/navigation'
 import { QAWidget } from '@/components/common/CommentItem'
 import { IGetComment } from '@/types/comment-type/comment-type'
@@ -9,7 +9,11 @@ import { Button } from '@/components/ui/button'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { Loader } from '@/components/common/Loader'
 
-const SingleReserveComments = () => {
+const SingleReserveComments = ({ setViewReply, setParent_comment, setParent_comment_id }: {
+  setViewReply: Dispatch<SetStateAction<boolean>>
+  setParent_comment: Dispatch<SetStateAction<string>>
+  setParent_comment_id: Dispatch<SetStateAction<string | null>>
+}) => {
   const PAGE_SIZE = 2
   const [comments, setComments] = useState<IGetComment[]>([])
   const [page, setPage] = useState(1)
@@ -52,7 +56,7 @@ const SingleReserveComments = () => {
         <div className="flex md:flex-row flex-col gap-4 max-md:gap-8 justify-center md:justify-start">
           {comments.map((comment) => (
             <div key={comment.id} className={`md:w-1/2 w-full mt-[30px]`}>
-              <QAWidget {...comment} />
+              <QAWidget setParent_comment_id={setParent_comment_id} setViewReply={setViewReply} setParent_comment={setParent_comment} {...comment} />
             </div>
           ))}
         </div>

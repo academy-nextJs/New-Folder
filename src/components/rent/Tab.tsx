@@ -23,6 +23,9 @@ const tabs = [
 
 export default function PropertyTabs({ house }: { house: IHouse }) {
   const [activeTab, setActiveTab] = useState("description");
+  const [viewReply, setViewReply] = useState<boolean>(false)
+  const [parent_comment, setParent_comment] = useState<string>('')
+  const [parent_comment_id, setParent_comment_id] = useState<string | null>(null)
 
   const facilities: TFacilities = []
   if (house?.parking && house?.parking > 0) { facilities.push({ title: <Car size={24} />, content: ' پارکینگ ' }) }
@@ -50,7 +53,7 @@ export default function PropertyTabs({ house }: { house: IHouse }) {
       </div>
 
       <motion.div initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }} className="text-sm text-foreground leading-relaxed py-6 rounded-lg">
+        whileInView={{ opacity: 1, y: 0 }} className="text-sm text-foreground leading-relaxed py-6 rounded-lg">
         {activeTab === "description" && (
           <p className="lg:text-base md:text-base sm:text-sm text-xs text-justify">
             {house.caption || 'هیج اطلاعاتی موجود نیست'}
@@ -58,7 +61,7 @@ export default function PropertyTabs({ house }: { house: IHouse }) {
         )}
         {activeTab === "features" && (
           <motion.div initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }} className='grid grid-rows-2 md:flex flex-wrap gap-4 w-full h-fit'>
+            whileInView={{ opacity: 1, y: 0 }} className='grid grid-rows-2 md:flex flex-wrap gap-4 w-full h-fit'>
             {facilities.map((facility, idx) => (
               <FacilityCard key={idx} content={facility.content} title={facility.title} />
             ))}
@@ -67,10 +70,10 @@ export default function PropertyTabs({ house }: { house: IHouse }) {
         {activeTab === "location" && <RentMap location={house.location} caption={house.caption || 'هیج اطلاعاتی موجود نیست'} />}
         {activeTab === "reviews" && (
           <motion.div initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}>
-            <SingleReserveForm />
+            whileInView={{ opacity: 1, y: 0 }}>
+            <SingleReserveForm parent_comment={parent_comment} parent_comment_id={parent_comment_id} viewReply={viewReply} />
             <div className="my-[100px]">
-              <SingleReserveComments />
+              <SingleReserveComments setParent_comment={setParent_comment} setParent_comment_id={setParent_comment_id} setViewReply={setViewReply} />
             </div>
           </motion.div>
         )}
