@@ -9,8 +9,8 @@ import { Button } from '@/components/ui/button'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { Loader } from '@/components/common/Loader'
 
-const SingleReserveComments = ({ perPageItems }: { perPageItems?: number }) => {
-  const PAGE_SIZE = perPageItems || 2
+const SingleReserveComments = () => {
+  const PAGE_SIZE = 2
   const [comments, setComments] = useState<IGetComment[]>([])
   const [page, setPage] = useState(1)
   const [loading, setLoading] = useState(false)
@@ -41,7 +41,7 @@ const SingleReserveComments = ({ perPageItems }: { perPageItems?: number }) => {
   return (
     <div className="flex flex-col mt-8 w-full">
       {loading ? (
-        <div className="flex justify-center py-10">
+        <div className="flex justify-center w-fit h-fit mx-auto py-10">
           <Loader />
         </div>
       ) : comments.length === 0 ? (
@@ -49,9 +49,11 @@ const SingleReserveComments = ({ perPageItems }: { perPageItems?: number }) => {
           هیچ نظری وجود ندارد.
         </p>
       ) : (
-        <div className="flex gap-4">
+        <div className="flex md:flex-row flex-col gap-4 max-md:gap-8 justify-center md:justify-start">
           {comments.map((comment) => (
-            <QAWidget key={comment.id} {...comment} />
+            <div key={comment.id} className={`md:w-1/2 w-full mt-[30px]`}>
+              <QAWidget {...comment} />
+            </div>
           ))}
         </div>
       )}
@@ -88,6 +90,7 @@ const SingleReserveComments = ({ perPageItems }: { perPageItems?: number }) => {
         </Button>
       </div>
     </div>
+
   )
 }
 

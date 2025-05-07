@@ -12,6 +12,7 @@ import FacilityCard from "../single-reserve/facilitis/FacilityCard";
 import { TFacilities } from "@/types/facilites-type";
 import { IHouse } from "@/types/houses-type/house-type";
 import SingleReserveComments from "../single-reserve/comments/SingleReserveComments";
+import { motion } from 'framer-motion'
 
 const tabs = [
   { id: "description", label: "توضیحات ملک" },
@@ -48,42 +49,32 @@ export default function PropertyTabs({ house }: { house: IHouse }) {
         ))}
       </div>
 
-      <div className="text-sm text-foreground leading-relaxed py-6 rounded-lg">
+      <motion.div initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }} className="text-sm text-foreground leading-relaxed py-6 rounded-lg">
         {activeTab === "description" && (
           <p className="lg:text-base md:text-base sm:text-sm text-xs text-justify">
-            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-            استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در
-            ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و
-            کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی
-            در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را
-            می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی
-            الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این
-            صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و
-            شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای
-            اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد
-            استفاده قرار گیرد.لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از
-            صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه
-            روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی
-            تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربر....
+            {house.caption || 'هیج اطلاعاتی موجود نیست'}
           </p>
         )}
         {activeTab === "features" && (
-          <div className='grid grid-rows-2 md:flex flex-wrap gap-4 w-full h-fit'>
+          <motion.div initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }} className='grid grid-rows-2 md:flex flex-wrap gap-4 w-full h-fit'>
             {facilities.map((facility, idx) => (
               <FacilityCard key={idx} content={facility.content} title={facility.title} />
             ))}
-          </div>
+          </motion.div>
         )}
-        {activeTab === "location" && <RentMap />}
+        {activeTab === "location" && <RentMap caption={house.caption || 'هیج اطلاعاتی موجود نیست'} />}
         {activeTab === "reviews" && (
-          <div>
+          <motion.div initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}>
             <SingleReserveForm />
             <div className="my-[100px]">
-              <SingleReserveComments perPageItems={3} />
+              <SingleReserveComments />
             </div>
-          </div>
+          </motion.div>
         )}
-      </div>
+      </motion.div>
     </div>
   );
 }

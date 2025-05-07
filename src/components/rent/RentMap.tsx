@@ -1,30 +1,25 @@
+'use client'
 import React from "react";
 import ReserveMap from "../reserve/map/ReserveMap";
+import { motion } from 'framer-motion'
 
-const RentMap = () => {
+const RentMap = ({ caption }: { caption: string }) => {
   return (
-    <div className="w-full flex flex-col md:flex-row justify-center gap-6">
-      <div className="w-1/2">
+    <motion.div initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }} className="w-full flex flex-col md:flex-row justify-center gap-6">
+      <div className="w-1/2 max-md:hidden h-[324px]">
+        <ReserveMap />
+      </div>
+      <div className="w-full md:hidden cursor-pointer block h-[324px]">
         <ReserveMap />
       </div>
 
-      <div className="w-full md:w-1/2">
+      <div className="w-1/2 max-md:w-full">
         <p className="text-secondary-foreground lg:text-lg md:text-md sm:text-sm text-xs text-justify">
-          لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده
-          از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و
-          سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای
-          متنوع با هدف بهبود ابزارهای کاربردی می‌باشد. کتاب‌های زیادی در شصت و سه
-          درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می‌طلبد تا با
-          نرم‌افزارها شناخت بیشتری را برای طراحان رایانه‌ای علی‌الخصوص طراحان
-          خلاق و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می‌توان امید
-          داشت که تمام دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان
-          رسد و زمان مورد نیاز شامل حروف‌چینی دستاوردهای اصلی و جوابگوی سوالات
-          پیوسته اهل دنیای موجود طراحی اساساً مورد استفاده قرار گیرد. لورم ایپسوم
-          متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان
-          گرافیک است...
+          {caption}
         </p>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

@@ -10,8 +10,8 @@ const ReserveComponent = () => {
     const [order, setOrder] = useState<'DESC' | 'ASC'>('DESC')
     const [sort, setSort] = useState<string>('')
     const [location, setLocation] = useState<string>('')
-    const [minPrice, setMinPrice] = useState<number | ''>('')
-    const [maxPrice, setMaxPrice] = useState<number | ''>('')
+    const [minPrice, setMinPrice] = useState<"" | number>("")
+    const [maxPrice, setMaxPrice] = useState<number | "">("")
     const [houses, setHouses] = useState<IHouse[]>([])
     const [isLoading, setIsLoading] = useState<boolean>(true)
 

@@ -1,11 +1,12 @@
+import RentalComponent from '@/components/rentalMortgage/Rental'
 import React from 'react'
 
-const page = () => {
+const RentPage = () => {
   return (
-    <div>
-      
+    <div className='mt-[120px]'>
+      <RentalComponent />
     </div>
   )
 }
 
-export default page
+export default RentPage

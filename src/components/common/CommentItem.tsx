@@ -22,7 +22,7 @@ export const QAWidget: FC<IGetComment> = ({
   };
 
   return (
-    <div className="flex max-w-[487.5px] rounded-[32px] flex-col gap-8 bg-secondary-light2 px-4 py-4 pt-[40px] relative group
+    <div className="flex h-full justify-between rounded-[32px] flex-col gap-8 bg-secondary-light2 px-4 py-4 pt-[40px] relative group
                     after:content-[''] after:w-[125px] after:h-[70px] after:group-hover:bg-primary
                     after:absolute after:top-[-40px] after:rounded-tr-2xl after:rounded-tl-[40px]
                     after:right-0 after:bg-secondary-light2">
@@ -36,11 +36,11 @@ export const QAWidget: FC<IGetComment> = ({
         style={!showFullTitle ? clampStyle : undefined}
         onClick={() => setShowFullTitle(prev => !prev)}
       >
-        {title}
+        {title || ' این پیام خالی می باشد '}
       </h2>
 
       <div className='flex gap-4 items-center'>
-        <div className='bg-accent px-6 py-3 rounded-[16px] flex items-center gap-2 flex-row-reverse'>
+        <div className='bg-accent whitespace-nowrap px-6 py-3 rounded-[16px] flex items-center gap-2 flex-row-reverse'>
           پاسخ کاربران <NotepadText size={16} />
         </div>
         <svg width="283" height="3" viewBox="0 0 283 3" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -67,10 +67,10 @@ export const QAWidget: FC<IGetComment> = ({
         style={!showFullCaption ? clampStyle : undefined}
         onClick={() => setShowFullCaption(prev => !prev)}
       >
-        {caption}
-      </h2>
+        {caption || ' این پیام خالی می باشد '}
+        </h2>
 
-      <div className='bg-card-light rounded-[16px] flex items-center justify-between py-2 px-4 gap-4'>
+      <div className='bg-card-light rounded-[16px] flex md:flex-row flex-col max-md:items-start items-center justify-between py-2 px-4 gap-4'>
         <div className='flex items-center gap-4'>
           <div className='bg-subText rounded-[16px] w-[57px] h-[57px]' />
           <div className='flex flex-col justify-between gap-3'>
@@ -80,7 +80,7 @@ export const QAWidget: FC<IGetComment> = ({
             </span>
           </div>
         </div>
-        <div className='px-4 py-2 cursor-pointer border border-white rounded-[16px] flex items-center gap-2 flex-row-reverse'>
+        <div className='px-4 py-2 whitespace-nowrap cursor-pointer border border-white rounded-[16px] flex items-center gap-2 flex-row-reverse'>
           <ChevronLeft size={16} /> ثبت پاسخ
         </div>
       </div>

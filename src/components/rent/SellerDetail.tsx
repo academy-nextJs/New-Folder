@@ -1,8 +1,10 @@
+'use client'
 import { IHouse } from '@/types/houses-type/house-type'
 import { convertToJalaliString } from '@/utils/helper/shamsiDate/ShamsDate'
 import { SplitNumber } from '@/utils/helper/spliter/SplitNumber'
 import { Calendar, Phone, MessageCircle } from 'lucide-react'
 import React, { FC } from 'react'
+import { motion } from 'framer-motion'
 
 const SellerDetail: FC<{ house: IHouse }> = ({ house }) => {
     const jalaliDate = convertToJalaliString(house.last_updated)
@@ -11,7 +13,7 @@ const SellerDetail: FC<{ house: IHouse }> = ({ house }) => {
     //   const maskedPhone = house.phone.replace(/^(\d{2})(\d{4})(\d{3})$/, '$1****$3')
 
     return (
-        <div className="bg-secondary-light2 border-border border rounded-2xl p-4 shadow-md flex flex-col justify-between max-2xl:w-full w-2/12">
+        <motion.div initial={{ opacity: 0, x: -100 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }} className="bg-secondary-light2 border-border border rounded-2xl p-4 shadow-md flex flex-col justify-between max-2xl:w-full w-2/12">
             <div className="text-center border-b border-subText pb-2 mb-3">
                 <h2 className="text-sm font-bold flex items-center flex-row-reverse justify-center gap-2">
                     <Phone size={16} /> اطلاعات تماس
@@ -39,13 +41,13 @@ const SellerDetail: FC<{ house: IHouse }> = ({ house }) => {
             </div>
 
             <button className="bg-primary flex-row-reverse text-primary-foreground text-sm w-full py-2 mt-4 rounded-xl flex items-center justify-center gap-2">
-                <Phone size={16} /> تماس با 09362728628
+                <Phone size={16} /> تماس با 09*****8903
             </button>
 
             <button className="mt-2 w-full flex-row-reverse border border-white text-sm py-2 rounded-xl flex items-center justify-center gap-2">
                 <MessageCircle size={16} /> گفتگو با فروشنده
             </button>
-        </div>
+        </motion.div>
     )
 }
 
