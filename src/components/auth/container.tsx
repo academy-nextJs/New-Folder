@@ -3,10 +3,12 @@ import authBanner from "../../assets/authBanner.png";
 import score from "@/assets/score.png"
 import Image from "next/image";
 import { motion } from 'framer-motion'
+import { useTranslation } from "react-i18next";
 
 const AuthContainer = ({ children }: { children: React.ReactNode; }) => {
+  const {t , i18n} = useTranslation("")
   return (
-    <div className="flex gap-16 text-card-foreground h-fit lg:pr-8 px-8 mt-[100px] items-center">
+    <div dir={i18n.dir()} className="flex gap-16 text-card-foreground h-fit lg:pr-8 px-8 mt-[100px] items-center">
       <div className="lg:w-1/2 w-full">
         {children}
       </div>
