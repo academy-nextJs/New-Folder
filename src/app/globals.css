@@ -25,7 +25,7 @@
   --subBg: #ffffff;
   --subBg2: #e0e0e0;
   --secondary-light: #eeeef4cc;
-  --secondary-light2: #dedee2;
+  --secondary-light2: #efefef;
   --secondary-light3: #656565;
   --secondary-light4: #ffffff;
   --card-light: #eeeef4;
@@ -46,9 +46,9 @@
   --input: #ffffff;
   --blur-primary: #56a60052;
   --blur-blue: #bab6eb;
-  --card-secondary: #9297a5;
-  --card-secondary2: #eeeef4cc;
-  --card-secondary3: #ffffff;
+  --card-secondary: #dbdbdb;
+  --card-secondary2: #e7e7e7cc;
+  --card-secondary3: #f5f5f5;
   --text-about: #434343;
   animation: fadeIn var(--transition-duration) ease;
 }

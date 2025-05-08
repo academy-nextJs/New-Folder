@@ -58,7 +58,7 @@ export default function AboutComponent() {
           {teamMembers.map((name, index) => (
             <motion.div
               key={index}
-              className="bg-secondary-light3 p-6 rounded-2xl shadow-md flex flex-col items-center"
+              className="bg-secondary-light p-6 rounded-2xl shadow-md flex flex-col items-center"
               variants={item}
               whileHover={{ y: -4, scale: 1.02 }}
               transition={{ type: "spring", stiffness: 120, damping: 10 }}
