@@ -6,6 +6,12 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        bacgkroundW: "var(--bacgkroundW)",
+        textComment: "var(--textComment)",
+        cardComment: "var(--cardComment)",
+        iconsecendary: "var(--iconsecendary)",
+        "text-about": "var(--text-about)",
+        "card-body": "var(--card-body)",
         primary: "var(--primary)", // سبز فسفری
         "primary-foreground": "var(--primary-foreground)",
         secondary: "var(--secondary)", // پس‌زمینه اصلی

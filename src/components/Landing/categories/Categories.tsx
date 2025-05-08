@@ -6,7 +6,6 @@ import villaIcon2 from "../../../assets/images/categories/cottage.png";
 import villaIcon3 from "../../../assets/images/categories/wooden-house.png";
 import villaIcon4 from "../../../assets/images/categories/apartment.png";
 import star from "@/assets/Star 7.png";
-import Bstar from "@/assets/Star 5.png";
 import { MoveLeftIcon } from "lucide-react";
 import { fetchApi } from "@/core/interceptore/fetchApi";
 import { Loader } from "@/components/common/Loader";
@@ -19,11 +18,16 @@ type Category = {
 };
 
 const CardSvgBackground = ({ isHovered }: { isHovered: boolean }) => (
-  <svg className="w-full" xmlns="http://www.w3.org/2000/svg">
+  <svg className="w-full " xmlns="http://www.w3.org/2000/svg">
     <path
       d="M103.688 23.5C108.543 23.5 113.052 20.9839 115.602 16.8515L121.898 6.6485C124.448 2.51609 128.956 0 133.812 0H199C206.732 0 213 6.26801 213 14V75C213 82.732 206.732 89 199 89H14C6.26802 89 0 82.732 0 75V37.5C0 29.768 6.26801 23.5 14 23.5H103.688Z"
-      fill={isHovered ? "#8CFF45" : "#2E2E2E"}
-      className="transition-all duration-300"
+      stroke="black" // رنگ بردر (مثلاً مشکی)
+      strokeWidth="2" // ضخامت بردر
+      className={`transition-all duration-300 ${
+        isHovered
+          ? "dark:fill-primary fill-primary"
+          : "dark:fill-card-body fill-white"
+      }   stroke-primary dark:stroke-none`}
     />
   </svg>
 );
@@ -104,7 +108,7 @@ const Categories = () => {
         هر ملکی بخوای اینجا پیدا میشه !
       </h1>
 
-      <p className="text-center sm:text-sm mb-8 sm:mb-12 mx-auto max-w-full font-sans break-words">
+      <p className="text-center text-subText sm:text-sm mb-8 sm:mb-12 mx-auto max-w-full font-sans break-words">
         با کلیک به روی هر دسته بندی می‌توانید تمام آگهی مربوط به آن را مشاهده
         کنید و به ملک مورد علاقه خود برسید
       </p>
@@ -123,7 +127,7 @@ const Categories = () => {
                 return (
                   <div
                     key={cardIndex}
-                    className="w-[210px] h-[100px] relative flex items-center justify-center cursor-pointer transition-all duration-300"
+                    className="w-[230px] h-[100px] relative flex items-center justify-center cursor-pointer transition-all duration-300"
                     onMouseEnter={() => setHoveredIndex(cardIndex)}
                     onMouseLeave={() => setHoveredIndex(null)}
                   >
@@ -134,56 +138,86 @@ const Categories = () => {
                     </div>
 
                     <div
-                      className="absolute left-6 bottom-20"
+                      className={`absolute left-6 bottom-[80px] rounded-lg transition-colors duration-300
+    dark:bg-transparent dark:border-none 
+    ${hoveredIndex === cardIndex ? "bg-primary" : "bg-white"}
+    dark:${hoveredIndex === cardIndex ? "" : ""}
+    border border-primary dark:border-none
+  `}
                       onClick={handleNextSlide}
                     >
-                      <MoveLeftIcon className="w-8 h-6 text-foreground" />
+                      <MoveLeftIcon
+                        className={`w-8 h-[18px] transition-colors duration-300
+      ${hoveredIndex === cardIndex ? "text-white" : "text-primary"}
+      dark:text-subText
+    `}
+                      />
                     </div>
 
                     <div
                       className={`
     absolute bottom-14 
-    ${isSmallScreen ? "right-4" : "right-2"}
+    ${isSmallScreen ? "right-8" : "right-8"}
     w-12 h-12 flex items-center justify-center rounded-md
     ${
       theme === "light"
-        ? "bg-[#393939]"
+        ? "bg-secondary-light2"
         : hoveredIndex === cardIndex
-        ? "bg-secondary-light"
-        : "bg-secondary"
+        ? "bg-secondary-light2"
+        : "bg-secondary-light2"
     }
     backdrop-blur-md transition-all duration-300
   `}
                     >
-                      <Image alt="villa" src={icon} className="w-6 h-6" />
+                      <Image
+                        alt="villa"
+                        src={icon}
+                        className="w-6 h-6 invert dark:invert-0"
+                      />
                     </div>
 
                     <div
-                      className={`absolute bottom-4 flex items-center gap-1 group font-bold text-center`}
+                      className={`
+    absolute bottom-4 left-1/2 transform -translate-x-1/2
+    flex items-center gap-1 group font-bold text-center
+  `}
                       style={{
                         bottom: "20px",
-                        right: isSmallScreen ? "60px" : "55px",
                       }}
                     >
                       <Image
                         alt="star"
-                        src={hoveredIndex === cardIndex ? Bstar : star}
-                        className="w-4 h-4 transition-all duration-300"
+                        src={star}
+                        className={`
+      w-4 h-4 transition-all duration-300
+      ${
+        hoveredIndex === cardIndex
+          ? "invert-0 dark:invert"
+          : "invert dark:invert-0"
+      }
+    `}
                       />
 
                       <span
                         className={`
-    transition-all duration-300
-    ${hoveredIndex === cardIndex ? "text-black" : "text-white"} 
-  `}
+      transition-all duration-300 
+      ${hoveredIndex === cardIndex ? "text-card-body" : "text-secondary-static"}
+    `}
                       >
                         {category?.name || "بدون عنوان"}
                       </span>
 
                       <Image
                         alt="star"
-                        src={hoveredIndex === cardIndex ? Bstar : star}
-                        className="w-4 h-4 transition-all duration-300"
+                        src={star}
+                        className={`
+      w-4 h-4 transition-all duration-300
+      ${
+        hoveredIndex === cardIndex
+          ? "invert-0 dark:invert"
+          : "invert dark:invert-0"
+      }
+    `}
                       />
                     </div>
                   </div>
