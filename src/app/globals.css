@@ -11,42 +11,42 @@
 }
 
 :root {
-  --background: #9CA3AF;
-  --foreground: #1E1E1E;
-  --primary: #131d2d;
+  --background: #ffffff;
+  --foreground: #1e1e1e;
+  --primary: #58893a;
   --primary-foreground: #ffffff;
-  --secondary: #9CA3AF;
-  --secondary-static: #1E1E1E;
+  --secondary: #ffffff;
+  --secondary-static: #1e1e1e;
   --secondary-foreground: #333333;
-  --subBg: #b8c0d2;
-  --subBg2: #E0E0E0;
-  --secondary-light: #b8c0d2;
-  --secondary-light2: #484848;
+  --subBg: #ffffff;
+  --subBg2: #e0e0e0;
+  --secondary-light: #eeeef4cc;
+  --secondary-light2: #dedee2;
   --secondary-light3: #656565;
-  --secondary-light4: #b8c0d2;
+  --secondary-light4: #ffffff;
+  --card-light: #EEEEF4;
   --subText: #1d1d1d;
-  --muted: #AAAAAA;
+  --muted: #aaaaaa;
   --muted-foreground: #777777;
-  --accent: #5D3BFF;
-  --accent-foreground: #FFFFFF;
+  --accent: #5d3bff;
+  --accent-foreground: #ffffff;
   --border: #e3e3e3;
-  --ring: #B0B0B0;
-  --card: #FFFFFF;
-  --card-foreground: #1E1E1E;
-  --popover: #FFFFFF;
-  --popover-foreground: #1E1E1E;
-  --danger: #D32F2F;
-  --destructive: #D32F2F;
-  --input: #FFFFFF;
-  --blur-primary: #56A60052;
-  --blur-blue: #7569FF52;
+  --ring: #b0b0b0;
+  --card: #eeeef4cc;
+  --card-foreground: #1e1e1e;
+  --popover: #eeeef4cc;
+  --popover-foreground: #1e1e1e;
+  --danger: #d32f2f;
+  --destructive: #d32f2f;
+  --input: #ffffff;
+  --blur-primary: #56a60052;
+  --blur-blue: #bab6eb;
   --card-secondary: #9297a5;
-  --card-secondary2: #a9b1be;
-  --card-secondary3: #b8c0d2;
+  --card-secondary2: #eeeef4cc;
+  --card-secondary3: #ffffff;
 
   animation: fadeIn var(--transition-duration) ease;
 }
-
 
 .dark {
   --background: #232323;
@@ -79,9 +79,9 @@
   --destructive: #ff4d4d;
   --input: #363636;
   --ring: #b0b0b0;
-  --card-secondary: #3B3B3B;
-  --card-secondary2: #2D2D2D;
-  --card-secondary3: #1C1C1C;
+  --card-secondary: #3b3b3b;
+  --card-secondary2: #2d2d2d;
+  --card-secondary3: #1c1c1c;
   animation: fadeIn var(--transition-duration) ease;
 }
 
@@ -91,7 +91,8 @@ body {
   background-color: var(--background);
   color: var(--foreground);
   overflow-x: hidden;
-  transition: background-color var(--transition-duration) ease, color var(--transition-duration) ease;
+  transition: background-color var(--transition-duration) ease,
+    color var(--transition-duration) ease;
 }
 
 @keyframes fadeIn {
@@ -147,4 +148,3 @@ body {
     -moz-appearance: textfield;
   }
 }
-
