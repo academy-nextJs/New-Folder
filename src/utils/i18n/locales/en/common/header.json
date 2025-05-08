@@ -1,0 +1,10 @@
+{
+    "navbarSection" :{
+        "quickReservation" : "Quick Reservation",
+        "rent" : "Rent",
+        "about" : "About",
+        "seller" : "Seller",
+        "articles" : "Articles",
+        "contact" : "Contact"
+    }
+}

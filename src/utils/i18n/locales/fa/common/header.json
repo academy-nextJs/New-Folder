@@ -1,0 +1,10 @@
+{
+    "navbarSection" :{
+        "quickReservation" : "رزرو سریع",
+        "rent" : "رهن و اجاره",
+        "about" : "درباره ما",
+        "seller" : "فروشنده شو",
+        "articles" : "مقالات ما",
+        "contact" : "تماس با ما"
+    }
+}
