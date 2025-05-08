@@ -9,6 +9,8 @@ import { Toaster } from "@/components/ui/sonner";
 import { Suspense } from "react";
 import Loading from "./loading";
 
+
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
