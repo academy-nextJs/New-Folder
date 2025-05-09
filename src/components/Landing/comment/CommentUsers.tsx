@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import arrow from "@/assets/arrow.svg";
 import { Star, Calendar } from "lucide-react";
 import plygen from "@/assets/Polygon 1.png";
+import { useTranslation } from "react-i18next";
 
 interface Comment {
   id: number;
@@ -106,6 +107,8 @@ const CommentUsers = () => {
     setActiveSlideGroup(groupIndex);
   };
 
+  const {t, i18n} = useTranslation("landing")
+
   const commentPairs = [];
   for (let i = 0; i < comments.length; i += commentsPerSlide) {
     commentPairs.push(comments.slice(i, i + commentsPerSlide));
@@ -154,7 +157,7 @@ const CommentUsers = () => {
             />
           </svg>
         </div>
-        <span className="text-sm sm:text-base md:text-lg">نظرات کاربران</span>
+        <span dir={i18n.dir()} className="text-sm sm:text-base md:text-lg"> {t("comments.title")} </span>
         <div className="flex gap-1 justify-center items-center dark:hidden">
           <svg
             width="48"
@@ -187,13 +190,12 @@ const CommentUsers = () => {
         />
       </div>
 
-      <h1 className="text-center text-xl sm:text-2xl md:text-3xl font-bold mb-2 sm:mb-4">
-        رضایت شما اعتبار و ارزش دلتا را می‌سازد!
+      <h1 dir={i18n.dir()} className="text-center text-xl sm:text-2xl md:text-3xl font-bold mb-2 sm:mb-4">
+        {t("comments.subtitle")}
       </h1>
 
-      <p className="text-center text-xs sm:text-sm md:text-base mb-4 sm:mb-5 mx-auto max-w-2xl font-sans break-words leading-5 sm:leading-6 md:leading-7">
-        تیم دلتا با ارائه بهترین نیروهای خدماتی و سرویس‌های املاکی سعی دارد تا
-        در تمام لحظات کنار شما باشد.
+      <p  dir={i18n.dir()} className="text-center text-xs sm:text-sm md:text-base mb-4 sm:mb-5 mx-auto max-w-2xl font-sans break-words leading-5 sm:leading-6 md:leading-7">
+        {t("comments.description")}
       </p>
 
       <div className="flex flex-col items-center">
