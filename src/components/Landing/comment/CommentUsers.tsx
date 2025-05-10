@@ -23,55 +23,61 @@ interface CommentCardProps {
 const CommentUsers = () => {
   const [activeSlideGroup, setActiveSlideGroup] = useState(0);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const { t, i18n } = useTranslation("landing");
+
+  function convertToPersianNumber(number: string) {
+    const persianNumbers = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
+    return number.replace(/\d/g, (digit) => persianNumbers[parseInt(digit)]);
+  }
 
   const comments: Comment[] = [
     {
       id: 1,
-      rating: "۴.۵",
-      text: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است...",
-      author: "محمد رضا ساداتی",
-      date: "۱۲ مرداد - ۱۴۰۱",
-      time: "۱۲:۳۳",
+      rating: convertToPersianNumber("4.5"),
+      text: t("comments.titleCard"),
+      author: t("comments.name"),
+      date: t("comments.date1"),
+      time: t("comments.time1"),
     },
     {
       id: 2,
-      rating: "۴.۳",
-      text: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است...",
-      author: "علی احمدی",
-      date: "۵ شهریور - ۱۴۰۱",
-      time: "۱۵:۲۰",
+      rating: convertToPersianNumber("4.3"),
+      text: t("comments.titleCard"),
+      author: t("comments.name1"),
+      date: t("comments.date2"),
+      time: t("comments.time2"),
     },
     {
       id: 3,
-      rating: "۴.۵",
-      text: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است...",
-      author: "محمد رضا ساداتی",
-      date: "۱۲ مرداد - ۱۴۰۱",
-      time: "۱۲:۳۳",
+      rating: convertToPersianNumber("4.5"),
+      text: t("comments.titleCard"),
+      author: t("comments.name"),
+      date: t("comments.date1"),
+      time: t("comments.time1"),
     },
     {
       id: 4,
-      rating: "۴.۳",
-      text: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است...",
-      author: "علی احمدی",
-      date: "۵ شهریور - ۱۴۰۱",
-      time: "۱۵:۲۰",
+      rating: convertToPersianNumber("4.3"),
+      text: t("comments.titleCard"),
+      author: t("comments.name1"),
+      date: t("comments.date2"),
+      time: t("comments.time2"),
     },
     {
       id: 5,
-      rating: "۴.۷",
-      text: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است...",
-      author: "مریم رضایی",
-      date: "۱۴ آذر - ۱۴۰۱",
-      time: "۱۱:۲۵",
+      rating: convertToPersianNumber("4.7"),
+      text: t("comments.titleCard"),
+      author: t("comments.name2"),
+      date: t("comments.date3"),
+      time: t("comments.time3"),
     },
     {
       id: 6,
-      rating: "۴.۹",
-      text: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است...",
-      author: "امیر کاظمی",
-      date: "۲۹ دی - ۱۴۰۱",
-      time: "۱۸:۰۵",
+      rating: convertToPersianNumber("4.9"),
+      text: t("comments.titleCard"),
+      author: t("comments.name3"),
+      date: t("comments.date4"),
+      time: t("comments.time4"),
     },
   ];
 
@@ -106,8 +112,6 @@ const CommentUsers = () => {
   const goToSlideGroup = (groupIndex: number) => {
     setActiveSlideGroup(groupIndex);
   };
-
-  const {t, i18n} = useTranslation("landing")
 
   const commentPairs = [];
   for (let i = 0; i < comments.length; i += commentsPerSlide) {
@@ -157,7 +161,10 @@ const CommentUsers = () => {
             />
           </svg>
         </div>
-        <span dir={i18n.dir()} className="text-sm sm:text-base md:text-lg"> {t("comments.title")} </span>
+        <span dir={i18n.dir()} className="text-sm sm:text-base md:text-lg">
+          {" "}
+          {t("comments.title")}{" "}
+        </span>
         <div className="flex gap-1 justify-center items-center dark:hidden">
           <svg
             width="48"
@@ -190,11 +197,17 @@ const CommentUsers = () => {
         />
       </div>
 
-      <h1 dir={i18n.dir()} className="text-center text-xl sm:text-2xl md:text-3xl font-bold mb-2 sm:mb-4">
+      <h1
+        dir={i18n.dir()}
+        className="text-center text-xl sm:text-2xl md:text-3xl font-bold mb-2 sm:mb-4"
+      >
         {t("comments.subtitle")}
       </h1>
 
-      <p  dir={i18n.dir()} className="text-center text-xs sm:text-sm md:text-base mb-4 sm:mb-5 mx-auto max-w-2xl font-sans break-words leading-5 sm:leading-6 md:leading-7">
+      <p
+        dir={i18n.dir()}
+        className="text-center text-xs sm:text-sm md:text-base mb-4 sm:mb-5 mx-auto max-w-2xl font-sans break-words leading-5 sm:leading-6 md:leading-7"
+      >
         {t("comments.description")}
       </p>
 

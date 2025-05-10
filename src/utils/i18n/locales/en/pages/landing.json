@@ -1,122 +1,138 @@
 {
-    "heroSection": {
-        "moreCount": "Over 7000+",
-        "moreCount2": "+8500",
-        "moreCount3": "+5600",
-        "informationText": "Customer satisfaction from those who trusted Delta",
-        "informationText2": "Regions for booking villas and cottages",
-        "informationText3": "Properties for booking, rent, and lease",
-        "slogan": "Book, lease, rent, or even buy and sell your desired property",
-        "slogan2": "Easier than ever, only on Delta___________",
-        "reserveButton": "Easy Booking",
-        "rentButton": "Lease & Rent Property",
-        "locationPlaceholder": "Province, City, Hotel ...",
-        "location": "Your destination or hotel",
-        "transactionType": "Property Type",
-        "transactionTypePlaceholder": "Lease and Rent",
-        "minArea": "Minimum Area",
-        "minAreaPlaceholder": "0 sqm",
-        "maxArea": "Maximum Area",
-        "maxAreaPlaceholder": "0 sqm",
-        "search": "Search",
-        "mortgageLabel": "Mortgage",
-        "rentalLabel": "Rent",
-        "direct_purchaseLabel": "Buy",
-        "allLabel": "All"
+  "heroSection": {
+    "moreCount": "Over 7000+",
+    "moreCount2": "+8500",
+    "moreCount3": "+5600",
+    "informationText": "Customer satisfaction from those who trusted Delta",
+    "informationText2": "Regions for booking villas and cottages",
+    "informationText3": "Properties for booking, rent, and lease",
+    "slogan": "Book, lease, rent, or even buy and sell your desired property",
+    "slogan2": "Easier than ever, only on Delta___________",
+    "reserveButton": "Easy Booking",
+    "rentButton": "Lease & Rent Property",
+    "locationPlaceholder": "Province, City, Hotel ...",
+    "location": "Your destination or hotel",
+    "transactionType": "Property Type",
+    "transactionTypePlaceholder": "Lease and Rent",
+    "minArea": "Minimum Area",
+    "minAreaPlaceholder": "0 sqm",
+    "maxArea": "Maximum Area",
+    "maxAreaPlaceholder": "0 sqm",
+    "search": "Search",
+    "mortgageLabel": "Mortgage",
+    "rentalLabel": "Rent",
+    "direct_purchaseLabel": "Buy",
+    "allLabel": "All"
+  },
+  "cities": {
+    "abadan": "Abadan",
+    "arak": "Arak",
+    "urmia": "Urmia",
+    "ardabil": "Ardabil",
+    "isfahan": "Isfahan",
+    "ahvaz": "Ahvaz",
+    "ilam": "Ilam",
+    "bojnord": "Bojnord",
+    "bandarabbas": "Bandar Abbas",
+    "bushehr": "Bushehr",
+    "birjand": "Birjand",
+    "tabriz": "Tabriz",
+    "tehran": "Tehran",
+    "khorramabad": "Khorramabad",
+    "rasht": "Rasht",
+    "zahedan": "Zahedan",
+    "zanjan": "Zanjan",
+    "sari": "Sari",
+    "semnan": "Semnan",
+    "sanandaj": "Sanandaj",
+    "shahrekord": "Shahrekord",
+    "shiraz": "Shiraz",
+    "qazvin": "Qazvin",
+    "qom": "Qom",
+    "karaj": "Karaj",
+    "kerman": "Kerman",
+    "kermanshah": "Kermanshah",
+    "gorgan": "Gorgan",
+    "mashhad": "Mashhad",
+    "hamedan": "Hamedan",
+    "yasuj": "Yasuj",
+    "yazd": "Yazd"
+  },
+  "categories": {
+    "title": "Delta Property Categories",
+    "subtitle": "Whatever property you want, you'll find it here!",
+    "description": "Click on any category to view all related listings and find your favorite property.",
+    "villa": "Villa",
+    "apartment": "Apartment",
+    "rural": "Rural",
+    "residential": "Residential"
+  },
+  "specialOffer": {
+    "title": "Offers for You",
+    "subtitle": "Special Offers"
+  },
+  "destinations": {
+    "title": "Dream Destinations",
+    "subtitle": "Villa rentals in this month’s top destinations",
+    "description": "Here you can browse and explore the most popular destinations chosen by users!"
+  },
+  "rentalMortgage": {
+    "title": "Own a home with any budget",
+    "subtitle": "Rent and mortgage properties on Delta",
+    "rentalLabel": "Rent a Property",
+    "mortgageLabel": "Home Mortgage"
+  },
+  "about": {
+    "title": "About Us",
+    "subtitle": "Get to know Delta better!",
+    "description": "The Delta team provides top-tier service tours and online platforms to be by your side at all times.",
+    "card1": {
+      "title": "12,000+ Active Homes",
+      "description": "Clean and secure homes guaranteed!"
     },
-    "cities": {
-        "abadan": "Abadan",
-        "arak": "Arak",
-        "urmia": "Urmia",
-        "ardabil": "Ardabil",
-        "isfahan": "Isfahan",
-        "ahvaz": "Ahvaz",
-        "ilam": "Ilam",
-        "bojnord": "Bojnord",
-        "bandarabbas": "Bandar Abbas",
-        "bushehr": "Bushehr",
-        "birjand": "Birjand",
-        "tabriz": "Tabriz",
-        "tehran": "Tehran",
-        "khorramabad": "Khorramabad",
-        "rasht": "Rasht",
-        "zahedan": "Zahedan",
-        "zanjan": "Zanjan",
-        "sari": "Sari",
-        "semnan": "Semnan",
-        "sanandaj": "Sanandaj",
-        "shahrekord": "Shahrekord",
-        "shiraz": "Shiraz",
-        "qazvin": "Qazvin",
-        "qom": "Qom",
-        "karaj": "Karaj",
-        "kerman": "Kerman",
-        "kermanshah": "Kermanshah",
-        "gorgan": "Gorgan",
-        "mashhad": "Mashhad",
-        "hamedan": "Hamedan",
-        "yasuj": "Yasuj",
-        "yazd": "Yazd"
+    "card2": {
+      "title": "10+ Years of Experience",
+      "description": "In providing hospitality to our dear travelers"
     },
-    "categories": {
-        "title": "Delta Property Categories",
-        "subtitle": "Whatever property you want, you'll find it here!",
-        "description": "Click on any category to view all related listings and find your favorite property.",
-        "defualtName": "Untitled"
+    "card3": {
+      "title": "24/7 Support",
+      "description": "Our support team is with you around the clock"
     },
-    "specialOffer": {
-        "title": "Offers for You",
-        "subtitle": "Special Offers"
+    "card4": {
+      "title": "15,000+ User Reviews",
+      "description": "Satisfaction from travelers who’ve used Delta"
     },
-    "destinations": {
-        "title": "Dream Destinations",
-        "subtitle": "Villa rentals in this month’s top destinations",
-        "description": "Here you can browse and explore the most popular destinations chosen by users!"
-    },
-    "rentalMortgage": {
-        "title": "Own a home with any budget",
-        "subtitle": "Rent and mortgage properties on Delta",
-        "rentalLabel": "Rent a Property",
-        "mortgageLabel": "Home Mortgage"
-    },
-    "about": {
-        "title": "About Us",
-        "subtitle": "Get to know Delta better!",
-        "description": "The Delta team provides top-tier service tours and online platforms to be by your side at all times.",
-        "card1": {
-            "title": "12,000+ Active Homes",
-            "description": "Clean and secure homes guaranteed!"
-        },
-        "card2": {
-            "title": "10+ Years of Experience",
-            "description": "In providing hospitality to our dear travelers"
-        },
-        "card3": {
-            "title": "24/7 Support",
-            "description": "Our support team is with you around the clock"
-        },
-        "card4": {
-            "title": "15,000+ User Reviews",
-            "description": "Satisfaction from travelers who’ve used Delta"
-        },
-        "cardCenter": {
-            "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. It has been the industry's standard dummy text ever since the 1500s. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text."
-        }
-    },
-    "traveling": {
-        "title": "Feel Right at Home!",
-        "subtitle": "Property buying and selling on Delta"
-    },
-    "newPlaces": {
-        "title": "Newest Locations",
-        "subtitle": "The latest recreational spots"
-    },
-    "comments": {
-        "title": "User Reviews",
-        "subtitle": "Your satisfaction builds Delta’s credibility!",
-        "description": "The Delta team aims to be by your side with top-tier property services and support staff."
-    },
-    "common": {
-        "viewAllButton": "View All"
+    "cardCenter": {
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. It has been the industry's standard dummy text ever since the 1500s. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text."
     }
+  },
+  "traveling": {
+    "title": "Feel Right at Home!",
+    "subtitle": "Property buying and selling on Delta"
+  },
+  "newPlaces": {
+    "title": "Newest Locations",
+    "subtitle": "The latest recreational spots"
+  },
+  "comments": {
+    "title": "User Reviews",
+    "subtitle": "Your satisfaction builds Delta’s credibility!",
+    "description": "The Delta team aims to be by your side with top-tier property services and support staff.",
+    "titleCard": "Lorem Ipsum is simply dummy text of the printing industry, used by graphic designers...",
+    "name": "Mohammadreza Sadati",
+    "name1": "Maryam Rezaei",
+    "name2": "Amir Kazemi",
+    "name3": "Ali Ahmadi",
+    "date1": "3 August 2022",
+    "date2": "27 August 2022",
+    "date3": "5 December 2022",
+    "date4": "19 January 2023",
+    "time1": "12:33",
+    "time2": "15:20",
+    "time3": "11:25",
+    "time4": "18:05"
+  },
+  "common": {
+    "viewAllButton": "View All"
+  }
 }
