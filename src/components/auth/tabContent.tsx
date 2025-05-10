@@ -10,7 +10,7 @@ interface IProps {
 }
 
 const TabContent: FC<IProps> = ({ defaultValue, registerElement }) => {
-  const {t , i18n} = useTranslation("auth")
+  const {t} = useTranslation("auth")
   return (
     <Tabs defaultValue={defaultValue} className='rtl'>
         <TabsList className='bg-subBg text-subText w-full mt-[20px]' >

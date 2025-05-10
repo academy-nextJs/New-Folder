@@ -5,12 +5,15 @@ import { useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useUserStore } from "@/utils/zustand/store";
 import { useTheme } from "@/utils/service/TanstakProvider";
+import { useTranslation } from "react-i18next";
+import ChangeLanguage from "./ChangeLanguage";
 
 const LoginSection = () => {
   const { isLoggedIn, logout, checkAuthStatus } = useUserStore();
   const { theme, toggleTheme } = useTheme();
   const dropdownRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
+  const {t} = useTranslation("header")
 
   const handleLogout = async () => {
     await logout();
@@ -23,6 +26,7 @@ const LoginSection = () => {
 
   return (
     <div className="flex items-center justify-end gap-3 text-[10px] lg:text-[16px] md:text-[11px] ml-7">
+      <ChangeLanguage />
       <button
         onClick={toggleTheme}
         className="flex items-center justify-center w-8 h-8 rounded-full hover:bg-subBg2 transition-colors"
@@ -41,7 +45,7 @@ const LoginSection = () => {
           className="text-subText hover:text-primary transition-colors flex items-center gap-1"
         >
           <User className="w-4 h-4 sm:w-5 sm:h-5 md:w-5 md:h-4 lg:w-6 lg:h-6" />
-          <span>ورود / ثبت نام</span>
+          <span> {t("navbarSection.loginRegister")} </span>
         </Link>
       ) : (
         <div className="relative group" ref={dropdownRef}>
@@ -59,7 +63,7 @@ const LoginSection = () => {
                   size={14}
                   className="text-primary sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-6 lg:h-6"
                 />
-                <span>ورود به حساب کاربری</span>
+                <span> {t("navbarSection.goToPanel")} </span>
               </Link>
               <button
                 onClick={handleLogout}
@@ -69,7 +73,7 @@ const LoginSection = () => {
                   size={14}
                   className="text-danger sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-6 lg:h-6"
                 />
-                <span>خروج از حساب</span>
+                <span>{t("navbarSection.logOut")}</span>
               </button>
             </div>
           </div>

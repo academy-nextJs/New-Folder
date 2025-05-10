@@ -4,7 +4,6 @@ import LogoSection from "./sections/LogoSection";
 import NavbarSection from "./sections/NavbarSection";
 import MobileNavbarSection from "./sections/MobileNavbarSection";
 import LoginSection from "./sections/LoginSection";
-import ChangeLanguage from "./sections/ChangeLanguage";
 
 const Header = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -100,8 +99,6 @@ const Header = () => {
           <LogoSection />
           <NavbarSection />
         </div>
-
-        <ChangeLanguage/>
 
         <div className="hidden md:flex items-center">
           <LoginSection />

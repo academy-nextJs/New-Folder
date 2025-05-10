@@ -5,6 +5,9 @@
         "about" : "About",
         "seller" : "Seller",
         "articles" : "Articles",
-        "contact" : "Contact"
+        "contact" : "Contact",
+        "loginRegister": "Login / Register",
+        "goToPanel": "Go to Account",
+        "logOut": "Log out"
     }
 }

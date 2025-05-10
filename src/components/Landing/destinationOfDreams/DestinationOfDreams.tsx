@@ -1,11 +1,14 @@
+'use client'
 import React from 'react'
 import ViewAllButton from '../../common/buttons/common/ViewAllButton';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../ui/tabs';
 import { CallSliderDreams } from './CallSlider';
 import { CallSliderRental } from './CallSliderRental';
 import { CallSliderMortgage } from './CallSliderMortgage';
+import { useTranslation } from 'react-i18next';
 
 const DestinationOfDreams = () => {
+    const {t, i18n} = useTranslation("landing")
 
     return (
         <div className='flex justify-center items-center py-[50px] gap-16 flex-col relative bg-secondary-light rounded-b-[64px]'>
@@ -26,7 +29,7 @@ const DestinationOfDreams = () => {
                                 <path d="M6.5 9.29376C7.16667 8.90886 7.16667 7.94661 6.5 7.56171L3.5 5.82966C2.83333 5.44476 2 5.92588 2 6.69568L2 10.1598C2 10.9296 2.83333 11.4107 3.5 11.0258L6.5 9.29376Z" fill="#363636" fillOpacity="0.25" />
                             </svg>
                         </div>
-                        <span className="text-primary text-sm"> مقصد رویا ها </span>
+                        <span dir={i18n.dir()} className="text-primary text-sm"> {t("destinations.title")} </span>
                         <div className='dark:flex hidden gap-1 justify-center items-center'>
                             <svg width="48" height="16" viewBox="0 0 48 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M45 9.73205C46.3333 8.96225 46.3333 7.03775 45 6.26795L39 2.80385C37.6667 2.03405 36 2.9963 36 4.5359L36 11.4641C36 13.0037 37.6667 13.966 39 13.1962L45 9.73205Z" fill="#8CFF45" />
@@ -43,8 +46,8 @@ const DestinationOfDreams = () => {
                         </div>
                     </div>
                 </div>
-                <h2 className='lg:text-2xl md:text-xl text-base font-[500]'> اجاره ویلا در محبوب ترین مقاصد این ماه </h2>
-                <span className='text-subText md:text-sm text-xs'> در اینجا می توانید محبوب ترین مقصد هارا از بین انتخاب کاربران مشاهده کنید و آن ها بررسی کنید ! </span>
+                <h2 dir={i18n.dir()} className='lg:text-2xl md:text-xl text-base font-[500]'>{t("destinations.subtitle")}</h2>
+                <span dir={i18n.dir()} className='text-subText md:text-sm text-xs'> {t("destinations.description")} </span>
                 <div className='mt-[20px] w-full'>
                     <CallSliderDreams />
                 </div>
@@ -53,7 +56,7 @@ const DestinationOfDreams = () => {
             <div className='w-full h-fit flex flex-col gap-4 px-8'>
                 <div className='flex gap-1 items-center'>
                     <div className="flex flex-row w-fit items-center gap-4">
-                        <span className="text-primary text-sm"> با هر مبلغی خونه دار شو </span>
+                        <span dir={i18n.dir()} className="text-primary text-sm"> {t("rentalMortgage.title")} </span>
                         <div className='dark:flex hidden gap-1 justify-center items-center'>
                             <svg width="48" height="16" viewBox="0 0 48 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M45 9.73205C46.3333 8.96225 46.3333 7.03775 45 6.26795L39 2.80385C37.6667 2.03405 36 2.9963 36 4.5359L36 11.4641C36 13.0037 37.6667 13.966 39 13.1962L45 9.73205Z" fill="#8CFF45" />
@@ -73,15 +76,15 @@ const DestinationOfDreams = () => {
                 <div className='relative'>
                     <div className='flex justify-between w-full flex-wrap items-center gap-4'>
                         <div className='flex gap-4'>
-                            <h2 className='lg:text-2xl md:text-xl text-base font-[500]'> رهن و اجاره ملک در دلتا </h2>
+                            <h2 dir={i18n.dir()} className='lg:text-2xl md:text-xl text-base font-[500]'> {t("rentalMortgage.subtitle")} </h2>
                             <span className='lg:block hidden text-2xl'> | </span>
                         </div>
                         <ViewAllButton classname='max-md:border-none max-md:p-0' />
                     </div>
                     <Tabs defaultValue="rental" className='rtl'>
                         <TabsList className='bg-subBg text-subText lg:absolute lg:mt-0 mt-4 right-[265px] top-0.5' >
-                            <TabsTrigger value="rental" className='bg-subBg'> اجاره ملک </TabsTrigger>
-                            <TabsTrigger value="mortgage" className='bg-subBg'> رهن خونه </TabsTrigger>
+                            <TabsTrigger dir={i18n.dir()} value="rental" className='bg-subBg'> {t("rentalMortgage.rentalLabel")} </TabsTrigger>
+                            <TabsTrigger dir={i18n.dir()} value="mortgage" className='bg-subBg'> {t("rentalMortgage.mortgageLabel")} </TabsTrigger>
                         </TabsList>
                         <TabsContent value="rental" className='mt-[30px]'>
                             <CallSliderRental />
