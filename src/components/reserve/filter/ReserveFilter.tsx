@@ -15,7 +15,7 @@ interface IReserveFilter {
     houseLength?: number
 }
 
-const ReserveFilter: FC<IReserveFilter> = ({ setOrder, setSort, setSearch, houseLength }) => {
+const ReserveFilter: FC<IReserveFilter> = ({ setOrder, setSort, setSearch, houseLength, setLocation }) => {
     const [isOpen, setIsOpen] = useState<boolean>(false)
 
     return (
@@ -23,19 +23,43 @@ const ReserveFilter: FC<IReserveFilter> = ({ setOrder, setSort, setSearch, house
             <div className='flex md:flex-row md:flex-wrap flex-col w-full gap-4'>
                 <CommonSelect
                     placeholder='استان ، شهر ، هتل ....'
+                    onValueChange={(value => {
+                        setLocation(value)
+                    })}
                     icon={<MapPin size={16} className='text-subText' />}
                     selectItems={[
-                        { label: 'تهران', value: 'tehran' },
+                        { label: 'آبادان', value: 'abadan' },
+                        { label: 'اراک', value: 'arak' },
+                        { label: 'ارومیه', value: 'urmia' },
+                        { label: 'اردبیل', value: 'ardabil' },
                         { label: 'اصفهان', value: 'isfahan' },
-                        { label: 'شیراز', value: 'shiraz' },
-                        { label: 'مشهد', value: 'mashhad' },
-                        { label: 'تبریز', value: 'tabriz' },
-                        { label: 'کرج', value: 'karaj' },
-                        { label: 'قم', value: 'qom' },
                         { label: 'اهواز', value: 'ahvaz' },
-                        { label: 'کرمان', value: 'kerman' },
+                        { label: 'ایلام', value: 'ilam' },
+                        { label: 'بجنورد', value: 'bojnord' },
+                        { label: 'بندرعباس', value: 'bandarabbas' },
+                        { label: 'بوشهر', value: 'bushehr' },
+                        { label: 'بیرجند', value: 'birjand' },
+                        { label: 'تبریز', value: 'tabriz' },
+                        { label: 'تهران', value: 'tehran' },
+                        { label: 'خرم‌آباد', value: 'khorramabad' },
+                        { label: 'رشت', value: 'rasht' },
+                        { label: 'زاهدان', value: 'zahedan' },
                         { label: 'زنجان', value: 'zanjan' },
                         { label: 'ساری', value: 'sari' },
+                        { label: 'سمنان', value: 'semnan' },
+                        { label: 'سنندج', value: 'sanandaj' },
+                        { label: 'شهرکرد', value: 'shahrekord' },
+                        { label: 'شیراز', value: 'shiraz' },
+                        { label: 'قزوین', value: 'qazvin' },
+                        { label: 'قم', value: 'qom' },
+                        { label: 'کرج', value: 'karaj' },
+                        { label: 'کرمان', value: 'kerman' },
+                        { label: 'کرمانشاه', value: 'kermanshah' },
+                        { label: 'گرگان', value: 'gorgan' },
+                        { label: 'مشهد', value: 'mashhad' },
+                        { label: 'همدان', value: 'hamedan' },
+                        { label: 'یاسوج', value: 'yasuj' },
+                        { label: 'یزد', value: 'yazd' }
                     ]}
                     color='text-subText dark:group-hover:text-white'
                     label='مقصد یا  هتل شما '
@@ -43,15 +67,15 @@ const ReserveFilter: FC<IReserveFilter> = ({ setOrder, setSort, setSearch, house
                 />
                 <CommonSelect
                     onValueChange={(value => {
-                        if(value === 'last_updated') {
+                        if (value === 'last_updated') {
                             setSort('last_updated')
                             setOrder('DESC')
                         }
-                        if(value === 'price_low') {
+                        if (value === 'price_low') {
                             setSort('price')
                             setOrder('ASC')
                         }
-                        if(value === 'rate') {
+                        if (value === 'rate') {
                             setSort('rate')
                             setOrder('DESC')
                         }
@@ -82,7 +106,7 @@ const ReserveFilter: FC<IReserveFilter> = ({ setOrder, setSort, setSearch, house
                     <span className='whitespace-nowrap'> تعداد آگهی : {houseLength} </span>
                 </div>
                 <CommonButton onclick={() => setIsOpen(true)} icon={<MapPin />} title='نقشه' classname='bg-transparent border-foreground border text-foreground flex xl:hidden' />
-                    <ReserveModalMap isOpen={isOpen} setIsOpen={setIsOpen} />
+                <ReserveModalMap isOpen={isOpen} setIsOpen={setIsOpen} />
             </div>
         </motion.div>
     )

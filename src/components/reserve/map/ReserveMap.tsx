@@ -1,4 +1,5 @@
 'use client';
+
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
@@ -17,6 +18,10 @@ interface MarkerType {
   lng: number;
 }
 
+interface ReserveMapProps {
+  location?: MarkerType;
+}
+
 const AddMarkerOnClick: React.FC<{ setMarker: React.Dispatch<React.SetStateAction<MarkerType | null>> }> = ({ setMarker }) => {
   useMapEvents({
     click(e) {
@@ -27,8 +32,8 @@ const AddMarkerOnClick: React.FC<{ setMarker: React.Dispatch<React.SetStateActio
   return null;
 };
 
-const ReserveMap: React.FC = () => {
-  const [marker, setMarker] = useState<MarkerType | null>(null);
+const ReserveMap: React.FC<ReserveMapProps> = ({ location }) => {
+  const [marker, setMarker] = useState<MarkerType | null>(location || null);
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
@@ -43,21 +48,27 @@ const ReserveMap: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
-  const darkTiles = "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png";
-  const lightTiles = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
+  const darkTiles = 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png';
+  const lightTiles = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+
+  const mapCenter: [number, number] = marker
+    ? [marker.lat, marker.lng]
+    : [35.6892, 51.3890];
 
   return (
     <MapContainer
-      style={{ height: "100%", width: "100%", borderRadius: "40px" }}
-      center={[35.6892, 51.3890]}
+      style={{ height: '100%', width: '100%', borderRadius: '40px' }}
+      center={mapCenter}
       zoom={13}
     >
       <TileLayer
-        key={isDark ? "dark" : "light"}
+        key={isDark ? 'dark' : 'light'}
         url={isDark ? darkTiles : lightTiles}
         attribution="&copy; OpenStreetMap contributors"
       />
-      <AddMarkerOnClick setMarker={setMarker} />
+
+      {!location && <AddMarkerOnClick setMarker={setMarker} />}
+
       {marker && (
         <Marker position={[marker.lat, marker.lng]} icon={customIcon}>
           <Popup>

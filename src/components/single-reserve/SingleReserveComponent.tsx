@@ -16,7 +16,6 @@ const SingleReserveComponent = () => {
     const params = useParams()
     const id = params?.id as string
 
-
     const fetchHouse = async () => {
         const houseData = await getHouseById(id) as IHouse
         setHouse(houseData)
@@ -36,7 +35,7 @@ const SingleReserveComponent = () => {
     return house ? <div className='px-8 flex flex-col gap-16'>
         <SingleReserveHeader house={house} />
         <div className='flex xl:flex-row flex-col-reverse gap-12 justify-between'>
-            <SingleReserveTab facilities={facilities} defaultValue='about' />
+            <SingleReserveTab photos={house.photos} caption={house.caption || 'هیج اطلاعاتی موجود نیست'} facilities={facilities} defaultValue='about' />
             <SingleReserveBooking price={house?.price} discountedPrice={1000000} />
         </div>
         <SingleReserveFooter />

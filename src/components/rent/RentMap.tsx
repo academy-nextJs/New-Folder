@@ -1,29 +1,25 @@
+'use client'
 import React from "react";
+import ReserveMap from "../reserve/map/ReserveMap";
+import { motion } from 'framer-motion'
 
-const RentMap = () => {
+const RentMap = ({ caption, location }: { caption: string, location: { lng: number, lat: number } }) => {
   return (
-    <div className="w-full flex-row flex justify-center gap-6">
-      <div className="w-[50%]">{/* {map} */}</div>
-      <div className="w-[50%]">
-        <span className="text-secondary-foreground lg:text-lg md:text-md sm:text-sm text-xs">
-          {" "}
-          لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده
-          از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و
-          سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای
-          متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه
-          درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با
-          نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان
-          خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید
-          داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به
-          پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی
-          سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.لورم
-          ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از
-          طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و
-          سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای
-          متنوع با هدف بهبود ابزارهای کاربر....
-        </span>
+    <motion.div initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }} className="w-full flex flex-col md:flex-row justify-center gap-6">
+      <div className="w-1/2 max-md:hidden h-[324px]">
+        <ReserveMap location={location} />
       </div>
-    </div>
+      <div className="w-full md:hidden cursor-pointer block h-[324px]">
+        <ReserveMap location={location} />
+      </div>
+
+      <div className="w-1/2 max-md:w-full">
+        <p className="text-secondary-foreground lg:text-lg md:text-md sm:text-sm text-xs text-justify">
+          {caption}
+        </p>
+      </div>
+    </motion.div>
   );
 };
 

@@ -1,0 +1,13 @@
+{
+    "navbarSection": {
+        "quickReservation": "حجز سريع",
+        "rent": "إيجار ورهن",
+        "about": "معلومات عنا",
+        "seller": "كن بائعًا",
+        "articles": "مقالاتنا",
+        "contact": "اتصل بنا",
+        "loginRegister":  "تسجيل الدخول / التسجيل",
+        "goToPanel": "الدخول إلى الحساب",
+        "logOut": "تسجيل الخروج"
+    }
+}

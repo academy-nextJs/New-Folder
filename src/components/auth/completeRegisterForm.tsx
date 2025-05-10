@@ -13,12 +13,14 @@ import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { useUserStore } from "@/utils/zustand/store";
 import { useRouter } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
 const CompleteRegisterForm = () => {
 
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const router = useRouter()
     const userId = useUserStore(state => state.userId)
+    const {t, i18n} = useTranslation("auth")
 
     const {
         handleSubmit,
@@ -41,7 +43,7 @@ const CompleteRegisterForm = () => {
             const res = await axiosApi.post('/auth/complete-registration', data)
             console.log(res)
             if (res) {
-                showToast("success", " تایید ثبت نام ", " بستن ", " ثبت نام با موفقیت انجام شد ")
+                showToast("success", t('completeRegisterForm.success'), t('loginForm.close'), t('completeRegisterForm.successMessage'))
                 setIsLoading(false)
                 reset()
                 router.push("/login")
@@ -49,22 +51,22 @@ const CompleteRegisterForm = () => {
         } catch (error: any) {
             console.log(error)
             if (error.response.data.message) {
-                showToast("error", " ارور در ارسال کد ", " بستن ", error.response.data.message, 5000)
+                showToast("error", t('completeRegisterForm.error'), t('loginForm.close'), t('loginForm.errorMessage'))
             }
             else {
-                showToast("error", " ارور در ساخت حساب کاربری ", " بستن ", " مشکلی در ساخت حساب کاربری پیدا شد ")
+                showToast("error", t('completeRegisterForm.error'), t('loginForm.close'), t('loginForm.errorMessage'))
             }
             setIsLoading(false)
         }
     }
 
     return (
-        <div>
+        <div dir={i18n.dir()}>
             <form className="mt-8 space-y-10" onSubmit={handleSubmit(handleRegister)}>
                 <div className="flex md:flex-row flex-col gap-4">
                     <div className="md:w-1/2 w-full flex gap-1 flex-col text-card-foreground">
                         <Label htmlFor="password" className={`text-[13px] flex gap-0.5`}>
-                            <span> رمز عبور </span>
+                            <span> {t('completeRegisterForm.password')} </span>
                             <p className='text-danger'> * </p>
                             <span> : </span>
                         </Label>
@@ -72,14 +74,14 @@ const CompleteRegisterForm = () => {
                             id="password"
                             type="text"
                             className="bg-transparent placeholder:text-card-foreground text-sm outline-none w-full py-3 border border-card-foreground text-card-foreground px-4 rounded-[16px] text-[16px]"
-                            placeholder=" لطفا رمز عبور خود را وارد فرمایید... "
+                            placeholder={t('completeRegisterForm.passwordPlaceholder')}
                             {...register("password")}
                         />
                         {errors.password && <p className='text-danger text-sm font-semibold'>{errors.password.message} </p>}
                     </div>
                     <div className="md:w-1/2 w-full flex gap-1 flex-col text-card-foreground">
                         <Label htmlFor="phoneNumber" className={`text-[13px] flex gap-0.5`}>
-                            <span> شماره تلفن </span>
+                            <span> {t('completeRegisterForm.phoneNumber')} </span>
                             <p className='text-danger'> * </p>
                             <span> : </span>
                         </Label>
@@ -87,7 +89,7 @@ const CompleteRegisterForm = () => {
                             id="phoneNumber"
                             type="text"
                             className="bg-transparent placeholder:text-card-foreground text-sm outline-none w-full py-3 border border-card-foreground text-card-foreground px-4 rounded-[16px] text-[16px]"
-                            placeholder=" لطفا شماره تلفن خود را وارد فرمایید... "
+                            placeholder={t('completeRegisterForm.phoneNumberPlaceholder')}
                             {...register("phoneNumber")}
                         />
                         {errors.phoneNumber && <p className='text-danger text-sm font-semibold'>{errors.phoneNumber.message} </p>}
@@ -95,7 +97,7 @@ const CompleteRegisterForm = () => {
                 </div>
 
                 <div>
-                    <CommonButton type="submit" title={isLoading ? "در حال ورود..." : " ساخت حساب کاربری "}
+                    <CommonButton type="submit" title={isLoading ? t('completeRegisterForm.loading') : t('completeRegisterForm.login')}
                         icon={isLoading ? <Loader /> : <ChevronLeft size={16} />} classname="w-full text-primary-foreground" />
                 </div>
             </form>

@@ -10,11 +10,13 @@ import { motion } from 'framer-motion';
 
 interface IProps {
   defaultValue: string;
-  facilities: TFacilities
+  facilities: TFacilities;
+  caption: string;
+  photos: string[];
 }
 
 
-const SingleReserveTab: FC<IProps> = ({ defaultValue, facilities }) => {
+const SingleReserveTab: FC<IProps> = ({ defaultValue, facilities, caption, photos }) => {
   return (
     <Tabs defaultValue={defaultValue} className='rtl xl:w-9/12 w-full'>
       <TabsList className='bg-subBg text-subText w-full overflow-hidden custom-scrollbar max-sm:overflow-x-scroll rounded-2xl flex justify-start gap-4 py-6 px-4' >
@@ -27,7 +29,7 @@ const SingleReserveTab: FC<IProps> = ({ defaultValue, facilities }) => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
         >
-          <SingleReserveAbout />
+          <SingleReserveAbout caption={caption} photos={photos} />
         </motion.div>
       </TabsContent>
       <TabsContent value="facilities" className='mt-[30px]'>

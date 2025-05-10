@@ -23,9 +23,8 @@ interface IReserveContent {
 }
 
 const ReserveContent: React.FC<IReserveContent> = ({ houses, isLoading, setMaxPrice, setMinPrice }) => {
-
   const [currentPage, setCurrentPage] = useState(1)
-  const itemsPerPage = 5
+  const itemsPerPage = 4
   const totalPages = Math.ceil(houses.length / itemsPerPage)
 
   const paginatedHouses = houses.slice(
@@ -58,7 +57,6 @@ const ReserveContent: React.FC<IReserveContent> = ({ houses, isLoading, setMaxPr
               classname="px-4 py-2 border-subText w-full outline-none"
               color="text-subText placeholder:text-subText"
               placeholder="0 تومان"
-
             />
           </div>
         </div>
@@ -67,7 +65,7 @@ const ReserveContent: React.FC<IReserveContent> = ({ houses, isLoading, setMaxPr
         <div className='flex flex-col justify-between h-full'>
           <div className="flex flex-col gap-6" id='items'>
             {isLoading ? (
-              Array.from({ length: 4 }).map((_, idx) => (
+              Array.from({ length: itemsPerPage }).map((_, idx) => (
                 <ReserveCardSkeleton key={idx} />
               ))
             ) : (
@@ -76,41 +74,39 @@ const ReserveContent: React.FC<IReserveContent> = ({ houses, isLoading, setMaxPr
               ))
             )}
           </div>
-          {paginatedHouses.length == 0 && ( <span className='text-sm font-semibold mx-auto'> درحال حاضر هیچ آگهی وجود ندارد </span> )}
+          {paginatedHouses.length === 0 && (
+            <span className='text-sm font-semibold mx-auto'>
+              درحال حاضر هیچ آگهی وجود ندارد
+            </span>
+          )}
 
           <Pagination>
-            <PaginationContent>
+            <PaginationContent className="justify-center mt-6">
               <PaginationItem>
-                <PaginationPrevious
-                  onClick={() => goToPage(currentPage - 1)}
-                  {...(currentPage === 1 && { disabled: true })}
-                />
+                <PaginationPrevious onClick={() => goToPage(currentPage - 1)} />
               </PaginationItem>
 
               {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                <PaginationItem key={page}>
-                  <PaginationLink
-                    onClick={() => goToPage(page)}
-                    isActive={page === currentPage}
-                    href="#items"
-                  >
+                <PaginationItem key={page} onClick={() => goToPage(page)}>
+                  <PaginationLink isActive={page === currentPage} href="#items">
                     {page}
                   </PaginationLink>
                 </PaginationItem>
               ))}
 
               <PaginationItem>
-                <PaginationNext
-                  onClick={() => goToPage(currentPage + 1)}
-                  {...(currentPage === totalPages && { disabled: true })}
-                />
+                <PaginationNext onClick={() => goToPage(currentPage + 1)} />
               </PaginationItem>
             </PaginationContent>
           </Pagination>
         </div>
       </div>
 
-      <motion.div initial={{ opacity: 0, x: -100 }} whileInView={{ opacity: 1, x: 0 }} className="bg-secondary-light3 rounded-[40px] xl:w-2/5 w-full h-[1032px] xl:block hidden">
+      <motion.div
+        initial={{ opacity: 0, x: -100 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        className="bg-secondary-light3 rounded-[40px] xl:w-2/5 w-full h-[1032px] xl:block hidden"
+      >
         <ReserveMap />
       </motion.div>
     </div>
