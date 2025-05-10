@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { getToken, removeToken } from '../cookie/auth'
+import { showToast } from '../toast/toast';
 
 const baseURL = 'https://delta-project.liara.run/api'
 
@@ -15,9 +16,10 @@ const onError = async (error: Response | Error) => {
     console.log(error);
 
     if (error instanceof Response) {
-        if (error.status === 401) {
+        if (error.status === 401 || error.status === 403) {
             await removeToken();
             window.location.pathname = '/login';
+            showToast("error", " شما وارد نشدید! ", " بستن ")
         }
 
         if (error.status >= 400 && error.status < 500) {

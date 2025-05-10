@@ -1,5 +1,6 @@
 import axios, { AxiosResponse, AxiosError } from "axios";
 import { getToken, removeToken } from '../cookie/auth';
+import { showToast } from "../toast/toast";
 
 const baseURL = 'https://delta-project.liara.run/api';
 
@@ -14,14 +15,16 @@ const onSuccess = (response: AxiosResponse) => {
 const onError = (err: AxiosError) => {
     console.log(err);
 
-    if (err.message === "Network Error") {
+    if (err.message === "Network Error" || err.response?.status === 403) {
         removeToken();
         window.location.pathname = '/login';
+        showToast("error", " شما وارد نشدید! ", " بستن ")
     }
 
     if (err.response?.status === 401) {
         removeToken();
         window.location.pathname = '/login';
+        showToast("error", " شما وارد نشدید! ", " بستن ")
     }
 
     if (err.response?.status && err.response?.status >= 400 && err.response?.status < 500) {

@@ -36,7 +36,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden`}
       >
-        <div className="flex flex-col justify-between mx-auto max-w-[1550px] w-screen h-screen">
+        <div className="flex flex-col justify-between mx-auto max-w-[1750px] w-full h-screen">
           <Providers>
             <div className="px-8 w-full">
               <Header />
@@ -49,6 +49,7 @@ export default function RootLayout({
             </div>
             <Toaster />
           </Providers>
+          
         </div>
       </body>
     </html>
