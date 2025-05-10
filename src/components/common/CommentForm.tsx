@@ -8,15 +8,17 @@ import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { schemaCommentFormValidation } from '@/utils/validations/comment-form-validation'
-import { IComment } from '@/types/comment-type/comment-type'
+import { IComment, IGetComment } from '@/types/comment-type/comment-type'
 import { fetchApi } from '@/core/interceptore/fetchApi'
 import { useParams } from 'next/navigation'
 import { showToast } from '@/core/toast/toast'
+import { QueryObserverResult, RefetchOptions } from '@tanstack/react-query'
 
-const SingleReserveForm = ({ viewReply, parent_comment, parent_comment_id }: { viewReply: boolean, parent_comment: string, parent_comment_id: string | null }) => {
+const SingleReserveForm = ({ viewReply, title, parent_comment_id, refetch }: { refetch: (options?: RefetchOptions) => Promise<QueryObserverResult<IGetComment[], Error>> ,viewReply: boolean, title: string, parent_comment_id: string | null }) => {
     const {
         register,
         handleSubmit,
+        reset,
         formState: { errors },
     } = useForm({
         resolver: zodResolver(schemaCommentFormValidation),
@@ -30,7 +32,7 @@ const SingleReserveForm = ({ viewReply, parent_comment, parent_comment_id }: { v
     const onSubmit = async (data: IComment) => {
         setIsLoading(true)
         const commentData = {
-            title: data.name,
+            title: data.title,
             caption: data.caption,
             rating: rating[0],
             parent_comment_id: parent_comment_id
@@ -41,6 +43,8 @@ const SingleReserveForm = ({ viewReply, parent_comment, parent_comment_id }: { v
             if (response) {
                 showToast('success', ' تایید نظر ', 'بستن', ' نظر شما با موفقیت ارسال شد ')
             }
+            reset()
+            refetch()
             setIsLoading(false)
         } catch (error) {
             console.log(error)
@@ -63,14 +67,14 @@ const SingleReserveForm = ({ viewReply, parent_comment, parent_comment_id }: { v
                     <Input {...register('name')} id='name' name='name' className='px-4 w-full py-2 bg-transparent rounded-[16px] border border-subText' />
                 </div>
                 <div className='flex flex-col gap-2 text-sm w-1/5 text-subText max-md:w-full'>
-                    <Label htmlFor='email' > ایمیل شما </Label>
-                    {errors.email && <span className='text-danger font-semibold text-xs'>{errors.email.message}</span>}
-                    <Input {...register('email')} id='email' name='email' className='px-4 w-full py-2 bg-transparent rounded-[16px] border border-subText' />
+                    <Label htmlFor='title' > عنوان شما </Label>
+                    {errors.title && <span className='text-danger font-semibold text-xs'>{errors.title.message}</span>}
+                    <Input {...register('title')} id='title' name='title' className='px-4 w-full py-2 bg-transparent rounded-[16px] border border-subText' />
                 </div>
                 {viewReply ? <div className='flex items-end max-md:flex-wrap justify-between w-full md:w-4/6 md:gap-4 gap-8'>
                     <div className='flex flex-col gap-2 text-sm w-full text-subText'>
                         <Label> برای نظر </Label>
-                        <div className='px-4 py-2 bg-transparent w-full rounded-[16px] border border-subText'> {parent_comment || 'نامعلوم'} </div>
+                        <div className='px-4 py-2 bg-transparent w-full rounded-[16px] border border-subText'> {title || 'نامعلوم'} </div>
                     </div>
                 </div> : <div className='flex flex-col gap-2 text-sm w-3/5 text-subText max-md:w-full'>
                     <Label htmlFor='rating' > امتیاز شما </Label>

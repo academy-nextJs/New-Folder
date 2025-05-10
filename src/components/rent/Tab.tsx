@@ -13,6 +13,10 @@ import { TFacilities } from "@/types/facilites-type";
 import { IHouse } from "@/types/houses-type/house-type";
 import SingleReserveComments from "../single-reserve/comments/SingleReserveComments";
 import { motion } from 'framer-motion'
+import { fetchComments } from "@/utils/service/api/fetchComments";
+import { IGetComment } from "@/types/comment-type/comment-type";
+import { useQuery } from "@tanstack/react-query";
+import { useParams } from "next/navigation";
 
 const tabs = [
   { id: "description", label: "توضیحات ملک" },
@@ -21,11 +25,28 @@ const tabs = [
   { id: "reviews", label: "نظرات کاربران" },
 ];
 
+const PAGE_SIZE = 2
+
 export default function PropertyTabs({ house }: { house: IHouse }) {
   const [activeTab, setActiveTab] = useState("description");
   const [viewReply, setViewReply] = useState<boolean>(false)
-  const [parent_comment, setParent_comment] = useState<string>('')
+  const [title, setTitle] = useState<string>('')
   const [parent_comment_id, setParent_comment_id] = useState<string | null>(null)
+
+  const [page, setPage] = useState(1)
+
+  const params = useParams()
+  const id = params?.id as string
+
+  const {
+    data: comments = [],
+    isLoading,
+    isFetching,
+    refetch,
+  } = useQuery<IGetComment[]>({
+    queryKey: ['comments', id, page],
+    queryFn: () => fetchComments(id, page, PAGE_SIZE),
+  })
 
   const facilities: TFacilities = []
   if (house?.parking && house?.parking > 0) { facilities.push({ title: <Car size={24} />, content: ' پارکینگ ' }) }
@@ -71,9 +92,19 @@ export default function PropertyTabs({ house }: { house: IHouse }) {
         {activeTab === "reviews" && (
           <motion.div initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}>
-            <SingleReserveForm parent_comment={parent_comment} parent_comment_id={parent_comment_id} viewReply={viewReply} />
+            <SingleReserveForm refetch={refetch} title={title} parent_comment_id={parent_comment_id} viewReply={viewReply} />
             <div className="my-[100px]">
-              <SingleReserveComments setParent_comment={setParent_comment} setParent_comment_id={setParent_comment_id} setViewReply={setViewReply} />
+              <SingleReserveComments
+                comments={comments}
+                isLoading={isLoading}
+                isFetching={isFetching}
+                page={page}
+                setPage={setPage}
+                setTitle={setTitle}
+                setParent_comment_id={setParent_comment_id}
+                setViewReply={setViewReply}
+                hasNext={comments.length === PAGE_SIZE}
+              />
             </div>
           </motion.div>
         )}

@@ -27,7 +27,7 @@ const RentalComponent = () => {
 
   const [search, setSearch] = useState<string>('')
   const [order, setOrder] = useState<'DESC' | 'ASC'>('DESC')
-  const [sort, setSort] = useState<string>('')
+  const [sort, setSort] = useState<string>('last_updated')
   const [houses, setHouses] = useState<IHouse[]>([])
   const [propertyType, setPropertyType] = useState<string>('')
   const [minRent, setMinRent] = useState<number | "">('')

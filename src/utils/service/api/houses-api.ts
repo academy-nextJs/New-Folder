@@ -35,6 +35,7 @@ export const getHouses = async (
         (minArea !== '' ? `&minArea=${minArea}` : '') +
         (maxArea !== '' ? `&maxArea=${maxArea}` : '');
 
+    console.log(url)
     const response = await fetchApi.get(url) as IHouse[];
     return response
 }
