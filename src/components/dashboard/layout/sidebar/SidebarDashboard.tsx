@@ -11,8 +11,8 @@ const routes = [
   { label: 'داشبورد', href: '/dashboard', icon: Home },
   { label: 'اطلاعات کاربری', href: '/dashboard/profile', icon: User },
   { label: 'ذخیره‌ها', href: '/dashboard/favorites', icon: Heart },
+  { label: 'پرداخت های من', href: '/dashboard/my-payments', icon: Heart },
   { label: 'دیدگاه‌های من', href: '/dashboard/my-comments', icon: Text },
-  { label: 'مورد اضافه', href: '/dashboard/extra', icon: MoreHorizontal },
 ];
 
 const SidebarDashboard = () => {
@@ -38,8 +38,8 @@ const SidebarDashboard = () => {
   }, [showMore]);
 
   return (
-    <div className="relative">
-      <div className="bg-subBg px-4 py-8 gap-8 rounded-xl w-2/12 hidden xl:flex flex-col shadow-md">
+    <>
+      <div className="bg-subBg px-4 border py-8 gap-8 rounded-xl w-2/12 hidden xl:flex flex-col shadow-md">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-bold">دلتا</h2>
           <LogOut onClick={() => redirect('/')} className="cursor-pointer hover:text-danger transition-colors" />
@@ -52,7 +52,7 @@ const SidebarDashboard = () => {
                 key={href}
                 href={href}
                 className={`flex gap-3 items-center px-3 py-2 rounded-lg font-medium transition-colors ${
-                  isActive ? 'bg-accent text-accent-foreground' : 'hover:bg-subBg2'
+                  isActive ? 'dark:bg-accent bg-subBg2 dark:text-accent-foreground' : 'hover:bg-subBg2'
                 }`}
               >
                 <Icon className="w-5 h-5" />
@@ -113,7 +113,7 @@ const SidebarDashboard = () => {
           <Image src={DeltaIcon} alt="Delta" width={32} height={32} />
         </Link>
       </div>
-    </div>
+    </>
   );
 };
 
