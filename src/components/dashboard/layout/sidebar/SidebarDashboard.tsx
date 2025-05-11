@@ -38,8 +38,8 @@ const SidebarDashboard = () => {
   }, [showMore]);
 
   return (
-    <div className="relative">
-      <div className="bg-subBg px-4 py-8 gap-8 rounded-xl w-2/12 hidden xl:flex flex-col shadow-md">
+    <>
+      <div className="bg-subBg px-4 border py-8 gap-8 rounded-xl w-2/12 hidden xl:flex flex-col shadow-md">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-bold">دلتا</h2>
           <LogOut onClick={() => redirect('/')} className="cursor-pointer hover:text-danger transition-colors" />
@@ -113,7 +113,7 @@ const SidebarDashboard = () => {
           <Image src={DeltaIcon} alt="Delta" width={32} height={32} />
         </Link>
       </div>
-    </div>
+    </>
   );
 };
 
