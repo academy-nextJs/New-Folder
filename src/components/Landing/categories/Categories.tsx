@@ -11,7 +11,6 @@ import { fetchApi } from "@/core/interceptore/fetchApi";
 import { Loader } from "@/components/common/Loader";
 import arrow from "@/assets/arrow.svg";
 import { useTheme } from "@/utils/service/TanstakProvider";
-import { useTranslation } from "react-i18next";
 
 type Category = {
   id: string;
@@ -40,7 +39,6 @@ const Categories = () => {
   const [cardsToShow, setCardsToShow] = useState(1);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [categoryData, setCategoryData] = useState<Category[]>([]);
-  const { t, i18n } = useTranslation("landing");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -89,23 +87,8 @@ const Categories = () => {
 
   const { theme } = useTheme();
 
-  const convertNameToKey = (name: string) => {
-    switch (name.trim()) {
-      case "ویلا":
-        return "villa";
-      case "آپارتمان":
-        return "apartment";
-      case "روستایی":
-        return "rural";
-      case "مسکونی":
-        return "residential";
-      default:
-        return "villa";
-    }
-  };
-
   return (
-    <div dir={i18n.dir()} className="mb-32 text-foreground p-2 sm:p-4">
+    <div className="mb-32 text-foreground p-2 sm:p-4">
       <div className="flex justify-center items-center gap-2 py-2 sm:py-4 mb-2 sm:mb-4 text-primary">
         <Image
           src={arrow}
@@ -113,7 +96,7 @@ const Categories = () => {
           className="w-8 h-8 sm:w-12 sm:h-12 rotate-180  brightness-0 dark:brightness-100 transition-all duration-300"
         />
         <span className="text-sm sm:text-base md:text-lg">
-          {t("categories.title")}
+           دسته بندی املاک دلتا 
         </span>
         <Image
           src={arrow}
@@ -123,11 +106,11 @@ const Categories = () => {
       </div>
 
       <h1 className="text-center text-xl sm:text-2xl md:text-3xl font-bold mb-2 sm:mb-4">
-        {t("categories.subtitle")}
+         هر ملکی بخوای اینجا پیدا میشه ! 
       </h1>
 
       <p className="text-center text-subText sm:text-sm mb-8 sm:mb-12 mx-auto max-w-full font-sans break-words">
-        {t("categories.description")}
+         با کلیک به روی هر دسته بندی می‌توانید تمام آگهی مربوط به آن را مشاهده کنید و به ملک مورد علاقه خود برسید 
       </p>
 
       <div className="relative w-full flex items-center justify-center">
@@ -137,7 +120,6 @@ const Categories = () => {
           </div>
         ) : (
           <div
-            dir={i18n.dir()}
             className="flex justify-center items-center w-full"
           >
             <div className="flex gap-4 sm:gap-8 overflow-x-auto px-2 sm:px-6 mx-auto">
@@ -146,14 +128,12 @@ const Categories = () => {
                 const icon = getCategoryIcon(cardIndex);
                 return (
                   <div
-                    dir={i18n.dir()}
                     key={cardIndex}
                     className="w-[230px] h-[100px] relative flex items-center justify-center cursor-pointer transition-all duration-300"
                     onMouseEnter={() => setHoveredIndex(cardIndex)}
                     onMouseLeave={() => setHoveredIndex(null)}
                   >
                     <div
-                      dir={i18n.dir()}
                       className="w-full h-full rounded-lg overflow-hidden"
                     >
                       <CardSvgBackground
@@ -162,7 +142,6 @@ const Categories = () => {
                     </div>
 
                     <div
-                      dir={i18n.dir()}
                       className={`absolute left-6 bottom-[80px] rounded-lg transition-colors duration-300
     dark:bg-transparent dark:border-none 
     ${hoveredIndex === cardIndex ? "bg-primary" : "bg-white"}
@@ -180,7 +159,6 @@ const Categories = () => {
                     </div>
 
                     <div
-                      dir={i18n.dir()}
                       className={`
     absolute bottom-14 
     ${isSmallScreen ? "right-8" : "right-8"}
@@ -203,7 +181,6 @@ const Categories = () => {
                     </div>
 
                     <div
-                      dir={i18n.dir()}
                       className={`
     absolute bottom-4 left-1/2 transform -translate-x-1/2
     flex items-center gap-1 group font-bold text-center
@@ -226,13 +203,12 @@ const Categories = () => {
                       />
 
                       <span
-                        dir={i18n.dir()}
                         className={`
       transition-all duration-300 
       ${hoveredIndex === cardIndex ? "text-card-body" : "text-secondary-static"}
     `}
                       >
-                        {t(`categories.${convertNameToKey(category?.name)}`)}
+                        {category?.name}
                         {/* {category?.name || t("categories.defaultName")} */}
                       </span>
 
