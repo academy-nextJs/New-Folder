@@ -22,6 +22,7 @@
   --secondary: #ffffff;
   --secondary-static: #1e1e1e;
   --secondary-foreground: #333333;
+  --bgDash: #ECECEC;
   --subBg: #ffffff;
   --subBg2: #e0e0e0;
   --secondary-light: #eeeef4cc;
@@ -58,6 +59,7 @@
   --textComment: #363636;
   --cardComment: #393939;
   --background: #232323;
+  --bgDash: #232323;
   --primary: #8cff45;
   --primary-foreground: #232323;
   --secondary: #232323;

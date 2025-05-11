@@ -1,135 +1,35 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
 import { useTheme } from "@/utils/service/TanstakProvider";
 import { Moon, Sun } from "lucide-react";
 
 const MobileNavbarSection = () => {
   const { theme, toggleTheme } = useTheme();
-  const [openMenus, setOpenMenus] = useState<{ [key: string]: boolean }>({
-    quickReserve: false,
-    rent: false,
-  });
-
-  const toggleMenu = (menuName: string) => {
-    setOpenMenus((prev) => ({
-      ...prev,
-      [menuName]: !prev[menuName],
-    }));
-  };
 
   return (
     <nav className="flex flex-col w-full space-y-6">
       {/* رزرو سریع */}
       <div className="relative">
-        <div
+        <Link
           className="flex items-center justify-between w-full mb-2 cursor-pointer"
-          onClick={() => toggleMenu("quickReserve")}
+          href={`/reserve/reserve-house`}
         >
           <span className="text-subText hover:text-primary transition-colors flex items-center gap-1">
             رزرو سریع
           </span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className={`w-4 h-4 text-subText transition-transform duration-300 ${
-              openMenus.quickReserve ? "rotate-180" : ""
-            }`}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="m19.5 8.25-7.5 7.5-7.5-7.5"
-            />
-          </svg>
-        </div>
-        <div
-          className={`pr-4 flex flex-col space-y-2 mt-2 border-r border-border overflow-hidden transition-all duration-300 ${
-            openMenus.quickReserve
-              ? "max-h-[500px] opacity-100"
-              : "max-h-0 opacity-0"
-          }`}
-        >
-          <Link
-            href="/quick-reserve/daily"
-            className="block text-subText hover:text-primary transition-colors"
-          >
-            رزرو روزانه
-          </Link>
-          <Link
-            href="/quick-reserve/monthly"
-            className="block text-subText hover:text-primary transition-colors"
-          >
-            رزرو ماهانه
-          </Link>
-          <Link
-            href="/quick-reserve/yearly"
-            className="block text-subText hover:text-primary transition-colors"
-          >
-            رزرو سالانه
-          </Link>
-        </div>
+        </Link>
       </div>
 
       {/* رهن و اجاره */}
       <div className="relative">
-        <div
+        <Link
           className="flex items-center justify-between w-full mb-2 cursor-pointer"
-          onClick={() => toggleMenu("rent")}
+          href={`/rent`}
         >
           <span className="text-subText hover:text-primary transition-colors flex items-center gap-1">
             رهن و اجاره
           </span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className={`w-4 h-4 text-subText transition-transform duration-300 ${
-              openMenus.rent ? "rotate-180" : ""
-            }`}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="m19.5 8.25-7.5 7.5-7.5-7.5"
-            />
-          </svg>
-        </div>
-        <div
-          className={`pr-4 flex flex-col space-y-2 mt-2 border-r border-border overflow-hidden transition-all duration-300 ${
-            openMenus.rent ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
-          }`}
-        >
-          <Link
-            href="/rent/apartment"
-            className="block text-subText hover:text-primary transition-colors"
-          >
-            آپارتمان
-          </Link>
-          <Link
-            href="/rent/villa"
-            className="block text-subText hover:text-primary transition-colors"
-          >
-            ویلا
-          </Link>
-          <Link
-            href="/rent/office"
-            className="block text-subText hover:text-primary transition-colors"
-          >
-            دفتر کار
-          </Link>
-          <Link
-            href="/rent/store"
-            className="block text-subText hover:text-primary transition-colors"
-          >
-            مغازه
-          </Link>
-        </div>
+        </Link>
       </div>
 
       {/* درباره ما */}

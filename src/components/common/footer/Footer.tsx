@@ -1,3 +1,4 @@
+'use client'
 import { PhoneCall } from 'lucide-react'
 import React from 'react'
 import FooterInfo from './footer-info/FooterInfo'
@@ -5,8 +6,13 @@ import Person from '@/assets/FooterPicture.png'
 import DeltaLogo from '@/assets/delta-logo.png'
 import Image from 'next/image'
 import FooterForm from './footer-form/FooterForm'
+import { usePathname } from 'next/navigation'
 
 const Footer = () => {
+    const pathname = usePathname()
+
+    if (pathname.startsWith("/dashboard")) return null;
+
     return (
         <div className='bg-primary text-primary-foreground  w-full md:rounded-2xl'>
             <div className='xl:flex hidden'>
