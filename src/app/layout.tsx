@@ -3,7 +3,6 @@ import { Providers } from "@/utils/service/TanstakProvider";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-// import "swiper/css";
 import Footer from "@/components/common/footer/Footer";
 import { Toaster } from "@/components/ui/sonner";
 import { Suspense } from "react";
@@ -34,7 +33,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden custom-scrollbar`}
       >
         <div className="flex flex-col justify-between mx-auto max-w-[1750px] w-full h-screen">
           <Providers>

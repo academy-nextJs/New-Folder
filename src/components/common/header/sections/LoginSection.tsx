@@ -33,9 +33,9 @@ const LoginSection = () => {
         aria-label={theme === "dark" ? "تغییر به حالت روشن" : "تغییر به حالت تاریک"}
       >
         {theme === "dark" ? (
-          <Sun className="w-4 h-4 sm:w-5 sm:h-5 text-subText hover:text-primary" />
+          <Sun className="w-5 h-5 text-subText hover:text-primary" />
         ) : (
-          <Moon className="w-4 h-4 sm:w-5 sm:h-5 text-subText hover:text-primary" />
+          <Moon className="w-5 h-5 text-subText hover:text-primary" />
         )}
       </button>
 

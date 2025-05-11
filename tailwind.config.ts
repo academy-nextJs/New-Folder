@@ -18,6 +18,7 @@ const config: Config = {
         "secondary-static": "var(--secondary-static)", // پس‌زمینه ثابت
         "secondary-foreground": "var(--secondary-foreground)",
         background: "var(--background)",
+        bgDash: "var(--bgDash)", // پس‌زمینه داشبورد
         foreground: "var(--foreground)", // متن اصلی
         subBg: "var(--subBg)", // پس‌زمینه فرعی
         subBg2: "var(--subBg2)", // پس‌زمینه فرعی کم‌رنگ
