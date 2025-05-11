@@ -1,4 +1,3 @@
-'use client'
 import { PhoneCall } from 'lucide-react'
 import React from 'react'
 import FooterInfo from './footer-info/FooterInfo'
@@ -6,13 +5,8 @@ import Person from '@/assets/FooterPicture.png'
 import DeltaLogo from '@/assets/delta-logo.png'
 import Image from 'next/image'
 import FooterForm from './footer-form/FooterForm'
-import { usePathname } from 'next/navigation'
 
 const Footer = () => {
-    const pathname = usePathname()
-
-    if (pathname.startsWith("/dashboard")) return null;
-
     return (
         <div className='bg-primary text-primary-foreground  w-full md:rounded-2xl'>
             <div className='xl:flex hidden'>
@@ -39,7 +33,7 @@ const Footer = () => {
                     <div className="flex flex-col gap-4">
 
                         <div className="flex flex-row w-fit items-center gap-4 justify-end">
-                            <span className="xl:text-base text-sm">  همیشه کنارتیم  </span>
+                            <span className="xl:text-base text-sm">همیشه کنارتیم</span>
                             <div className='flex gap-1 justify-center items-center'>
                                 <svg width="48" height="17" viewBox="0 0 48 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M45 10.1598C46.3333 9.38998 46.3333 7.46548 45 6.69568L39 3.23158C37.6667 2.46178 36 3.42403 36 4.96363L36 11.8918C36 13.4314 37.6667 14.3937 39 13.6239L45 10.1598Z" fill="#363636" />
@@ -50,11 +44,11 @@ const Footer = () => {
                         </div>
 
                         <h2 className="xl:text-[32px] font-semibold text-xl tracking-tight">
-                            24 ساعت روز و 7 روز هفته در اختیار شماییم! 
+                            24 ساعت روز و 7 روز هفته در اختیار شماییم!
                         </h2>
 
                         <p className="xl:text-[20px] text-base tracking-tighter">
-                             تیم دلتا با ارائه بهترین نیروهای خدماتی و سرویس‌های املاکی سعی دارد تا بتواند در تمام لحظات کنار شما باشد. 
+                            تیم دلتا با ارائه بهترین نیروهای خدماتی و سرویس‌های املاکی سعی دارد تا بتواند در تمام لحظات کنار شما باشد.
                         </p>
                     </div>
                     <FooterForm classname='xl:absolute xl:top-[250px] xl:my-0 my-10' />
