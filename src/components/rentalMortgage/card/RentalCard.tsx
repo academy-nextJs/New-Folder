@@ -12,7 +12,7 @@ interface IReserveContent {
 }
 const RentalCard : FC<IReserveContent> = ({ items }) => {
     return (
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} whileHover={{ scale: 1.02 }} className="flex flex-col md:flex-row xl:w-fit w-full overflow-hidden px-4 py-6 rounded-[16px] items-center group justify-between bg-secondary-light2">
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} whileHover={{ scale: 1.02 }} className="flex flex-col md:flex-row w-full md:basis-[calc(50%-1rem)] overflow-hidden px-4 py-6 rounded-[16px] items-center group justify-between bg-secondary-light2">
             <div className="flex flex-col md:flex-row gap-4 md:w-4/5 w-full">
                 <img
                     alt=""
