@@ -11,6 +11,7 @@ const routes = [
   { label: 'داشبورد', href: '/dashboard', icon: Home },
   { label: 'اطلاعات کاربری', href: '/dashboard/profile', icon: User },
   { label: 'ذخیره‌ها', href: '/dashboard/favorites', icon: Heart },
+  { label: 'پرداخت های من', href: '/dashboard/my-payments', icon: Heart },
   { label: 'دیدگاه‌های من', href: '/dashboard/my-comments', icon: Text },
 ];
 
