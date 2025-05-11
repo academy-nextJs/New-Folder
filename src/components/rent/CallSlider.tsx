@@ -4,11 +4,11 @@ import { fetchHouses } from '@/utils/service/api/fetchHouses'
 import { useQuery } from '@tanstack/react-query'
 import React from 'react'
 
-const CallSlider = () => {
+const CallSlider = ({ type }: { type: "" | "rental" | "mortgage" | "reservation" | "direct_purchase" }) => {
 
     const { data: houses, isLoading } = useQuery({
-        queryKey: ['realStateTravelingHouses'],
-        queryFn: () => fetchHouses('last_updated', 'DESC', 'rental')
+        queryKey: ['fetchSameHouses'],
+        queryFn: () => fetchHouses('last_updated', 'DESC', type)
     })
 
     return (
