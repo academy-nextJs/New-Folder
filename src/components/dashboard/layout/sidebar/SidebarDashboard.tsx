@@ -12,7 +12,6 @@ const routes = [
   { label: 'اطلاعات کاربری', href: '/dashboard/profile', icon: User },
   { label: 'ذخیره‌ها', href: '/dashboard/favorites', icon: Heart },
   { label: 'دیدگاه‌های من', href: '/dashboard/my-comments', icon: Text },
-  { label: 'مورد اضافه', href: '/dashboard/extra', icon: MoreHorizontal },
 ];
 
 const SidebarDashboard = () => {
