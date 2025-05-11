@@ -52,7 +52,7 @@ const SidebarDashboard = () => {
                 key={href}
                 href={href}
                 className={`flex gap-3 items-center px-3 py-2 rounded-lg font-medium transition-colors ${
-                  isActive ? 'bg-accent text-accent-foreground' : 'hover:bg-subBg2'
+                  isActive ? 'dark:bg-accent bg-subBg2 dark:text-accent-foreground' : 'hover:bg-subBg2'
                 }`}
               >
                 <Icon className="w-5 h-5" />
