@@ -10,7 +10,7 @@ import Categories from "@/components/Landing/categories/Categories";
 
 export default async function Home() {
   return (
-    <div className="w-full flex flex-col gap-16 overflow-x-hidden">
+    <div className="w-full max-md:mt-[100px] flex flex-col gap-16 overflow-x-hidden">
       <HeroSection />
 
       <div className="relative">
