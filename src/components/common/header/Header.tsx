@@ -4,10 +4,12 @@ import LogoSection from "./sections/LogoSection";
 import NavbarSection from "./sections/NavbarSection";
 import MobileNavbarSection from "./sections/MobileNavbarSection";
 import LoginSection from "./sections/LoginSection";
+import { usePathname } from "next/navigation";
 
 const Header = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const drawerRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname()
 
   // Close drawer when clicking outside
   useEffect(() => {
@@ -46,8 +48,9 @@ const Header = () => {
     };
   }, [isDrawerOpen]);
 
-  return (
-    <div className="w-full flex justify-center items-center relative">
+  if (pathname.startsWith("/dashboard")) return null;
+
+  return  <div className="w-full flex justify-center items-center relative">
       {/* Overlay */}
       {isDrawerOpen && (
         <div
@@ -137,7 +140,6 @@ const Header = () => {
         </div>
       </div>
     </div>
-  );
 };
 
 export default Header;

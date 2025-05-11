@@ -38,14 +38,14 @@ const FooterForm: FC<IFooterForm> = ({ classname }) => {
         try {
             const response = await fetchApi.post('/contact-us', postData)
             if (response) {
-                showToast('success', t("form.success"), t("form.close"), t("form.successMessage"))
+                showToast('success', " تایید درخواست ", " بستن ", " درخواست شما با موفقیت ارسال شد ")
             }
             setIsLoading(false)
             reset()
         } catch (error: any) {
             console.log(error)
             setIsLoading(false)
-            showToast('error', t("form.error"), t("form.close"), t("form.errorMessage"))
+            showToast('error', " مشکل در ارسال ", " بستن ", " مشکلی در درخواست پیدا شد ")
         }
     }
 
@@ -54,14 +54,14 @@ const FooterForm: FC<IFooterForm> = ({ classname }) => {
             <div className='flex gap-4 md:flex-row flex-col w-full'>
                 <div className="flex flex-col gap-1 md:w-1/2 w-full">
                     <Label htmlFor="name" className=" text-sm">
-                        {t("form.name")}
+                         نام و نام خانوادگی: 
                     </Label>
                     <Input
                         type='text'
                         id="name"
                         {...register('name')}
                         className="border w-full outline-none border-border bg-transparent px-4 py-2 placeholder:text-border rounded-2xl"
-                        placeholder={t("form.namePlaceholder")}
+                        placeholder="وارد کنید..."
                     />
                     {errors.name && <p className='text-danger text-sm font-semibold'>{errors.name.message}</p>}
                 </div>
