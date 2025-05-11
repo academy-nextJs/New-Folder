@@ -14,7 +14,6 @@ import { Button } from "../ui/button";
 import { useState } from "react";
 import { showToast } from "@/core/toast/toast";
 import { useRouter } from "next/navigation";
-import { useTranslation } from "react-i18next";
 
 interface LoginResponse {
   accessToken: string;
@@ -22,7 +21,6 @@ interface LoginResponse {
 }
 
 const LoginForm = () => {
-  const {t,i18n} = useTranslation("auth")
   const [showPassword, setShowPassword] = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { login } = useUserStore();
@@ -46,9 +44,9 @@ const LoginForm = () => {
         await login(res.accessToken);
         showToast(
           "success",
-          t("loginForm.success"),
-          t("loginForm.close"),
-          t("loginForm.successMessage")
+          "ورود با موفقیت انجام شد",
+          "بستن",
+          "با موفقیت وارد پنل شدید"
         );
         setIsLoading(false);
         reset();
@@ -59,15 +57,15 @@ const LoginForm = () => {
       setIsLoading(false);
       showToast(
         "error",
-        t("loginForm.error"),
-        t("loginForm.close"),
-        t("loginForm.errorMessage")
+        "ورود با مشکل مواجه شد",
+        "بستن",
+        "لطفا اطلاعات خود را چکار کنید"
       );
     }
   };
 
   return (
-    <div dir={i18n.dir()}>
+    <div>
       <form
         className="mt-8 space-y-6 text-foreground"
         onSubmit={handleSubmit(handleLogin)}
@@ -75,7 +73,7 @@ const LoginForm = () => {
         <div className="rounded-md -space-y-px flex md:flex-nowrap flex-wrap gap-4">
           <div className="md:w-1/2 w-full flex gap-1 flex-col text-card-foreground">
             <Label htmlFor="email" className={`text-[13px] flex gap-0.5`}>
-              <span> {t("loginForm.email")} </span>
+              <span> ایمیل شما </span>
               <p className="text-danger"> * </p>
               <span> : </span>
             </Label>
@@ -83,7 +81,7 @@ const LoginForm = () => {
               id="email"
               type="text"
               className="bg-transparent placeholder:text-card-foreground text-sm outline-none w-full py-3 border border-card-foreground text-card-foreground px-4 rounded-[16px] text-[16px]"
-              placeholder={`${t("loginForm.emailPlaceholder")} : dakjsbd@email.com`}
+              placeholder={`مثال : dakjsbd@email.com`}
               {...register("email")}
             />
             {errors.email && (
@@ -95,7 +93,7 @@ const LoginForm = () => {
           <div className="flex flex-col gap-3 md:w-1/2 w-full">
             <div className="w-full flex gap-1 flex-col text-card-foreground">
               <Label htmlFor="email" className={`text-[13px] flex gap-0.5`}>
-                <span> {t("loginForm.password")} </span>
+                <span> رمز عبور </span>
                 <p className="text-danger"> * </p>
                 <span> : </span>
               </Label>
@@ -115,7 +113,7 @@ const LoginForm = () => {
                       setShowPassword(true);
                     }
                   }}
-                  className={`cursor-pointer bg-transparent text-card-foreground absolute top-2 ${i18n.dir() === "rtl" ? "left-3" : "right-3"}`}
+                  className={`cursor-pointer bg-transparent text-card-foreground absolute top-2 right-0`}
                   type="button"
                 >
                   {showPassword ? (
@@ -133,7 +131,7 @@ const LoginForm = () => {
               </div>
               <span className="text-card-foreground flex gap-2 text-sm cursor-pointer">
                 {" "}
-                <p> {t("loginForm.forgotPassword")} </p> <ArrowLeft size={20} />{" "}
+                <p> رمز عبور خود را فراموش کردم </p> <ArrowLeft size={20} />{" "}
               </span>
             </div>
           </div>
@@ -141,7 +139,7 @@ const LoginForm = () => {
         <div>
           <CommonButton
             type="submit"
-            title={isLoading ? t("loginForm.loading") : t("loginForm.login")}
+            title={isLoading ? "در حال ورود..." : "ورود به حساب کاربری"}
             icon={isLoading ? <Loader /> : <ArrowLeft size={16} />}
             classname="w-full text-primary-foreground"
             disabled={isLoading}

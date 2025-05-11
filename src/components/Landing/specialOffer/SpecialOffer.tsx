@@ -1,13 +1,9 @@
-'use client'
 import { Clock } from 'lucide-react'
 import React from 'react'
 import CountdownTimer from '@/utils/helper/Timer/CountdownTimer'
 import CallSlider from './CallSlider'
-import { useTranslation } from 'react-i18next'
 
 const SpecialOffer = () => {
-
-  const {t, i18n} = useTranslation("landing")
 
   return (
     <div className="w-full h-fit bg-secondary-light px-8 py-12 rounded-[40px] relative">
@@ -25,7 +21,7 @@ const SpecialOffer = () => {
         <div className='flex flex-col gap-8'>
           <div className='flex flex-col gap-4'>
             <div className="flex flex-row w-fit items-center gap-4 justify-end">
-              <span dir={i18n.dir()} className="text-primary text-sm"> {t("specialOffer.title")} </span>
+              <span className="text-primary text-sm"> پیشنهادات برای شما </span>
               <div className='dark:flex hidden gap-1 justify-center items-center'>
                 <svg width="48" height="16" viewBox="0 0 48 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M45 9.73205C46.3333 8.96225 46.3333 7.03775 45 6.26795L39 2.80385C37.6667 2.03405 36 2.9963 36 4.5359L36 11.4641C36 13.0037 37.6667 13.966 39 13.1962L45 9.73205Z" fill="#8CFF45" />
@@ -43,7 +39,7 @@ const SpecialOffer = () => {
             </div>
 
             <div className='flex justify-between w-full items-center'>
-              <h2 dir={i18n.dir()} className='lg:text-[28px] md:text-xl text-base font-[500]'> {t("specialOffer.subtitle")} </h2>
+              <h2 className='lg:text-[28px] md:text-xl text-base font-[500]'> پیشنهادات ویژه  </h2>
             </div>
           </div>
 

@@ -1,8 +1,6 @@
-"use client";
 import Link from "next/link";
-import { useTranslation } from "react-i18next";
+
 const NavbarSection = () => {
-  const {t} = useTranslation("header")
   return (
     <nav className="flex items-center justify-center lg:gap-6 md:gap-3 text-[14px] lg:text-[16px] md:text-[12px] h-full relative">
       {/* رزرو سریع */}
@@ -11,7 +9,7 @@ const NavbarSection = () => {
           href="/reserve/reserve-house"
           className="flex items-center h-full text-subText transition-colors pb-1 group-hover:text-primary"
         >
-          {t("navbarSection.quickReservation")}
+          رزرو سریع
         </Link>
         <span className="absolute left-0 right-0 bottom-0 h-[2px] bg-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-bottom group-hover:origin-bottom z-20"></span>
       </div>
@@ -21,7 +19,7 @@ const NavbarSection = () => {
           href="/rent"
           className="text-subText transition-colors flex items-center lg:gap-1 pb-1 h-full group-hover:text-primary"
         >
-          {t("navbarSection.rent")}
+          رهن و اجاره
           {/* بردر پایین */}
           <span className="absolute left-0 right-0 bottom-0 h-[2px] bg-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-bottom group-hover:origin-bottom z-20"></span>
         </Link>
@@ -33,7 +31,7 @@ const NavbarSection = () => {
           href="/about"
           className="flex items-center h-full text-subText transition-colors pb-1 group-hover:text-primary"
         >
-          {t("navbarSection.about")}
+          درباره ما
           {/* بردر پایین */}
           <span className="absolute left-0 right-0 bottom-0 h-[2px] bg-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-bottom group-hover:origin-bottom z-20"></span>
         </Link>
@@ -44,7 +42,7 @@ const NavbarSection = () => {
           href="/articles"
           className="flex items-center h-full text-subText transition-colors pb-1 group-hover:text-primary"
         >
-          {t("navbarSection.articles")}
+          مقالات ما
           {/* بردر پایین */}
           <span className="absolute left-0 right-0 bottom-0 h-[2px] bg-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-bottom group-hover:origin-bottom z-20"></span>
         </Link>
@@ -55,7 +53,7 @@ const NavbarSection = () => {
           href="/contact"
           className="flex items-center h-full text-subText transition-colors pb-1 group-hover:text-primary"
         >
-          {t("navbarSection.contact")}
+          تماس با ما
           {/* بردر پایین */}
           <span className="absolute left-0 right-0 bottom-0 h-[2px] bg-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-bottom group-hover:origin-bottom z-20"></span>
         </Link>
@@ -76,7 +74,7 @@ const NavbarSection = () => {
           <path d="M15 8v4" strokeLinecap="round" />
           <path d="M17 9v2" strokeLinecap="round" />
         </svg>
-        {t("navbarSection.seller")}
+        فروشنده شو
       </Link>
     </nav>
   );
