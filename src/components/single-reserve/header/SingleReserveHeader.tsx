@@ -73,7 +73,7 @@ const SingleReserveHeader: FC<IProps> = ({ house }) => {
                     </div>
                     |
                     <div className='flex gap-4'>
-                        <CommonButton onclick={handleCopy} classname='bg-secondary-light2 text-white' icon={<Copy />} />
+                        <CommonButton onclick={handleCopy} classname='bg-secondary-light2 text-secondary-foreground' icon={<Copy />} />
                         <CommonButton onclick={handleShare} classname='text-primary-foreground' icon={<Share />} />
                     </div>
                 </div>

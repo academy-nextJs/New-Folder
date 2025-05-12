@@ -26,6 +26,7 @@ const SingleReserveComment = () => {
   } = useQuery<IGetComment[]>({
     queryKey: ['comments', id, page],
     queryFn: () => fetchComments(id, page, PAGE_SIZE),
+    refetchOnWindowFocus: false
   })
 
   return (
