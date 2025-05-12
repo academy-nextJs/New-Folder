@@ -43,9 +43,9 @@ export const QAWidget: FC<
         </div>
 
         <div className="flex gap-2 flex-col">
-          <h2 className="text-xl"> {parent_comment ? parent_comment.title : title} </h2>
+          <h2 className="text-2xl"> {parent_comment ? parent_comment.title : title} </h2>
           <h2
-            className="cursor-pointer"
+            className="cursor-pointer text-lg"
             style={!showFullCaption ? clampStyle : undefined}
             onClick={() => setShowFullCaption((prev) => !prev)}
           >
@@ -55,7 +55,7 @@ export const QAWidget: FC<
 
 
         <div className="flex gap-4 items-center">
-          <div className="bg-accent cursor-pointer whitespace-nowrap px-6 py-3 rounded-[16px] flex items-center gap-2 flex-row-reverse">
+          <div className="bg-accent text-accent-foreground cursor-pointer whitespace-nowrap px-6 py-3 rounded-[16px] flex items-center gap-2 flex-row-reverse">
             پاسخ کاربران <NotepadText size={16} />
           </div>
           <svg
@@ -102,7 +102,7 @@ export const QAWidget: FC<
           <div className="flex gap-2 flex-col">
             <h2 className="text-xl"> {title} </h2>
             <h2
-              className="cursor-pointer"
+              className="cursor-pointer text-lg"
               style={!showFullCaption ? clampStyle : undefined}
               onClick={() => setShowFullCaption((prev) => !prev)}
             >
@@ -113,7 +113,7 @@ export const QAWidget: FC<
 
         <div className="bg-card-light rounded-[16px] flex md:flex-row flex-col max-md:items-start items-center justify-between py-2 px-4 gap-4">
           <div className="flex items-center gap-4">
-            <div className="bg-subText rounded-[16px] w-[57px] h-[57px]" />
+            {user?.profilePicture ? <img className="bg-cardComment rounded-[16px] min-w-[57px] min-h-[57px]" alt="" src={user.profilePicture} /> : <div className="bg-cardComment rounded-[16px] min-w-[57px] min-h-[57px]" />}
             <div className="flex flex-col justify-between gap-3">
               <h2>{user?.fullName || "ناشناس"}</h2>
               <span className="text-sm text-subText flex items-center gap-2">
@@ -127,7 +127,7 @@ export const QAWidget: FC<
               setViewReply(true);
               setParent_comment_id(parent_comment_id);
             }}
-            className="px-4 py-2 whitespace-nowrap cursor-pointer border border-white rounded-[16px] flex items-center gap-2 flex-row-reverse"
+            className="px-4 py-2 whitespace-nowrap cursor-pointer border border-foreground rounded-[16px] flex items-center gap-2 flex-row-reverse"
           >
             <ChevronLeft size={16} /> ثبت پاسخ
           </div>

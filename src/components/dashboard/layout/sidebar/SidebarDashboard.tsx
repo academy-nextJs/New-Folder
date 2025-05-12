@@ -101,11 +101,20 @@ const SidebarDashboard = ({
       </div>
 
       <div className={`w-dvw fixed bottom-0 right-0 z-50 justify-around items-center bg-subBg border-t py-3 md:hidden flex`}>
-        {mainRoutes.map(({ href, icon: Icon }) => {
+        {mainRoutes.map(({ href, icon: Icon, label }) => {
           const isActive = pathname.startsWith(href);
           return (
             <Link key={href} href={href} className="flex flex-col items-center">
-              <Icon className={`w-6 h-6 ${isActive ? 'text-primary' : ''}`} />
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger>
+                    <Icon className={`w-6 h-6 ${isActive ? 'text-primary' : ''}`} />                    
+                  </TooltipTrigger>
+                  <TooltipContent className='dark:bg-accent bg-subBg2 dark:accent-foreground text-foreground'>
+                    <p> {label} </p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
             </Link>
           );
         })}
@@ -126,7 +135,7 @@ const SidebarDashboard = ({
                 >
                   <X className="w-4 h-4" />
                 </button>
-                {extraRoutes.map(({ href, label }) => {
+                {extraRoutes.map(({ href, label, icon: Icon }) => {
                   const isActive = pathname.startsWith(href);
                   return (
                     <Link
@@ -136,6 +145,7 @@ const SidebarDashboard = ({
                         }`}
                       onClick={() => setShowMore(false)}
                     >
+                      <Icon className="min-w-4 min-h-4 h-4 w-4" />
                       <span>{label}</span>
                     </Link>
                   );

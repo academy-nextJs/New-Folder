@@ -5,6 +5,7 @@ import { useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useUserStore } from "@/utils/zustand/store";
 import { useTheme } from "@/utils/service/TanstakProvider";
+import { motion } from "framer-motion";
 // import ChangeLanguage from "./ChangeLanguage";
 
 const LoginSection = () => {
@@ -25,7 +26,11 @@ const LoginSection = () => {
   return (
     <div className="flex items-center justify-end gap-3 text-[10px] lg:text-[16px] md:text-[11px] ml-7">
       {/* <ChangeLanguage /> */}
-      <button
+      <motion.button
+        initial={{ rotate: 0, scale: 0 }}
+        animate={{ rotate: 360, scale: 1 }}
+        exit={{ rotate: -360, scale: 0 }}
+        transition={{ duration: 0.5 }}
         onClick={toggleTheme}
         className="flex items-center justify-center w-8 h-8 rounded-full hover:bg-subBg2 transition-colors"
         aria-label={theme === "dark" ? "تغییر به حالت روشن" : "تغییر به حالت تاریک"}
@@ -35,7 +40,7 @@ const LoginSection = () => {
         ) : (
           <Moon className="w-5 h-5 text-subText hover:text-primary" />
         )}
-      </button>
+      </motion.button>
 
       {!isLoggedIn ? (
         <Link

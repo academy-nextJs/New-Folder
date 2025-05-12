@@ -44,7 +44,7 @@ const SellerDetail: FC<{ house: IHouse }> = ({ house }) => {
                 <Phone size={16} /> تماس با 09*****8903
             </button>
 
-            <button className="mt-2 w-full flex-row-reverse border border-white text-sm py-2 rounded-xl flex items-center justify-center gap-2">
+            <button className="mt-2 w-full flex-row-reverse border border-foreground text-sm py-2 rounded-xl flex items-center justify-center gap-2">
                 <MessageCircle size={16} /> گفتگو با فروشنده
             </button>
         </motion.div>
