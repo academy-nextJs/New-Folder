@@ -102,7 +102,7 @@ const SingleReserveForm = ({ viewReply, title, parent_comment_id, refetch }: { r
                     {errors.caption && <span className='text-danger font-semibold text-xs'>{errors.caption.message}</span>}
                     <Input {...register('caption')} id='caption' name='caption' className='px-4 py-2 bg-transparent w-full rounded-[16px] border border-subText' />
                 </div>
-                <CommonButton type='submit' classname='max-md:w-full' icon={isLoading ? <RefreshCcw /> : <ChevronLeft />} title={isLoading ? 'در حال ارسال...' : 'ارسال نظر'} />
+                <CommonButton type='submit' classname='max-md:w-full text-primary-foreground' icon={isLoading ? <RefreshCcw /> : <ChevronLeft />} title={isLoading ? 'در حال ارسال...' : 'ارسال نظر'} />
             </div>
         </form>
     )

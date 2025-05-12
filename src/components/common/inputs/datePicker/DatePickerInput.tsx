@@ -18,15 +18,15 @@ const DatePickerInput: FC<IDatePicker> = ({
   return (
     <div className={`rtl flex flex-col gap-1 w-full ${className}`}>
       {label && (
-        <Label htmlFor={label} className={`text-[13px] flex gap-0.5 text-[#AAAAAA] ${color}`}>
+        <Label htmlFor={label} className={`text-[13px] flex gap-0.5 text-subText ${color}`}>
           <span>{label}</span>
           {mandatory && <p className="text-danger">*</p>}
           <span>:</span>
         </Label>
       )}
 
-      <div className={`flex items-center gap-2 rounded-[16px] border border-[#AAAAAA] text-[#AAAAAA] px-4 py-2 ${background} ${color} w-full`}>
-        {icon && <span className={`text-[#AAAAAA] ${color}`}>{icon}</span>}
+      <div className={`flex items-center gap-2 rounded-[16px] border text-subText border-subText px-4 py-2 ${background} ${color} w-full`}>
+        {icon && <span className={`text-subText ${color}`}>{icon}</span>}
         <div className="flex-1">
           <DatePicker
             id={label}
@@ -34,7 +34,7 @@ const DatePickerInput: FC<IDatePicker> = ({
             calendar={persian}
             locale={persian_fa}
             calendarPosition="bottom-right"
-            inputClass="w-full outline-none bg-transparent text-sm"
+            inputClass="w-full outline-none bg-transparent placeholder:text-subText text-subText text-sm"
             containerClassName="w-full"
             style={{
               background: 'transparent',
