@@ -1,18 +1,15 @@
 'use client'
 import { useTheme } from "@/utils/service/TanstakProvider";
 import { Bell, ChevronDown, LogOut, Moon, Sun } from "lucide-react";
-import { useRouter } from "next/navigation";
 import React, { Fragment } from "react";
-import { useUserStore } from '@/utils/zustand/store'
+import { signOut, useSession } from "next-auth/react";
 
 const HeaderDashboard: React.FC = () => {
     const { theme, toggleTheme } = useTheme();
-    const router = useRouter();
-    const { logout } = useUserStore()
+    const { data: session } = useSession();
 
     const handleLogout = async () => {
-        await logout();
-        router.push("/login");
+        await signOut({ redirect: true, callbackUrl: "/login" });
     };
 
     return (
@@ -34,7 +31,7 @@ const HeaderDashboard: React.FC = () => {
                     <Bell className="cursor-pointer" />
                     <div className="relative group">
                         <div className="flex relative gap-4 items-center cursor-pointer">
-                            <img src={' '} alt="" className="size-[40px] border-0 outline-none bg-secondary-light rounded-[8px]" />
+                            <img src={session?.user?.image || "  "} alt="" className="size-[40px] border-0 outline-none bg-secondary-light rounded-[8px]" />
                             <div className="flex max-md:hidden flex-col justify-between">
                                 <h2> امیر محمد ملایی </h2>
                                 <span className="text-muted-foreground text-sm"> خریدار </span>

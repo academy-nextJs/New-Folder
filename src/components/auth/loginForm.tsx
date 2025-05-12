@@ -1,10 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 "use client";
-import { useUserStore } from "@/utils/zustand/store";
 import { Input } from "../ui/input";
 import { useForm } from "react-hook-form";
-import axiosApi from "@/core/interceptore/axiosApi";
 import { Label } from "../ui/label";
 import { ArrowLeft, Eye, EyeOff, Loader } from "lucide-react";
 import CommonButton from "../common/buttons/common/CommonButton";
@@ -13,9 +11,10 @@ import { schemaLoginValidation } from "@/utils/validations/login-validation";
 import { Button } from "../ui/button";
 import { useState } from "react";
 import { showToast } from "@/core/toast/toast";
-import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
+import { signIn } from "next-auth/react";
 
-interface LoginResponse {
+export interface LoginResponse {
   accessToken: string;
   refreshToken: string;
 }
@@ -23,8 +22,6 @@ interface LoginResponse {
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const { login } = useUserStore();
-  const router = useRouter();
 
   const {
     register,
@@ -35,34 +32,25 @@ const LoginForm = () => {
     resolver: zodResolver(schemaLoginValidation),
   });
 
+
   const handleLogin = async (values: any) => {
     setIsLoading(true);
-    try {
-      const res: LoginResponse = await axiosApi.post("/auth/login", values);
+    const res = await signIn("credentials", {
+      redirect: false,
+      email: values.email,
+      password: values.password,
+    });
 
-      if (res.accessToken) {
-        await login(res.accessToken);
-        showToast(
-          "success",
-          "ورود با موفقیت انجام شد",
-          "بستن",
-          "با موفقیت وارد پنل شدید"
-        );
-        setIsLoading(false);
-        reset();
-        router.push("/dashboard");
-      }
-    } catch (error) {
-      console.error("Login error:", error);
-      setIsLoading(false);
-      showToast(
-        "error",
-        "ورود با مشکل مواجه شد",
-        "بستن",
-        "لطفا اطلاعات خود را چکار کنید"
-      );
+    if (res?.ok) {
+      showToast("success", "ورود با موفقیت انجام شد", "بستن", "");
+      reset()
+      redirect("/dashboard");
+    } else {
+      showToast("error", "ورود با مشکل مواجه شد", "بستن", "ایمیل یا رمز اشتباه است");
     }
+    setIsLoading(false);
   };
+
 
   return (
     <div>

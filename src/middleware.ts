@@ -3,7 +3,7 @@ import type { NextRequest } from 'next/server'
 import { publicRoutes, privateRoutes, authRoutes } from './core/config/routes'
 
 export function middleware(request: NextRequest) {
-  const token = request.cookies.get('token')?.value
+  const token = request.cookies.get('next-auth.session-token')?.value
   const { pathname } = request.nextUrl
 
   if (publicRoutes.includes(pathname)) {
