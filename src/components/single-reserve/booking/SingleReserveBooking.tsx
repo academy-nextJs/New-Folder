@@ -86,7 +86,7 @@ const SingleReserveBooking: FC<IProps> = ({ discountedPrice, price }) => {
             <div className='flex flex-col gap-4 items-end w-full'>
                 <div className='flex gap-4'>
                     {discountedPrice && <div className='text-subText line-through'> {SplitNumber(price)} </div>}
-                    {discountedPrice && <div className='bg-danger rounded-[12px] px-4 text-sm py-1 w-fit'> %{discount_percentage} </div>}
+                    {discountedPrice && <div className='bg-danger text-accent-foreground rounded-[12px] px-4 text-sm py-1 w-fit'> %{discount_percentage} </div>}
                 </div>
                 <div className='text-primary text-[24px]'>
                     {discountedPrice ? SplitNumber(discountedPrice) : SplitNumber(price)} ت

@@ -88,7 +88,7 @@ const ReserveContent: React.FC<IReserveContent> = ({ houses, isLoading, setMaxPr
 
               {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
                 <PaginationItem key={page} onClick={() => goToPage(page)}>
-                  <PaginationLink isActive={page === currentPage} href="#items">
+                  <PaginationLink isActive={page === currentPage} className={` ${page === currentPage && "bg-primary text-primary-foreground"} `} href="#items">
                     {page}
                   </PaginationLink>
                 </PaginationItem>

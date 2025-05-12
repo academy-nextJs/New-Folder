@@ -98,7 +98,7 @@ const Rent = () => {
     <div className=" flex justify-around flex-col my-[20px] w-full gap-4 ">
       <div className="w-full flex justify-end my-[15px] lg:flex-row sm:flex-row flex-wrap gap-4">
         <button
-          className="flex flex-row-reverse justify-center gap-2 text-sm  whitespace-nowrap items-center w-[100px] h-[36px] rounded-xl bg-[#7569FF]"
+          className="flex flex-row-reverse justify-center gap-2 text-sm  whitespace-nowrap items-center w-[100px] h-[36px] rounded-xl bg-accent text-accent-foreground"
           dir="rtl"
         >
           <StarIcon size={16} />{house.rate} ستاره

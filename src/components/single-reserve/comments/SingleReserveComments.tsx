@@ -71,6 +71,7 @@ const SingleReserveComments = ({
             size="sm"
             disabled={isFetching}
             onClick={() => setPage(p)}
+            className={` ${p === page ? "bg-primary text-primary-foreground" : ""} `}
           >
             {p}
           </Button>
