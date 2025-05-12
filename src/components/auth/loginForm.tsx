@@ -113,7 +113,7 @@ const LoginForm = () => {
                       setShowPassword(true);
                     }
                   }}
-                  className={`cursor-pointer bg-transparent text-card-foreground absolute top-2 right-0`}
+                  className={`cursor-pointer bg-transparent text-card-foreground absolute top-2 left-3`}
                   type="button"
                 >
                   {showPassword ? (

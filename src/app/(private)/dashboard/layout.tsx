@@ -1,9 +1,8 @@
-import ContentDashboard from "@/components/dashboard/layout/content/ContentDashboard";
 import HeaderDashboard from "@/components/dashboard/layout/header/HeaderDashboard";
 import SidebarDashboard from "@/components/dashboard/layout/sidebar/SidebarDashboard";
 import React from "react";
 
-const Layout = ({
+const layout = ({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -17,11 +16,10 @@ const Layout = ({
 
         <div className="flex-1 overflow-y-auto pr-2 custom-scrollbar">
           {children}
-          <ContentDashboard />
         </div>
       </div>
     </div>
   );
 };
 
-export default Layout;
+export default layout;
