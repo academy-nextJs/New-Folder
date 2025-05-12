@@ -2,7 +2,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 
 const RentalCardSkeleton = () => {
     return (
-        <Skeleton className="rtl flex justify-between gap-4 items-center w-1/2 max-xl:w-full h-[180px] overflow-hidden bg-transparent rounded-2xl p-4">
+        <Skeleton className="rtl flex justify-between gap-4 items-center w-full md:basis-[calc(50%-1rem)] h-[180px] overflow-hidden bg-transparent rounded-2xl p-4">
             <div className="w-fit h-full md:block hidden">
                 <Skeleton className="w-[240px] h-full bg-secondary-light3 rounded-xl" />
             </div>

@@ -22,7 +22,6 @@ const HeroSection = () => {
 
   return (
     <div className="relative max-md:hidden w-full h-[500px] sm:h-[565px] md:h-[775px] lg:h-[901px] xl:h-[901px] 2xl:h-[901px] ">
-      {/* تصویر پس‌زمینه */}
       <div className="absolute inset-0 z-0">
         <Image
           src={heroSection}
@@ -33,7 +32,6 @@ const HeroSection = () => {
         />
       </div>
 
-      {/* تصویر ساختمان */}
       <motion.div
         initial={{ right: 1000 }}
         whileInView={{ right: 0 }}
@@ -42,11 +40,8 @@ const HeroSection = () => {
         <Image src={building} alt="building" className="object-contain" />
       </motion.div>
 
-      {/* محتوای اصلی */}
       <div className="relative -top-10 z-20 h-full w-full px-8 py-6 gap-8 flex flex-col justify-center">
-        {/* بخش میانی */}
         <div className="flex flex-col items-start  mx-auto">
-          {/* لوگو */}
           <HeroLogo />
         </div>
         <div className="flex  w-full  justify-between items-center z-30">
@@ -55,15 +50,12 @@ const HeroSection = () => {
           </div>
 
           <div className=" gap-10 w-[40%] ">
-            {/* متن و دکمه‌ها */}
             <HeroContent />
 
-            {/* آمار */}
             <StatisticSection />
           </div>
         </div>
       </div>
-      {/* نوار جستجو پایین */}
       <SearchBar />
     </div>
   );
