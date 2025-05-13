@@ -1,16 +1,28 @@
-import Layout from '@/components/dashboard/layout/Layout';
-import React from 'react';
+"use client";
+import HeaderDashboard from "@/components/dashboard/layout/header/HeaderDashboard";
+import SidebarDashboard from "@/components/dashboard/layout/sidebar/SidebarDashboard";
+import React from "react";
 
-const layout = ({
+const Layout = ({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) => {
+  const [view, setView] = React.useState(1);
+
   return (
-    <Layout>
-      {children}
-    </Layout>
+    <div className="bg-bgDash w-dvw h-dvh p-4 gap-5 flex rtl">
+      <SidebarDashboard view={view} setView={setView} />
+
+      <div className={`w-full max-xl:w-full flex flex-col gap-5`}>
+        <HeaderDashboard />
+
+        <div className="flex-1 overflow-y-auto pr-2 custom-scrollbar">
+          {children}
+        </div>
+      </div>
+    </div>
   );
 };
 
-export default layout;
+export default Layout;
