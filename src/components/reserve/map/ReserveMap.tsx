@@ -20,6 +20,7 @@ interface MarkerType {
 
 interface ReserveMapProps {
   location?: MarkerType;
+  setMarkLocation?: React.Dispatch<React.SetStateAction<MarkerType | null>>
 }
 
 const AddMarkerOnClick: React.FC<{ setMarker: React.Dispatch<React.SetStateAction<MarkerType | null>> }> = ({ setMarker }) => {
@@ -32,9 +33,15 @@ const AddMarkerOnClick: React.FC<{ setMarker: React.Dispatch<React.SetStateActio
   return null;
 };
 
-const ReserveMap: React.FC<ReserveMapProps> = ({ location }) => {
+const ReserveMap: React.FC<ReserveMapProps> = ({ location, setMarkLocation }) => {
   const [marker, setMarker] = useState<MarkerType | null>(location || null);
   const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    if (setMarkLocation && marker) {
+      setMarkLocation(marker);
+    }
+  }, [marker, setMarkLocation]);
 
   useEffect(() => {
     const checkDark = () => document.documentElement.classList.contains('dark');

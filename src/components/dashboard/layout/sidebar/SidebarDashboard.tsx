@@ -7,7 +7,6 @@ import Link from 'next/link';
 import DeltaIcon from '@/app/icon.png';
 import { usePathname } from 'next/navigation';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { AnimatedList } from '@/components/magicui/animated-list';
 
 const routes = [
   { label: 'داشبورد', href: '/dashboard', icon: Home },
@@ -52,7 +51,7 @@ const SidebarDashboard = ({
           <Link href={'/'} className="text-2xl font-bold">دلتا</Link>
           <LogOut onClick={() => setView(2)} className="cursor-pointer hover:text-accent transition-colors" />
         </div>
-        <AnimatedList className="flex flex-col-reverse gap-2">
+        <div className="flex flex-col gap-2">
           {routes.map(({ label, href, icon: Icon }) => {
             const isActive = pathname == href;
             return (
@@ -67,7 +66,7 @@ const SidebarDashboard = ({
               </Link>
             );
           })}
-        </AnimatedList>
+        </div>
       </div>
 
       <div className={`bg-subBg md:flex hidden transition-all duration-300 ease-in-out px-4 border py-8 gap-8 rounded-xl w-fit flex-col shadow-md ${view === 2 ? 'opacity-100 scale-100 pointer-events-auto' : 'opacity-0 scale-95 pointer-events-none absolute'}`}>

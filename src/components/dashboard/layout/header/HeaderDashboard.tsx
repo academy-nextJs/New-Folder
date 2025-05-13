@@ -41,9 +41,9 @@ const HeaderDashboard: React.FC = () => {
                             </div>
                             <ChevronDown className="max-md:hidden" size={12} />
                         </div>
-                        <div className="absolute text-sm px-2 py-2 top-full opacity-0 group-hover:opacity-100 left-0 bg-subBg shadow-xl rounded-lg z-50 flex flex-col gap-2 w-max min-w-[160px]">
+                        <div className="absolute text-sm  py-2 top-full opacity-0 group-hover:opacity-100 left-0 bg-secondary shadow-xl z-50 flex flex-col gap-2 w-max min-w-[160px]">
                             <div className="flex flex-col gap-2">
-                                <div onClick={handleLogout} className="flex gap-2 text-danger items-center cursor-pointer hover:bg-subBg2 rounded-[12px] px-2 py-2"> <LogOut size={16} />  خروج از حساب </div>
+                                <div onClick={handleLogout} className="flex gap-2 text-danger items-center cursor-pointer hover:bg-subBg2 px-2 py-2"> <LogOut size={16} />  خروج از حساب </div>
                             </div>
                         </div>
                     </div>
