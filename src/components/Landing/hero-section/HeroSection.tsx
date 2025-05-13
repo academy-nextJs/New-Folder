@@ -9,7 +9,6 @@ import HeroContent from "./section/HeroContent";
 import StatisticSection from "./section/StatisticSection";
 import SearchBar from "./section/SearchBar";
 import InfoIndicator from "./section/InfoIndicator";
-import { motion } from "framer-motion";
 import { useTheme } from "@/utils/service/TanstakProvider";
 
 const HeroSection = () => {
@@ -32,13 +31,11 @@ const HeroSection = () => {
         />
       </div>
 
-      <motion.div
-        initial={{ right: 1000 }}
-        whileInView={{ right: 0 }}
+      <div
         className="absolute bottom-0 left-1/2 lg:left-3/8 md:left-1/2 sm:left-3/8 transform -translate-x-1/4 md: z-40"
       >
         <Image src={building} alt="building" className="object-contain" />
-      </motion.div>
+      </div>
 
       <div className="relative -top-10 z-20 h-full w-full px-8 py-6 gap-8 flex flex-col justify-center">
         <div className="flex flex-col items-start  mx-auto">
