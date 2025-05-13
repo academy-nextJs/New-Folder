@@ -1,34 +1,41 @@
-import { PinIcon } from "lucide-react";
+import { HeartIcon, MessageCircleIcon, PinIcon } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 import img from "@/assets/Rectangle 6486.png";
 import ProfileCompletion from "./ProfileCompletion";
+import RecentReserve from "./RecentReserve";
 
 const cardData = [
   { id: 1, title: "5", subtitle: "کل رزرو‌ها" },
-  { id: 2, title: "12", subtitle: "کل پرداخت‌ها" },
-  { id: 3, title: "7", subtitle: "در انتظار تایید" },
-  { id: 4, title: "3", subtitle: "لغو شده" },
-  { id: 5, title: "20", subtitle: "کل کاربران" },
+  { id: 2, title: "12", subtitle: " رزرو های فعال" },
+  { id: 3, title: "7", subtitle: "  رزرو های پرداخت نشده" },
+  { id: 4, title: "3", subtitle: " علاقه مندی ها" },
+  { id: 5, title: "20", subtitle: "نظرات " },
 ];
 
 const ContentDashboard = () => {
   return (
     <div className="flex justify-center flex-col w-full gap-2">
-      <div className="flex flex-wrap justify-center gap-4 w-full">
+      <div className="flex flex-wrap justify-center gap-7 w-full overflow-x-hidden">
         {cardData.map((item) => (
           <div
             key={item.id}
-            className="relative bg-bacgkroundW rounded-xl px-4 pt-4 flex flex-col items-center justify-between
+            className="relative bg-background dark:bg-secondary-light2  rounded-xl px-4 pt-4 flex flex-col items-center justify-between
               w-full sm:w-[47%] md:w-[30%] lg:w-[22%] xl:w-[18%]"
           >
-            <div className="absolute top-0 right-6 w-10 h-12 rounded-b-2xl bg-ring flex justify-center items-center">
-              <PinIcon size={20} />
+            <div className="absolute top-0 right-6 w-10 h-12 rounded-b-2xl bg-card-secondary2 flex justify-center items-center ">
+              {item.id === 4 ? (
+                <HeartIcon size={20} />
+              ) : item.id === 5 ? (
+                <MessageCircleIcon size={20} />
+              ) : (
+                <PinIcon size={20} />
+              )}
             </div>
 
             <div className="text-start w-full mr-28">
               <span className="text-xl font-bold block">{item.title}</span>
-              <span className="text-sm text-muted-foreground block">
+              <span className="text-[12px] text-muted-foreground block">
                 {item.subtitle}
               </span>
             </div>
@@ -39,9 +46,11 @@ const ContentDashboard = () => {
               className="w-full rounded-b-xl object-cover"
             />
             <div className="flex flex-row justify-between w-full items-center mt-2">
-              <span className="text-textComment">جزئیات</span>
+              <span className=" text-textComment dark:text-bacgkroundW">
+                جزئیات
+              </span>
 
-              <div className="flex gap-1 rotate-180 justify-center items-center dark:hidden">
+              <div className="flex gap-1 rotate-180 justify-center items-center ">
                 <svg
                   width="48"
                   height="17"
@@ -68,10 +77,11 @@ const ContentDashboard = () => {
             </div>
           </div>
         ))}
-        <div className="flex flex-row justify-center gap-8 w-full ">
-          <div className="w-[60%] h-52 bg-background rounded-xl"></div>
+        <div className="flex flex-col justify-center gap-8 w-full  sm:flex-col lg:flex-row ">
+          <div className="lg:w-[60%] md:w-full  h-60 bg-background dark:bg-secondary-light2 rounded-xl"></div>
           <ProfileCompletion percentage={40} />
         </div>
+        <RecentReserve />
       </div>
     </div>
   );

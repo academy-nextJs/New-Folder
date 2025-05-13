@@ -1,34 +1,36 @@
 "use client";
 
-import React from "react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
 const ProfileCompletion = ({ percentage }: { percentage: number }) => {
   return (
     <div
-      className="w-full md:w-[40%] h-52 bg-background rounded-xl p-4 flex items-center gap-4 shadow-md border"
+      className=" lg:w-[40%] md:w-full sm:w-full w-full h-60 bg-background dark:bg-secondary-light2   rounded-2xl p-6 flex items-center gap-6 shadow-lg border  "
       dir="ltr"
     >
-      <div className="w-24 h-24">
+      <div className="w-28 ">
         <CircularProgressbar
           value={percentage}
           text={`${percentage}%`}
           styles={buildStyles({
-            textSize: "22px",
-            pathColor: "#72ff72",
-            textColor: "#000",
-            trailColor: "#d6d6d6",
+            textSize: "20px",
+            pathColor: "var(--primary)",
+            textColor: "var(--secondary-foreground)",
           })}
         />
       </div>
-      <div className="flex flex-col justify-center text-right w-full mb-8">
-        <div className="flex flex-row justify-between gap-16">
-          <div className="flex gap-1 rotate-180 justify-end items-center dark:hidden">
-            <h2 className=" rotate-180">ویرایش</h2>
+
+      {/* Info Box */}
+      <div className="flex flex-col justify-between h-full text-right w-full">
+        <div className="flex justify-between items-center mb-2">
+          <div className="flex gap-1 rotate-180 items-center  justify-between ml-[-100px]">
+            <h2 className=" rotate-180 text-sm text-primary font-medium cursor-pointer hover:underline">
+              ویرایش
+            </h2>
             <svg
-              width="48"
-              height="17"
+              width="42"
+              height="15"
               viewBox="0 0 48 17"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -50,15 +52,17 @@ const ProfileCompletion = ({ percentage }: { percentage: number }) => {
             </svg>
           </div>
 
-          <h2 className="text-lg font-bold">وضعیت پروفایل شما</h2>
+          <h2 className="text-sm md:text-sm font-semibold sm:text-sm lg:text-base">
+            وضعیت پروفایل شما
+          </h2>
         </div>
 
-        <p className="text-2xl font-extrabold mt-1">{percentage}%</p>
-        <p className="text-sm text-muted-foreground leading-relaxed mt-1">
+        <p className="text-3xl font-bold text-primary">{percentage}%</p>
+        <p className="text-sm lg:text-sm md:text-xs sm:text-xs text-muted-foreground leading-relaxed mt-2">
           برای اینکه بازدید خوبی داشته باشید، پروفایل شما باید حداقل ۷۰٪ تکمیل
           شده باشد.
         </p>
-        <span className="text-xs text-gray-500 mt-auto">
+        <span className="text-xs text-ring mt-3">
           آخرین تغییرات در ۳ دقیقه پیش
         </span>
       </div>
