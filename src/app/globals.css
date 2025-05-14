@@ -43,6 +43,8 @@
   --popover: #eeeef4cc;
   --popover-foreground: #1e1e1e;
   --danger: #d32f2f;
+  --orange: #F79000;
+  --orange-foreground: #000000;
   --destructive: #d32f2f;
   --input: #ffffff;
   --blur-primary: #56a60052;
@@ -83,6 +85,8 @@
   --blur-primary: #8cff4552;
   --blur-blue: #7569ff52;
   --danger: #ff4d4d;
+  --orange: #F79000;
+  --orange-foreground: #000000;
   --card: #2d2d2d;
   --card-foreground: #f2f2f2;
   --card-body: #2e2e2e;

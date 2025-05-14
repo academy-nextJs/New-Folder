@@ -28,6 +28,8 @@ const config: Config = {
         accent: "var(--accent)", // دکمه‌های خاص مثل "ثبت آگهی"
         "accent-foreground": "var(--accent-foreground)",
         danger: "var(--danger)", // برای هشدار یا تایمر
+        orange: "var(--orange)", // نارنجی
+        "orange-foreground": "var(--orange-foreground)",
         destructive: "var(--destructive)",
         border: "var(--border)", // خطوط حاشیه
         "secondary-light": "var(--secondary-light)", // خاکستری کاپوننت های لندینگ

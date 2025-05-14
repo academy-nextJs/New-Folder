@@ -5,7 +5,7 @@ import img from "@/assets/Line 2.png";
 
 const RecentReserve = () => {
   return (
-    <div className="w-full flex flex-col justify-center gap-4  bg-background dark:bg-secondary-light2 rounded-xl">
+    <div className="w-full flex flex-col justify-center gap-4 px-4 bg-background dark:bg-secondary-light2 rounded-xl">
       <div className="w-full flex flex-row justify-between px-4 pt-4">
         <h2 className="items-center flex gap-4">
           <SaveIcon size={20} />

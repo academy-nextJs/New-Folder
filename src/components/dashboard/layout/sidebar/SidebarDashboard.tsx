@@ -1,18 +1,18 @@
 'use client';
 
-import { Heart, Home, LogOut, Text, User, MoreHorizontal, X, LogIn } from 'lucide-react';
+import { Heart, Home, LogOut, Text, User, MoreHorizontal, X, LogIn, CreditCard, Coins } from 'lucide-react';
 import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import DeltaIcon from '@/app/icon.png';
-import { usePathname } from 'next/navigation';
+import { redirect, usePathname } from 'next/navigation';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 const routes = [
   { label: 'داشبورد', href: '/dashboard', icon: Home },
   { label: 'اطلاعات کاربری', href: '/dashboard/profile', icon: User },
   { label: 'ذخیره‌ها', href: '/dashboard/favorites', icon: Heart },
-  { label: 'پرداخت های من', href: '/dashboard/my-payments', icon: Heart },
+  { label: 'پرداخت های من', href: '/dashboard/my-payments', icon: Coins },
   { label: 'دیدگاه‌های من', href: '/dashboard/my-comments', icon: Text },
 ];
 
@@ -51,21 +51,33 @@ const SidebarDashboard = ({
           <Link href={'/'} className="text-2xl font-bold">دلتا</Link>
           <LogOut onClick={() => setView(2)} className="cursor-pointer hover:text-accent transition-colors" />
         </div>
-        <div className="flex flex-col gap-2">
-          {routes.map(({ label, href, icon: Icon }) => {
-            const isActive = pathname == href;
-            return (
-              <Link
-                key={href}
-                href={href}
-                className={`whitespace-nowrap flex gap-3 items-center px-3 py-2 rounded-lg font-medium transition-colors ${isActive ? 'dark:bg-accent dark:text-accent-foreground bg-subBg2' : 'hover:bg-subBg2 bg-none'
-                  }`}
-              >
-                <Icon className="min-w-5 min-h-5 h-5 w-5" />
-                <span>{label}</span>
-              </Link>
-            );
-          })}
+        <div className='flex flex-col justify-between h-full'>
+          <div className="flex flex-col gap-2">
+            {routes.map(({ label, href, icon: Icon }) => {
+              const isActive = pathname == href;
+              return (
+                <Link
+                  key={href}
+                  href={href}
+                  className={`whitespace-nowrap flex gap-3 items-center px-3 py-2 rounded-lg font-medium transition-colors ${isActive ? 'dark:bg-accent dark:text-accent-foreground bg-subBg2' : 'hover:bg-subBg2 bg-none'
+                    }`}
+                >
+                  <Icon className="min-w-5 min-h-5 h-5 w-5" />
+                  <span>{label}</span>
+                </Link>
+              );
+            })}
+          </div>
+          <div onClick={() => redirect('')} className='relative cursor-pointer flex items-center w-full'>
+            <svg width="232" className='absolute w-full' height="80" viewBox="0 0 232 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="0.5" y="0.5" width="231" height="79" rx="17.5" stroke="#888888" strokeOpacity="0.5" strokeDasharray="6 6" />
+            </svg>
+            <CreditCard className='mx-4' />
+            <div className='flex flex-col h-full justify-between'>
+              <h2 className='text-lg font-bold'> کیف پول </h2>
+              <span className='text-sm text-subText'>  عدم موجودی  </span>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -73,30 +85,44 @@ const SidebarDashboard = ({
         <div className="flex justify-center items-center mb-6">
           <LogIn onClick={() => setView(1)} className="cursor-pointer rotate-180 hover:text-accent transition-colors" />
         </div>
-        <div className="flex flex-col gap-2">
-          {routes.map(({ label, href, icon: Icon }) => {
-            const isActive = pathname === href
-            return (
-              <Link
-                key={href}
-                href={href}
-                className={`whitespace-nowrap flex gap-3 items-center px-3 py-2 rounded-lg font-medium transition-colors hover:bg-subBg2 ${isActive ? 'dark:bg-accent dark:text-accent-foreground bg-subBg2' : 'hover:bg-subBg2 bg-none'
-                  }`}
-              >
-                <TooltipProvider>
-                  <Tooltip>
-                    <TooltipTrigger>
-                      <Icon className="w-5 h-5 min-w-5 min-h-5" />
-                    </TooltipTrigger>
-                    <TooltipContent className='dark:bg-accent bg-subBg2 dark:accent-foreground absolute right-6 whitespace-nowrap text-foreground'>
-                      <p> {label} </p>
-                    </TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
+        <div className='flex flex-col justify-between h-full items-center'>
+          <div className="flex flex-col gap-2">
+            {routes.map(({ label, href, icon: Icon }) => {
+              const isActive = pathname === href
+              return (
+                <Link
+                  key={href}
+                  href={href}
+                  className={`whitespace-nowrap flex gap-3 items-center px-3 py-2 rounded-lg font-medium transition-colors ${isActive ? 'dark:bg-accent dark:text-accent-foreground bg-subBg2' : 'hover:bg-subBg2 bg-none'
+                    }`}
+                >
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger>
+                        <Icon className="w-5 h-5 min-w-5 min-h-5" />
+                      </TooltipTrigger>
+                      <TooltipContent className='dark:bg-accent bg-subBg2 dark:accent-foreground absolute right-6 whitespace-nowrap text-foreground'>
+                        <p> {label} </p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
 
-              </Link>
-            );
-          })}
+                </Link>
+              );
+            })}
+          </div>
+          <Link className='hover:bg-subBg2 px-3 py-2 flex justify-center items-center rounded-lg' href={''}>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger>
+                  <CreditCard />
+                </TooltipTrigger>
+                <TooltipContent className='dark:bg-accent bg-subBg2 dark:accent-foreground absolute right-6 whitespace-nowrap text-foreground'>
+                  <p> کیف پول </p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          </Link>
         </div>
       </div>
 
