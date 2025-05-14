@@ -36,6 +36,7 @@ const SingleReserveComment = () => {
         title={title}
         viewReply={viewReply}
         refetch={refetch}
+        setViewReply={setViewReply}
       />
 
       <svg width="999" height="3" viewBox="0 0 999 3" fill="none" xmlns="http://www.w3.org/2000/svg">

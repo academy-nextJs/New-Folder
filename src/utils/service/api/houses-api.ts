@@ -26,8 +26,8 @@ export const getHouses = async (
         `&sort=${sort}` +
         `&propertyType=${propertyType || ''}` +
         `&location=${encodeURIComponent(location ?? '')}` +
-        (minPrice !== '' ? `&minPrice=${minPrice}` : '') +
-        (maxPrice !== '' ? `&maxPrice=${maxPrice}` : '') +
+        (minPrice === 0 ? "" : minPrice !== '' ? `&minPrice=${minPrice}` : '') +
+        (maxPrice === 0 ? "" : maxPrice !== '' ? `&maxPrice=${maxPrice}` : '') +
         (minRent !== '' ? `&minRent=${minRent}` : '') +
         (maxRent !== '' ? `&maxRent=${maxRent}` : '') +
         (minMortgage !== '' ? `&minMortgage=${minMortgage}` : '') +
