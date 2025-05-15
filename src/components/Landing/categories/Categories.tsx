@@ -12,11 +12,8 @@ import { Loader } from "@/components/common/Loader";
 import arrow from "@/assets/arrow.svg";
 import { useTheme } from "@/utils/service/TanstakProvider";
 import { useRouter } from "next/navigation";
-
-type Category = {
-  id: string;
-  name: string;
-};
+import { Category } from "@/types/categories-type/categories-type";
+import { getCategories } from "@/utils/service/api/categories";
 
 const CardSvgBackground = ({ isHovered }: { isHovered: boolean }) => (
   <svg className="w-full " xmlns="http://www.w3.org/2000/svg">
@@ -44,7 +41,7 @@ const Categories = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const Data = await fetchApi.get<Category[]>("/categories");
+        const Data = await getCategories()
         setCategoryData(Data);
       } catch (error) {
         console.error("Failed to fetch categories:", error);
