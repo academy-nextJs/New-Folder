@@ -7,7 +7,6 @@ import villaIcon3 from "../../../assets/images/categories/wooden-house.png";
 import villaIcon4 from "../../../assets/images/categories/apartment.png";
 import star from "@/assets/Star 7.png";
 import { MoveLeftIcon } from "lucide-react";
-import { fetchApi } from "@/core/interceptore/fetchApi";
 import { Loader } from "@/components/common/Loader";
 import arrow from "@/assets/arrow.svg";
 import { useTheme } from "@/utils/service/TanstakProvider";

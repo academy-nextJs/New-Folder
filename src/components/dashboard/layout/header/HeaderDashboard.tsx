@@ -61,10 +61,10 @@ const HeaderDashboard: React.FC = () => {
                             {!modalView && <ChevronDown className="cursor-pointer" size={12} />}
                             {modalView && <ChevronUp className="cursor-pointer" size={12} />}
                         </div>
-                        {modalView && <div className="absolute text-sm  py-4 top-full rounded-2xl px-4 left-0 bg-subBg shadow-2xl z-50 flex flex-col gap-2 w-max min-w-[160px]">
+                        {modalView && <div ref={moreRef} className="absolute text-sm p-2 top-full rounded-2xl left-0 bg-subBg shadow-2xl z-50 flex flex-col gap-2 w-max min-w-[160px]">
                             <div className="flex flex-col">
                                 <div className="flex border-b gap-2 items-center cursor-pointer hover:bg-subBg2 px-2 py-4"> <PlusCircle size={16} /> شارژ کردن کیف پول </div>
-                                <CommonModal buttonTitle={"   خروج از حساب  "} buttonIcon={<LogOut size={16} />} onClick={handleLogout(logout, '/login')} title={"  آیا از خروج خود مطمعن هستید?  "} />
+                                <CommonModal handleClick="خروج" buttonTitle={"   خروج از حساب  "} buttonIcon={<LogOut size={16} />} onClick={handleLogout(logout, '/login')} title={"  آیا از خروج خود مطمعن هستید?  "} />
                             </div>
                         </div>}
                     </div>

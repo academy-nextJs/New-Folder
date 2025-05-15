@@ -13,7 +13,7 @@ const CommonSelect: FC<ISelect> = ({ background, color, label, mandatory, classn
         <div dir={i18n.dir()} className='rtl flex flex-col gap-1 group'>
             {label && <Label dir={i18n.dir()} htmlFor={label} className={`text-[13px] flex gap-0.5 ${color}`}>
                 <span> {label} </span>
-                {mandatory === true ? <p className='text-danger'> * </p> : <></>}
+                {mandatory === true ? <span className='text-danger'> * </span> : <></>}
                 <span> : </span>
             </Label>}
             <Select dir={i18n.dir()} onValueChange={onValueChange}>
