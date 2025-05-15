@@ -11,6 +11,7 @@ import { fetchApi } from "@/core/interceptore/fetchApi";
 import { Loader } from "@/components/common/Loader";
 import arrow from "@/assets/arrow.svg";
 import { useTheme } from "@/utils/service/TanstakProvider";
+import { useRouter } from "next/navigation";
 
 type Category = {
   id: string;
@@ -87,6 +88,16 @@ const Categories = () => {
 
   const { theme } = useTheme();
 
+  const router = useRouter();
+
+  const handleClick = (type: string) => {
+    const params = new URLSearchParams();
+
+    params.set("propertyType", type)
+
+    router.push(`/rent?${params.toString()}`);
+  };
+
   return (
     <div className="mb-32 text-foreground p-2 sm:p-4">
       <div className="flex justify-center items-center gap-2 py-2 sm:py-4 mb-2 sm:mb-4 text-primary">
@@ -129,6 +140,7 @@ const Categories = () => {
                 return (
                   <div
                     key={cardIndex}
+                    onClick={() => handleClick(category.name)}
                     className="w-[230px] h-[100px] relative flex items-center justify-center cursor-pointer transition-all duration-300"
                     onMouseEnter={() => setHoveredIndex(cardIndex)}
                     onMouseLeave={() => setHoveredIndex(null)}
