@@ -1,24 +1,19 @@
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import React from 'react'
 import { useUserStore } from '@/utils/zustand/store'
-import { useRouter } from 'next/navigation';
 import { LogOut } from 'lucide-react';
+import { handleLogout } from '@/core/logOut';
 
 
 const LogOutModal = () => {
 
-    const router = useRouter();
     const { logout } = useUserStore()
 
-    const handleLogout = async () => {
-        await logout();
-        router.push("/login");
-    };
 
     return (
         <Dialog>
             <DialogTrigger>
-                <div className="flex border-b gap-2 text-danger items-center cursor-pointer hover:bg-subBg2 px-2 py-4"> <LogOut size={16} />  خروج از حساب </div>
+                <div className="flex gap-2 w-full justify-center text-danger hover:bg-subBg2 items-center cursor-pointer px-2 py-4"> <LogOut size={16} />  خروج از حساب </div>
             </DialogTrigger>
             <DialogContent className='rounded-2xl flex flex-col gap-8 items-center'>
                 <DialogHeader className='flex flex-col gap-8 items-center'>
@@ -43,7 +38,7 @@ const LogOutModal = () => {
                     <DialogClose>
                         انصراف
                     </DialogClose>
-                    <div onClick={handleLogout} className='bg-orange text-orange-foreground px-4 py-2 rounded-2xl cursor-pointer w-fit'> خروج </div>
+                    <div onClick={handleLogout(logout, '/login')} className='bg-orange text-orange-foreground px-4 py-2 rounded-2xl cursor-pointer w-fit'> خروج </div>
                 </DialogFooter>
             </DialogContent>
         </Dialog>

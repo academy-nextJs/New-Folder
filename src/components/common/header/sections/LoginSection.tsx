@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useUserStore } from "@/utils/zustand/store";
 import { useTheme } from "@/utils/service/TanstakProvider";
 import { motion } from "framer-motion";
+import { handleLogout } from "@/core/logOut";
 // import ChangeLanguage from "./ChangeLanguage";
 
 const LoginSection = () => {
@@ -13,11 +14,6 @@ const LoginSection = () => {
   const { theme, toggleTheme } = useTheme();
   const dropdownRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
-
-  const handleLogout = async () => {
-    await logout();
-    router.push("/login");
-  };
 
   useEffect(() => {
     checkAuthStatus();
@@ -53,10 +49,11 @@ const LoginSection = () => {
       ) : (
         <div className="relative group" ref={dropdownRef}>
           <div className="flex items-center gap-2 px-3 py-2 rounded-2lg hover:bg-subBg text-foreground cursor-pointer transition-colors rounded-full">
-            <User className="text-subText w-6 h-6" />
+            <User onClick={() => {router.push("/dashboard")}} className="text-subText md:hidden block w-6 h-6" />
+            <User className="text-subText w-6 h-6 md:block hidden" />
           </div>
 
-          <div className="absolute top-full left-0 mt-1 w-36 sm:w-44 md:w-48 lg:w-56 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-10">
+          <div className="absolute top-full left-0 mt-1 w-36 sm:w-44 md:w-48 lg:w-56 opacity-0 invisible md:group-hover:opacity-100 group-hover:visible transition-all duration-200 z-10">
             <div className="bg-secondary border border-border rounded-md shadow-lg py-1 text-right">
               <Link
                 href="/dashboard"
@@ -69,7 +66,7 @@ const LoginSection = () => {
                 <span> ورود به حساب کاربری </span>
               </Link>
               <button
-                onClick={handleLogout}
+                onClick={handleLogout(logout, '/login')}
                 className="block w-full px-2 sm:px-3 md:px-4 py-2 md:py-3 text-[10px] sm:text-xs md:text-sm text-foreground hover:bg-subBg transition-colors flex items-center gap-1 sm:gap-2"
               >
                 <LogOut
