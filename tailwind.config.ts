@@ -30,6 +30,8 @@ const config: Config = {
         danger: "var(--danger)", // برای هشدار یا تایمر
         orange: "var(--orange)", // نارنجی
         "orange-foreground": "var(--orange-foreground)",
+        "accent-blue": "var(--accent-blue)",
+        "accent-blue-foreground": "var(--accent-blue-foreground)",
         destructive: "var(--destructive)",
         border: "var(--border)", // خطوط حاشیه
         "secondary-light": "var(--secondary-light)", // خاکستری کاپوننت های لندینگ
