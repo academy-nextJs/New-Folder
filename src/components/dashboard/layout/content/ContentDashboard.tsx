@@ -16,7 +16,7 @@ const cardData = [
 const ContentDashboard = () => {
   return (
     <div className="flex justify-center flex-col w-full gap-2">
-      <div className="flex flex-wrap justify-center gap-7 w-full overflow-x-hidden">
+      <div className="flex flex-wrap justify-between gap-7 w-full overflow-x-hidden">
         {cardData.map((item) => (
           <div
             key={item.id}
