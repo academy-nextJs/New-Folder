@@ -1,19 +1,18 @@
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
-import React from 'react'
-import { useUserStore } from '@/utils/zustand/store'
-import { LogOut } from 'lucide-react';
-import { handleLogout } from '@/core/logOut';
+import { IModal } from '@/types/dashboard-type/modal-type/modal-type'
+import React, { FC } from 'react'
 
-
-const LogOutModal = () => {
-
-    const { logout } = useUserStore()
-
+const CommonModal: FC<IModal> = ({
+    onClick,
+    title,
+    buttonTitle,
+    buttonIcon
+}) => {
 
     return (
         <Dialog>
             <DialogTrigger>
-                <div className="flex gap-2 w-full justify-center text-danger hover:bg-subBg2 items-center cursor-pointer px-2 py-4"> <LogOut size={16} />  خروج از حساب </div>
+                <div className="flex gap-2 w-full justify-center text-danger hover:bg-subBg2 items-center cursor-pointer px-2 py-4"> {buttonIcon} {buttonTitle} </div>
             </DialogTrigger>
             <DialogContent className='rounded-2xl flex flex-col gap-8 items-center'>
                 <DialogHeader className='flex flex-col gap-8 items-center'>
@@ -31,18 +30,18 @@ const LogOutModal = () => {
 
                     </DialogTitle>
                     <DialogDescription>
-                        <span className='text-2xl font-bold'> آیا از خروج خود مطمعن هستید? </span>
+                        <span className='text-2xl font-bold'> {title} </span>
                     </DialogDescription>
                 </DialogHeader>
                 <DialogFooter className='flex gap-4 flex-row mx-auto justify-center items-center'>
                     <DialogClose>
                         انصراف
                     </DialogClose>
-                    <div onClick={handleLogout(logout, '/login')} className='bg-orange text-orange-foreground px-4 py-2 rounded-2xl cursor-pointer w-fit'> خروج </div>
+                    <div onClick={onClick} className='bg-orange text-orange-foreground px-4 py-2 rounded-2xl cursor-pointer w-fit'> خروج </div>
                 </DialogFooter>
             </DialogContent>
         </Dialog>
     )
 }
 
-export default LogOutModal
+export default CommonModal

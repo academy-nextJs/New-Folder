@@ -1,8 +1,10 @@
 'use client'
 import { useTheme } from "@/utils/service/TanstakProvider";
-import { Bell, ChevronDown, ChevronUp, Moon, PlusCircle, Sun } from "lucide-react";
+import { Bell, ChevronDown, ChevronUp, LogOut, Moon, PlusCircle, Sun } from "lucide-react";
 import React, { Fragment, useEffect, useRef } from "react";
-import LogOutModal from "../../modal/LogOutModal";
+import CommonModal from "../../modal/CommonModal";
+import { useUserStore } from "@/utils/zustand/store";
+import { handleLogout } from "@/core/logOut";
 
 const HeaderDashboard: React.FC = () => {
     const { theme, toggleTheme } = useTheme();
@@ -22,6 +24,8 @@ const HeaderDashboard: React.FC = () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
     }, [modalView])
+
+    const { logout } = useUserStore()
 
     return (
         <Fragment>
@@ -60,7 +64,7 @@ const HeaderDashboard: React.FC = () => {
                         {modalView && <div className="absolute text-sm  py-4 top-full rounded-2xl px-4 left-0 bg-subBg shadow-2xl z-50 flex flex-col gap-2 w-max min-w-[160px]">
                             <div className="flex flex-col">
                                 <div className="flex border-b gap-2 items-center cursor-pointer hover:bg-subBg2 px-2 py-4"> <PlusCircle size={16} /> شارژ کردن کیف پول </div>
-                                <LogOutModal />
+                                <CommonModal buttonTitle={"   خروج از حساب  "} buttonIcon={<LogOut size={16} />} onClick={handleLogout(logout, '/login')} title={"  آیا از خروج خود مطمعن هستید?  "} />
                             </div>
                         </div>}
                     </div>
