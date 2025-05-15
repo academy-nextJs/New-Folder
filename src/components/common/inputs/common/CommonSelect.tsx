@@ -1,12 +1,13 @@
 'use client'
 import { Label } from '@/components/ui/label'
+import { ScrollArea } from '@/components/ui/scroll-area'
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { ISelect } from '@/types/select-type/select-types'
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
 const CommonSelect: FC<ISelect> = ({ background, color, label, mandatory, classname, placeholder, selectItems, onValueChange, icon }) => {
-    const {i18n} = useTranslation("landing")
+    const { i18n } = useTranslation("landing")
 
     return (
         <div dir={i18n.dir()} className='rtl flex flex-col gap-1 group'>
@@ -21,12 +22,14 @@ const CommonSelect: FC<ISelect> = ({ background, color, label, mandatory, classn
                     <SelectValue placeholder={`${placeholder}`}></SelectValue>
                 </SelectTrigger>
                 <SelectContent className={`rtl ${background} ${color}`}>
-                    <SelectGroup>
-                        <SelectLabel> {label} </SelectLabel>
-                        {selectItems.map((item, index) => (
-                            <SelectItem key={index} value={item.value}> {item.label} </SelectItem>
-                        ))}
-                    </SelectGroup>
+                    <ScrollArea>
+                        <SelectGroup>
+                            <SelectLabel> {label} </SelectLabel>
+                            {selectItems.map((item, index) => (
+                                <SelectItem key={index} value={item.value}> {item.label} </SelectItem>
+                            ))}
+                        </SelectGroup>
+                    </ScrollArea>
                 </SelectContent>
             </Select>
         </div>

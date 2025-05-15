@@ -1,18 +1,19 @@
 'use client'
 import React from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { fetchHouses } from '@/utils/service/api/fetchHouses'
 import SliderComponent from '../sliders/SliderComponent'
+import { getRecommendsHouse } from '@/utils/service/api/recommendsHouse'
 
 const CallSlider = () => {
-    const { data: houses, isLoading } = useQuery({
-        queryKey: ['specialOfferHouses'],
-        queryFn: () => fetchHouses('rate', 'DESC', '')
+    const { data, isLoading } = useQuery({
+        queryKey: ['recommendsHouses'],
+        queryFn: () => getRecommendsHouse('rate', 'DESC', '')
     })
+    console.log(data)
 
     return (
         <div>
-            <SliderComponent items={houses} view='2' loading={isLoading} />
+            <SliderComponent items={data?.recommendations ? data?.recommendations : data} view='2' loading={isLoading} />
         </div>
     )
 }
