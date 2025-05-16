@@ -1,26 +1,22 @@
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
-import React from 'react'
-import { useUserStore } from '@/utils/zustand/store'
-import { useRouter } from 'next/navigation';
-import { LogOut } from 'lucide-react';
+import { IModal } from '@/types/dashboard-type/modal-type/modal-type'
+import React, { FC } from 'react'
 
-
-const LogOutModal = () => {
-
-    const router = useRouter();
-    const { logout } = useUserStore()
-
-    const handleLogout = async () => {
-        await logout();
-        router.push("/login");
-    };
+const CommonModal: FC<IModal> = ({
+    onClick,
+    title,
+    buttonTitle,
+    buttonIcon,
+    button,
+    handleClick
+}) => {
 
     return (
         <Dialog>
             <DialogTrigger>
-                <div className="flex border-b gap-2 text-danger items-center cursor-pointer hover:bg-subBg2 px-2 py-4"> <LogOut size={16} />  خروج از حساب </div>
+                {button ? button : <div className="flex gap-2 w-full justify-center text-danger hover:bg-subBg2 items-center cursor-pointer px-2 py-4"> {buttonIcon} {buttonTitle} </div>}
             </DialogTrigger>
-            <DialogContent className='rounded-2xl flex flex-col gap-8 items-center'>
+            <DialogContent onMouseDown={(e) => e.stopPropagation()} className='rounded-2xl flex flex-col gap-8 items-center'>
                 <DialogHeader className='flex flex-col gap-8 items-center'>
                     <DialogTitle className='mx-auto'>
                         <svg width="98" height="98" viewBox="0 0 98 98" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -36,18 +32,18 @@ const LogOutModal = () => {
 
                     </DialogTitle>
                     <DialogDescription>
-                        <span className='text-2xl font-bold'> آیا از خروج خود مطمعن هستید? </span>
+                        <span className='text-xl font-bold'> {title} </span>
                     </DialogDescription>
                 </DialogHeader>
                 <DialogFooter className='flex gap-4 flex-row mx-auto justify-center items-center'>
-                    <DialogClose>
+                    <DialogClose className='text-sm'>
                         انصراف
                     </DialogClose>
-                    <div onClick={handleLogout} className='bg-orange text-orange-foreground px-4 py-2 rounded-2xl cursor-pointer w-fit'> خروج </div>
+                    <div onClick={onClick} className='bg-orange text-sm text-orange-foreground px-4 py-2 rounded-2xl cursor-pointer w-fit'> {handleClick} </div>
                 </DialogFooter>
             </DialogContent>
         </Dialog>
     )
 }
 
-export default LogOutModal
+export default CommonModal

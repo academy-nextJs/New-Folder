@@ -11,7 +11,6 @@ const Header = () => {
   const drawerRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname()
 
-  // Close drawer when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -31,7 +30,6 @@ const Header = () => {
     };
   }, [isDrawerOpen]);
 
-  // Close drawer when ESC key is pressed
   useEffect(() => {
     const handleEscKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -51,7 +49,6 @@ const Header = () => {
   if (pathname.startsWith("/dashboard")) return null;
 
   return  <div className="w-full flex justify-center items-center relative">
-      {/* Overlay */}
       {isDrawerOpen && (
         <div
           className="relative inset-0 bg-black/50 z-60  animate-overlayShow"
@@ -59,7 +56,6 @@ const Header = () => {
         />
       )}
 
-      {/* Mobile Drawer */}
       <div
         ref={drawerRef}
         className={`fixed md:hidden top-0 right-0 h-full w-72 bg-secondary z-[100] shadow-lg transform ${
@@ -97,7 +93,6 @@ const Header = () => {
       </div>
 
       <div className="w-[100%] flex items-center justify-between lg:h-[48px] md:h-[36px] h-[40px] absolute top-[24px] bg-subBg text-subText rounded-[16px]  z-50">
-        {/* Desktop Layout */}
         <div className="hidden md:flex items-center h-full gap-5 ">
           <LogoSection />
           <NavbarSection />
@@ -106,8 +101,7 @@ const Header = () => {
         <div className="hidden md:flex items-center">
           <LoginSection />
         </div>
-
-        {/* Mobile Layout */}
+        
         <div className="flex md:hidden items-center justify-between w-full">
           <div>
             <button

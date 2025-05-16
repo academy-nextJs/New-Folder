@@ -1,9 +1,10 @@
 'use client'
 import { useTheme } from "@/utils/service/TanstakProvider";
-import { Bell, ChevronDown, ChevronUp, Moon, PlusCircle, Sun } from "lucide-react";
-import { redirect } from "next/navigation";
+import { Bell, ChevronDown, ChevronUp, LogOut, Moon, PlusCircle, Sun } from "lucide-react";
 import React, { Fragment, useEffect, useRef } from "react";
-import LogOutModal from "../../modal/LogOutModal";
+import CommonModal from "../../modal/CommonModal";
+import { useUserStore } from "@/utils/zustand/store";
+import { handleLogout } from "@/core/logOut";
 
 const HeaderDashboard: React.FC = () => {
     const { theme, toggleTheme } = useTheme();
@@ -24,6 +25,8 @@ const HeaderDashboard: React.FC = () => {
         };
     }, [modalView])
 
+    const { logout } = useUserStore()
+
     return (
         <Fragment>
             <div className='bg-subBg w-full rounded-[12px] px-8 py-3 flex items-center justify-between'>
@@ -42,26 +45,26 @@ const HeaderDashboard: React.FC = () => {
                     </button>
                     <Bell className="cursor-pointer" />
                     <div className="relative">
-                        <div className="flex relative gap-4 items-center">
+                        <div onClick={() => {
+                            if(modalView){
+                                setModalView(false)
+                            }
+                            else{
+                                setModalView(true)
+                            }
+                        }} className="flex relative gap-4 items-center cursor-pointer">
                             <img src={' '} alt="" className="size-[40px] border-0 outline-none bg-secondary-light rounded-[8px]" />
                             <div className="flex max-md:hidden flex-col justify-between">
                                 <h2> امیر محمد ملایی </h2>
                                 <span className="text-muted-foreground text-sm"> خریدار </span>
                             </div>
-                            {!modalView && <ChevronDown className="cursor-pointer" onClick={() => setModalView(true)} size={12} />}
-                            {modalView && <ChevronUp className="cursor-pointer" onClick={() => setModalView(false)} size={12} />}
+                            {!modalView && <ChevronDown className="cursor-pointer" size={12} />}
+                            {modalView && <ChevronUp className="cursor-pointer" size={12} />}
                         </div>
-                        {modalView && <div className="absolute text-sm  py-4 top-full rounded-2xl px-4 left-0 bg-subBg shadow-xl z-50 flex flex-col gap-2 w-max min-w-[160px]">
+                        {modalView && <div ref={moreRef} className="absolute text-sm p-2 top-full rounded-2xl left-0 bg-subBg shadow-2xl z-50 flex flex-col gap-2 w-max min-w-[160px]">
                             <div className="flex flex-col">
-                                <div onClick={() => redirect("/dashboard/profile")} className="flex relative hover:bg-subBg2 px-2 gap-4 border-b py-4 items-center cursor-pointer">
-                                    <img src={' '} alt="" className="size-[40px] border-0 outline-none bg-secondary-light rounded-[8px]" />
-                                    <div className="flex flex-col justify-between">
-                                        <h2> امیر محمد ملایی </h2>
-                                        <span className="text-muted-foreground text-sm"> +09678737282 </span>
-                                    </div>
-                                </div>
                                 <div className="flex border-b gap-2 items-center cursor-pointer hover:bg-subBg2 px-2 py-4"> <PlusCircle size={16} /> شارژ کردن کیف پول </div>
-                                <LogOutModal />
+                                <CommonModal handleClick="خروج" buttonTitle={"   خروج از حساب  "} buttonIcon={<LogOut size={16} />} onClick={handleLogout(logout, '/login')} title={"  آیا از خروج خود مطمعن هستید?  "} />
                             </div>
                         </div>}
                     </div>
