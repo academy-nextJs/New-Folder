@@ -6,7 +6,7 @@ const FilterModal = () => {
     return (
         <Dialog>
             <DialogTrigger>
-                <div className='cursor-pointer px-4 py-2 rounded-[14px] flex text-primary-foreground bg-primary text-sm hover:scale-[1.02] transition-all'> فیلتر ها </div>
+                <div className='cursor-pointer px-4 py-2 rounded-[14px] flex text-primary-foreground max-md:w-full justify-center bg-primary text-sm hover:scale-[1.02] transition-all'> فیلتر ها </div>
             </DialogTrigger>
             <DialogContent className='rounded-2xl flex flex-col gap-8 items-start py-[50px]'>
                 <DialogHeader className='flex flex-col gap-8 w-full'>

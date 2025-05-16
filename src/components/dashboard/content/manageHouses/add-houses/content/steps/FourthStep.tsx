@@ -46,7 +46,7 @@ const FourthStep = () => {
                     قرار دادن عکس شانس دیده شدن ملک‌تان را ۵ برابر کنید.
                 </span>
             </div>
-            <div className="flex w-full justify-center gap-8">
+            <div className="flex max-xl:flex-wrap max-xl:items-center w-full justify-center gap-8">
                 <FileImage defaultImage={mainImage} />
                 <FileImage defaultImage={addImage} />
                 <FileImage defaultImage={addImage} />

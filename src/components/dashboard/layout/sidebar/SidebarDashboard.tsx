@@ -13,7 +13,7 @@ const routes = [
   { label: 'اطلاعات کاربری', href: '/dashboard/profile', icon: User },
   { label: 'ذخیره‌ها', href: '/dashboard/favorites', icon: Heart },
   { label: 'پرداخت های من', href: '/dashboard/my-payments', icon: Coins },
-  { label: 'دیدگاه‌های من', href: '/dashboard/my-comments', icon: Text },
+  { label: 'دیدگاه‌های من', href: '', icon: Text },
   {
     label: 'مدیریت املاک', href: '/dashboard/manage-houses', icon: Settings, children: [
       { label: ' املاک من ', href: '/dashboard/manage-houses/my-houses', icon: Hotel },
@@ -129,27 +129,69 @@ const SidebarDashboard = ({
         </div>
         <div className='flex flex-col justify-between h-full items-center'>
           <div className="flex flex-col gap-2">
-            {routes.map(({ label, href, icon: Icon }) => {
+            {routes.map(({ label, href, icon: Icon, children }) => {
               const isActive = pathname === href
-              return (
-                <Link
-                  key={href}
-                  href={href}
-                  className={`whitespace-nowrap flex gap-3 items-center px-3 py-2 rounded-lg font-medium transition-colors ${isActive ? 'dark:bg-accent dark:text-accent-foreground bg-subBg2' : 'hover:bg-subBg2 bg-none'
-                    }`}
-                >
-                  <TooltipProvider>
-                    <Tooltip>
-                      <TooltipTrigger>
-                        <Icon className="w-5 h-5 min-w-5 min-h-5" />
-                      </TooltipTrigger>
-                      <TooltipContent className='dark:bg-accent bg-subBg2 dark:accent-foreground absolute right-6 whitespace-nowrap text-foreground'>
-                        <p> {label} </p>
-                      </TooltipContent>
-                    </Tooltip>
-                  </TooltipProvider>
+              const isDropdownOpen = openDropdown === href;
 
-                </Link>
+              const handleClick = (e: React.MouseEvent) => {
+                if (children) {
+                  e.preventDefault();
+                  setOpenDropdown(prev => (prev === href ? null : href));
+                }
+              };
+
+              return (
+                <div className='flex flex-col' key={href}>
+                  <Link
+                    key={href}
+                    href={href}
+                    onClick={handleClick}
+                    className={`whitespace-nowrap flex gap-3 items-center px-3 py-2 rounded-lg font-medium transition-colors ${isActive ? 'dark:bg-accent dark:text-accent-foreground bg-subBg2' : 'hover:bg-subBg2 bg-none'
+                      }`}
+                  >
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger className='flex flex-col items-center'>
+                          <Icon className="w-5 h-5 min-w-5 min-h-5" />
+                          {children && <ChevronDown size={16} className={`transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`} />}
+                        </TooltipTrigger>
+                        <TooltipContent className='dark:bg-accent bg-subBg2 dark:accent-foreground absolute right-6 whitespace-nowrap text-foreground'>
+                          <p> {label} </p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+
+                  </Link>
+                  {
+                    isDropdownOpen && children && (
+
+                      <div className=" flex flex-col gap-2 mt-1">
+                        {children.map(({ label, href, icon: Icon }) => {
+                          const isActive = pathname === href;
+
+                          return <Link
+                            key={href}
+                            href={href}
+                            className={`whitespace-nowrap flex justify-between items-center px-3 py-2 rounded-lg font-medium transition-colors ${isActive ? 'dark:bg-accent dark:text-accent-foreground bg-subBg2' : 'hover:bg-subBg2 bg-none'}`}
+                          >
+                            <div className='flex gap-2'>
+                              <TooltipProvider>
+                                <Tooltip>
+                                  <TooltipTrigger className='flex flex-col items-center'>
+                                    <Icon className="w-5 h-5 min-w-5 min-h-5" />
+                                  </TooltipTrigger>
+                                  <TooltipContent className='dark:bg-accent bg-subBg2 dark:accent-foreground absolute right-6 whitespace-nowrap text-foreground'>
+                                    <p> {label} </p>
+                                  </TooltipContent>
+                                </Tooltip>
+                              </TooltipProvider>
+                            </div>
+                          </Link>
+                        })}
+                      </div>
+                    )
+                  }
+                </div>
               );
             })}
           </div>
@@ -203,10 +245,25 @@ const SidebarDashboard = ({
                 >
                   <X className="w-4 h-4" />
                 </button>
-                {extraRoutes.map(({ href, label, icon: Icon }) => {
-                  const isActive = pathname.startsWith(href);
-                  return (
-                    <Link
+                {extraRoutes.map(({ href, label, icon: Icon, children }) => {
+                  const isActive = pathname === href;
+
+                  return children ?
+                    children.map(({ href, label, icon: Icon }) => {
+                      const isActive = pathname === href;
+                      
+                      return <Link
+                        key={href}
+                        href={href}
+                        className={`flex items-center gap-2 px-2 py-1 flex-nowrap whitespace-nowrap rounded-md text-sm ${isActive ? 'bg-accent text-accent-foreground' : 'hover:bg-subBg2'
+                          }`}
+                        onClick={() => setShowMore(false)}
+                      >
+                        <Icon className="min-w-4 min-h-4 h-4 w-4" />
+                        <span>{label}</span>
+                      </Link>
+                    })
+                    : <Link
                       key={href}
                       href={href}
                       className={`flex items-center gap-2 px-2 py-1 flex-nowrap whitespace-nowrap rounded-md text-sm ${isActive ? 'bg-accent text-accent-foreground' : 'hover:bg-subBg2'
@@ -216,7 +273,6 @@ const SidebarDashboard = ({
                       <Icon className="min-w-4 min-h-4 h-4 w-4" />
                       <span>{label}</span>
                     </Link>
-                  );
                 })}
               </div>
             )}

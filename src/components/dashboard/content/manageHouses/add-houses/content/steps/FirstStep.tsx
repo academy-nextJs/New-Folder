@@ -6,22 +6,22 @@ import React from 'react'
 const FirstStep = () => {
     return (
         <form className='flex flex-col gap-8 w-full'>
-            <div className='flex w-full justify-between gap-8'>
-                <div className='w-1/2 flex flex-col gap-2'>
+            <div className='flex max-lg:flex-col w-full justify-between gap-8'>
+                <div className='w-1/2 max-lg:w-full flex flex-col gap-2'>
                     <Label htmlFor='title' className='text-subText'> عنوان ملک </Label>
                     <Input name='title' id='title' className='w-full px-4 py-2 text-sm bg-transparent border rounded-xl text-subText border-subText' />
                 </div>
-                <div className='w-1/2 flex flex-col gap-2'>
+                <div className='w-1/2 max-lg:w-full flex flex-col gap-2'>
                     <Label htmlFor='price' className='text-subText'> قیمت </Label>
                     <Input name='price' id='price' placeholder='تومن' className='w-full text-sm px-4 py-2 bg-transparent border rounded-xl text-subText border-subText' />
                 </div>
             </div>
-            <div className='flex w-full justify-between gap-8 h-fit'>
-                <div className='w-1/2 flex flex-col gap-2'>
+            <div className='flex max-lg:flex-col-reverse w-full justify-between gap-8 h-fit'>
+                <div className='w-1/2 max-lg:w-full flex flex-col gap-2'>
                     <Label htmlFor='caption' className='text-subText'> توضیحات ملک </Label>
                     <Textarea name='caption' id='caption' className='w-full h-[244] rounded-xl border border-subText text-subText' />
                 </div>
-                <div className='w-1/2 flex flex-col justify-between'>
+                <div className='w-1/2 max-lg:w-full flex max-lg:gap-8 flex-col justify-between'>
                     <div className='w-full flex gap-4'>
                         <div className='w-1/2 flex flex-col gap-2'>
                             <Label htmlFor='capacity' className='text-subText'> ظرفیت (نفر) </Label>
