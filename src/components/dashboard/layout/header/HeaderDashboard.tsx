@@ -6,6 +6,7 @@ import CommonModal from "../../modal/CommonModal";
 import { useUserStore } from "@/utils/zustand/store";
 import { handleLogout } from "@/core/logOut";
 import NotifModal from "../../modal/NotifModal";
+import { redirect } from "next/navigation";
 
 const HeaderDashboard: React.FC = () => {
     const { theme, toggleTheme } = useTheme();
@@ -44,7 +45,7 @@ const HeaderDashboard: React.FC = () => {
                             <Moon className="w-5 h-5 text-subText hover:text-primary" />
                         )}
                     </button>
-                    <Bell className="cursor-pointer" />
+                    <Bell onClick={() => redirect("/dashboard/notifications")} className="cursor-pointer" />
                     <div className="relative">
                         <div onClick={() => {
                             if(modalView){

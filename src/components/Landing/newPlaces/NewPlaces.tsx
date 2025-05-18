@@ -1,6 +1,8 @@
+'use client'
 import React from 'react'
 import ViewAllButton from '../../common/buttons/common/ViewAllButton'
 import CallSlider from './CallSlider'
+import { redirect } from 'next/navigation'
 
 const NewPlaces = () => {
 
@@ -39,7 +41,7 @@ const NewPlaces = () => {
                     <div className='flex gap-4'>
                         <h2 className='lg:text-2xl md:text-xl text-base font-[500]'>جدید ترین مناقط تفریحی </h2>
                     </div>
-                    <ViewAllButton classname='max-md:border-none max-md:p-0' />
+                    <ViewAllButton onclick={() => redirect("/rent")} classname='max-md:border-none max-md:p-0' />
                 </div>
             </div>
             <div className='w-full'>

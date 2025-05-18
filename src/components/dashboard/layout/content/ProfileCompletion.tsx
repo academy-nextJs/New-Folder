@@ -6,7 +6,7 @@ import "react-circular-progressbar/dist/styles.css";
 const ProfileCompletion = ({ percentage }: { percentage: number }) => {
   return (
     <div
-      className=" lg:w-[40%] md:w-full sm:w-full w-full h-60 bg-background dark:bg-secondary-light2   rounded-2xl p-6 flex items-center gap-6 shadow-lg border  "
+      className=" lg:w-[40%] md:w-full sm:w-full w-full h-60 bg-subBg rounded-2xl p-6 flex items-center gap-6 shadow-lg border  "
       dir="ltr"
     >
       <div className="w-28 ">
