@@ -133,11 +133,9 @@ export default function ContentNotifications() {
                             <p className='text-sm text-muted-foreground'>{not.subtitle}</p>
                             <div className='flex justify-between items-center'>
                                 <span className='text-xs text-muted-foreground'>{not.date}</span>
-                                {not.status && (
-                                    <div className='inline-flex items-center gap-1 bg-primary text-primary-foreground px-2 py-1 rounded-lg text-xs'>
-                                        <CheckCircle2 size={12} /> علامت‌گذاری
-                                    </div>
-                                )}
+                                <div className='inline-flex items-center gap-1 bg-primary text-primary-foreground cursor-pointer px-2 py-1 rounded-lg text-xs'>
+                                    <CheckCircle2 size={12} /> علامت‌گذاری
+                                </div>
                             </div>
                         </div>
                     ))}
