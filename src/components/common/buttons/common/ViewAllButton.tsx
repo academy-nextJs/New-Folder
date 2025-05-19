@@ -7,8 +7,8 @@ const ViewAllButton: FC<IButton> = ({ classname, onclick }) => {
 
     return (
         <div>
-            <Button variant={'scale'} onClick={onclick} className={`cursor-pointer px-4 py-2 w-fit h-fit border border-white rounded-2xl text-sm flex flex-row-reverse dark:text-white md:text-white text-black dark:bg-transparent md:bg-secondary-static bg-none ${classname}`}>
-                <ChevronLeft className={`dark:text-white md:text-white text-black`} />
+            <Button variant={'scale'} onClick={onclick} className={`cursor-pointer px-4 py-2 w-fit h-fit rounded-2xl text-sm flex flex-row-reverse bg-transparent border-subText border bg-none ${classname}`}>
+                <ChevronLeft className={`text-foreground`} />
                 مشاهده همه
             </Button>
         </div>

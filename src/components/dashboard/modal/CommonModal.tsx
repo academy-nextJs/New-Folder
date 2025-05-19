@@ -14,7 +14,7 @@ const CommonModal: FC<IModal> = ({
     return (
         <Dialog>
             <DialogTrigger>
-                {button ? button : <div className="flex gap-2 w-full justify-center text-danger hover:bg-subBg2 items-center cursor-pointer px-2 py-4"> {buttonIcon} {buttonTitle} </div>}
+                {button ? button : <div className="flex gap-2 w-full text-danger hover:bg-subBg2 items-center cursor-pointer px-2 py-4"> {buttonIcon} {buttonTitle} </div>}
             </DialogTrigger>
             <DialogContent onMouseDown={(e) => e.stopPropagation()} className='rounded-2xl flex flex-col gap-8 items-center'>
                 <DialogHeader className='flex flex-col gap-8 items-center'>

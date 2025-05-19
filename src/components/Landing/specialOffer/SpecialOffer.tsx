@@ -2,11 +2,12 @@ import { Clock } from 'lucide-react'
 import React from 'react'
 import CountdownTimer from '@/utils/helper/Timer/CountdownTimer'
 import CallSlider from './CallSlider'
+import { getToken } from '@/core/cookie/auth'
 
-const SpecialOffer = () => {
-
-  return (
-    <div className="w-full h-fit bg-secondary-light px-8 py-12 rounded-[40px] relative">
+const SpecialOffer = async () => {
+  const token = await getToken();
+  
+  return token && <div className="w-full h-fit bg-secondary-light px-8 py-12 rounded-[40px] relative">
       <div className="
         after:content-['']
         after:absolute after:right-0 after:top-[-50px]
@@ -48,7 +49,6 @@ const SpecialOffer = () => {
 
       </div>
     </div>
-  )
 }
 
 export default SpecialOffer

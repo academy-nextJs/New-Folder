@@ -5,6 +5,8 @@ import React, { Fragment, useEffect, useRef } from "react";
 import CommonModal from "../../modal/CommonModal";
 import { useUserStore } from "@/utils/zustand/store";
 import { handleLogout } from "@/core/logOut";
+import NotifModal from "../../modal/NotifModal";
+import { redirect } from "next/navigation";
 
 const HeaderDashboard: React.FC = () => {
     const { theme, toggleTheme } = useTheme();
@@ -43,7 +45,7 @@ const HeaderDashboard: React.FC = () => {
                             <Moon className="w-5 h-5 text-subText hover:text-primary" />
                         )}
                     </button>
-                    <Bell className="cursor-pointer" />
+                    <Bell onClick={() => redirect("/dashboard/notifications")} className="cursor-pointer" />
                     <div className="relative">
                         <div onClick={() => {
                             if(modalView){
@@ -64,6 +66,7 @@ const HeaderDashboard: React.FC = () => {
                         {modalView && <div ref={moreRef} className="absolute text-sm p-2 top-full rounded-2xl left-0 bg-subBg shadow-2xl z-50 flex flex-col gap-2 w-max min-w-[160px]">
                             <div className="flex flex-col">
                                 <div className="flex border-b gap-2 items-center cursor-pointer hover:bg-subBg2 px-2 py-4"> <PlusCircle size={16} /> شارژ کردن کیف پول </div>
+                                <NotifModal />
                                 <CommonModal handleClick="خروج" buttonTitle={"   خروج از حساب  "} buttonIcon={<LogOut size={16} />} onClick={handleLogout(logout, '/login')} title={"  آیا از خروج خود مطمعن هستید?  "} />
                             </div>
                         </div>}

@@ -7,7 +7,7 @@ import { getRecommendsHouse } from '@/utils/service/api/recommendsHouse'
 const CallSlider = () => {
     const { data, isLoading } = useQuery({
         queryKey: ['recommendsHouses'],
-        queryFn: () => getRecommendsHouse('rate', 'DESC', '')
+        queryFn: () => getRecommendsHouse()
     })
     console.log(data)
 

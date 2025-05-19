@@ -4,7 +4,9 @@ export const privateRoutes = [
   "/dashboard",
   "/dashboard/favorites",
   "/dashboard/profile",
-  "/dashboard/my-payments",
+  "/dashboard/payments",
+  "/dashboard/manage-reserves",
+  "/dashboard/notifications",
   "/dashboard/my-comments",
   "/dashboard/manage-houses/my-houses",
   "/dashboard/manage-houses/add-houses"

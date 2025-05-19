@@ -1,9 +1,11 @@
+'use client'
 import React from 'react'
 import ViewAllButton from '../../common/buttons/common/ViewAllButton';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../ui/tabs';
 import { CallSliderDreams } from './CallSlider';
 import { CallSliderRental } from './CallSliderRental';
 import { CallSliderMortgage } from './CallSliderMortgage';
+import { redirect } from 'next/navigation';
 
 const DestinationOfDreams = () => {
 
@@ -76,7 +78,7 @@ const DestinationOfDreams = () => {
                             <h2 className='lg:text-2xl md:text-xl text-base font-[500]'> رهن و اجاره ملک در دلتا </h2>
                             <span className='lg:block hidden text-2xl'> | </span>
                         </div>
-                        <ViewAllButton classname='max-md:border-none max-md:p-0' />
+                        <ViewAllButton onclick={() => redirect("/rent")} classname='max-md:border-none max-md:p-0' />
                     </div>
                     <Tabs defaultValue="rental" className='rtl'>
                         <TabsList className='bg-subBg text-subText lg:absolute lg:mt-0 mt-4 right-[265px] top-0.5' >
