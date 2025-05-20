@@ -1,16 +1,33 @@
 'use client'
 import { useTheme } from "@/utils/service/TanstakProvider";
-import { Bell, ChevronDown, LogOut, Moon, Sun } from "lucide-react";
-import React, { Fragment } from "react";
-import { signOut, useSession } from "next-auth/react";
+import { Bell, ChevronDown, ChevronUp, LogOut, Moon, PlusCircle, Sun } from "lucide-react";
+import React, { Fragment, useEffect, useRef } from "react";
+import CommonModal from "../../modal/CommonModal";
+import { useUserStore } from "@/utils/zustand/store";
+import { handleLogout } from "@/core/logOut";
+import NotifModal from "../../modal/NotifModal";
+import { redirect } from "next/navigation";
 
 const HeaderDashboard: React.FC = () => {
     const { theme, toggleTheme } = useTheme();
-    const { data: session } = useSession();
+    const [modalView, setModalView] = React.useState(false);
+    const moreRef = useRef<HTMLDivElement | null>(null);
 
-    const handleLogout = async () => {
-        await signOut({ redirect: true, callbackUrl: "/login" });
-    };
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (moreRef.current && !moreRef.current.contains(event.target as Node)) {
+                setModalView(false);
+            }
+        }
+        if (modalView) {
+            document.addEventListener('mousedown', handleClickOutside);
+        }
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [modalView])
+
+    const { logout } = useUserStore()
 
     return (
         <Fragment>
@@ -28,21 +45,31 @@ const HeaderDashboard: React.FC = () => {
                             <Moon className="w-5 h-5 text-subText hover:text-primary" />
                         )}
                     </button>
-                    <Bell className="cursor-pointer" />
-                    <div className="relative group">
-                        <div className="flex relative gap-4 items-center cursor-pointer">
-                            <img src={session?.user?.image || "  "} alt="" className="size-[40px] border-0 outline-none bg-secondary-light rounded-[8px]" />
+                    <Bell onClick={() => redirect("/dashboard/notifications")} className="cursor-pointer" />
+                    <div className="relative">
+                        <div onClick={() => {
+                            if(modalView){
+                                setModalView(false)
+                            }
+                            else{
+                                setModalView(true)
+                            }
+                        }} className="flex relative gap-4 items-center cursor-pointer">
+                            <img src={' '} alt="" className="size-[40px] border-0 outline-none bg-secondary-light rounded-[8px]" />
                             <div className="flex max-md:hidden flex-col justify-between">
                                 <h2> امیر محمد ملایی </h2>
                                 <span className="text-muted-foreground text-sm"> خریدار </span>
                             </div>
-                            <ChevronDown className="max-md:hidden" size={12} />
+                            {!modalView && <ChevronDown className="cursor-pointer" size={12} />}
+                            {modalView && <ChevronUp className="cursor-pointer" size={12} />}
                         </div>
-                        <div className="absolute text-sm px-2 py-2 top-full opacity-0 group-hover:opacity-100 left-0 bg-subBg shadow-xl rounded-lg z-50 flex flex-col gap-2 w-max min-w-[160px]">
-                            <div className="flex flex-col gap-2">
-                                <div onClick={handleLogout} className="flex gap-2 text-danger items-center cursor-pointer hover:bg-subBg2 rounded-[12px] px-2 py-2"> <LogOut size={16} />  خروج از حساب </div>
+                        {modalView && <div ref={moreRef} className="absolute text-sm p-2 top-full rounded-2xl left-0 bg-subBg shadow-2xl z-50 flex flex-col gap-2 w-max min-w-[160px]">
+                            <div className="flex flex-col">
+                                <div className="flex border-b gap-2 items-center cursor-pointer hover:bg-subBg2 px-2 py-4"> <PlusCircle size={16} /> شارژ کردن کیف پول </div>
+                                <NotifModal />
+                                <CommonModal handleClick="خروج" buttonTitle={"   خروج از حساب  "} buttonIcon={<LogOut size={16} />} onClick={handleLogout(logout, '/login')} title={"  آیا از خروج خود مطمعن هستید?  "} />
                             </div>
-                        </div>
+                        </div>}
                     </div>
                 </div>
             </div>

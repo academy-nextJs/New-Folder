@@ -10,8 +10,9 @@ import {
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { I18nextProvider } from 'react-i18next';
 import i18n from '../../utils/i18n/config';
-import { AnimatePresence, motion } from 'framer-motion';
+
 import { SessionProvider } from 'next-auth/react';
+
 
 type Theme = 'dark' | 'light';
 
@@ -40,7 +41,6 @@ const queryClient = new QueryClient({
 
 function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>('dark');
-  const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme') as Theme | null;
@@ -62,39 +62,11 @@ function ThemeProvider({ children }: { children: ReactNode }) {
   }, [theme]);
 
   const toggleTheme = () => {
-    setIsTransitioning(true);
-
-    setTimeout(() => {
-      setTheme((prevTheme) => (prevTheme === 'dark' ? 'light' : 'dark'));
-      setIsTransitioning(false);
-    }, 1000);
+    setTheme((prevTheme) => (prevTheme === 'dark' ? 'light' : 'dark'));
   };
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      <AnimatePresence>
-        {isTransitioning && (
-          <motion.div
-            key="transition"
-            initial={{ opacity: 0, x: -1000 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -1000 }}
-            transition={{ duration: 0.6 }}
-            className="fixed inset-0 z-[9999] flex items-center justify-center bg-white dark:bg-black"
-          >
-            <motion.div
-              initial={{ scale: 0, x: -1000 }}
-              animate={{ scale: 1, x: 0 }}
-              exit={{ scale: 0, x: -1000, }}
-              transition={{ duration: 0.6 }}
-              className="text-4xl"
-            >
-
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
       {children}
     </ThemeContext.Provider>
   );

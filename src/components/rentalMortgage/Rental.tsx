@@ -23,13 +23,14 @@ const RentalComponent = () => {
   const urlLocation = searchParams.get('location') || ''
   const urlMinArea = Number(searchParams.get('minRent')) || ''
   const urlMaxArea = Number(searchParams.get('maxRent')) || ''
+  const urlProperty = searchParams.get("propertyType") || ''
 
 
   const [search, setSearch] = useState<string>('')
   const [order, setOrder] = useState<'DESC' | 'ASC'>('DESC')
   const [sort, setSort] = useState<string>('last_updated')
   const [houses, setHouses] = useState<IHouse[]>([])
-  const [propertyType, setPropertyType] = useState<string>('')
+  const [propertyType, setPropertyType] = useState<string>(urlProperty)
   const [minRent, setMinRent] = useState<number | "">('')
   const [maxRent, setMaxRent] = useState<number | "">('')
   const [minMortgage, setMinMortgage] = useState<number | "">('')

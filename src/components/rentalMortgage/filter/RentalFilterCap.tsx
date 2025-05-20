@@ -22,7 +22,7 @@ const RentalFilterCap: FC<IProps> = ({
                         placeholder='0 تومن'
                         type='number'
                         label='حداقل رهن'
-                        classname='px-4 py-3 border-subText w-full dark:group-hover:text-white dark:group-hover:border-white outline-none'
+                        classname='px-4 py-3 border-subText w-full dark:group-hover:text-white dark:group-hover:border-white text-foreground outline-none'
                     />
                 </div>
                 <div className='w-1/2'>
@@ -31,7 +31,7 @@ const RentalFilterCap: FC<IProps> = ({
                         placeholder='0 تومن'
                         type='number'
                         label='حداکثر رهن'
-                        classname='px-4 py-3 border-subText w-full dark:group-hover:text-white dark:group-hover:border-white outline-none'
+                        classname='px-4 py-3 border-subText w-full dark:group-hover:text-white dark:group-hover:border-white text-foreground outline-none'
                     /></div>
             </div>
             <div className='h-[30px] max-xl:hidden border relative bottom-2 border-subText'></div>
@@ -42,7 +42,7 @@ const RentalFilterCap: FC<IProps> = ({
                         placeholder='0 تومن'
                         type='number'
                         label='حداقل اجاره'
-                        classname='px-4 py-3 border-subText w-full dark:group-hover:text-white dark:group-hover:border-white outline-none'
+                        classname='px-4 py-3 border-subText w-full dark:group-hover:text-white dark:group-hover:border-white text-foreground outline-none'
                     />
                 </div>
                 <div className='w-1/2'>
@@ -51,7 +51,7 @@ const RentalFilterCap: FC<IProps> = ({
                         placeholder='0 تومن'
                         type='number'
                         label='حداکثر اجاره'
-                        classname='px-4 py-3 border-subText w-full dark:group-hover:text-white dark:group-hover:border-white outline-none'
+                        classname='px-4 py-3 border-subText w-full dark:group-hover:text-white dark:group-hover:border-white text-foreground outline-none'
                     />
                 </div>
             </div>
@@ -63,7 +63,7 @@ const RentalFilterCap: FC<IProps> = ({
                         placeholder='0 متر'
                         type='number'
                         label='حداقل متراژ'
-                        classname='px-4 py-3 border-subText w-full dark:group-hover:text-white dark:group-hover:border-white outline-none'
+                        classname='px-4 py-3 border-subText w-full dark:group-hover:text-white dark:group-hover:border-white text-foreground outline-none'
                     />
                 </div>
                 <div className='w-1/2'>
@@ -72,7 +72,7 @@ const RentalFilterCap: FC<IProps> = ({
                         placeholder='0 متر'
                         type='number'
                         label='حداکثر متراژ'
-                        classname='px-4 py-3 border-subText w-full dark:group-hover:text-white dark:group-hover:border-white outline-none'
+                        classname='px-4 py-3 border-subText w-full dark:group-hover:text-white dark:group-hover:border-white text-foreground outline-none'
                     /></div>
             </div>
         </div>

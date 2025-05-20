@@ -14,7 +14,7 @@ import { useParams } from 'next/navigation'
 import { showToast } from '@/core/toast/toast'
 import { QueryObserverResult, RefetchOptions } from '@tanstack/react-query'
 
-const SingleReserveForm = ({ viewReply, title, parent_comment_id, refetch }: { refetch: (options?: RefetchOptions) => Promise<QueryObserverResult<IGetComment[], Error>> ,viewReply: boolean, title: string, parent_comment_id: string | null }) => {
+const SingleReserveForm = ({ viewReply, title, parent_comment_id, refetch, setViewReply }: { setViewReply: React.Dispatch<React.SetStateAction<boolean>> ,refetch: (options?: RefetchOptions) => Promise<QueryObserverResult<IGetComment[], Error>> ,viewReply: boolean, title: string, parent_comment_id: string | null }) => {
     const {
         register,
         handleSubmit,
@@ -46,6 +46,7 @@ const SingleReserveForm = ({ viewReply, title, parent_comment_id, refetch }: { r
             reset()
             refetch()
             setIsLoading(false)
+            setViewReply(false)
         } catch (error) {
             console.log(error)
             showToast('success', ' مشکل نظر ', 'بستن', ' مشکلی پیدا شد و نظر شما لغو شد ')

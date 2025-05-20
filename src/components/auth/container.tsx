@@ -1,5 +1,5 @@
 'use client'
-import authBanner from "../../assets/authBanner.png";
+import authBanner from "../../assets/auth banner.svg";
 import score from "@/assets/score.png"
 import Image from "next/image";
 import { motion } from 'framer-motion'

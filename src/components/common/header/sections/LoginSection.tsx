@@ -5,8 +5,9 @@ import { useRef, useEffect } from "react";
 import { useUserStore } from "@/utils/zustand/store";
 import { useTheme } from "@/utils/service/TanstakProvider";
 import { motion } from "framer-motion";
-import { signOut, useSession } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import Image from "next/image";
+import { handleLogout } from "@/core/logOut";
 // import ChangeLanguage from "./ChangeLanguage";
 
 const LoginSection = () => {
@@ -14,12 +15,6 @@ const LoginSection = () => {
   const { theme, toggleTheme } = useTheme();
   const dropdownRef = useRef<HTMLDivElement>(null);
   const { data: session } = useSession()
-
-  const handleLogout = async () => {
-    await signOut({ redirect: true, callbackUrl: "/login" });
-  };
-
-  console.log(session)
 
   useEffect(() => {
     checkAuthStatus();
@@ -58,7 +53,7 @@ const LoginSection = () => {
             {session?.user?.image ? <Image alt="" src={session.user?.image || ""} className="w-8 h-8 rounded-full" width={200} height={40} /> : <User className="text-subText w-6 h-6" />}
           </div>
 
-          <div className="absolute top-full left-0 mt-1 w-36 sm:w-44 md:w-48 lg:w-56 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-10">
+          <div className="absolute top-full left-0 mt-1 w-36 sm:w-44 md:w-48 lg:w-56 opacity-0 invisible md:group-hover:opacity-100 group-hover:visible transition-all duration-200 z-10">
             <div className="bg-secondary border border-border rounded-md shadow-lg py-1 text-right">
               <Link
                 href="/dashboard"
@@ -71,7 +66,7 @@ const LoginSection = () => {
                 <span> ورود به حساب کاربری </span>
               </Link>
               <button
-                onClick={handleLogout}
+                onClick={handleLogout(signOut, '/login')}
                 className="block w-full px-2 sm:px-3 md:px-4 py-2 md:py-3 text-[10px] sm:text-xs md:text-sm text-foreground hover:bg-subBg transition-colors flex items-center gap-1 sm:gap-2"
               >
                 <LogOut

@@ -7,15 +7,12 @@ import villaIcon3 from "../../../assets/images/categories/wooden-house.png";
 import villaIcon4 from "../../../assets/images/categories/apartment.png";
 import star from "@/assets/Star 7.png";
 import { MoveLeftIcon } from "lucide-react";
-import { fetchApi } from "@/core/interceptore/fetchApi";
 import { Loader } from "@/components/common/Loader";
 import arrow from "@/assets/arrow.svg";
 import { useTheme } from "@/utils/service/TanstakProvider";
-
-type Category = {
-  id: string;
-  name: string;
-};
+import { useRouter } from "next/navigation";
+import { Category } from "@/types/categories-type/categories-type";
+import { getCategories } from "@/utils/service/api/categories";
 
 const CardSvgBackground = ({ isHovered }: { isHovered: boolean }) => (
   <svg className="w-full " xmlns="http://www.w3.org/2000/svg">
@@ -43,7 +40,7 @@ const Categories = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const Data = await fetchApi.get<Category[]>("/categories");
+        const Data = await getCategories()
         setCategoryData(Data);
       } catch (error) {
         console.error("Failed to fetch categories:", error);
@@ -87,6 +84,16 @@ const Categories = () => {
 
   const { theme } = useTheme();
 
+  const router = useRouter();
+
+  const handleClick = (type: string) => {
+    const params = new URLSearchParams();
+
+    params.set("propertyType", type)
+
+    router.push(`/rent?${params.toString()}`);
+  };
+
   return (
     <div className="mb-32 text-foreground p-2 sm:p-4">
       <div className="flex justify-center items-center gap-2 py-2 sm:py-4 mb-2 sm:mb-4 text-primary">
@@ -129,6 +136,7 @@ const Categories = () => {
                 return (
                   <div
                     key={cardIndex}
+                    onClick={() => handleClick(category.name)}
                     className="w-[230px] h-[100px] relative flex items-center justify-center cursor-pointer transition-all duration-300"
                     onMouseEnter={() => setHoveredIndex(cardIndex)}
                     onMouseLeave={() => setHoveredIndex(null)}

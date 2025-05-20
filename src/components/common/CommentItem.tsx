@@ -18,6 +18,7 @@ export const QAWidget: FC<
   user,
   parent_comment,
   parent_comment_id,
+  id,
   setViewReply,
   setTitle,
   setParent_comment_id,
@@ -115,7 +116,7 @@ export const QAWidget: FC<
           <div className="flex items-center gap-4">
             {user?.profilePicture ? <img className="bg-cardComment rounded-[16px] min-w-[57px] min-h-[57px]" alt="" src={user.profilePicture} /> : <div className="bg-cardComment rounded-[16px] min-w-[57px] min-h-[57px]" />}
             <div className="flex flex-col justify-between gap-3">
-              <h2>{user?.fullName || "ناشناس"}</h2>
+              <h2>{parent_comment ? parent_comment.user.fullName : user?.fullName || "ناشناس"}</h2>
               <span className="text-sm text-subText flex items-center gap-2">
                 <Calendar size={16} /> {convertToJalaliString(parent_comment?.created_at ? parent_comment.created_at : created_at)}
               </span>
@@ -125,7 +126,7 @@ export const QAWidget: FC<
             onClick={() => {
               setTitle(parent_comment ? parent_comment.title : title);
               setViewReply(true);
-              setParent_comment_id(parent_comment_id);
+              setParent_comment_id(parent_comment_id ? parent_comment_id : id);
             }}
             className="px-4 py-2 whitespace-nowrap cursor-pointer border border-foreground rounded-[16px] flex items-center gap-2 flex-row-reverse"
           >

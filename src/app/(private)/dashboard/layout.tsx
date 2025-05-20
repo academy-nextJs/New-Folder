@@ -1,16 +1,17 @@
-import Layout from '@/components/dashboard/layout/Layout';
-import React from 'react';
+import LayoutDashboard from '@/components/dashboard/layout/Layout';
+import React from "react";
 
-const layout = ({
+const Layout = ({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) => {
+
   return (
-    <Layout>
+    <LayoutDashboard>
       {children}
-    </Layout>
+    </LayoutDashboard>
   );
 };
 
-export default layout;
+export default Layout;
