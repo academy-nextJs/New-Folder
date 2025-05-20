@@ -73,21 +73,17 @@ const SidebarDashboard = ({
 
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
-  // برای بررسی عرض صفحه و تغییر view به 2 (حالت بسته) زمانی که عرض کمتر از 1200 پیکسل است
   useEffect(() => {
     const checkScreenWidth = () => {
       if (window.innerWidth < 1200) {
-        setView(2); // تغییر به حالت بسته (view = 2) زمانی که عرض کمتر از 1200 پیکسل است
+        setView(2);
       }
     };
 
-    // بررسی اولیه هنگام لود
     checkScreenWidth();
 
-    // تنظیم event listener برای resize شدن صفحه
     window.addEventListener("resize", checkScreenWidth);
 
-    // پاکسازی event listener
     return () => {
       window.removeEventListener("resize", checkScreenWidth);
     };

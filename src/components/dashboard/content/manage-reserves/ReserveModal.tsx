@@ -22,9 +22,6 @@ export default function ReserveModal({ isOpen, onClose }: ReserveModalProps) {
 "
       >
         <div className="relative w-[95%] max-w-6xl rounded-2xl bg-border p-6 text-right shadow-xl ">
-          {/* Close button */}
-
-          {/* Header */}
           <h2 className="mb-4 lg:text-2xl md:text-2xl sm:text-2xl font-bold text-foreground text-sm">
             هتل همایون فر کیش ایران
           </h2>
@@ -35,7 +32,6 @@ export default function ReserveModal({ isOpen, onClose }: ReserveModalProps) {
             بستن <X />
           </button>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2" dir="ltr">
-            {/* Right - Text content */}
             <div className="space-y-4">
               <p className="text-sm leading-7 text-subText">
                 آپارتمانی دنج و آرام در قلب شهر، جایی که زندگی روزمره راحت و
@@ -52,7 +48,6 @@ export default function ReserveModal({ isOpen, onClose }: ReserveModalProps) {
                 خوش، آرامش و شروعی نو در زندگی روزمره‌تان.
               </p>
 
-              {/* Tags */}
               <div
                 className="flex flex-wrap items-center gap-3 text-sm"
                 dir="rtl"
@@ -71,21 +66,17 @@ export default function ReserveModal({ isOpen, onClose }: ReserveModalProps) {
               </div>
             </div>
 
-            {/* Left - Image */}
             <div className="relative h-64 w-full rounded-2xl bg-gray-100">
-              {/* Fake image */}
               <Image
                 alt=""
                 src={""}
                 className="absolute inset-0 flex items-center justify-center text-2xl text-gray-400"
               ></Image>
 
-              {/* Top left icon */}
               <button className="absolute left-3 top-3 rounded-md bg-primary p-1.5 text-foreground shadow-md">
                 <LucideCopy className="text-bacgkroundW" size={20} />
               </button>
 
-              {/* Top right star */}
               <div className="absolute right-3 top-3 rounded-md bg-gradient-to-r from-accent to-accent px-3 py-1 text-foreground shadow-md">
                 <span className="flex items-center gap-1 text-sm text-bacgkroundW">
                   <Star className="text-bacgkroundW" /> ۵ ستاره
@@ -94,7 +85,6 @@ export default function ReserveModal({ isOpen, onClose }: ReserveModalProps) {
             </div>
           </div>
 
-          {/* Address and Features */}
           <div className="mt-6 border-t pt-4 text-sm text-gray-600">
             <p className="mb-2 text-foreground">
               <strong>آدرس :</strong> گیلان، رشت، میدان آزادی، جنب چهارراه
@@ -117,7 +107,6 @@ export default function ReserveModal({ isOpen, onClose }: ReserveModalProps) {
             </div>
           </div>
 
-          {/* Price and Actions */}
           <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
             <div className="text-md text-subText">
               <strong>قیمت خرید :</strong>

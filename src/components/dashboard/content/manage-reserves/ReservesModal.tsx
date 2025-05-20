@@ -11,7 +11,6 @@ export default function ReservesModals({ isOpen, onClose }: ListModalProps) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50  backdrop-blur-sm">
       <div className="w-[95%] max-w-3xl bg-border p-6 rounded-xl text-right">
-        {/* Header */}
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-xl font-bold text-foreground">لیست رزرو ها</h2>
           <button
@@ -22,7 +21,6 @@ export default function ReservesModals({ isOpen, onClose }: ListModalProps) {
           </button>
         </div>
 
-        {/* Table */}
         <div className="overflow-hidden rounded-xl">
           <table className="w-full text-sm text-center border-collapse">
             <thead className="bg-subText text-foreground">
