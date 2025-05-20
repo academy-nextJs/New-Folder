@@ -2,18 +2,19 @@
 import { User, LogOut, LayoutDashboard, Moon, Sun } from "lucide-react";
 import Link from "next/link";
 import { useRef, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import { useUserStore } from "@/utils/zustand/store";
 import { useTheme } from "@/utils/service/TanstakProvider";
 import { motion } from "framer-motion";
+import { useSession, signOut } from "next-auth/react";
+import Image from "next/image";
 import { handleLogout } from "@/core/logOut";
 // import ChangeLanguage from "./ChangeLanguage";
 
 const LoginSection = () => {
-  const { isLoggedIn, logout, checkAuthStatus } = useUserStore();
+  const { checkAuthStatus } = useUserStore();
   const { theme, toggleTheme } = useTheme();
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const router = useRouter();
+  const { data: session } = useSession()
 
   useEffect(() => {
     checkAuthStatus();
@@ -38,7 +39,7 @@ const LoginSection = () => {
         )}
       </motion.button>
 
-      {!isLoggedIn ? (
+      {!session ? (
         <Link
           href="/login"
           className="text-subText hover:text-primary transition-colors flex items-center gap-1"
@@ -49,8 +50,7 @@ const LoginSection = () => {
       ) : (
         <div className="relative group" ref={dropdownRef}>
           <div className="flex items-center gap-2 px-3 py-2 rounded-2lg hover:bg-subBg text-foreground cursor-pointer transition-colors rounded-full">
-            <User onClick={() => {router.push("/dashboard")}} className="text-subText md:hidden block w-6 h-6" />
-            <User className="text-subText w-6 h-6 md:block hidden" />
+            {session?.user?.image ? <Image alt="" src={session.user?.image || ""} className="w-8 h-8 rounded-full" width={200} height={40} /> : <User className="text-subText w-6 h-6" />}
           </div>
 
           <div className="absolute top-full left-0 mt-1 w-36 sm:w-44 md:w-48 lg:w-56 opacity-0 invisible md:group-hover:opacity-100 group-hover:visible transition-all duration-200 z-10">
@@ -66,7 +66,7 @@ const LoginSection = () => {
                 <span> ورود به حساب کاربری </span>
               </Link>
               <button
-                onClick={handleLogout(logout, '/login')}
+                onClick={handleLogout(signOut, '/login')}
                 className="block w-full px-2 sm:px-3 md:px-4 py-2 md:py-3 text-[10px] sm:text-xs md:text-sm text-foreground hover:bg-subBg transition-colors flex items-center gap-1 sm:gap-2"
               >
                 <LogOut

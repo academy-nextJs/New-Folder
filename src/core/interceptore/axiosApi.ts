@@ -1,6 +1,7 @@
 import axios, { AxiosResponse, AxiosError } from "axios";
-import { getToken, removeToken } from '../cookie/auth';
+import { removeToken } from '../cookie/auth';
 import { showToast } from "../toast/toast";
+import { getSession } from "next-auth/react";
 
 const baseURL = 'https://delta-project.liara.run/api';
 
@@ -37,7 +38,9 @@ const onError = (err: AxiosError) => {
 axiosApi.interceptors.response.use(onSuccess, onError);
 
 axiosApi.interceptors.request.use(async (opt) => {
-    const token = await getToken();
+    const session = await getSession();
+    const token = session?.accessToken
+
     if (token) {
         opt.headers.Authorization = 'Bearer ' + token;
     }

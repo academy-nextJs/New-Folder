@@ -3,7 +3,7 @@ import { useTheme } from "@/utils/service/TanstakProvider";
 import { Bell, ChevronDown, ChevronUp, LogOut, Moon, PlusCircle, Sun } from "lucide-react";
 import React, { Fragment, useEffect, useRef } from "react";
 import CommonModal from "../../modal/CommonModal";
-import { useUserStore } from "@/utils/zustand/store";
+import { signOut, useSession } from 'next-auth/react'
 import { handleLogout } from "@/core/logOut";
 import NotifModal from "../../modal/NotifModal";
 import { redirect } from "next/navigation";
@@ -27,7 +27,7 @@ const HeaderDashboard: React.FC = () => {
         };
     }, [modalView])
 
-    const { logout } = useUserStore()
+    const {data: session} = useSession();
 
     return (
         <Fragment>
@@ -55,7 +55,7 @@ const HeaderDashboard: React.FC = () => {
                                 setModalView(true)
                             }
                         }} className="flex relative gap-4 items-center cursor-pointer">
-                            <img src={' '} alt="" className="size-[40px] border-0 outline-none bg-secondary-light rounded-[8px]" />
+                            <img src={session?.user?.image || " "} alt="" className="size-[40px] border-0 outline-none bg-secondary-light rounded-[8px]" />
                             <div className="flex max-md:hidden flex-col justify-between">
                                 <h2> امیر محمد ملایی </h2>
                                 <span className="text-muted-foreground text-sm"> خریدار </span>
@@ -67,7 +67,7 @@ const HeaderDashboard: React.FC = () => {
                             <div className="flex flex-col">
                                 <div className="flex border-b gap-2 items-center cursor-pointer hover:bg-subBg2 px-2 py-4"> <PlusCircle size={16} /> شارژ کردن کیف پول </div>
                                 <NotifModal />
-                                <CommonModal handleClick="خروج" buttonTitle={"   خروج از حساب  "} buttonIcon={<LogOut size={16} />} onClick={handleLogout(logout, '/login')} title={"  آیا از خروج خود مطمعن هستید?  "} />
+                                <CommonModal handleClick="خروج" buttonTitle={"   خروج از حساب  "} buttonIcon={<LogOut size={16} />} onClick={handleLogout(signOut, '/login')} title={"  آیا از خروج خود مطمعن هستید?  "} />
                             </div>
                         </div>}
                     </div>

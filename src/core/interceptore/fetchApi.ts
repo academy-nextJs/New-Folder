@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
-import { getToken, removeToken } from '../cookie/auth'
+import { getSession, signOut } from 'next-auth/react';
 import { showToast } from '../toast/toast';
 
 const baseURL = 'https://delta-project.liara.run/api'
@@ -17,7 +16,7 @@ const onError = async (error: Response | Error) => {
 
     if (error instanceof Response) {
         if (error.status === 401 || error.status === 403) {
-            await removeToken();
+            await signOut({ callbackUrl: '/login' });
             window.location.pathname = '/login';
             showToast("error", " شما وارد نشدید! ", " بستن ")
         }
@@ -26,7 +25,7 @@ const onError = async (error: Response | Error) => {
             console.log("Client request error:", error.status);
         }
     } else if (error.message === "Network Error") {
-        await removeToken();
+        await signOut({ callbackUrl: '/login' });
         window.location.pathname = '/login';
     }
 
@@ -35,7 +34,8 @@ const onError = async (error: Response | Error) => {
 
 async function fetchWithAuth(url: string, options: RequestInit = {}) {
     try {
-        const token = await getToken();
+        const session = await getSession();
+        const token = session?.accessToken
         
         const headers = {
             'Content-Type': 'application/json',
