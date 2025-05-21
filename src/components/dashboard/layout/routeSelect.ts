@@ -1,8 +1,8 @@
 import { CreditCard, SquaresSubtract } from "lucide-react";
 import { routes, sellerRoutes } from "./routes/routes";
 
-export const routeSelect = true ? routes : sellerRoutes;
-export const footerSidebarSelect = true ? 
+export const routeSelect = false ? routes : sellerRoutes;
+export const footerSidebarSelect = false ? 
 {
     title: 'کیف پول',
     description: 'عدم موجودی',

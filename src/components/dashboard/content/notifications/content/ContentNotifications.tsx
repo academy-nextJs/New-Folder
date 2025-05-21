@@ -61,7 +61,6 @@ export default function ContentNotifications() {
 
     return (
         <div className='flex flex-col gap-8'>
-            {/* جدول دسکتاپ */}
             <Table className='text-right max-lg:hidden overflow-hidden w-full'>
                 <TableHeader className='bg-subBg2 rounded-t-2xl text-foreground'>
                     <TableRow className='text-right'>
@@ -114,9 +113,7 @@ export default function ContentNotifications() {
                 </TableBody>
             </Table>
 
-            {/* کارت موبایل */}
             <div className='flex flex-col gap-4 lg:hidden'>
-                {/* خوانده‌نشده‌ها */}
                 <div className='space-y-2'>
                     <div
                         onClick={() => setOpenUnread(v => !v)}
@@ -141,7 +138,6 @@ export default function ContentNotifications() {
                     ))}
                 </div>
 
-                {/* خوانده‌شده‌ها */}
                 <div className='space-y-2'>
                     <div
                         onClick={() => setOpenRead(v => !v)}
@@ -160,7 +156,6 @@ export default function ContentNotifications() {
                 </div>
             </div>
 
-            {/* Pagination */}
             <div className='flex w-full justify-end items-center'>
                 <Pagination className='w-fit'>
                     <PaginationContent className="justify-center mt-6">
