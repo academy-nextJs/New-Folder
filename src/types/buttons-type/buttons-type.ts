@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 export interface IButton {
   icon?: ReactNode;
   type?: "button" | "submit" | "reset";
-  title?: string;
+  title?: string | ReactNode;
   classname?: string;
   onclick?: () => void;
   disabled?: boolean;
