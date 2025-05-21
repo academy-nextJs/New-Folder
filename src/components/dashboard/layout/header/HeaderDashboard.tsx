@@ -6,12 +6,14 @@ import CommonModal from "../../modal/CommonModal";
 import { signOut, useSession } from 'next-auth/react'
 import { handleLogout } from "@/core/logOut";
 import NotifModal from "../../modal/NotifModal";
-import { redirect } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
+import { routeSelect } from "../routeSelect";
 
 const HeaderDashboard: React.FC = () => {
     const { theme, toggleTheme } = useTheme();
     const [modalView, setModalView] = React.useState(false);
     const moreRef = useRef<HTMLDivElement | null>(null);
+    const pathname = usePathname();
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -32,7 +34,11 @@ const HeaderDashboard: React.FC = () => {
     return (
         <Fragment>
             <div className='bg-subBg w-full rounded-[12px] px-8 py-3 flex items-center justify-between'>
-                <h2 className='font-extrabold text-xl'> داشبورد </h2>
+                <h2 className='font-extrabold text-xl'> 
+                    {routeSelect.map(({ label, href }) => (
+                        pathname === href && label
+                    ))}
+                 </h2>
                 <div className='flex gap-4 items-center'>
                     <button
                         onClick={toggleTheme}

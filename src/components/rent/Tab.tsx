@@ -92,7 +92,7 @@ export default function PropertyTabs({ house }: { house: IHouse }) {
         {activeTab === "reviews" && (
           <motion.div initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}>
-            <SingleReserveForm refetch={refetch} title={title} parent_comment_id={parent_comment_id} viewReply={viewReply} />
+            <SingleReserveForm setViewReply={setViewReply} refetch={refetch} title={title} parent_comment_id={parent_comment_id} viewReply={viewReply} />
             <div className="my-[100px]">
               <SingleReserveComments
                 comments={comments}

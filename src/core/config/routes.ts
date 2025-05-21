@@ -1,15 +1,24 @@
 export const publicRoutes = ["/", "/login", "/verifyCode", "/completeRegister"];
 
-export const privateRoutes = [
-  "/dashboard",
-  "/dashboard/favorites",
-  "/dashboard/profile",
-  "/dashboard/payments",
-  "/dashboard/manage-reserves",
-  "/dashboard/notifications",
-  "/dashboard/my-comments",
-  "/dashboard/manage-houses/my-houses",
-  "/dashboard/manage-houses/add-houses"
+const dashboardSubRoutes = [
+  "",
+  "favorites",
+  "profile",
+  "payments",
+  "manage-reserves",
+  "notifications",
+  "my-comments",
+  "seller",
+  "seller/profile",
+  "seller/manage-houses",
+  "seller/manage-reserves",
+  "seller/payments",
+  "seller/manage-comments",
+  "seller/notifications",
 ];
+
+export const privateRoutes = dashboardSubRoutes.map(
+  (sub) => `/dashboard${sub ? `/${sub}` : ""}`
+);
 
 export const authRoutes = ["/login", "/verifyCode", "/completeRegister"];

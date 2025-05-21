@@ -206,7 +206,7 @@ export default function HotelReservationList() {
   };
 
   return (
-    <div className="flex flex-col justify-between gap-8 bg-background p-4 sm:p-6 lg:p-8 rounded-xl w-full min-h-screen">
+    <div className="flex flex-col justify-between gap-8 bg-subBg p-4 sm:p-6 lg:p-8 rounded-xl w-full min-h-screen">
       <div className="flex flex-col gap-4">
         <h1 className="text-xl font-bold text-right text-foreground">
           لیست رزرو های شما
@@ -217,7 +217,7 @@ export default function HotelReservationList() {
           dir="ltr"
         >
           <button
-            className="w-28 bg-primary text-background px-4 py-2 rounded-lg whitespace-nowrap flex items-center justify-center"
+            className="w-28 bg-primary text-background px-4 py-2 rounded-lg whitespace-nowrap gap-2 flex items-center justify-center"
             onClick={() => setIsFilterModalOpen(true)}
           >
             <Filter className="w-4 h-4 ml-2" />
@@ -226,7 +226,7 @@ export default function HotelReservationList() {
 
           <div className="relative flex-grow max-w-full sm:max-w-md lg:max-w-sm">
             <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-              <Search className="h-4 w-4 text-border" />
+              <Search className="h-4 w-4 text-border text-foreground" />
             </div>
             <input
               type="text"
@@ -256,7 +256,7 @@ export default function HotelReservationList() {
       />
       <div className="overflow-hidden rounded-xl border border-border hidden lg:block">
         <Table className="text-right w-full">
-          <TableHeader className="bg-border dark:bg-subBg text-foreground">
+          <TableHeader className="bg-subBg2 text-foreground">
             <TableRow className="text-right rounded-xl">
               <TableHead className="text-right text-foreground whitespace-nowrap">
                 نام اقامتگاه
@@ -283,11 +283,11 @@ export default function HotelReservationList() {
             {filteredReservations.map((reservation, idx) => (
               <TableRow
                 key={reservation.id}
-                className="hover:bg-border dark:hover:bg-subBg"
+                className="hover:bg-subBg2"
               >
                 <TableCell className="py-4">
                   <div className="flex items-center gap-2">
-                    <div className="w-10 h-10 bg-gray-200 rounded flex-shrink-0"></div>
+                    <div className="w-[107] h-[72] rounded-[12px] bg-card-light flex-shrink-0"></div>
                     <div className="text-right whitespace-nowrap overflow-hidden text-ellipsis max-w-xs">
                       {reservation.hotelName}
                     </div>
