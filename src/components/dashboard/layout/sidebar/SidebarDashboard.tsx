@@ -62,8 +62,8 @@ const SidebarDashboard = ({
     <>
       <div
         className={`bg-subBg md:flex hidden transition-all duration-300 ease-in-out px-4 border py-8 gap-8 rounded-xl w-fit flex-col shadow-md ${view === 1
-            ? "opacity-100 scale-100 pointer-events-auto"
-            : "opacity-0 scale-95 pointer-events-none absolute"
+          ? "opacity-100 scale-100 pointer-events-auto"
+          : "opacity-0 scale-95 pointer-events-none absolute"
           }`}
       >
         <div className="flex justify-between items-center mb-6 min-w-[200px]">
@@ -94,8 +94,8 @@ const SidebarDashboard = ({
                     href={href}
                     onClick={handleClick}
                     className={`whitespace-nowrap flex justify-between items-center px-3 py-2 rounded-lg font-medium transition-colors ${isActive
-                        ? "dark:bg-accent dark:text-accent-foreground bg-subBg2"
-                        : "hover:bg-subBg2 bg-none"
+                      ? "dark:bg-accent dark:text-accent-foreground bg-subBg2"
+                      : "hover:bg-subBg2 bg-none"
                       }`}
                   >
                     <div className="flex gap-2">
@@ -121,8 +121,8 @@ const SidebarDashboard = ({
                             key={href}
                             href={href}
                             className={`whitespace-nowrap flex justify-between items-center px-3 py-2 rounded-lg font-medium transition-colors ${isActive
-                                ? "dark:bg-accent dark:text-accent-foreground bg-subBg2"
-                                : "hover:bg-subBg2 bg-none"
+                              ? "dark:bg-accent dark:text-accent-foreground bg-subBg2"
+                              : "hover:bg-subBg2 bg-none"
                               }`}
                           >
                             <div className="flex gap-2">
@@ -171,11 +171,11 @@ const SidebarDashboard = ({
             {show && (
               <div
                 ref={moreRef}
-                className="absolute right-full bottom-full bg-subBg p-4 rounded-[12px] flex flex-col gap-2"
+                className="absolute bottom-full left-0 z-50 min-w-[180px] w-max rounded-xl backdrop-blur-md shadow-xl border border-border text-sm p-2 flex flex-col gap-1 animate-in fade-in slide-in-from-top-1"
               >
-                <div className="flex gap-2 cursor-pointer">
-                  {" "}
-                  <PlusCircle size={20} /> شارژ کردن کیف پول{" "}
+                <div className="flex items-center gap-2 px-3 py-2 hover:bg-muted rounded-md cursor-pointer transition-colors">
+                  <PlusCircle size={16} className="text-primary" />
+                  <span className="text-sm">شارژ کردن کیف پول</span>
                 </div>
                 <svg
                   width="160"
@@ -210,7 +210,7 @@ const SidebarDashboard = ({
                     strokeWidth="0.5"
                   />
                 </svg>
-                <div className="flex gap-2 cursor-pointer">
+                <div className="flex items-center gap-2 px-3 py-2 hover:bg-muted rounded-md cursor-pointer transition-colors">
                   {" "}
                   <LogIn size={20} /> برداشت وجه{" "}
                 </div>

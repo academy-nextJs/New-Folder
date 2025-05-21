@@ -1,10 +1,11 @@
 import CommonButton from '@/components/common/buttons/common/CommonButton'
+import { BlurFade } from '@/components/magicui/blur-fade'
 import { CreditCard } from 'lucide-react'
 import React from 'react'
 
 const SituationPayroll = () => {
     return (
-        <div className='w-1/2 max-lg:w-full min-h-full rounded-[12px] bg-subBg flex gap-4 px-4 py-4 flex-col'>
+        <BlurFade delay={0.50} className='w-1/2 max-lg:w-full min-h-full rounded-[12px] bg-subBg flex gap-4 px-4 py-4 flex-col'>
             <div className='flex justify-between w-full items-center'>
                 <div className='flex gap-2 w-fit items-center'>
                     <CreditCard size={24} />
@@ -24,7 +25,7 @@ const SituationPayroll = () => {
                     <CommonButton classname='bg-subBg2 text-foreground' title=' 195،000،000     تومان ' />
                 </div>
             </div>
-        </div>
+        </BlurFade>
     )
 }
 

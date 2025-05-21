@@ -1,4 +1,5 @@
 'use client'
+import { BlurFade } from '@/components/magicui/blur-fade';
 import { User } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
@@ -13,7 +14,7 @@ const COLORS = ['fill-primary', 'fill-subBg2'];
 
 const StatusProfile = () => {
     return (
-        <div className='w-1/2 max-lg:w-full min-h-full rounded-[12px] bg-subBg flex gap-4 px-4 py-4 flex-col'>
+        <BlurFade delay={0.70} className='w-1/2 max-lg:w-full min-h-full rounded-[12px] bg-subBg flex gap-4 px-4 py-4 flex-col'>
             <div className='flex justify-between w-full items-center flex-wrap gap-4'>
                 <div className='flex gap-2 w-fit items-center'>
                     <User size={24} />
@@ -59,7 +60,7 @@ const StatusProfile = () => {
                 </div>
             </div>
 
-        </div>
+        </BlurFade>
     )
 }
 

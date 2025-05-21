@@ -1,9 +1,11 @@
+'use client'
 import { HeartIcon, MessageCircleIcon, PinIcon } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 import img from "@/assets/Rectangle 6486.png";
 import ProfileCompletion from "./ProfileCompletion";
 import RecentReserve from "./RecentReserve";
+import { BlurFade } from "@/components/magicui/blur-fade";
 
 const cardData = [
   { id: 1, title: "5", subtitle: "کل رزرو‌ها" },
@@ -17,9 +19,11 @@ const ContentDashboard = () => {
   return (
     <div className="flex justify-center flex-col w-full gap-2">
       <div className="flex flex-wrap justify-between gap-7 w-full overflow-x-hidden">
-        {cardData.map((item) => (
-          <div
-            key={item.id}
+        {cardData.map((item, idx) => (
+          <BlurFade
+            inView
+            delay={( idx / 5 )}
+            key={idx}
             className="relative bg-subBg rounded-xl px-4 pt-4 flex flex-col items-center justify-between
               w-full sm:w-[47%] md:w-[30%] lg:w-[22%] xl:w-[18%]"
           >
@@ -75,11 +79,11 @@ const ContentDashboard = () => {
                 </svg>
               </div>
             </div>
-          </div>
+          </BlurFade>
         ))}
         <div className="flex flex-col justify-center gap-8 w-full  sm:flex-col lg:flex-row ">
-          <div className="lg:w-[60%] md:w-full  h-60 bg-subBg rounded-xl"></div>
-          <ProfileCompletion percentage={40} />
+          <BlurFade delay={0.35} inView className="lg:w-[60%] md:w-full  h-60 bg-subBg rounded-xl"> <p></p> </BlurFade>
+            <ProfileCompletion percentage={40} />
         </div>
         <RecentReserve />
       </div>

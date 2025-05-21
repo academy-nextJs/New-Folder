@@ -142,6 +142,10 @@ body {
   direction: rtl;
 }
 
+.ltr {
+  direction: ltr;
+}
+
 .custom-scrollbar::-webkit-scrollbar {
   height: 6px;
 }

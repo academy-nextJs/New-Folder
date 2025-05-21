@@ -2,10 +2,11 @@ import { SaveIcon } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 import img from "@/assets/Line 2.png";
+import { BlurFade } from "@/components/magicui/blur-fade";
 
 const RecentReserve = () => {
   return (
-    <div className="w-full flex flex-col justify-center gap-4 px-4 bg-background dark:bg-secondary-light2 rounded-xl">
+    <BlurFade delay={0.45} inView className="w-full flex flex-col justify-center gap-4 px-4 bg-background dark:bg-secondary-light2 rounded-xl">
       <div className="w-full flex flex-row justify-between px-4 pt-4">
         <h2 className="items-center flex gap-4">
           <SaveIcon size={20} />
@@ -58,7 +59,7 @@ const RecentReserve = () => {
           {/* iamge */}
         </div>
       </div>
-    </div>
+    </BlurFade>
   );
 };
 

@@ -1,5 +1,6 @@
 /* eslint-disable */
 
+import { BlurFade } from '@/components/magicui/blur-fade'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { SplitNumber } from '@/utils/helper/spliter/SplitNumber'
 import { CheckCircle2, Coins, Flower, LayoutGrid, Pin, Rocket, Text, X } from 'lucide-react'
@@ -16,7 +17,7 @@ const reserves = [
 
 const RecentReserves = () => {
     return (
-        <div className='w-full min-h-full rounded-[12px] bg-subBg flex gap-4 px-4 py-4 flex-col'>
+        <BlurFade delay={1} className='w-full min-h-full rounded-[12px] bg-subBg flex gap-4 px-4 py-4 flex-col'>
             <div className='flex justify-between w-full items-center flex-wrap gap-4'>
                 <div className='flex gap-2 w-fit items-center'>
                     <Pin size={24} />
@@ -78,7 +79,7 @@ const RecentReserves = () => {
                     </div>
                 ))}
             </div>
-        </div>
+        </BlurFade>
     )
 }
 

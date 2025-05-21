@@ -19,7 +19,7 @@ const PaymentsModal = () => {
     return (
         <Dialog onOpenChange={setOpen} open={open} >
             <DialogTrigger>
-                <div className='flex gap-2 cursor-pointer'> <CreditCard size={20} /> لیست تراکنش ها </div>
+                <div className='flex items-center gap-2 px-3 py-2 hover:bg-muted rounded-md cursor-pointer transition-colors'> <CreditCard size={20} /> لیست تراکنش ها </div>
             </DialogTrigger>
             <DialogContent onMouseDown={(e) => e.stopPropagation()} className='rounded-2xl max-w-[800px] flex flex-col gap-8 items-center'>
                 <DialogHeader className='flex justify-between flex-row w-full items-center my-4'>

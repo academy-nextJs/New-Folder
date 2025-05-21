@@ -32,6 +32,7 @@ import {
 import FilterModal from "./FilterModal";
 import ReserveModal from "./ReserveModal";
 import GuestCount from "./GuestCount";
+import { BlurFade } from "@/components/magicui/blur-fade";
 
 interface Reservation {
   id: number;
@@ -206,7 +207,7 @@ export default function HotelReservationList() {
   };
 
   return (
-    <div className="flex flex-col justify-between gap-8 bg-subBg p-4 sm:p-6 lg:p-8 rounded-xl w-full min-h-screen">
+    <BlurFade className="flex flex-col justify-between gap-8 bg-subBg p-4 sm:p-6 lg:p-8 rounded-xl w-full min-h-screen">
       <div className="flex flex-col gap-4">
         <h1 className="text-xl font-bold text-right text-foreground">
           لیست رزرو های شما
@@ -550,6 +551,6 @@ export default function HotelReservationList() {
           </PaginationContent>
         </Pagination>
       </div>
-    </div>
+    </BlurFade>
   );
 }

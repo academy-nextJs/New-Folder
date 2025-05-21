@@ -8,6 +8,7 @@ import { handleLogout } from "@/core/logOut";
 import NotifModal from "../../modal/NotifModal";
 import { redirect, usePathname } from "next/navigation";
 import { routeSelect } from "../routeSelect";
+import { TypingAnimation } from "@/components/magicui/typing-animation";
 
 const HeaderDashboard: React.FC = () => {
     const { theme, toggleTheme } = useTheme();
@@ -29,16 +30,20 @@ const HeaderDashboard: React.FC = () => {
         };
     }, [modalView])
 
-    const {data: session} = useSession();
+    const { data: session } = useSession();
+
 
     return (
         <Fragment>
             <div className='bg-subBg w-full rounded-[12px] px-8 py-3 flex items-center justify-between'>
-                <h2 className='font-extrabold text-xl'> 
-                    {routeSelect.map(({ label, href }) => (
-                        pathname === href && label
-                    ))}
-                 </h2>
+                {routeSelect.map(({ label, href }) => {
+                    return pathname === href && (
+                        <TypingAnimation key={label} className='font-extrabold text-xl'>
+                            {label}
+                        </TypingAnimation>
+                    )
+                }
+                )}
                 <div className='flex gap-4 items-center'>
                     <button
                         onClick={toggleTheme}
@@ -54,10 +59,10 @@ const HeaderDashboard: React.FC = () => {
                     <Bell onClick={() => redirect("/dashboard/notifications")} className="cursor-pointer" />
                     <div className="relative">
                         <div onClick={() => {
-                            if(modalView){
+                            if (modalView) {
                                 setModalView(false)
                             }
-                            else{
+                            else {
                                 setModalView(true)
                             }
                         }} className="flex relative gap-4 items-center cursor-pointer">
@@ -69,13 +74,28 @@ const HeaderDashboard: React.FC = () => {
                             {!modalView && <ChevronDown className="cursor-pointer" size={12} />}
                             {modalView && <ChevronUp className="cursor-pointer" size={12} />}
                         </div>
-                        {modalView && <div ref={moreRef} className="absolute text-sm p-2 top-full rounded-2xl left-0 bg-subBg shadow-2xl z-50 flex flex-col gap-2 w-max min-w-[160px]">
-                            <div className="flex flex-col">
-                                <div className="flex border-b gap-2 items-center cursor-pointer hover:bg-subBg2 px-2 py-4"> <PlusCircle size={16} /> شارژ کردن کیف پول </div>
+                        {modalView && <div
+                            ref={moreRef}
+                            className="absolute top-full left-0 z-50 min-w-[180px] w-max rounded-xl backdrop-blur-md shadow-xl border border-border text-sm p-2 flex flex-col gap-1 animate-in fade-in slide-in-from-top-1"
+                        >
+                            <div className="flex flex-col divide-y divide-border">
+                                <div className="flex items-center gap-2 px-3 py-2 hover:bg-muted rounded-md cursor-pointer transition-colors">
+                                    <PlusCircle size={16} className="text-primary" />
+                                    <span className="text-sm">شارژ کردن کیف پول</span>
+                                </div>
+
                                 <NotifModal />
-                                <CommonModal handleClick="خروج" buttonTitle={"   خروج از حساب  "} buttonIcon={<LogOut size={16} />} onClick={handleLogout(signOut, '/login')} title={"  آیا از خروج خود مطمعن هستید?  "} />
+                                
+                                <CommonModal
+                                    handleClick="خروج"
+                                    buttonTitle="خروج از حساب"
+                                    buttonIcon={<LogOut size={16} className="text-destructive" />}
+                                    onClick={handleLogout(signOut, "/login")}
+                                    title="آیا از خروج خود مطمئن هستید؟"
+                                />
                             </div>
-                        </div>}
+                        </div>
+                        }
                     </div>
                 </div>
             </div>

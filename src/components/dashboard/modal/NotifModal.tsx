@@ -12,7 +12,7 @@ const NotifModal = () => {
     return (
         <Dialog onOpenChange={setOpen} open={open} >
             <DialogTrigger>
-                <div className="flex border-b gap-2 items-center cursor-pointer hover:bg-subBg2 px-2 py-4"> <Bell size={16} /> تنظیمات نوتیفیکیشن </div>
+                <div className="flex items-center gap-2 px-3 py-2 hover:bg-muted rounded-md cursor-pointer transition-colors"> <Bell size={16} /> تنظیمات نوتیفیکیشن </div>
             </DialogTrigger>
             <DialogContent onMouseDown={(e) => e.stopPropagation()} className='rounded-2xl flex flex-col gap-8 items-center'>
                 <DialogHeader className='flex justify-between flex-row w-full items-center my-4'>
