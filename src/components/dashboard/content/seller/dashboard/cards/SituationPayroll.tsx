@@ -12,7 +12,7 @@ const SituationPayroll = () => {
                 </div>
             </div>
             <svg width="100%" height="2" viewBox="0 0 547 2" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <line y1="-0.5" x2="100%" y2="-0.5" transform="matrix(1 0.000108856 -7.8105e-05 1 0 1)" stroke="#888888" stroke-opacity="0.26" stroke-dasharray="7 7" />
+                <line y1="-0.5" x2="100%" y2="-0.5" transform="matrix(1 0.000108856 -7.8105e-05 1 0 1)" stroke="#888888" stroke-opacity="0.26" strokeDasharray="7 7" />
             </svg>
             <div className='flex flex-col w-full justify-between gap-8 h-fit'>
                 <div className='w-full flex justify-between'>

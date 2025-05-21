@@ -32,7 +32,7 @@ const RecentReserves = () => {
                 </Link>
             </div>
             <svg width="100%" height="2" viewBox="0 0 1115 2" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <line x1="0.972656" y1="1.15332" x2="1114.03" y2="1.15332" stroke="#888888" stroke-opacity="0.26" stroke-dasharray="7 7" />
+                <line x1="0.972656" y1="1.15332" x2="1114.03" y2="1.15332" stroke="#888888" stroke-opacity="0.26" strokeDasharray="7 7" />
             </svg>
 
             <Table className='text-right max-lg:hidden overflow-hidden w-full'>
