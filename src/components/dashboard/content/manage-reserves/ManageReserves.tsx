@@ -226,7 +226,7 @@ export default function HotelReservationList() {
 
           <div className="relative flex-grow max-w-full sm:max-w-md lg:max-w-sm">
             <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-              <Search className="h-4 w-4 text-border" />
+              <Search className="h-4 w-4  text-foreground" />
             </div>
             <input
               type="text"
