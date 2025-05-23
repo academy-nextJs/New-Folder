@@ -44,6 +44,7 @@ const HeaderDashboard: React.FC = () => {
                     )
                 }
                 )}
+                <div></div>
                 <div className='flex gap-4 items-center'>
                     <button
                         onClick={toggleTheme}
