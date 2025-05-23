@@ -10,14 +10,14 @@ import FourthStep from './steps/FourthStep'
 import FifthStep from './steps/FifthStep'
 
 const ContentAddHouses = () => {
-  const [step, setStep] = useState<number>(0)
+  const [step, setStep] = useState<number>(2)
 
   return (
     <div className='flex flex-col gap-6'>
       <Stepper currentStep={step} />
       {step === 0 && <FirstStep />}
-      {step === 1 && <SecondStep />}
-      {step === 2 && <ThirdStep />}
+      {step === 1 && <ThirdStep />}
+      {step === 2 && <SecondStep />}
       {step === 3 && <FourthStep />}
       {step === 4 && <FifthStep />}
 
