@@ -10,9 +10,8 @@ import { BlurFade } from "@/components/magicui/blur-fade";
 const cardData = [
   { id: 1, title: "5", subtitle: "کل رزرو‌ها" },
   { id: 2, title: "12", subtitle: " رزرو های فعال" },
-  { id: 3, title: "7", subtitle: "  رزرو های پرداخت نشده" },
-  { id: 4, title: "3", subtitle: " علاقه مندی ها" },
-  { id: 5, title: "20", subtitle: "نظرات " },
+  { id: 3, title: "3", subtitle: " علاقه مندی ها" },
+  { id: 4, title: "20", subtitle: "نظرات " },
 ];
 
 const ContentDashboard = () => {
@@ -25,7 +24,7 @@ const ContentDashboard = () => {
             delay={( idx / 5 )}
             key={idx}
             className="relative bg-subBg rounded-xl px-4 pt-4 flex flex-col items-center justify-between
-              w-full sm:w-[47%] md:w-[30%] lg:w-[22%] xl:w-[18%]"
+              w-full sm:w-[47%] md:w-[30%] lg:w-[22%] xl:w-[21%]"
           >
             <div className="absolute top-0 right-6 w-10 h-12 rounded-b-2xl bg-card-secondary2 flex justify-center items-center ">
               {item.id === 4 ? (
