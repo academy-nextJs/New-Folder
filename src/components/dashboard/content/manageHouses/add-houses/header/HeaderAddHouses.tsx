@@ -5,7 +5,7 @@ const HeaderAddHouses = () => {
     return (
         <div className='flex justify-between w-full'>
             <h2> ساخت آگهی ملک جدید </h2>
-            <Link href={"/dashboard/manage-houses/my-houses"} className='flex items-center gap-2 text-accent-blue cursor-pointer'>
+            <Link href={"/dashboard/seller/manage-houses/my-houses"} className='flex items-center gap-2 text-accent-blue cursor-pointer'>
                 <p className='text-sm'> لیست املاک من </p>
                 <svg width="48" height="16" viewBox="0 0 48 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M3 9.73205C1.66666 8.96225 1.66667 7.03775 3 6.26795L9 2.80385C10.3333 2.03405 12 2.9963 12 4.5359L12 11.4641C12 13.0037 10.3333 13.966 9 13.1962L3 9.73205Z" fill="#0059FF" />

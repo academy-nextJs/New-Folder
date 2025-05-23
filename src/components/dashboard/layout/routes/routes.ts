@@ -1,5 +1,5 @@
 import { Routes } from "@/types/routes-type/routes-type";
-import { BellDot, Coins, Heart, Home, PlusCircle, Settings, SquaresSubtract, User } from "lucide-react";
+import { BellDot, Coins, Heart, Home, House, HousePlus, PlusCircle, Settings, SquaresSubtract, User } from "lucide-react";
 
 export const routes = [
   { label: "داشبورد", href: "/dashboard", icon: Home },
@@ -13,7 +13,12 @@ export const routes = [
 export const sellerRoutes = [
   { label: "داشبورد", href: "/dashboard/seller", icon: Home },
   { label: "اطلاعات کاربری", href: "/dashboard/seller/profile", icon: User },
-  { label: "مدیریت املاک", href: "/dashboard/seller/manage-houses", icon: Settings },
+  {
+    label: "مدیریت املاک", href: "/dashboard/seller/manage-houses", icon: Settings, children: [
+      { label: "املاک من", href: "/dashboard/seller/manage-houses/my-houses", icon: House },
+      { label: "ملک جدید", href: "/dashboard/seller/manage-houses/add-houses", icon: HousePlus },
+    ]
+  },
   { label: "مدیریت رزروها", href: "/dashboard/seller/manage-reserves", icon: PlusCircle },
   { label: "مدیریت مالی", href: "/dashboard/seller/payments", icon: Coins },
   { label: "مدیریت نظرات", href: "/dashboard/seller/manage-comments", icon: SquaresSubtract },
