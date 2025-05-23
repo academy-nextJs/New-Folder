@@ -14,7 +14,7 @@ const FilterModal = () => {
     return (
         <Dialog open={open} onOpenChange={setOpen} >
             <DialogTrigger asChild>
-                <div className='cursor-pointer px-4 py-2 rounded-[14px] flex text-primary-foreground max-md:w-full justify-center bg-primary text-sm hover:scale-[1.02] transition-all'>
+                <div className='cursor-pointer px-4 py-2 rounded-[14px] h-fit flex text-primary-foreground max-md:w-full justify-center bg-primary text-sm hover:scale-[1.02] transition-all'>
                     فیلتر ها
                 </div>
             </DialogTrigger>
@@ -54,7 +54,7 @@ const FilterModal = () => {
                         <Input
                             defaultValue={priceFrom}
                             onChange={(e) => setPriceFrom(e.target.value)}
-                            className='border bg-transparent rounded px-3 py-2 w-full'
+                            className='bg-transparent rounded px-3 py-2 w-full'
                         />
                         <span className='text-subText'>تومان</span>
                     </div>
@@ -63,7 +63,7 @@ const FilterModal = () => {
                         <Input
                             defaultValue={priceTo}
                             onChange={(e) => setPriceTo(e.target.value)}
-                            className='border bg-transparent rounded px-3 py-2 w-full'
+                            className='bg-transparent rounded px-3 py-2 w-full'
                         />
                         <span className='text-subText'>تومان</span>
                     </div>
