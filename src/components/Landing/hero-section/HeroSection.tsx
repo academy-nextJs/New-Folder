@@ -20,7 +20,7 @@ const HeroSection = () => {
   }, [theme]);
 
   return (
-    <div className="relative w-full h-[500px] sm:h-[565px] md:h-[775px] lg:h-[901px] xl:h-[901px] 2xl:h-[901px] ">
+    <div className="relative w-full h-[400px] sm:h-[465px] md:h-[775px] 2xl:h-[820px] ">
       <div className="absolute inset-0 z-0">
         <Image
           src={heroSection}
@@ -32,7 +32,7 @@ const HeroSection = () => {
       </div>
 
       <div
-        className="absolute bottom-0 left-1/2 lg:left-3/8 md:left-1/2 sm:left-3/8 transform -translate-x-1/4 md: z-40"
+        className="absolute bottom-0 left-1/2 max-md:-z-0 lg:left-3/8 md:left-1/2 sm:left-3/8 transform -translate-x-1/4 md: z-40"
       >
         <Image src={building} alt="building" className="object-contain" />
       </div>

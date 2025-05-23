@@ -7,6 +7,7 @@ import CommonInput from "@/components/common/inputs/common/CommonInput";
 import { useRouter } from "next/navigation";
 import { Label } from "@/components/ui/label";
 import CitySelectPopover from "@/components/common/inputs/common/CitySelectPopovar";
+import { Particles } from "@/components/magicui/particles";
 
 export const selectItems = [
   { label: "آذربایجان شرقی", value: "آذربایجان شرقی" },
@@ -172,8 +173,8 @@ const SearchBar = () => {
         <div className="w-full md:w-auto">
           <CommonButton
             onclick={handleClick}
-            title="جستجو کن"
-            classname="px-8 py-7 text-sm font-bold text-primary-foreground w-full"
+            title={<span className="flex justify-center items-center max-w-[150px]"> <span className="absolute text-primary-foreground"> جستجو کن </span> <Particles size={0.8} quantity={50} color="#404040" /> </span>}
+            classname="px-8 py-7 text-sm font-bold w-full overflow-hidden text-primary-foreground"
             type="button"
           />
         </div>

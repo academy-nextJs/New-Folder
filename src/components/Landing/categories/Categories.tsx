@@ -213,7 +213,7 @@ const Categories = () => {
                       <span
                         className={`
       transition-all duration-300 
-      ${hoveredIndex === cardIndex ? "text-card-body" : "text-secondary-static"}
+      ${hoveredIndex === cardIndex ? "text-card-body" : "text-foreground"}
     `}
                       >
                         {category?.name}

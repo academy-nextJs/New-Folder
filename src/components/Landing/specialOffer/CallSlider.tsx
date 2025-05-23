@@ -9,7 +9,6 @@ const CallSlider = () => {
         queryKey: ['recommendsHouses'],
         queryFn: () => getRecommendsHouse()
     })
-    console.log(data)
 
     return (
         <div>

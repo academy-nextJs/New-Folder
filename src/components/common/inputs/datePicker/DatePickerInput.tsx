@@ -25,7 +25,7 @@ const DatePickerInput: FC<IDatePicker> = ({
         </Label>
       )}
 
-      <div className={`flex items-center gap-2 rounded-[16px] border text-subText border-subText px-4 py-2 ${background} ${color} w-full`}>
+      <div className={`flex items-center gap-2 rounded-[16px] border text-subText border-subText px-4 py-2.5 ${background} ${color} w-full`}>
         {icon && <span className={`text-subText ${color}`}>{icon}</span>}
         <div className="flex-1">
           <DatePicker

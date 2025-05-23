@@ -1,13 +1,17 @@
+'use client'
 import { Clock } from 'lucide-react'
 import React from 'react'
 import CountdownTimer from '@/utils/helper/Timer/CountdownTimer'
 import CallSlider from './CallSlider'
-import { getToken } from '@/core/cookie/auth'
+import {useSession} from 'next-auth/react'
 
-const SpecialOffer = async () => {
-  const token = await getToken();
+const SpecialOffer = () => {
+  const {data: session} = useSession();
+  console.log("session:", session)
+
+
   
-  return token && <div className="w-full h-fit bg-secondary-light px-8 py-12 rounded-[40px] relative">
+  return session?.accessToken && <div className="w-full h-fit bg-secondary-light px-8 py-12 rounded-[40px] relative">
       <div className="
         after:content-['']
         after:absolute after:right-0 after:top-[-50px]
