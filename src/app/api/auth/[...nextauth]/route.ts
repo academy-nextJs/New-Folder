@@ -4,7 +4,6 @@ import NextAuth from "next-auth";
 import GoogleProvider from 'next-auth/providers/google';
 import GithubProvider from 'next-auth/providers/github';
 import CredentialsProvider from "next-auth/providers/credentials";
-import axios from "axios";
 import { JWT } from 'next-auth/jwt';
 
 async function fetchBackendToken(githubToken: string): Promise<string | null> {
@@ -63,27 +62,19 @@ const handler = NextAuth({
         CredentialsProvider({
             name: "Credentials",
             credentials: {
-                email: { label: "Email", type: "text" },
-                password: { label: "Password", type: "password" },
+                accessToken: { label: "AccessToken", type: "text" },
+                refreshToken: { label: "RefreshToken", type: "text" },
             },
             async authorize(credentials) {
                 try {
-                    const res = await axios.post("https://delta-project.liara.run/api/auth/login", {
-                        email: credentials?.email,
-                        password: credentials?.password,
-                    });
-
-                    const user = res.data;
-
-                    if (user?.accessToken) {
+                    if (credentials?.accessToken && credentials.refreshToken) {
                         return {
-                            id: "1",
-                            email: credentials?.email,
-                            accessToken: user.accessToken,
-                            refreshToken: user.refreshToken,
+                            id: credentials.accessToken,
+                            accessToken: credentials.accessToken,
+                            refreshToken: credentials.refreshToken,
                         };
                     }
-                    return null;
+                    return null
                 } catch (error) {
                     console.error("Login failed:", error);
                     return null;
@@ -92,37 +83,37 @@ const handler = NextAuth({
         }),
     ],
     callbacks: {
-            async jwt({ token, account, user }: { token: JWT, account: any, user: any }) {
-                if (account?.provider === 'github') {
-                    const githubAccessToken = account.access_token;
-                    const backendToken = await fetchBackendToken(githubAccessToken);
+        async jwt({ token, account, user }: { token: JWT, account: any, user: any }) {
+            if (account?.provider === 'github') {
+                const githubAccessToken = account.access_token;
+                const backendToken = await fetchBackendToken(githubAccessToken);
 
-                    if (backendToken) {
-                        token.accessToken = backendToken;
-                    }
+                if (backendToken) {
+                    token.accessToken = backendToken;
                 }
+            }
 
-                if (account?.provider === "google") {
-                    const googleAccessToken = account.access_token;
-                    const backendToken = await fetchBackendTokenGoogle(googleAccessToken);
+            if (account?.provider === "google") {
+                const googleAccessToken = account.access_token;
+                const backendToken = await fetchBackendTokenGoogle(googleAccessToken);
 
-                    if (backendToken) {
-                        token.accessToken = backendToken;
-                    }
+                if (backendToken) {
+                    token.accessToken = backendToken;
                 }
+            }
 
-                if (user?.accessToken) {
-                    token.accessToken = user.accessToken;
-                    token.refreshToken = user.refreshToken;
-                }
+            if (user?.accessToken) {
+                token.accessToken = user.accessToken;
+                token.refreshToken = user.refreshToken;
+            }
 
-                return token;
-            },
-            async session({ session, token }: any) {
-                session.accessToken = token.accessToken;
-                session.refreshToken = token.refreshToken;
-                return session;
-            },
+            return token;
+        },
+        async session({ session, token }: any) {
+            session.accessToken = token.accessToken;
+            session.refreshToken = token.refreshToken;
+            return session;
+        },
 
     },
     pages: {

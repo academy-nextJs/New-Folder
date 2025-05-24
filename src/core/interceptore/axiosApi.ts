@@ -1,6 +1,6 @@
 import axios, { AxiosResponse, AxiosError } from "axios";
 import { showToast } from "../toast/toast";
-import { getSession, signOut } from "next-auth/react";
+import { getSession, signIn, signOut } from "next-auth/react";
 
 const baseURL = 'https://delta-project.liara.run/api';
 
@@ -13,18 +13,59 @@ const onSuccess = (response: AxiosResponse) => {
 }
 
 const onError = async (err: AxiosError) => {
-    console.log(err);
+    const session = await getSession();
+    const refreshToken = session?.refreshToken;
 
     if (err.message === "Network Error" || err.response?.status === 403) {
-        await signOut({ callbackUrl: '/login' });
-        window.location.pathname = '/login';
-        showToast("error", " شما وارد نشدید! ", " بستن ")
+        if (refreshToken) {
+            const response = await fetch(`${baseURL}/auth/refresh`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ token: refreshToken })
+            })
+            const data = await response.json();
+            if (response.ok) {
+                await signIn("credentials", {
+                    redirect: false,
+                    accessToken: data?.accessToken,
+                    refreshToken: data?.refreshToken,
+                })
+            }
+            else {
+                await signOut({ callbackUrl: '/login' });
+                showToast("error", " شما وارد نشدید! ", " بستن ")
+            }
+        }
+        else {
+            await signOut({ callbackUrl: '/login' });
+            showToast("error", " شما وارد نشدید! ", " بستن ")
+        }
     }
 
     if (err.response?.status === 401) {
-        await signOut({ callbackUrl: '/login' });
-        window.location.pathname = '/login';
-        showToast("error", " شما وارد نشدید! ", " بستن ")
+        if (refreshToken) {
+            const response = await fetch(`${baseURL}/auth/refresh`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ token: refreshToken })
+            })
+            const data = await response.json();
+            if (response.ok) {
+                await signIn("credentials", {
+                    redirect: false,
+                    accessToken: data?.accessToken,
+                    refreshToken: data?.refreshToken,
+                })
+            }
+            else {
+                await signOut({ callbackUrl: '/login' });
+                showToast("error", " شما وارد نشدید! ", " بستن ")
+            }
+        }
+        else {
+            await signOut({ callbackUrl: '/login' });
+            showToast("error", " شما وارد نشدید! ", " بستن ")
+        }
     }
 
     if (err.response?.status && err.response?.status >= 400 && err.response?.status < 500) {

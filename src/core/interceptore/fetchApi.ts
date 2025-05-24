@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { getSession, signOut } from 'next-auth/react';
+import { getSession, signIn, signOut } from 'next-auth/react';
 import { showToast } from '../toast/toast';
 
 const baseURL = 'https://delta-project.liara.run/api'
@@ -13,13 +13,33 @@ const onSuccess = async (response: Response) => {
 
 const onError = async (error: Response | Error) => {
     const session = await getSession();
-    console.log(session)
+    const refreshToken = session?.refreshToken;
 
     if (error instanceof Response) {
         if (error.status === 401 || error.status === 403) {
-            await signOut({ callbackUrl: '/login' });
-            window.location.pathname = '/login';
-            showToast("error", " شما وارد نشدید! ", " بستن ")
+            if (refreshToken) {
+                const response = await fetch(`${baseURL}/auth/refresh`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ token: refreshToken })
+                })
+                const data = await response.json();
+                if (response.ok) {
+                    await signIn("credentials", {
+                        redirect: false,
+                        accessToken: data?.accessToken,
+                        refreshToken: data?.refreshToken,
+                    })
+                }
+                else {
+                    await signOut({ callbackUrl: '/login' });
+                    showToast("error", " شما وارد نشدید! ", " بستن ")
+                }
+            }
+            else {
+                await signOut({ callbackUrl: '/login' });
+                showToast("error", " شما وارد نشدید! ", " بستن ")
+            }
         }
 
         if (error.status >= 400 && error.status < 500) {
@@ -27,7 +47,6 @@ const onError = async (error: Response | Error) => {
         }
     } else if (error.message === "Network Error") {
         await signOut({ callbackUrl: '/login' });
-        window.location.pathname = '/login';
     }
 
     throw error;
@@ -37,7 +56,7 @@ async function fetchWithAuth(url: string, options: RequestInit = {}) {
     try {
         const session = await getSession();
         const token = session?.accessToken
-        
+
         const headers = {
             'Content-Type': 'application/json',
             ...(token ? { 'Authorization': `Bearer ${token}` } : {}),
@@ -56,23 +75,23 @@ async function fetchWithAuth(url: string, options: RequestInit = {}) {
 }
 
 export const fetchApi = {
-    get: <T>(url: string, options?: RequestInit): Promise<T> => 
+    get: <T>(url: string, options?: RequestInit): Promise<T> =>
         fetchWithAuth(url, { ...options, method: 'GET' }),
-    
-    post: <T>(url: string, data: any, options?: RequestInit): Promise<T> => 
-        fetchWithAuth(url, { 
-            ...options, 
+
+    post: <T>(url: string, data: any, options?: RequestInit): Promise<T> =>
+        fetchWithAuth(url, {
+            ...options,
             method: 'POST',
             body: JSON.stringify(data)
         }),
-    
-    put: <T>(url: string, data: any, options?: RequestInit): Promise<T> => 
-        fetchWithAuth(url, { 
-            ...options, 
+
+    put: <T>(url: string, data: any, options?: RequestInit): Promise<T> =>
+        fetchWithAuth(url, {
+            ...options,
             method: 'PUT',
             body: JSON.stringify(data)
         }),
-    
-    delete: <T>(url: string, options?: RequestInit): Promise<T> => 
+
+    delete: <T>(url: string, options?: RequestInit): Promise<T> =>
         fetchWithAuth(url, { ...options, method: 'DELETE' }),
 }; 
