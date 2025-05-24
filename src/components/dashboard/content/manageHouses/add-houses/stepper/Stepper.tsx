@@ -2,10 +2,10 @@ import { Check } from "lucide-react";
 
 const steps = [
     "مشخصات اولیه",
-    "برچسب‌ها",
-    "آدرس ملک",
+    "آدرس",
+    "امکانات",
     "تصاویر ملک",
-    "نمای کلی ملک",
+    "تایید نهایی",
 ];
 
 export default function Stepper({ currentStep }: { currentStep: number }) {

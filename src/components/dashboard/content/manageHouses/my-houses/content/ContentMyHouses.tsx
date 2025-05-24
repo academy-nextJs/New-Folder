@@ -80,10 +80,10 @@ const ContentMyHouses = () => {
                                     className='cursor-pointer'
                                 />
                                 {openModalIndex === idx && (
-                                    <div className={`flex absolute left-full ${idx > 1 ? "bottom-0" : "top-0"} flex-col backdrop-blur-md border rounded-xl gap-4 p-2 z-20 shadow-2xl`}>
-                                        <div onClick={() => redirect(`/rent/5`)} className='bg-subBg px-4 py-1 flex gap-2 rounded-xl justify-between flex-row-reverse cursor-pointer hover:bg-subBg2'> جزییات <Info size={16} /> </div>
-                                        <div className='bg-subBg px-4 py-1 flex gap-2 rounded-xl justify-between flex-row-reverse cursor-pointer hover:bg-subBg2'> ویرایش <Edit size={16} /> </div>
-                                        <CommonModal handleClick='حذف' title=' آیا از حذف ملک مطمئن هستید؟ ' button={<div className='bg-subBg px-4 py-1 flex gap-2 rounded-xl justify-between flex-row-reverse cursor-pointer hover:bg-subBg2'> حذف <Delete size={16} /> </div>} />
+                                    <div className={`flex absolute left-full ${idx > 1 ? "bottom-0" : "top-0"} flex-col backdrop-blur-md border rounded-xl gap-2 p-2 z-20 shadow-2xl`}>
+                                        <div onClick={() => redirect(`/rent/5`)} className='px-4 py-1 flex gap-2 rounded-xl justify-end flex-row-reverse cursor-pointer hover:bg-subBg2'> جزییات <Info size={16} /> </div>
+                                        <div className='px-4 py-1 flex gap-2 rounded-xl justify-end flex-row-reverse cursor-pointer hover:bg-subBg2'> ویرایش <Edit size={16} /> </div>
+                                        <CommonModal handleClick='حذف' title=' آیا از حذف ملک مطمئن هستید؟ ' button={<div className='px-4 py-1 flex gap-2 rounded-xl justify-end flex-row-reverse cursor-pointer hover:bg-subBg2'> حذف <Delete size={16} /> </div>} />
                                     </div>
                                 )}
                             </TableCell>
