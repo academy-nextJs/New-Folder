@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Slider } from '@/components/ui/slider'
 import { ChevronLeft, RefreshCcw, Star } from 'lucide-react'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { schemaCommentFormValidation } from '@/utils/validations/comment-form-validation'
@@ -53,10 +53,6 @@ const SingleReserveForm = ({ viewReply, title, parent_comment_id, refetch, setVi
             setIsLoading(false)
         }
     }
-
-    useEffect(() => {
-        console.log(rating[0])
-    }, [rating])
 
 
     return (
