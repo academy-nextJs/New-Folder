@@ -9,7 +9,7 @@ const CommonInput: FC<IInput> = ({ label, placeholder, classname, type, color, b
     const {i18n} = useTranslation("landing")
     
     return (
-        <div dir={i18n.dir()} className='rtl flex flex-col gap-1 group'>
+        <div dir={i18n.dir()} className='rtl flex flex-col gap-1 group w-full'>
             <Label dir={i18n.dir()} htmlFor={label} className={`text-[13px] flex gap-0.5 ${color}`}>
                 <span> {label} </span>
                 {mandatory === true ? <p className='text-danger'> * </p> : <></>}

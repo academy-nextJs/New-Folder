@@ -3,6 +3,7 @@
 'use client'
 import CommonButton from '@/components/common/buttons/common/CommonButton'
 import CommonModal from '@/components/dashboard/modal/CommonModal'
+import DetailReserveModal from '@/components/dashboard/modal/DetailReserveModal'
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '@/components/ui/pagination'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { SplitNumber } from '@/utils/helper/spliter/SplitNumber'
@@ -12,23 +13,37 @@ import React, { useEffect, useRef } from 'react'
 
 const ReservesContent = () => {
     const houses = [
-        { name: "هتل سراوان رانین رشت", passengerInformation: "سبحان عرب خزائلی ،4/1/8...", date: "12 مرداد - 1401 / 12:33", reserveStatus: "تایید شده", price: "1800000", paymentStatus: "لغو شده" ,},
-        { name: "هتل سراوان رانین رشت", passengerInformation: "سبحان عرب خزائلی ،4/1/8...", date: "12 مرداد - 1401 / 12:33", reserveStatus: "در حال انتظار", price: "1800000", paymentStatus: "لغو شده" ,},
-        { name: "هتل سراوان رانین رشت", passengerInformation: "سبحان عرب خزائلی ،4/1/8...", date: "12 مرداد - 1401 / 12:33", reserveStatus: "در حال انتظار", price: "1800000", paymentStatus: "لغو شده" ,},
-        { name: "هتل سراوان رانین رشت", passengerInformation: "سبحان عرب خزائلی ،4/1/8...", date: "12 مرداد - 1401 / 12:33", reserveStatus: "تایید شده", price: "1800000", paymentStatus: "لغو شده" ,},
-        { name: "هتل سراوان رانین رشت", passengerInformation: "سبحان عرب خزائلی ،4/1/8...", date: "12 مرداد - 1401 / 12:33", reserveStatus: "تایید شده", price: "1800000", paymentStatus: "لغو شده" ,},
-        { name: "هتل سراوان رانین رشت", passengerInformation: "سبحان عرب خزائلی ،4/1/8...", date: "12 مرداد - 1401 / 12:33", reserveStatus: "تایید شده", price: "1800000", paymentStatus: "لغو شده" ,},
-        { name: "هتل سراوان رانین رشت", passengerInformation: "سبحان عرب خزائلی ،4/1/8...", date: "12 مرداد - 1401 / 12:33", reserveStatus: "تایید شده", price: "1800000", paymentStatus: "لغو شده" ,},
-        { name: "هتل سراوان رانین رشت", passengerInformation: "سبحان عرب خزائلی ،4/1/8...", date: "12 مرداد - 1401 / 12:33", reserveStatus: "تایید شده", price: "1800000", paymentStatus: "لغو شده" ,},
+        { name: "هتل سراوان رانین رشت", passengerInformation: "سبحان عرب خزائلی ،4/1/8...", date: "12 مرداد - 1401 / 12:33", reserveStatus: "تایید شده", price: "1800000", paymentStatus: "لغو شده", },
+        { name: "هتل سراوان رانین رشت", passengerInformation: "سبحان عرب خزائلی ،4/1/8...", date: "12 مرداد - 1401 / 12:33", reserveStatus: "در حال انتظار", price: "1800000", paymentStatus: "لغو شده", },
+        { name: "هتل سراوان رانین رشت", passengerInformation: "سبحان عرب خزائلی ،4/1/8...", date: "12 مرداد - 1401 / 12:33", reserveStatus: "در حال انتظار", price: "1800000", paymentStatus: "لغو شده", },
+        { name: "هتل سراوان رانین رشت", passengerInformation: "سبحان عرب خزائلی ،4/1/8...", date: "12 مرداد - 1401 / 12:33", reserveStatus: "تایید شده", price: "1800000", paymentStatus: "لغو شده", },
+        { name: "هتل سراوان رانین رشت", passengerInformation: "سبحان عرب خزائلی ،4/1/8...", date: "12 مرداد - 1401 / 12:33", reserveStatus: "تایید شده", price: "1800000", paymentStatus: "لغو شده", },
+        { name: "هتل سراوان رانین رشت", passengerInformation: "سبحان عرب خزائلی ،4/1/8...", date: "12 مرداد - 1401 / 12:33", reserveStatus: "تایید شده", price: "1800000", paymentStatus: "لغو شده", },
+        { name: "هتل سراوان رانین رشت", passengerInformation: "سبحان عرب خزائلی ،4/1/8...", date: "12 مرداد - 1401 / 12:33", reserveStatus: "تایید شده", price: "1800000", paymentStatus: "لغو شده", },
+        { name: "هتل سراوان رانین رشت", passengerInformation: "سبحان عرب خزائلی ،4/1/8...", date: "12 مرداد - 1401 / 12:33", reserveStatus: "تایید شده", price: "1800000", paymentStatus: "لغو شده", },
     ]
 
     const [openModalIndex, setOpenModalIndex] = React.useState<number | null>(null);
+    const [openModalIndex2, setOpenModalIndex2] = React.useState<number | null>(null);
     const moreRef = useRef<HTMLTableCellElement | null>(null);
+    const moreRef2 = useRef<HTMLTableCellElement | null>(null);
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (moreRef.current && !moreRef.current.contains(event.target as Node)) {
                 setOpenModalIndex(null);
+            }
+        }
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
+
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (moreRef2.current && !moreRef2.current.contains(event.target as Node)) {
+                setOpenModalIndex2(null);
             }
         }
         document.addEventListener('mousedown', handleClickOutside);
@@ -84,7 +99,7 @@ const ReservesContent = () => {
                                     <div className={`flex absolute left-full ${idx > 1 ? "bottom-0" : "top-0"} flex-col backdrop-blur-md border rounded-xl gap-2 p-2 z-20 shadow-2xl`}>
                                         <div className='px-4 py-1 flex gap-2 rounded-xl justify-end flex-row-reverse cursor-pointer hover:bg-subBg2 whitespace-nowrap'> تایید رزرو <CheckCircle size={16} /> </div>
                                         <div className='px-4 py-1 flex gap-2 rounded-xl justify-end flex-row-reverse cursor-pointer hover:bg-subBg2 whitespace-nowrap'>  لغو رزرو <XCircle size={16} /> </div>
-                                        <div className='px-4 py-1 flex gap-2 rounded-xl justify-end flex-row-reverse cursor-pointer hover:bg-subBg2'> جزییات <Info size={16} /> </div>
+                                        <DetailReserveModal />
                                         <CommonModal handleClick='حذف' title=' آیا از حذف رزرو مطمئن هستید؟ ' button={<div className='px-4 py-1 flex gap-2 rounded-xl justify-end flex-row-reverse cursor-pointer hover:bg-subBg2'> حذف <Delete size={16} /> </div>} />
                                     </div>
                                 )}
@@ -95,14 +110,39 @@ const ReservesContent = () => {
             </Table>
             <div className='flex flex-col gap-4 w-full lg:hidden'>
                 {houses.map((house, idx) => (
-                    <div key={idx} className='w-full max-sm:flex-col bg-subBg2 px-4 py-2 rounded-xl flex gap-4'>
-                        <img src={"  "} alt='' className='w-1/3 max-sm:w-full max-sm:h-[200px] bg-secondary-light3 rounded-xl' />
-                        <div className=' h-full flex flex-col gap-2 max-sm:gap-4 text-base'>
-                            <div className='flex gap-2 items-center text-base gap-4 my-2 max-sm:text-lg justify-between flex-wrap'> <span> {house.name} </span> <div className='bg-accent text-accent-foreground px-4 py-1 flex gap-2 text-sm rounded-2xl'> <Star size={16} /> {house.rating} ستاره </div> </div>
-                            <div className='flex gap-2 items-center'> <LayoutGrid className='text-subText' size={16} /> <span className='text-subText'> رزرو ها: </span> <span> {house.reserves} بار </span> </div>
-                            <div className='flex gap-2 items-center'> <Home className='text-subText' size={16} /> <span className='text-subText'> بازدید ها: </span> <span> {house.views} تا </span>  </div>
-                            <div className={` px-8 py-1 w-fit rounded-2xl ${house.paymentStatus === 'فعال' && "bg-primary text-primary-foreground"} ${house.paymentStatus === 'در انتظار' && "bg-orange text-orange-foreground"} ${house.paymentStatus === 'غیرفعال' && "bg-danger text-accent-foreground"} `}> <span> {house.paymentStatus} </span> </div>
-                            <div className='flex gap-2 items-center'> <Coins className='text-subText' size={16} /> <span className='gap-2 flex'> {SplitNumber(house.price)} <p>تومن </p>  </span> </div>
+                    <div key={idx} className='w-full px-4 py-4 bg-subBg2 rounded-xl flex flex-col gap-4 text-sm relative'>
+                        <div ref={idx === openModalIndex2 ? moreRef : null} className='flex justify-between items-center'>
+                            <div className='font-bold text-base'>{house.name}</div>
+                            <MoreHorizontal
+                                onClick={() => {
+                                    setOpenModalIndex2(prev => prev === idx ? null : idx);
+                                }}
+                                className='cursor-pointer'
+                            />
+                            {openModalIndex2 === idx && (
+                                <div className={`flex absolute left-4 bottom-full mt-2 flex-col backdrop-blur-xl border rounded-xl gap-2 p-2 z-20 shadow-2xl w-[200px] bg-transparent`}>
+                                    <div className='px-4 py-1 flex gap-2 rounded-xl justify-end flex-row-reverse cursor-pointer hover:bg-subBg2 whitespace-nowrap'> تایید رزرو <CheckCircle size={16} /> </div>
+                                    <div className='px-4 py-1 flex gap-2 rounded-xl justify-end flex-row-reverse cursor-pointer hover:bg-subBg2 whitespace-nowrap'>  لغو رزرو <XCircle size={16} /> </div>
+                                    <div className='px-4 py-1 flex gap-2 rounded-xl justify-end flex-row-reverse cursor-pointer hover:bg-subBg2'> جزییات <Info size={16} /> </div>
+                                    <CommonModal handleClick='حذف' title=' آیا از حذف رزرو مطمئن هستید؟ ' button={<div className='px-4 py-1 flex gap-2 rounded-xl justify-end flex-row-reverse cursor-pointer hover:bg-subBg2'> حذف <Delete size={16} /> </div>} />
+                                </div>
+                            )}
+                        </div>
+
+                        <div className='flex flex-col gap-4 text-right'>
+                            <div className='flex gap-2'><span className='font-semibold'>اطلاعات مسافر:</span> {house.passengerInformation}</div>
+                            <div className='flex gap-2'><span className='font-semibold'>تاریخ رزرو:</span> {house.date}</div>
+                            <div className='flex gap-2'><span className='font-semibold'>مبلغ:</span> {SplitNumber(house.price)}ت</div>
+                            <div className='flex gap-2'><span className='font-semibold'>وضعیت رزرو:</span>
+                                <span className={`ml-2 px-3 py-1 rounded-xl ${house.reserveStatus === 'تایید شده' && "bg-primary text-primary-foreground"} ${house.reserveStatus === 'در حال انتظار' && "bg-orange text-orange-foreground"} ${house.reserveStatus === 'رد شده' && "bg-danger text-accent-foreground"}`}>
+                                    {house.reserveStatus}
+                                </span>
+                            </div>
+                            <div className='flex gap-2'><span className='font-semibold'>وضعیت پرداخت:</span>
+                                <span className={`ml-2 px-3 py-1 rounded-xl ${house.paymentStatus === 'پرداخت شده' && "bg-primary text-primary-foreground"} ${house.paymentStatus === 'لغو شده' && "bg-danger text-accent-foreground"}`}>
+                                    {house.paymentStatus}
+                                </span>
+                            </div>
                         </div>
                     </div>
                 ))}
