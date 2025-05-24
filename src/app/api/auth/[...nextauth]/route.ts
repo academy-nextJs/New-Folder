@@ -113,12 +113,14 @@ const handler = NextAuth({
 
                 if (user?.accessToken) {
                     token.accessToken = user.accessToken;
+                    token.refreshToken = user.refreshToken;
                 }
 
                 return token;
             },
             async session({ session, token }: any) {
                 session.accessToken = token.accessToken;
+                session.refreshToken = token.refreshToken;
                 return session;
             },
 

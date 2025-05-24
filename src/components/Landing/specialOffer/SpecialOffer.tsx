@@ -7,9 +7,6 @@ import {useSession} from 'next-auth/react'
 
 const SpecialOffer = () => {
   const {data: session} = useSession();
-  console.log("session:", session)
-
-
   
   return session?.accessToken && <div className="w-full h-fit bg-secondary-light px-8 py-12 rounded-[40px] relative">
       <div className="

@@ -12,12 +12,13 @@ const onSuccess = async (response: Response) => {
 }
 
 const onError = async (error: Response | Error) => {
-    console.log(error);
+    const session = await getSession();
+    console.log(session)
 
     if (error instanceof Response) {
         if (error.status === 401 || error.status === 403) {
-            await signOut({ callbackUrl: '/login' });
-            window.location.pathname = '/login';
+            // await signOut({ callbackUrl: '/login' });
+            // window.location.pathname = '/login';
             showToast("error", " شما وارد نشدید! ", " بستن ")
         }
 
