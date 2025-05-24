@@ -17,8 +17,8 @@ const onError = async (error: Response | Error) => {
 
     if (error instanceof Response) {
         if (error.status === 401 || error.status === 403) {
-            // await signOut({ callbackUrl: '/login' });
-            // window.location.pathname = '/login';
+            await signOut({ callbackUrl: '/login' });
+            window.location.pathname = '/login';
             showToast("error", " شما وارد نشدید! ", " بستن ")
         }
 

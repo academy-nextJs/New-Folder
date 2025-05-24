@@ -1,7 +1,6 @@
 import axios, { AxiosResponse, AxiosError } from "axios";
-import { removeToken } from '../cookie/auth';
 import { showToast } from "../toast/toast";
-import { getSession } from "next-auth/react";
+import { getSession, signOut } from "next-auth/react";
 
 const baseURL = 'https://delta-project.liara.run/api';
 
@@ -13,17 +12,17 @@ const onSuccess = (response: AxiosResponse) => {
     return response.data;
 }
 
-const onError = (err: AxiosError) => {
+const onError = async (err: AxiosError) => {
     console.log(err);
 
     if (err.message === "Network Error" || err.response?.status === 403) {
-        removeToken();
+        await signOut({ callbackUrl: '/login' });
         window.location.pathname = '/login';
         showToast("error", " شما وارد نشدید! ", " بستن ")
     }
 
     if (err.response?.status === 401) {
-        removeToken();
+        await signOut({ callbackUrl: '/login' });
         window.location.pathname = '/login';
         showToast("error", " شما وارد نشدید! ", " بستن ")
     }
