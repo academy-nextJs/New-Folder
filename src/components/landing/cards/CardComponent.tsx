@@ -24,7 +24,7 @@ const CardComponent: FC<ICard> = ({ view, photos, rate, title, address, rooms, p
                         <Link href={`/rent/${id}`} className=''> <ArrowLeft size={24} className='text-white' /> </Link>
                     </div>
                     <div className='relative w-full h-full flex justify-center'>
-                        { photos && photos?.length > 0 ? <SliderPhotos photos={photos || []} /> : <div className='w-[272px] h-[157px] bg-secondary-light3 rounded-2xl'>  </div>}            
+                        { photos && photos?.length > 0 ? <SliderPhotos photos={photos || []} /> : <div className='w-[272px] h-[157px] bg-secondary-light2 rounded-2xl'> </div>}            
                     </div>
                 </div>
             </div>

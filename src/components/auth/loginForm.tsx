@@ -13,6 +13,7 @@ import { useState } from "react";
 import { showToast } from "@/core/toast/toast";
 import { redirect } from "next/navigation";
 import { signIn } from "next-auth/react";
+import { fetchApi } from "@/core/interceptore/fetchApi";
 
 export interface LoginResponse {
   accessToken: string;
@@ -35,10 +36,15 @@ const LoginForm = () => {
 
   const handleLogin = async (values: any) => {
     setIsLoading(true);
+    const user = await fetchApi.post("/auth/login", {
+      email: values.email,
+      password: values.password
+    }) as any
+
     const res = await signIn("credentials", {
       redirect: false,
-      email: values.email,
-      password: values.password,
+      accessToken: user?.accessToken,
+      refreshToken: user?.refreshToken,
     });
 
     if (res?.ok) {

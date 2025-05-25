@@ -83,7 +83,7 @@ const SearchBar = () => {
   };
 
   return (
-    <div className="absolute -bottom-2 lg:bottom-8 md:bottom-2 left-0 right-0 mx-auto w-full max-w-5xl z-50 px-4">
+    <div className="absolute -bottom-5 lg:bottom-8 md:bottom-2 left-0 right-0 mx-auto w-full max-w-5xl z-50 px-4">
       <div className="md:hidden flex justify-center mt-10 items-center gap-2 ">
         <CommonButton
           onclick={() => setIsOpen(true)}
@@ -173,8 +173,8 @@ const SearchBar = () => {
         <div className="w-full md:w-auto">
           <CommonButton
             onclick={handleClick}
-            title={<span className="flex justify-center items-center max-w-[150px]"> <span className="absolute text-primary-foreground"> جستجو کن </span> <Particles size={0.8} quantity={50} color="#404040" /> </span>}
-            classname="px-8 py-7 text-sm font-bold w-full overflow-hidden text-primary-foreground"
+            title={<span className="flex justify-center items-center px-4"> <span className="absolute text-primary-foreground"> جستجو کن </span> <Particles size={0.8} quantity={50} color="#404040" /> </span>}
+            classname="px-8 py-7 text-sm font-bold w-full overflow-hidden max-w-[200px] text-primary-foreground"
             type="button"
           />
         </div>

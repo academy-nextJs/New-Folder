@@ -24,8 +24,8 @@ const ReserveFilter: FC<IReserveFilter> = ({ setOrder, setSort, setSearch, house
 
 
     return (
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} className='bg-secondary-light4 w-full md:flex-nowrap flex-wrap gap-4 rounded-[24px] px-4 py-3 flex justify-between'>
-            <div className='flex md:flex-row md:flex-wrap flex-col w-full gap-4'>
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} className='bg-secondary-light4 w-full lg:flex-nowrap flex-wrap gap-4 rounded-[24px] px-4 py-3 flex justify-between'>
+            <div className='flex lg:flex-row flex-col w-full gap-4'>
 
                 <div className="w-fill md-w-auto flex-col flex gap-1">
                     <Label className={`text-[13px] flex gap-0.5 text-subText`}>
@@ -79,7 +79,7 @@ const ReserveFilter: FC<IReserveFilter> = ({ setOrder, setSort, setSearch, house
 
             </div>
             <div className='flex gap-4 justify-center items-center'>
-                <div className='px-4 py-2 border md:mx-0 mx-auto border-card-foreground items-center justify-center rounded-[16px] flex flex-nowrap gap-2 text-sm'>
+                <div className='px-4 py-2 border lg:mx-0 mx-auto border-card-foreground items-center justify-center rounded-[16px] flex flex-nowrap gap-2 text-sm'>
                     <Megaphone size={20} />
                     <span className='whitespace-nowrap'> تعداد آگهی : {houseLength} </span>
                 </div>
