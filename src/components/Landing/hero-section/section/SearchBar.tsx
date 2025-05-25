@@ -83,7 +83,7 @@ const SearchBar = () => {
   };
 
   return (
-    <div className="absolute -bottom-2 lg:bottom-8 md:bottom-2 left-0 right-0 mx-auto w-full max-w-5xl z-50 px-4">
+    <div className="absolute -bottom-5 lg:bottom-8 md:bottom-2 left-0 right-0 mx-auto w-full max-w-5xl z-50 px-4">
       <div className="md:hidden flex justify-center mt-10 items-center gap-2 ">
         <CommonButton
           onclick={() => setIsOpen(true)}

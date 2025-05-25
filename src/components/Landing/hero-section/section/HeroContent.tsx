@@ -7,7 +7,7 @@ const HeroContent = () => {
   return (
     <div className="text-foreground">
       <div className="mb-4 md:mb-8 text-center md:text-right">
-        <p className="text-sm sm:text-xs md:text-sm mb-1 flex items-center justify-center  gap-2">
+        <p className="text-sm sm:text-xs min-w-[150px] md:text-sm mb-1 flex items-center justify-center  gap-2">
           <Sparkle className="w-5 h-5" />
            رزرو، رهن، اجاره و حتی خرید و فروش ملک مورد 
           <br className="md:hidden lg:block" />

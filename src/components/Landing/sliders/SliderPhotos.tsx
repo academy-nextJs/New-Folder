@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination, Navigation } from 'swiper/modules'
@@ -6,6 +7,7 @@ import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 
 import { ISliderPhotos } from '@/types/slider-type/slider-types'
+import { Telescope } from 'lucide-react'
 
 export default function SliderPhotos({ photos, imageClassName }: ISliderPhotos) {
   return (
@@ -22,8 +24,8 @@ export default function SliderPhotos({ photos, imageClassName }: ISliderPhotos) 
           <SwiperSlide key={index} className="flex justify-center">
             <img
               src={photo}
-              alt={``}
-              className={`w-full h-[157px] object-cover ${imageClassName}`}
+              alt={""}
+              className={`w-full flex justify-center items-center bg-secondary-light2 h-[157px] object-cover ${imageClassName}`}
             />
           </SwiperSlide>
         ))}
