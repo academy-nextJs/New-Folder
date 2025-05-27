@@ -1,17 +1,22 @@
 import { Sparkle } from "lucide-react";
 import React from "react";
 import LinkButtons from "@/components/common/buttons/common/LinkButtons";
+import { useDirection } from "@/utils/hooks/useDirection";
+import { useTranslations } from "next-intl";
 
 const HeroContent = () => {
 
+  const dir = useDirection();
+  const t = useTranslations('landing.heroSection');
+
   return (
-    <div className="text-foreground">
+    <div dir={dir} className="text-foreground">
       <div className="mb-4 md:mb-8 text-center md:text-right">
         <p className="text-sm sm:text-xs min-w-[150px] md:text-sm mb-1 flex items-center justify-center  gap-2">
           <Sparkle className="w-5 h-5" />
-           رزرو، رهن، اجاره و حتی خرید و فروش ملک مورد 
+          {t("infoLong")}
           <br className="md:hidden lg:block" />
-           نظرتون مثل آب خوردن فقط در دلتا___________ 
+          {t("infoLong2")}
         </p>
       </div>
 

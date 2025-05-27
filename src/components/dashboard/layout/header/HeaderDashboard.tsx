@@ -14,7 +14,8 @@ const HeaderDashboard: React.FC = () => {
     const { theme, toggleTheme } = useTheme();
     const [modalView, setModalView] = React.useState(false);
     const moreRef = useRef<HTMLDivElement | null>(null);
-    const pathname = usePathname();
+    const cleanPath = usePathname();
+    const pathname = cleanPath.replace(/^\/(fa|en|ar)/, "")
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -86,7 +87,7 @@ const HeaderDashboard: React.FC = () => {
                                 </div>
 
                                 <NotifModal />
-                                
+
                                 <CommonModal
                                     handleClick="خروج"
                                     buttonTitle="خروج از حساب"

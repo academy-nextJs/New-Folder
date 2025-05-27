@@ -7,11 +7,12 @@ import React, { useEffect, useRef, useState } from 'react'
 import { routeSelect } from '../routeSelect';
 import { usePathname } from 'next/navigation';
 import { MoreHorizontal, X } from 'lucide-react';
-import DeltaIcon from "@/app/icon.png";
+import DeltaIcon from "@/app/[locale]/icon.png";
 
 const MobileSidebar = () => {
 
-    const pathname = usePathname();
+    const cleanPath = usePathname();
+    const pathname = cleanPath.replace(/^\/(fa|en|ar)/, "")
     const [showMore, setShowMore] = useState(false);
     const moreRef = useRef<HTMLDivElement | null>(null);
 
@@ -20,17 +21,17 @@ const MobileSidebar = () => {
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
-          if (moreRef.current && !moreRef.current.contains(event.target as Node)) {
-            setShowMore(false);
-          }
+            if (moreRef.current && !moreRef.current.contains(event.target as Node)) {
+                setShowMore(false);
+            }
         };
         if (showMore) {
-          document.addEventListener("mousedown", handleClickOutside);
+            document.addEventListener("mousedown", handleClickOutside);
         }
         return () => {
-          document.removeEventListener("mousedown", handleClickOutside);
+            document.removeEventListener("mousedown", handleClickOutside);
         };
-      }, [showMore]);
+    }, [showMore]);
 
     return (
         <div
