@@ -3,6 +3,7 @@
 import { useRouter, usePathname } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import { useLocale } from 'next-intl';
+import CommonSelect from '../../inputs/common/CommonSelect';
 
 export default function LanguageSwitcher() {
   const router = useRouter();
@@ -20,15 +21,20 @@ export default function LanguageSwitcher() {
 
   return (
     <div className="flex gap-4">
-      {routing.locales.map((locale) => (
-        <button
-          key={locale}
-          onClick={() => changeLangUseSelection(locale)}
-          className={locale === currentLocale ? 'font-bold text-blue-600' : ''}
-        >
-          {locale === 'fa' ? 'فارسی' : 'English'}
-        </button>
-      ))}
+      <CommonSelect
+        classname="border-subText"      
+        placeholder=""
+        value={currentLocale}
+        onValueChange={(value => {
+          console.log(value);
+          changeLangUseSelection(value);
+        })}
+        selectItems={[
+          { label: 'فارسی', value: 'fa' },
+          { label: 'English', value: 'en' },
+          { label: 'Arabic', value: 'ar' },
+        ]}
+      />
     </div>
   );
 }

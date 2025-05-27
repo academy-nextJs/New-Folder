@@ -5,7 +5,7 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrig
 import { ISelect } from '@/types/select-type/select-types'
 import React, { FC } from 'react'
 
-const CommonSelect: FC<ISelect> = ({ background, color, label, mandatory, classname, placeholder, selectItems, onValueChange, icon }) => {
+const CommonSelect: FC<ISelect> = ({ background, color, label, mandatory, classname, placeholder, selectItems, onValueChange, icon, value }) => {
 
     return (
         <div className='rtl flex flex-col gap-1 group'>
@@ -14,7 +14,7 @@ const CommonSelect: FC<ISelect> = ({ background, color, label, mandatory, classn
                 {mandatory === true ? <span className='text-danger'> * </span> : <></>}
                 <span> : </span>
             </Label>}
-            <Select onValueChange={onValueChange}>
+            <Select value={value} onValueChange={onValueChange}>
                 <SelectTrigger className={`rtl rounded-[16px] px-4 py-2 ${classname} ${color} ${background}`}>
                     {icon && <span className="flex-shrink-0">{icon}</span>}
                     <SelectValue placeholder={`${placeholder}`}></SelectValue>

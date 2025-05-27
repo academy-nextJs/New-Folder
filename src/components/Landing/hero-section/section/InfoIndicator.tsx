@@ -8,7 +8,7 @@ const InfoIndicator = () => {
   const t = useTranslations('landing.heroSection');
 
   return (
-    <div className=" text-right flex items-center  ">
+    <div dir={} className=" text-right flex items-center  ">
       <div className="mb-4 text-white flex flex-col">
         <span className="text-base max-md:text-sm max-sm:text-xs mb-1">  {t("infoNumb")} </span>
         <span className="text-sm sm:text-xs min-w-[100px]"> {t("info")}  </span>

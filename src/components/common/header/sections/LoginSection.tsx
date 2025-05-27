@@ -9,7 +9,6 @@ import { useSession, signOut } from "next-auth/react";
 import Image from "next/image";
 import { handleLogout } from "@/core/logOut";
 import LanguageSwitcher from "./LangSwitcher";
-// import ChangeLanguage from "./ChangeLanguage";
 
 const LoginSection = () => {
   const { checkAuthStatus } = useUserStore();
@@ -23,7 +22,7 @@ const LoginSection = () => {
 
   return (
     <div className="flex items-center justify-end gap-3 text-[10px] lg:text-[16px] md:text-[11px] ml-7">
-      {/* <ChangeLanguage /> */}
+      <LanguageSwitcher />
       <motion.button
         initial={{ rotate: 0, scale: 0 }}
         animate={{ rotate: 360, scale: 1 }}
@@ -40,7 +39,6 @@ const LoginSection = () => {
         )}
       </motion.button>
       
-      <LanguageSwitcher />
 
       {!session ? (
         <Link
