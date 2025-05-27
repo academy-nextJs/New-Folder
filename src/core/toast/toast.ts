@@ -8,7 +8,7 @@ export const showToast = (type: ToastType, message: string, label: string, descr
         className: "max-w-full sm:max-w-md mx-auto p-4 text-sm sm:text-base",
         action: {
             label,
-            onClick: () => console.log("Undo"),
+            onClick: () => console.log(""),
         },
         description,
         duration,

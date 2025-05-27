@@ -163,7 +163,7 @@ const SidebarDashboard = ({
                 />
               </svg>
               <Icon className="mx-4" />
-              <div className="flex flex-col h-full justify-between">
+              <div className="flex flex-col h-full justify-between" >
                 <h2 className="text-lg font-bold"> {footerSidebarSelect.title} </h2>
                 <span className="text-sm text-subText"> {footerSidebarSelect.description} </span>
               </div>
