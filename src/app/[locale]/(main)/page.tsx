@@ -9,6 +9,7 @@ import NewPlaces from "@/components/Landing/newPlaces/NewPlaces";
 import Categories from "@/components/Landing/categories/Categories";
 
 export default async function Home() {
+
   return (
     <div className="w-full flex flex-col gap-16 overflow-x-hidden">
       <HeroSection />

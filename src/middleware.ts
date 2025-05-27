@@ -1,13 +1,22 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { publicRoutes, privateRoutes, authRoutes } from "./core/config/routes";
+import createMiddleware from 'next-intl/middleware';
+import { routing } from './i18n/routing';
 
-export function middleware(request: NextRequest) {
-  const token = request.cookies.get('next-auth.session-token')?.value
-  const { pathname } = request.nextUrl
+const intlMiddleware = createMiddleware(routing);
+
+export async function middleware(request: NextRequest) {
+  const intlResponse = intlMiddleware(request);
+  if (intlResponse instanceof NextResponse && intlResponse.redirected) {
+    return intlResponse;
+  }
+
+  const token = request.cookies.get('next-auth.session-token')?.value;
+  const { pathname } = request.nextUrl;
 
   if (publicRoutes.includes(pathname)) {
-    return NextResponse.next();
+    return intlResponse;
   }
 
   if (authRoutes.includes(pathname) && token) {
@@ -16,15 +25,16 @@ export function middleware(request: NextRequest) {
 
   if (privateRoutes.includes(pathname)) {
     if (!token) {
-      const redirectUrl = new URL("/login", request.url);
-      return NextResponse.redirect(redirectUrl);
+      return NextResponse.redirect(new URL("/login", request.url));
     }
-    return NextResponse.next();
+    return intlResponse;
   }
 
-  return NextResponse.redirect(new URL("/", request.url));
+  return intlResponse;
 }
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/login", "/completeRegister", "/verifyCode"],
+  matcher: [
+    "/((?!api|_next|_vercel|.*\\..*).*)",
+  ],
 };

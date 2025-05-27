@@ -5,6 +5,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/common/footer/Footer";
 import { Toaster } from "@/components/ui/sonner";
+import { NextIntlClientProvider, hasLocale } from 'next-intl';
+import { notFound } from 'next/navigation';
+import { routing } from '@/i18n/routing';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -21,11 +24,19 @@ export const metadata: Metadata = {
   description: " املاک دلتا دوست خوب بچه ها ",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
+  params
 }: Readonly<{
   children: React.ReactNode;
+  params: Promise<{ locale: string }>;
 }>) {
+
+  const { locale } = await params;
+  if (!hasLocale(routing.locales, locale)) {
+    notFound();
+  }
+
   return (
     <html lang="en">
       <body
@@ -33,18 +44,20 @@ export default function RootLayout({
       >
         <div className="flex flex-col justify-between mx-auto max-w-[1750px] w-full h-screen">
           <Providers>
-            <div className="px-8 w-full">
-              <Header />
-            </div>
-            <div className="mb-[100px]">
+            <NextIntlClientProvider >
+              <div className="px-8 w-full">
+                <Header />
+              </div>
+              <div className="mb-[100px]">
                 {children}
-            </div>
-            <div className="xl:px-8 px-0">
-              <Footer />
-            </div>
-            <Toaster />
+              </div>
+              <div className="xl:px-8 px-0">
+                <Footer />
+              </div>
+              <Toaster />
+            </NextIntlClientProvider>
           </Providers>
-          
+
         </div>
       </body>
     </html>

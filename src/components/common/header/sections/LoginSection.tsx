@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 import { useSession, signOut } from "next-auth/react";
 import Image from "next/image";
 import { handleLogout } from "@/core/logOut";
+import LanguageSwitcher from "./LangSwitcher";
 // import ChangeLanguage from "./ChangeLanguage";
 
 const LoginSection = () => {
@@ -38,6 +39,8 @@ const LoginSection = () => {
           <Moon className="w-5 h-5 text-subText hover:text-primary" />
         )}
       </motion.button>
+      
+      <LanguageSwitcher />
 
       {!session ? (
         <Link
