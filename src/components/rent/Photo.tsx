@@ -1,24 +1,26 @@
+/* eslint-disable */
 import React, { FC } from 'react'
+import { BlurFade } from '../magicui/blur-fade'
 
 const Photo: FC<{ images: string[], nextSlide: () => void, currentSlideIndex: number }> = ({ currentSlideIndex, images, nextSlide }) => {
     return (
         <div className="flex-grow order-1 2xl:w-9/12 w-full md:order-2">
             <div className="flex flex-col lg:flex-row gap-2 mt-4">
                 <div className="flex flex-col gap-2 w-full lg:w-[400px] order-2 lg:order-1">
-                    <div className="w-full h-[208px] overflow-hidden rounded-lg">
+                    <BlurFade className="w-full h-[208px] overflow-hidden rounded-lg">
                         <img
                             src={images[1]}
                             alt=""
                             className="w-full h-full object-cover bg-secondary-light2 rounded-[32px]"
                         />
-                    </div>
-                    <div className="w-full h-[204px] overflow-hidden rounded-lg relative">
+                    </BlurFade>
+                    <BlurFade className="w-full h-[204px] overflow-hidden rounded-lg relative">
                         <img
                             src={images[2]}
                             alt=""
                             className="w-full h-full object-cover bg-secondary-light2 rounded-[32px]"
                         />
-                    </div>
+                    </BlurFade>
                 </div>
 
                 <div className="h-[410px] overflow-hidden rounded-lg relative flex-grow order-1 lg:order-2">
@@ -43,7 +45,7 @@ const Photo: FC<{ images: string[], nextSlide: () => void, currentSlideIndex: nu
                                 <button
                                     key={index}
                                     onClick={nextSlide}
-                                    className={`w-1.5 h-1.5 rounded-full transition-all ${index === currentSlideIndex
+                                    className={`w-3 h-3 rounded-full transition-all ${index === currentSlideIndex
                                         ? "bg-primary"
                                         : "bg-white opacity-70"
                                         }`}

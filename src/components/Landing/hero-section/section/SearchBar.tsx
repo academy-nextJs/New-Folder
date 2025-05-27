@@ -7,7 +7,6 @@ import CommonInput from "@/components/common/inputs/common/CommonInput";
 import { useRouter } from "next/navigation";
 import { Label } from "@/components/ui/label";
 import CitySelectPopover from "@/components/common/inputs/common/CitySelectPopovar";
-import { Particles } from "@/components/magicui/particles";
 
 export const selectItems = [
   { label: "آذربایجان شرقی", value: "آذربایجان شرقی" },
@@ -129,57 +128,57 @@ const SearchBar = () => {
           </div>
 
 
-        <div className="w-full md:w-auto">
-          <CommonSelect
-            onValueChange={(value) => {
-              setTransactionType(value === "all" ? "" : value);
-            }}
-            placeholder="رهن و اجاره"
-            icon={<Coins size={16} className="text-subText" />}
-            selectItems={[
-              { label: "رهن", value: "mortgage" },
-              { label: "اجاره", value: "rental" },
-              { label: "خرید", value: "direct_purchase" },
-              { label: "همه", value: "all" },
-            ]}
-            color="text-subText"
-            label={"نوع ملک"}
-            classname="px-4 py-5 border-subText w-full"
-          />
-        </div>
+          <div className="w-full md:w-auto">
+            <CommonSelect
+              onValueChange={(value) => {
+                setTransactionType(value === "all" ? "" : value);
+              }}
+              placeholder="رهن و اجاره"
+              icon={<Coins size={16} className="text-subText" />}
+              selectItems={[
+                { label: "رهن", value: "mortgage" },
+                { label: "اجاره", value: "rental" },
+                { label: "خرید", value: "direct_purchase" },
+                { label: "همه", value: "all" },
+              ]}
+              color="text-subText"
+              label={"نوع ملک"}
+              classname="px-4 py-5 border-subText w-full"
+            />
+          </div>
 
-        <div className="w-full md:w-auto">
-          <CommonInput
-            onchange={(e) => setMinArea(e.target.value)}
-            label="حداقل متراژ"
-            classname="px-4 py-2 border-subText w-full outline-none"
-            color="text-subText placeholder:text-subText"
-            placeholder=" 0 متر "
-            type="number"
-          />
-        </div>
+          <div className="w-full md:w-auto">
+            <CommonInput
+              onchange={(e) => setMinArea(e.target.value)}
+              label="حداقل متراژ"
+              classname="px-4 py-2 border-subText w-full outline-none"
+              color="text-subText placeholder:text-subText"
+              placeholder=" 0 متر "
+              type="number"
+            />
+          </div>
 
-        <div className="w-full md:w-auto">
-          <CommonInput
-            onchange={(e) => setMaxArea(e.target.value)}
-            label="حداکثر متراژ"
-            classname="px-4 py-2 border-subText w-full outline-none"
-            color="text-subText placeholder:text-subText"
-            placeholder=" 0 متر "
-            type="number"
-          />
-        </div>
+          <div className="w-full md:w-auto">
+            <CommonInput
+              onchange={(e) => setMaxArea(e.target.value)}
+              label="حداکثر متراژ"
+              classname="px-4 py-2 border-subText w-full outline-none"
+              color="text-subText placeholder:text-subText"
+              placeholder=" 0 متر "
+              type="number"
+            />
+          </div>
 
-        <div className="w-full md:w-auto">
-          <CommonButton
-            onclick={handleClick}
-            title={<span className="flex justify-center items-center px-4"> <span className="absolute text-primary-foreground"> جستجو کن </span> <Particles size={0.8} quantity={50} color="#404040" /> </span>}
-            classname="px-8 py-7 text-sm font-bold w-full overflow-hidden max-w-[200px] text-primary-foreground"
-            type="button"
-          />
+          <div className="w-full md:w-auto">
+            <CommonButton
+              onclick={handleClick}
+              title="جستجو کن"
+              classname="px-8 py-7 text-sm font-bold w-full overflow-hidden text-primary-foreground"
+              type="button"
+            />
+          </div>
         </div>
       </div>
-    </div>
     </div >
   );
 };

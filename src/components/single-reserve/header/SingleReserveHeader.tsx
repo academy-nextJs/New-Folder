@@ -8,6 +8,8 @@ import Link from 'next/link'
 import React, { FC, useState } from 'react'
 import { motion } from 'framer-motion'
 import { showToast } from '@/core/toast/toast'
+import { BlurFade } from '@/components/magicui/blur-fade'
+import { Lens } from '@/components/magicui/lense'
 
 interface IProps {
     house: IHouse
@@ -31,20 +33,20 @@ const SingleReserveHeader: FC<IProps> = ({ house }) => {
 
     const handleShare = async () => {
         if (navigator.share) {
-          try {
-            await navigator.share({
-              title: document.title,
-              text: 'یه رزرو عالی ببین!',
-              url: window.location.href,
-            })
-            showToast('success', ' اشتراک گذاری با موفقیت انجام شد ', ' بستن ')
-          } catch {
-            showToast('success', ' خطا در اشتراک گذاری ', ' بستن ')
-          }
+            try {
+                await navigator.share({
+                    title: document.title,
+                    text: 'یه رزرو عالی ببین!',
+                    url: window.location.href,
+                })
+                showToast('success', ' اشتراک گذاری با موفقیت انجام شد ', ' بستن ')
+            } catch {
+                showToast('success', ' خطا در اشتراک گذاری ', ' بستن ')
+            }
         } else {
-          console.log('مرورگر شما از اشتراک‌گذاری پشتیبانی نمی‌کند')
+            console.log('مرورگر شما از اشتراک‌گذاری پشتیبانی نمی‌کند')
         }
-      }
+    }
 
     return (
         <div className='flex gap-4 flex-col text-foreground'>
@@ -80,13 +82,22 @@ const SingleReserveHeader: FC<IProps> = ({ house }) => {
             </div>
             <div className='flex max-2xl:flex-col gap-6 mt-2'>
                 <div className='2xl:w-11/12 w-full'>
-                    <div className='w-full h-[444px] bg-secondary-light2 rounded-[40px] overflow-hidden flex items-center justify-center'>
-                        <img
-                            src={house.photos[currentIndex]}
-                            alt={`house-photo-${currentIndex}`}
-                            className='w-full h-full object-cover rounded-[40px]'
-                        />
-                    </div>
+                    <BlurFade className='w-full max-lg:hidden h-[444px] bg-secondary-light2 rounded-[40px] overflow-hidden flex items-center justify-center'>
+                        <Lens>
+                            <img
+                                src={house.photos[currentIndex]}
+                                alt={`house-photo-${currentIndex}`}
+                                className='w-full h-full object-cover rounded-[40px]'
+                            />
+                        </Lens>
+                    </BlurFade>
+                    <BlurFade className='w-full lg:hidden h-[444px] bg-secondary-light2 rounded-[40px] overflow-hidden flex items-center justify-center'>
+                            <img
+                                src={house.photos[currentIndex]}
+                                alt={`house-photo-${currentIndex}`}
+                                className='w-full h-full object-cover rounded-[40px]'
+                            />
+                    </BlurFade>
                 </div>
 
                 <div className='2xl:w-2/12 w-full flex flex-wrap gap-4 2xl:justify-between items-center'>
