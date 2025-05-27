@@ -21,7 +21,7 @@ export interface IHouse {
     rooms: number,
     yard_type: string,
     num_comments: number,
-    transaction_type: string,
+    transaction_type: "" | "rental" | "mortgage" | "reservation" | "direct_purchase",
     sellerId: string,
     sellerName: string,
     caption: null

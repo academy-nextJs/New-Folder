@@ -11,7 +11,7 @@ import {
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import PropertyTabs from "./Tab";
-import { useParams } from "next/navigation";
+import { redirect, useParams } from "next/navigation";
 import { IHouse } from "@/types/houses-type/house-type";
 import { getHouseById } from "@/utils/service/api/houses-api";
 import CallSlider from "./CallSlider";
@@ -147,13 +147,13 @@ const Rent = () => {
             <HomeIcon />
             اگهی های مشابه
           </p>
-          <button className="flex gap-1 text-primary pl-4">
+          <button onClick={() => redirect("/rent")} className="flex gap-1 text-primary pl-4">
             مشاهده همه
             <ChevronLeft />
           </button>
         </div>
 
-        <div className="mt-[40px]"> <CallSlider /> </div>
+        <div className="mt-[40px]"> <CallSlider type={house?.transaction_type || ""} /> </div>
       </div>
     </div>
   </div> : <Loader />

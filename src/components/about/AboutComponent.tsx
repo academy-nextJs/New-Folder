@@ -1,73 +1,78 @@
 "use client";
 import { motion } from "framer-motion";
-import { UserCircle } from "lucide-react";
+import { UserCircle2 } from "lucide-react";
 
 const container = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 40 },
   show: {
     opacity: 1,
     y: 0,
     transition: {
       when: "beforeChildren",
-      staggerChildren: 0.25,
-      duration: 0.6,
+      staggerChildren: 0.2,
+      duration: 0.8,
       ease: "easeOut",
     },
   },
 };
 
 const item = {
-  hidden: { opacity: 0, scale: 0.95 },
+  hidden: { opacity: 0, scale: 0.8 },
   show: {
     opacity: 1,
     scale: 1,
-    transition: { duration: 0.4, ease: "easeOut" },
+    transition: { duration: 0.5, ease: "easeOut" },
   },
 };
 
 export default function AboutComponent() {
-
   const teamMembers = ["کیان جانلو", "مهدی قاسمی", "محمد درزی", "عارف سالاریه"];
 
   return (
-    <div className="min-h-screen px-6 py-16 bg-secondary text-secondary-foreground">
+    <div className="relative min-h-screen bg-gradient-to-br px-6 py-20 text-white overflow-hidden">
+      <div className="absolute bottom-0 left-1/2 w-[600px] h-[600px] bg-cyan-600/20 rounded-full blur-[120px] -translate-x-1/2 z-0" />
+      <div className="absolute bottom-0 left-1/2 w-[400px] h-[400px] bg-cyan-500/20 rounded-full blur-[100px] z-0" />
+
       <motion.div
-        className="max-w-4xl mx-auto text-center"
+        className="relative max-w-5xl mx-auto text-center z-10"
         initial="hidden"
         animate="show"
         variants={container}
       >
         <motion.h1
-          className="text-4xl font-bold mb-8 text-primary"
+          className="text-5xl font-extrabold mb-6 bg-gradient-to-r from-primary to-cyan-400 text-transparent bg-clip-text drop-shadow-lg"
           variants={item}
         >
           درباره دلتا
         </motion.h1>
+
         <motion.p
-          className="text-subText mb-12 leading-relaxed text-justify"
+          className="text-lg leading-relaxed mb-14 text-gray-300 max-w-3xl mx-auto"
           variants={item}
         >
-          مشاوره املاک دلتا با سال‌ها تجربه در حوزه‌ی خرید، فروش، رهن و اجاره‌ی ملک، بستری مطمئن برای مشتریان فراهم کرده تا با خیالی آسوده معاملات ملکی خود را انجام دهند. تیم ما با شناخت دقیق بازار، تحلیل‌های حرفه‌ای و مشاوره‌ی تخصصی، همراه مطمئن شما در تمامی مراحل معامله است. ما معتقدیم اعتماد، پایه‌ی اصلی هر همکاری موفق است و همواره در تلاشیم تا خدماتی صادقانه، شفاف و کارآمد ارائه دهیم.
+          مشاوره املاک دلتا با سال‌ها تجربه در حوزه‌ی خرید، فروش، رهن و اجاره‌ی ملک، بستری مطمئن برای مشتریان فراهم کرده تا با خیالی آسوده معاملات ملکی خود را انجام دهند. تیم ما با شناخت دقیق بازار، تحلیل‌های حرفه‌ای و مشاوره‌ی تخصصی، همراه مطمئن شما در تمامی مراحل معامله است.
         </motion.p>
 
         <motion.h2
-          className="text-xl font-semibold text-accent mb-6"
+          className="text-2xl font-semibold text-white mb-10 tracking-widest uppercase"
           variants={item}
         >
-          اعضای دلتا
+          اعضای تیم دلتا
         </motion.h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-8">
           {teamMembers.map((name, index) => (
             <motion.div
               key={index}
-              className="bg-secondary-light p-6 rounded-2xl shadow-md flex flex-col items-center"
               variants={item}
-              whileHover={{ y: -4, scale: 1.02 }}
-              transition={{ type: "spring", stiffness: 120, damping: 10 }}
+              whileHover={{ scale: 1.05, rotate: 1 }}
+              transition={{ type: "spring", stiffness: 140, damping: 12 }}
+              className="relative rounded-3xl bg-white/10 border border-white/20 p-6 backdrop-blur-lg shadow-xl hover:shadow-cyan-800 transition-all duration-300"
             >
-              <UserCircle className="w-12 h-12 text-muted mb-3" />
-              <p className="text-lg text-primary">{name}</p>
+              <div className="flex flex-col items-center justify-center space-y-4">
+                <UserCircle2 className="w-16 h-16 text-primary drop-shadow-md" />
+                <p className="text-xl font-bold text-white tracking-wide">{name}</p>
+              </div>
             </motion.div>
           ))}
         </div>
