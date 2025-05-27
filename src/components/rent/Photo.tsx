@@ -9,15 +9,15 @@ const Photo: FC<{ images: string[], nextSlide: () => void, currentSlideIndex: nu
                 <div className="flex flex-col gap-2 w-full lg:w-[400px] order-2 lg:order-1">
                     <BlurFade className="w-full h-[208px] overflow-hidden rounded-lg">
                         <img
-                            src={images[1]}
-                            alt=""
+                            src={images[1] || " "}
+                            alt=" "
                             className="w-full h-full object-cover bg-secondary-light2 rounded-[32px]"
                         />
                     </BlurFade>
                     <BlurFade className="w-full h-[204px] overflow-hidden rounded-lg relative">
                         <img
-                            src={images[2]}
-                            alt=""
+                            src={images[2] || " "}
+                            alt=" "
                             className="w-full h-full object-cover bg-secondary-light2 rounded-[32px]"
                         />
                     </BlurFade>
