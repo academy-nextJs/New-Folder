@@ -3,14 +3,16 @@ import React from 'react'
 import ViewAllButton from '../../common/buttons/common/ViewAllButton'
 import CallSlider from './CallSlider'
 import { redirect } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 
 const RealStateTraveling = () => {
+    const t = useTranslations('landing.realStateTraveling');
 
     return (
         <div className='w-full h-fit flex flex-col gap-4'>
             <div className='flex gap-1 items-center'>
                 <div className="flex flex-row w-fit items-center gap-4">
-                    <span className="text-primary text-sm"> خونه از خودت میخوای ! </span>
+                    <span className="text-primary text-sm">{t('wantYourOwnHome')}</span>
                     <div className='dark:flex hidden gap-1 justify-center items-center'>
                         <svg width="48" height="16" viewBox="0 0 48 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M45 9.73205C46.3333 8.96225 46.3333 7.03775 45 6.26795L39 2.80385C37.6667 2.03405 36 2.9963 36 4.5359L36 11.4641C36 13.0037 37.6667 13.966 39 13.1962L45 9.73205Z" fill="#8CFF45" />
@@ -30,7 +32,7 @@ const RealStateTraveling = () => {
             <div className='relative'>
                 <div className='flex justify-between w-full flex-wrap items-center gap-4'>
                     <div className='flex gap-4'>
-                        <h2 className='lg:text-2xl md:text-xl text-base font-[500]'> خرید و فروش ملک در دلتا </h2>
+                        <h2 className='lg:text-2xl md:text-xl text-base font-[500]'>{t('buyAndSellTitle')}</h2>
                     </div>
                     <ViewAllButton onclick={() => redirect("/rent")} classname='max-md:border-none max-md:p-0' />
                 </div>

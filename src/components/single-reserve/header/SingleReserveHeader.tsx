@@ -10,12 +10,14 @@ import { motion } from 'framer-motion'
 import { showToast } from '@/core/toast/toast'
 import { BlurFade } from '@/components/magicui/blur-fade'
 import { Lens } from '@/components/magicui/lense'
+import { useTranslations } from 'next-intl'
 
 interface IProps {
     house: IHouse
 }
 
 const SingleReserveHeader: FC<IProps> = ({ house }) => {
+    const t = useTranslations('singleReserve.header');
     const [currentIndex, setCurrentIndex] = useState(0)
 
     const handleThumbnailClick = (index: number) => {
@@ -25,9 +27,9 @@ const SingleReserveHeader: FC<IProps> = ({ house }) => {
     const handleCopy = async () => {
         try {
             await navigator.clipboard.writeText(window.location.href)
-            showToast('success', ' کپی شد ', ' بستن ')
+            showToast('success', t('copied'), t('close'))
         } catch {
-            showToast('error', ' کپی نشد ', ' بستن ')
+            showToast('error', t('notCopied'), t('close'))
         }
     }
 
@@ -36,24 +38,24 @@ const SingleReserveHeader: FC<IProps> = ({ house }) => {
             try {
                 await navigator.share({
                     title: document.title,
-                    text: 'یه رزرو عالی ببین!',
+                    text: t('shareText'),
                     url: window.location.href,
                 })
-                showToast('success', ' اشتراک گذاری با موفقیت انجام شد ', ' بستن ')
+                showToast('success', t('shareSuccess'), t('close'))
             } catch {
-                showToast('success', ' خطا در اشتراک گذاری ', ' بستن ')
+                showToast('error', t('shareError'), t('close'))
             }
         } else {
-            console.log('مرورگر شما از اشتراک‌گذاری پشتیبانی نمی‌کند')
+            console.log(t('noShareSupport'))
         }
     }
 
     return (
         <div className='flex gap-4 flex-col text-foreground'>
             <div className='flex gap-2 rtl text-sm items-center'>
-                <Link href={'/'}> خانه </Link>
+                <Link href={'/'}>{t('home')}</Link>
                 <ChevronLeft size={16} />
-                <Link href={'/reserve/reserve-house'}> رزرو </Link>
+                <Link href={'/reserve/reserve-house'}>{t('reserve')}</Link>
                 <ChevronLeft size={16} />
                 <div className='text-primary'> {house.title} </div>
             </div>
@@ -62,7 +64,7 @@ const SingleReserveHeader: FC<IProps> = ({ house }) => {
                 <p className="flex text-subText items-center gap-2 whitespace-nowrap overflow-hidden w-full text-ellipsis">
                     <span className="flex gap-2 items-center">
                         <MapPin size={16} />
-                        <span>آدرس:</span>
+                        <span>{t('address')}:</span>
                     </span>
                     <span className="text-foreground text-ellipsis overflow-hidden whitespace-nowrap w-[598]">
                         {house.address}
@@ -70,7 +72,7 @@ const SingleReserveHeader: FC<IProps> = ({ house }) => {
                 </p>
                 <div className='flex gap-5 items-center'>
                     <div className="bg-accent items-center text-white text-sm flex gap-2 px-4 py-1 flex-row-reverse rounded-[8px]">
-                        <span className='whitespace-nowrap'>{house.rate} ستاره</span>
+                        <span className='whitespace-nowrap'>{house.rate} {t('star')}</span>
                         <Star size={16} />
                     </div>
                     |
@@ -92,11 +94,11 @@ const SingleReserveHeader: FC<IProps> = ({ house }) => {
                         </Lens>
                     </BlurFade>
                     <BlurFade className='w-full lg:hidden h-[444px] bg-secondary-light2 rounded-[40px] overflow-hidden flex items-center justify-center'>
-                            <img
-                                src={house.photos[currentIndex]}
-                                alt={`house-photo-${currentIndex}`}
-                                className='w-full h-full object-cover rounded-[40px]'
-                            />
+                        <img
+                            src={house.photos[currentIndex]}
+                            alt={`house-photo-${currentIndex}`}
+                            className='w-full h-full object-cover rounded-[40px]'
+                        />
                     </BlurFade>
                 </div>
 

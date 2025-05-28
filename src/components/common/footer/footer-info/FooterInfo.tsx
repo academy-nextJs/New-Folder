@@ -1,39 +1,43 @@
 import { Instagram, Linkedin, MessageCircle, TextCursor } from 'lucide-react'
 import React from 'react'
+import { useTranslations } from 'next-intl'
+import { useDirection } from '@/utils/hooks/useDirection'
 
 const FooterInfo = () => {
+    const t = useTranslations('common.footerInfo')
+    const dir = useDirection()
+
     return (
-        <div className="text-accent-foreground bg-secondary-static py-12 lg:px-16 px-8 rounded-[56px]">
-            <h2 className="text-2xl font-extrabold mb-4">پلتفرم دلتـا</h2>
+        <div dir={dir} className="text-accent-foreground bg-secondary-static py-12 lg:px-16 px-8 rounded-[56px]">
+            <h2 className="text-2xl font-extrabold mb-4">{t('platformTitle')}</h2>
             <div className="grid lg:grid-cols-4 gap-8">
                 <div>
                     <p className="text-sm leading-7">
-                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.
-                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.
+                        {t('about')}
                     </p>
                 </div>
                 <div>
-                    <h3 className="text-lg font-semibold mb-3">نحوه رزرو اقامتگاه</h3>
+                    <h3 className="text-lg font-semibold mb-3">{t('reservationTitle')}</h3>
                     <ul className="text-sm space-y-4">
-                        <li>راهنمای رزرو اقامتگاه</li>
-                        <li>ثبت اقامتگاه</li>
+                        <li>{t('reservationGuide')}</li>
+                        <li>{t('registerResidence')}</li>
                     </ul>
                 </div>
                 <div>
-                    <h3 className="text-lg font-semibold mb-3">خدمات مشتریان</h3>
+                    <h3 className="text-lg font-semibold mb-3">{t('customerServiceTitle')}</h3>
                     <ul className="text-sm space-y-4">
-                        <li>پرسش های متداول مهمان</li>
-                        <li>پرسش های متداول میزبان</li>
-                        <li>چطور اقامتگاه ثبت کنم؟</li>
-                        <li>حریم شخصی کاربران</li>
+                        <li>{t('faqGuest')}</li>
+                        <li>{t('faqHost')}</li>
+                        <li>{t('howToRegisterResidence')}</li>
+                        <li>{t('privacyPolicy')}</li>
                     </ul>
                 </div>
                 <div>
-                    <h3 className="text-lg font-semibold mb-3">راه ارتباطی دلتا</h3>
+                    <h3 className="text-lg font-semibold mb-3">{t('contactTitle')}</h3>
                     <ul className="text-sm space-y-4">
-                        <li>09392198743 - 09385412312</li>
-                        <li>Delta@gmail.com</li>
-                        <li>گیلان، رشت، میدان آزادی، جنب چهار راه عظیمی‌زاده</li>
+                        <li>{t('phone')}</li>
+                        <li>{t('email')}</li>
+                        <li>{t('address')}</li>
                     </ul>
                 </div>
             </div>
@@ -41,10 +45,10 @@ const FooterInfo = () => {
                 <div className="flex gap-4 flex-row-reverse text-xl">
                     <div className='border rounded-2xl p-1.5'><a href="#" aria-label="Whatsapp"> <MessageCircle className='size-[17px]' /></a></div>
                     <div className='border rounded-2xl p-1.5'><a href="#" aria-label="Telegram"> <TextCursor className='size-[17px]' /></a></div>
-                    <div className='border rounded-2xl p-1.5'><a href="#" aria-label="Whatsapp"> <Instagram className='size-[17px]' /></a></div>
-                    <div className='text-card bg-card-foreground rounded-2xl p-1.5'><a href="#" aria-label="Whatsapp"> <Linkedin className='size-[17px]' /></a></div>
+                    <div className='border rounded-2xl p-1.5'><a href="#" aria-label="Instagram"> <Instagram className='size-[17px]' /></a></div>
+                    <div className='text-card bg-card-foreground rounded-2xl p-1.5'><a href="#" aria-label="Linkedin"> <Linkedin className='size-[17px]' /></a></div>
                 </div>
-                <p className="text-base">تمام حقوق مادی و معنوی این اثر برای دلتا محفوظ است.</p>
+                <p className="text-base">{t('copyright')}</p>
             </div>
         </div>
     )

@@ -7,7 +7,6 @@ import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 
 import { ISliderPhotos } from '@/types/slider-type/slider-types'
-import { Telescope } from 'lucide-react'
 
 export default function SliderPhotos({ photos, imageClassName }: ISliderPhotos) {
   return (

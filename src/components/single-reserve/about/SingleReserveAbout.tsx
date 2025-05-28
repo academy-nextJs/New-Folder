@@ -1,10 +1,12 @@
 import React from 'react'
+import { useTranslations } from 'next-intl'
 
 const SingleReserveAbout = ({ caption, photos }: { caption: string, photos: string[] }) => {
+  const t = useTranslations('singleReserve.about');
   return (
     <div className='flex flex-col gap-4'>
       <div className='flex flex-col gap-4 w-full'>
-        <h2 className='text-xl'> درباره این ملک </h2>
+        <h2 className='text-xl'>{t('aboutProperty')}</h2>
         <span className='text-subText text-justify'> {caption} </span>
       </div>
       <div className='w-full flex max-h-[391] gap-4'>

@@ -8,14 +8,15 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { schemaRegisterValidation } from "@/utils/validations/register-validation";
 import { showToast } from "@/core/toast/toast";
 import { useState } from "react";
-import axiosApi from "@/core/interceptore/axiosApi";;
+import axiosApi from "@/core/interceptore/axiosApi";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
-import {useUserStore, useEmailStore} from "@/utils/zustand/store";
+import { useUserStore, useEmailStore } from "@/utils/zustand/store";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 const RegisterForm = () => {
-
+  const t = useTranslations('auth.registerForm');
   const router = useRouter()
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const setTempUserId = useUserStore(state => state.setTempUserId)
@@ -39,19 +40,19 @@ const RegisterForm = () => {
         setTempUserId(res.tempUserId)
       }
       if (res) {
-        showToast("success", "کد ارسال شد ", "بستن", " کد تایید برای ایمیل شما ارسال شد ")
+        showToast("success", t("successTitle"), t("close"), t("successMessage"))
         setIsLoading(false)
         reset()
         router.push("/verifyCode")
       }
     } catch (error: any) {
       console.log(error)
-      if (error.response.data.message) {
-        showToast("error", "ارسال کد با مشکل مواجه شد", "بستن", error.response.data.message, 5000)
+      if (error.response?.data?.message) {
+        showToast("error", t("errorTitle"), t("close"), error.response.data.message, 5000)
       }
       else {
-        showToast("error",  "ارسال کد با مشکل مواجه شد", "بستن", "مشکلی در ارسال کد تایید به وجود آمد", 5000)
-}
+        showToast("error", t("errorTitle"), t("close"), t("errorMessage"), 5000)
+      }
       setIsLoading(false)
     }
   }
@@ -62,7 +63,7 @@ const RegisterForm = () => {
         <div className="flex flex-col gap-4">
           <div className="w-full flex gap-1 flex-col text-card-foreground">
             <Label htmlFor="email" className={`text-[13px] flex gap-0.5`}>
-              <span>  ایمیل شما </span>
+              <span>{t("email")}</span>
               <p className='text-danger'> * </p>
               <span> : </span>
             </Label>
@@ -70,7 +71,7 @@ const RegisterForm = () => {
               id="email"
               type="text"
               className="bg-transparent placeholder:text-card-foreground text-sm outline-none w-full py-3 border border-card-foreground text-card-foreground px-4 rounded-[16px] text-[16px]"
-              placeholder=" لطفا ایمیل خود را وارد کنید... "
+              placeholder={t("emailPlaceholder")}
               {...register("email")}
             />
             {errors.email && <p className='text-danger text-sm font-semibold'>{errors.email.message} </p>}
@@ -78,8 +79,11 @@ const RegisterForm = () => {
         </div>
 
         <div>
-          <CommonButton title={isLoading ? "در حال ارسال..." : "ارسال کد تایید"}
-            icon={isLoading ? <Loader /> : <ChevronLeft size={16} />} classname="w-full text-primary-foreground" />
+          <CommonButton
+            title={isLoading ? t("loading") : t("submit")}
+            icon={isLoading ? <Loader /> : <ChevronLeft size={16} />}
+            classname="w-full text-primary-foreground"
+          />
         </div>
       </form>
     </div>

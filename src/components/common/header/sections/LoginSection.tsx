@@ -26,7 +26,7 @@ const LoginSection = () => {
   }, [checkAuthStatus]);
 
   return (
-    <div className="flex whitespace-nowrap items-center px-4 justify-end gap-3 text-[10px] xl:text-[16px] md:text-[11px]">
+    <div className="flex whitespace-nowrap items-center px-8 justify-end gap-3 xl:text-[16px] text-[12px]">
       <div className="max-md:hidden">
         <LanguageSwitcher />
       </div>

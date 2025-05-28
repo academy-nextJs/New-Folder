@@ -14,6 +14,7 @@ import { showToast } from "@/core/toast/toast";
 import { redirect } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { fetchApi } from "@/core/interceptore/fetchApi";
+import { useTranslations } from "next-intl";
 
 export interface LoginResponse {
   accessToken: string;
@@ -21,6 +22,7 @@ export interface LoginResponse {
 }
 
 const LoginForm = () => {
+  const t = useTranslations('auth.loginForm');
   const [showPassword, setShowPassword] = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -32,7 +34,6 @@ const LoginForm = () => {
   } = useForm({
     resolver: zodResolver(schemaLoginValidation),
   });
-
 
   const handleLogin = async (values: any) => {
     setIsLoading(true);
@@ -48,15 +49,14 @@ const LoginForm = () => {
     });
 
     if (res?.ok) {
-      showToast("success", "ورود با موفقیت انجام شد", "بستن", "");
+      showToast("success", t("successTitle"), t("close"), "");
       reset()
       redirect("/dashboard");
     } else {
-      showToast("error", "ورود با مشکل مواجه شد", "بستن", "ایمیل یا رمز اشتباه است");
+      showToast("error", t("errorTitle"), t("close"), t("errorMessage"));
     }
     setIsLoading(false);
   };
-
 
   return (
     <div>
@@ -67,7 +67,7 @@ const LoginForm = () => {
         <div className="rounded-md -space-y-px flex md:flex-nowrap flex-wrap gap-4">
           <div className="md:w-1/2 w-full flex gap-1 flex-col text-card-foreground">
             <Label htmlFor="email" className={`text-[13px] flex gap-0.5`}>
-              <span> ایمیل شما </span>
+              <span>{t("email")}</span>
               <p className="text-danger"> * </p>
               <span> : </span>
             </Label>
@@ -75,19 +75,19 @@ const LoginForm = () => {
               id="email"
               type="text"
               className="bg-transparent placeholder:text-card-foreground text-sm outline-none w-full py-3 border border-card-foreground text-card-foreground px-4 rounded-[16px] text-[16px]"
-              placeholder={`مثال : dakjsbd@email.com`}
+              placeholder={t("emailPlaceholder")}
               {...register("email")}
             />
             {errors.email && (
               <p className="text-danger text-sm font-semibold">
-                {errors.email.message}{" "}
+                {errors.email.message}
               </p>
             )}
           </div>
           <div className="flex flex-col gap-3 md:w-1/2 w-full">
             <div className="w-full flex gap-1 flex-col text-card-foreground">
-              <Label htmlFor="email" className={`text-[13px] flex gap-0.5`}>
-                <span> رمز عبور </span>
+              <Label htmlFor="password" className={`text-[13px] flex gap-0.5`}>
+                <span>{t("password")}</span>
                 <p className="text-danger"> * </p>
                 <span> : </span>
               </Label>
@@ -100,13 +100,7 @@ const LoginForm = () => {
                 />
                 <Button
                   variant={"scale"}
-                  onClick={() => {
-                    if (showPassword) {
-                      setShowPassword(false);
-                    } else {
-                      setShowPassword(true);
-                    }
-                  }}
+                  onClick={() => setShowPassword(!showPassword)}
                   className={`cursor-pointer bg-transparent text-card-foreground absolute top-2 left-3`}
                   type="button"
                 >
@@ -119,13 +113,12 @@ const LoginForm = () => {
                 <div />
                 {errors.password && (
                   <p className="text-danger text-sm mt-0.5 font-semibold">
-                    {errors.password.message}{" "}
+                    {errors.password.message}
                   </p>
                 )}
               </div>
               <span className="text-card-foreground flex gap-2 text-sm cursor-pointer">
-                {" "}
-                <p> رمز عبور خود را فراموش کردم </p> <ArrowLeft size={20} />{" "}
+                <p>{t("forgotPassword")}</p> <ArrowLeft size={20} />
               </span>
             </div>
           </div>
@@ -133,7 +126,7 @@ const LoginForm = () => {
         <div>
           <CommonButton
             type="submit"
-            title={isLoading ? "در حال ورود..." : "ورود به حساب کاربری"}
+            title={isLoading ? t("loading") : t("submit")}
             icon={isLoading ? <Loader /> : <ArrowLeft size={16} />}
             classname="w-full text-primary-foreground"
             disabled={isLoading}
