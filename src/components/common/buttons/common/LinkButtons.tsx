@@ -12,13 +12,14 @@ const LinkButtons: FC<ILinkButton> = ({
   variant,
   size,
 }) => {
+
   return (
     <div>
       <Button
         variant={variant}
         size={size}
         onClick={() => redirect(link)}
-        className={`cursor-pointer  rounded-xl flex ${classname}`}
+        className={`cursor-pointer rounded-xl flex ${classname}`}
       >
         {title}
         <ChevronLeft className="hidden sm:hidden md:block" />

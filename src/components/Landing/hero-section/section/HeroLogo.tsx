@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from "react";
 import HeroLogoImage from "@/assets/images/heroSection/Group 12.svg";
 

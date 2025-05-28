@@ -10,8 +10,8 @@ const HeroContent = () => {
   const t = useTranslations('landing.heroSection');
 
   return (
-    <div dir={dir} className="text-foreground">
-      <div className="mb-4 md:mb-8 text-center md:text-right">
+    <div className="text-foreground">
+      <div dir={dir} className="mb-4 md:mb-8">
         <p className="text-sm sm:text-xs min-w-[150px] md:text-sm mb-1 flex items-center justify-center  gap-2">
           <Sparkle className="w-5 h-5" />
           {t("infoLong")}
@@ -20,9 +20,9 @@ const HeroContent = () => {
         </p>
       </div>
 
-      <div className="flex  justify-center align-center  gap-2 sm:gap-4 md:gap-8 text-center  md:text-right">
-        <LinkButtons variant="scale" classname="bg-secondary text-foreground text-xs md:text-sm lg:text-base w-fit" link="/reserve/reserve-house" title="آسون رزرو کن" />
-        <LinkButtons variant="scale" classname="bg-foreground text-secondary text-xs md:text-sm lg:text-base w-fit" link="/rent" title="رهن و اجاره ملک" />
+      <div className="flex justify-center gap-2 sm:gap-4 md:gap-8">
+        <LinkButtons variant="scale" classname="bg-secondary text-foreground text-xs md:text-sm lg:text-base w-fit" link="/reserve/reserve-house" title={t("button")} />
+        <LinkButtons variant="scale" classname="bg-foreground text-secondary text-xs md:text-sm lg:text-base w-fit" link="/rent" title={t("button2")} />
       </div>
     </div>
   );

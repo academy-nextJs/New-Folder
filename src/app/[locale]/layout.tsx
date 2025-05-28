@@ -1,23 +1,12 @@
 import Header from "@/components/common/header/Header";
 import { Providers } from "@/utils/service/TanstakProvider";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/common/footer/Footer";
 import { Toaster } from "@/components/ui/sonner";
 import { NextIntlClientProvider, hasLocale } from 'next-intl';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: { template: "%s پروژه مسکن", default: "پروژه مسکن" },
@@ -38,9 +27,9 @@ export default async function RootLayout({
   }
 
   return (
-    <html lang="en">
+    <html lang={locale}>
       <body
-        className={`${geistSans.variable} ${geistMono.variable}  antialiased overflow-x-hidden custom-scrollbar`}
+        className={`antialiased overflow-x-hidden custom-scrollbar`}
       >
         <div className="flex flex-col justify-between mx-auto max-w-[1750px] w-full h-screen">
           <Providers>

@@ -107,7 +107,6 @@
 }
 
 body {
-  font-family: "IRANSans", sans-serif;
   direction: rtl;
   background-color: var(--background);
   color: var(--foreground);
@@ -115,6 +114,24 @@ body {
   transition: background-color var(--transition-duration) ease,
     color var(--transition-duration) ease;
 }
+
+html[lang="fa"] {
+  font-family: 'IRANSans', sans-serif;
+  direction: rtl;
+}
+
+html[lang="en"] {
+  font-family: system-ui, sans-serif; /* یا 'Roboto', 'Open Sans', ... */
+  direction: ltr;
+}
+
+/* اگه خواستی اعداد فارسی نشن در محیط فارسی */
+html[lang="fa"] .latin-digits {
+  font-family: 'Roboto', sans-serif;
+  direction: ltr;
+  unicode-bidi: plaintext;
+}
+
 
 @keyframes fadeIn {
   0% {

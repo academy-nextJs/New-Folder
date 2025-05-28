@@ -1,0 +1,38 @@
+{
+  "heroSection": {
+    "infoNumb": " بیش از 7000+ ",
+    "info": "  رضایت مشتریانی که به دلتا اعتماد کرده اند  ",
+    "infoLong": " رزرو، رهن، اجاره و حتی خرید و فروش ملک مورد ",
+    "infoLong2": " نظرتون مثل آب خوردن فقط در دلتا___________ ",
+    "button": "آسون رزرو کن",
+    "button2": "رهن و اجاره ملک",
+    "infoButton": " ملک برای رزرو و رهن و اجاره  ",
+    "infoButton2": "  منطقه برای رزرو، ویلا و کلبه ها  ",
+    "searchButtonTitle": " جستجو کن ",
+    "searchButtonSubTitle": "جستجوی پیشرفته",
+    "searchBar": {
+      "firstInput": {
+        "label": "  مقصد مورد نظر شما  ",
+        "placeholder": "استان یا شهر را انتخاب کنید"
+      },
+      "secondInput": {
+        "label": "نوع معامله",
+        "placeholder": "انتخاب نوع",
+        "options": {
+          "mortgage": "رهن",
+          "rental": "اجاره",
+          "direct_purchase": "خرید",
+          "all": "همه"
+        }
+      },
+      "thirdInput": {
+        "label": "حداقل متراژ",
+        "placeholder": "0 متر"
+      },
+      "fourthInput": {
+        "label": "حداکثر متراژ",
+        "placeholder": "0 متر"
+      }
+    }
+  }
+}
