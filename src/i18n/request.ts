@@ -23,6 +23,8 @@ export default getRequestConfig(async ({ requestLocale }) => {
       about: (await import(`../../messages/${locale}/about.json`)).default,
       reserve: (await import(`../../messages/${locale}/reserve.json`)).default,
       singleReserve: (await import(`../../messages/${locale}/singleReserve.json`)).default,
+      rental: (await import(`../../messages/${locale}/rental.json`)).default,
+      hotel: (await import(`../../messages/${locale}/hotel.json`)).default,
     }
   };
 });

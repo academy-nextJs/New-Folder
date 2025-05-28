@@ -1,5 +1,6 @@
 import CommonInput from '@/components/common/inputs/common/CommonInput'
 import React, { FC } from 'react'
+import { useTranslations } from 'next-intl'
 
 interface IProps {
     setMinRent: React.Dispatch<React.SetStateAction<number | "">>
@@ -13,24 +14,25 @@ interface IProps {
 const RentalFilterCap: FC<IProps> = ({
     setMaxArea, setMaxMortgage, setMaxRent, setMinArea, setMinMortgage, setMinRent
 }) => {
+    const t = useTranslations('rental.filterCap');
     return (
         <div className='flex xl:flex-row flex-col gap-4 border-b py-8 border-muted items-end'>
             <div className='flex gap-4 max-xl:w-full'>
                 <div className='w-1/2'>
                     <CommonInput
                         onchange={(e) => setMinMortgage(e.target.valueAsNumber)}
-                        placeholder='0 تومن'
+                        placeholder={t('minMortgagePlaceholder')}
                         type='number'
-                        label='حداقل رهن'
+                        label={t('minMortgage')}
                         classname='px-4 py-3 border-subText w-full dark:group-hover:text-white dark:group-hover:border-white text-foreground outline-none'
                     />
                 </div>
                 <div className='w-1/2'>
                     <CommonInput
                         onchange={(e) => setMaxMortgage(e.target.valueAsNumber)}
-                        placeholder='0 تومن'
+                        placeholder={t('maxMortgagePlaceholder')}
                         type='number'
-                        label='حداکثر رهن'
+                        label={t('maxMortgage')}
                         classname='px-4 py-3 border-subText w-full dark:group-hover:text-white dark:group-hover:border-white text-foreground outline-none'
                     /></div>
             </div>
@@ -39,18 +41,18 @@ const RentalFilterCap: FC<IProps> = ({
                 <div className='w-1/2'>
                     <CommonInput
                         onchange={(e) => setMinRent(e.target.valueAsNumber)}
-                        placeholder='0 تومن'
+                        placeholder={t('minRentPlaceholder')}
                         type='number'
-                        label='حداقل اجاره'
+                        label={t('minRent')}
                         classname='px-4 py-3 border-subText w-full dark:group-hover:text-white dark:group-hover:border-white text-foreground outline-none'
                     />
                 </div>
                 <div className='w-1/2'>
                     <CommonInput
                         onchange={(e) => setMaxRent(e.target.valueAsNumber)}
-                        placeholder='0 تومن'
+                        placeholder={t('maxRentPlaceholder')}
                         type='number'
-                        label='حداکثر اجاره'
+                        label={t('maxRent')}
                         classname='px-4 py-3 border-subText w-full dark:group-hover:text-white dark:group-hover:border-white text-foreground outline-none'
                     />
                 </div>
@@ -60,18 +62,18 @@ const RentalFilterCap: FC<IProps> = ({
                 <div className='w-1/2'>
                     <CommonInput
                         onchange={(e) => setMinArea(e.target.valueAsNumber)}
-                        placeholder='0 متر'
+                        placeholder={t('minAreaPlaceholder')}
                         type='number'
-                        label='حداقل متراژ'
+                        label={t('minArea')}
                         classname='px-4 py-3 border-subText w-full dark:group-hover:text-white dark:group-hover:border-white text-foreground outline-none'
                     />
                 </div>
                 <div className='w-1/2'>
                     <CommonInput
                         onchange={(e) => setMaxArea(e.target.valueAsNumber)}
-                        placeholder='0 متر'
+                        placeholder={t('maxAreaPlaceholder')}
                         type='number'
-                        label='حداکثر متراژ'
+                        label={t('maxArea')}
                         classname='px-4 py-3 border-subText w-full dark:group-hover:text-white dark:group-hover:border-white text-foreground outline-none'
                     /></div>
             </div>

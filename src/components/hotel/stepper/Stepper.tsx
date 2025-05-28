@@ -1,14 +1,16 @@
 import { Check } from "lucide-react";
-
-const steps = [
-    "انتخاب هتل",
-    "مشخصات مسافران",
-    "تایید اطلاعات",
-    "پرداخت آنلاین",
-    "صدور بلیط",
-];
+import { useTranslations } from "next-intl";
 
 export default function Stepper({ currentStep }: { currentStep: number }) {
+    const t = useTranslations('hotel');
+    const steps = [
+        t("selectHotel"),
+        t("passengerInfo"),
+        t("confirmInfo"),
+        t("onlinePayment"),
+        t("ticketIssue"),
+    ];
+
     return (
         <div className="flex items-center justify-around bg-secondary-light2 p-4 rounded-3xl shadow-sm">
             {steps.map((label, index) => {

@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-
 import {
   Car,
   Bath,
@@ -17,22 +16,16 @@ import { fetchComments } from "@/utils/service/api/fetchComments";
 import { IGetComment } from "@/types/comment-type/comment-type";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
-
-const tabs = [
-  { id: "description", label: "توضیحات ملک" },
-  { id: "features", label: "امکانات ملک" },
-  { id: "location", label: "موقعیت ملک" },
-  { id: "reviews", label: "نظرات کاربران" },
-];
+import { useTranslations } from "next-intl";
 
 const PAGE_SIZE = 2
 
 export default function PropertyTabs({ house }: { house: IHouse }) {
+  const t = useTranslations('rental.tabs');
   const [activeTab, setActiveTab] = useState("description");
   const [viewReply, setViewReply] = useState<boolean>(false)
   const [title, setTitle] = useState<string>('')
   const [parent_comment_id, setParent_comment_id] = useState<string | null>(null)
-
   const [page, setPage] = useState(1)
 
   const params = useParams()
@@ -48,13 +41,19 @@ export default function PropertyTabs({ house }: { house: IHouse }) {
     queryFn: () => fetchComments(id, page, PAGE_SIZE),
   })
 
-  const facilities: TFacilities = []
-  if (house?.parking && house?.parking > 0) { facilities.push({ title: <Car size={24} />, content: ' پارکینگ ' }) }
-  if (house?.rooms && house?.rooms > 0) { facilities.push({ title: <Bed size={24} />, content: ` ${house?.rooms} خوابه ` }) }
-  if (house?.bathrooms && house?.bathrooms > 0) { facilities.push({ title: <Bath size={24} />, content: ` سرویس بهداشتی ` }) }
-  if (house?.yard_type) { facilities.push({ title: ' حیاط ', content: ` ${house?.yard_type} ` }) }
-  if (house?.capacity) { facilities.push({ title: ' ظرفیت ', content: ` ${house?.capacity > 0 ? house?.capacity + " نفر " : ' ندارد '} ` }) }
+  const tabs = [
+    { id: "description", label: t("description") },
+    { id: "features", label: t("features") },
+    { id: "location", label: t("location") },
+    { id: "reviews", label: t("reviews") },
+  ];
 
+  const facilities: TFacilities = []
+  if (house?.parking && house?.parking > 0) { facilities.push({ title: <Car size={24} />, content: t("parking") }) }
+  if (house?.rooms && house?.rooms > 0) { facilities.push({ title: <Bed size={24} />, content: t("rooms", { count: house?.rooms }) }) }
+  if (house?.bathrooms && house?.bathrooms > 0) { facilities.push({ title: <Bath size={24} />, content: t("bathroom") }) }
+  if (house?.yard_type) { facilities.push({ title: t("yard"), content: house?.yard_type }) }
+  if (house?.capacity) { facilities.push({ title: t("capacity"), content: house?.capacity > 0 ? t("capacityValue", { count: house?.capacity }) : t("noCapacity") }) }
 
   return (
     <div className="w-full">
@@ -77,7 +76,7 @@ export default function PropertyTabs({ house }: { house: IHouse }) {
         whileInView={{ opacity: 1, y: 0 }} className="text-sm text-foreground leading-relaxed py-6 rounded-lg">
         {activeTab === "description" && (
           <p className="lg:text-base md:text-base sm:text-sm text-xs text-justify">
-            {house.caption || 'هیج اطلاعاتی موجود نیست'}
+            {house.caption || t("noInfo")}
           </p>
         )}
         {activeTab === "features" && (
@@ -88,7 +87,7 @@ export default function PropertyTabs({ house }: { house: IHouse }) {
             ))}
           </motion.div>
         )}
-        {activeTab === "location" && <RentMap location={house.location} caption={house.caption || 'هیج اطلاعاتی موجود نیست'} />}
+        {activeTab === "location" && <RentMap location={house.location} caption={house.caption || t("noInfo")} />}
         {activeTab === "reviews" && (
           <motion.div initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}>

@@ -6,6 +6,7 @@ import { selectItems } from '@/components/Landing/hero-section/section/SearchBar
 import { Label } from '@/components/ui/label'
 import { Coins, Filter, House, Megaphone } from 'lucide-react'
 import React, { FC, useState } from 'react'
+import { useTranslations } from 'next-intl'
 
 interface IReserveFilter {
     setOrder: React.Dispatch<React.SetStateAction<'DESC' | 'ASC'>>
@@ -18,6 +19,7 @@ interface IReserveFilter {
 }
 
 const RentalFilter: FC<IReserveFilter> = ({ setOrder, setSort, setSearch, setPropertyType, houseLength, setLocation, setTransactionType }) => {
+    const t = useTranslations('rental.filter');
     const [value, setValue] = useState('')
 
     return (
@@ -25,17 +27,17 @@ const RentalFilter: FC<IReserveFilter> = ({ setOrder, setSort, setSearch, setPro
             <div className='flex xl:flex-row flex-col gap-4'>
                 <div className="w-fill md-w-auto flex-col flex gap-1">
                     <Label className={`text-[13px] flex gap-0.5 text-subText`}>
-                        <span> مقصد مورد نظر شما </span>
+                        <span>{t('destination')}</span>
                         <span> : </span>
                     </Label>
                     <CitySelectPopover
                         value={value}
                         onChange={(val) => {
                             setValue(val);
-                            setLocation(val === "همه" ? "" : val);
+                            setLocation(val === t('all') ? "" : val);
                         }}
                         items={selectItems}
-                        placeholder="استان یا شهر را انتخاب کنید"
+                        placeholder={t('cityPlaceholder')}
                     />
                 </div>
                 <CommonSelect
@@ -53,60 +55,60 @@ const RentalFilter: FC<IReserveFilter> = ({ setOrder, setSort, setSearch, setPro
                             setOrder('DESC')
                         }
                     })}
-                    placeholder="جدید ترین ها"
+                    placeholder={t('latest')}
                     icon={<Filter size={16} className='text-subText' />}
                     selectItems={[
-                        { label: 'جدید ترین ها', value: 'last_updated' },
-                        { label: 'ارزان ترین ها', value: 'price_low' },
-                        { label: 'محبوب ترین ها', value: 'rate' },
+                        { label: t('latest'), value: 'last_updated' },
+                        { label: t('cheapest'), value: 'price_low' },
+                        { label: t('popular'), value: 'rate' },
                     ]}
                     color='text-subText dark:group-hover:text-white'
-                    label='مرتب سازی بر اساس'
+                    label={t('sortBy')}
                     classname='px-4 py-5 border-subText w-full dark:group-hover:text-white dark:group-hover:border-white outline-none'
                 />
                 <CommonSelect
                     onValueChange={(value => {
-                        setPropertyType(value === "all" ? "" : value)
+                        setPropertyType(value === t('all') ? "" : value)
                     })}
-                    placeholder="آپارتمان"
+                    placeholder={t('apartment')}
                     icon={<House size={16} className='text-subText' />}
                     selectItems={[
-                        { label: 'آپارتمان', value: 'آپارتمان' },
-                        { label: 'ویلا', value: 'ویلا' },
-                        { label: 'روستایی', value: 'روستایی' },
-                        { label: 'همه', value: 'all' },
+                        { label: t('apartment'), value: t('apartment') },
+                        { label: t('villa'), value: t('villa') },
+                        { label: t('rural'), value: t('rural') },
+                        { label: t('all'), value: 'all' },
                     ]}
                     color='text-subText dark:group-hover:text-white'
-                    label='نوع ملک'
+                    label={t('propertyType')}
                     classname='px-4 py-5 border-subText w-full dark:group-hover:text-white dark:group-hover:border-white outline-none'
                 />
                 <CommonSelect
                     onValueChange={(value => {
-                        setTransactionType(value === "all" ? "" : value)
+                        setTransactionType(value === t('all') ? "" : value)
                     })}
-                    placeholder="رهن و اجاره"
+                    placeholder={t('mortgageAndRental')}
                     icon={<Coins size={16} className='text-subText' />}
                     selectItems={[
-                        { label: 'رهن', value: 'mortgage' },
-                        { label: 'اجاره', value: 'rental' },
-                        { label: 'خرید', value: 'direct_purchase' },
-                        { label: 'همه', value: "all" },
+                        { label: t('mortgage'), value: 'mortgage' },
+                        { label: t('rental'), value: 'rental' },
+                        { label: t('directPurchase'), value: 'direct_purchase' },
+                        { label: t('all'), value: "all" },
                     ]}
                     color='text-subText dark:group-hover:text-white'
-                    label='نوع ملک'
+                    label={t('transactionType')}
                     classname='px-4 py-5 border-subText w-full dark:group-hover:text-white dark:group-hover:border-white outline-none'
                 />
                 <CommonInput
                     onchange={(e) => setSearch(e.target.value)}
-                    label='جستجو'
+                    label={t('search')}
                     classname='px-4 py-2 border-subText xl:w-[400px] w-full dark:group-hover:placeholder:text-white placeholder:text-subText dark:group-hover:text-white dark:group-hover:border-white outline-none'
                     color='text-subText dark:group-hover:text-white'
-                    placeholder='نام هتل مورد نظر .....'
+                    placeholder={t('hotelPlaceholder')}
                 />
             </div>
             <div className='px-4 py-2 border md:mx-0 mx-auto border-card-foreground items-center justify-center rounded-[16px] flex flex-nowrap gap-2 text-sm'>
                 <Megaphone size={20} />
-                <span className='whitespace-nowrap'> تعداد آگهی : {houseLength || 0} </span>
+                <span className='whitespace-nowrap'>{t('count')} : {houseLength || 0} </span>
             </div>
         </div>
     )

@@ -34,5 +34,13 @@
     "footer": {
         "similarAds": "إعلانات مشابهة",
         "seeAll": "عرض الكل"
-    }
+    },
+    "parking": "موقف سيارات",
+    "rooms": "{count} غرفة",
+    "bathroom": "حمام",
+    "yard": "ساحة",
+    "capacity": "السعة",
+    "capacityValue": "{count} أشخاص",
+    "noCapacity": "لا يوجد",
+    "noInfo": "لا توجد معلومات متاحة"
 }
