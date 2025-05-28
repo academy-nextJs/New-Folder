@@ -7,7 +7,7 @@ import FourthStep from './steps/FourthStep';
 
 const HotelComponent = () => {
 
-  const [currentStep, setCurrentStep] = useState<number>(3);
+  const [currentStep, setCurrentStep] = useState<number>(0);
   const handleCurrentStepIncrease = () => {
     setCurrentStep(currentStep +1)
   }

@@ -34,5 +34,13 @@
     "footer": {
         "similarAds": "آگهی های متشابه",
         "seeAll": "مشاهده همه"
-    }
+    },
+    "parking": "پارکینگ",
+    "rooms": "{count} خوابه",
+    "bathroom": "سرویس بهداشتی",
+    "yard": "حیاط",
+    "capacity": "ظرفیت",
+    "capacityValue": "{count} نفر",
+    "noCapacity": "ندارد",
+    "noInfo": "هیچ اطلاعاتی موجود نیست"
 }

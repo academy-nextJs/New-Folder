@@ -13,8 +13,22 @@ import { fetchApi } from '@/core/interceptore/fetchApi'
 import { useParams } from 'next/navigation'
 import { showToast } from '@/core/toast/toast'
 import { QueryObserverResult, RefetchOptions } from '@tanstack/react-query'
+import { useTranslations } from 'next-intl'
 
-const SingleReserveForm = ({ viewReply, title, parent_comment_id, refetch, setViewReply }: { setViewReply: React.Dispatch<React.SetStateAction<boolean>> ,refetch: (options?: RefetchOptions) => Promise<QueryObserverResult<IGetComment[], Error>> ,viewReply: boolean, title: string, parent_comment_id: string | null }) => {
+const SingleReserveForm = ({
+    viewReply,
+    title,
+    parent_comment_id,
+    refetch,
+    setViewReply
+}: {
+    setViewReply: React.Dispatch<React.SetStateAction<boolean>>,
+    refetch: (options?: RefetchOptions) => Promise<QueryObserverResult<IGetComment[], Error>>,
+    viewReply: boolean,
+    title: string,
+    parent_comment_id: string | null
+}) => {
+    const t = useTranslations('rental.commentForm');
     const {
         register,
         handleSubmit,
@@ -39,67 +53,71 @@ const SingleReserveForm = ({ viewReply, title, parent_comment_id, refetch, setVi
         }
         try {
             const response = await fetchApi.post(`/houses/${id}/comments`, commentData)
-            console.log(response)
             if (response) {
-                showToast('success', ' تایید نظر ', 'بستن', ' نظر شما با موفقیت ارسال شد ')
+                showToast('success', t('successTitle'), t('close'), t('successMsg'))
             }
             reset()
             refetch()
             setIsLoading(false)
             setViewReply(false)
-        } catch (error) {
-            console.log(error)
-            showToast('success', ' مشکل نظر ', 'بستن', ' مشکلی پیدا شد و نظر شما لغو شد ')
+        } catch {
+            showToast('error', t('errorTitle'), t('close'), t('errorMsg'))
             setIsLoading(false)
         }
     }
-
 
     return (
         <form className='flex flex-col w-full gap-4' onSubmit={handleSubmit(onSubmit)}>
             <div className='flex items-center max-md:flex-wrap w-full justify-between gap-4'>
                 <div className='flex flex-col max-md:w-full w-1/5 gap-2 text-sm text-subText'>
-                    <Label htmlFor='name' > نام و نام خانوادگی </Label>
+                    <Label htmlFor='name'>{t('name')}</Label>
                     {errors.name && <span className='text-danger font-semibold text-xs'>{errors.name.message}</span>}
                     <Input {...register('name')} id='name' name='name' className='px-4 w-full py-2 bg-transparent rounded-[16px] border border-subText' />
                 </div>
                 <div className='flex flex-col gap-2 text-sm w-1/5 text-subText max-md:w-full'>
-                    <Label htmlFor='title' > عنوان شما </Label>
+                    <Label htmlFor='title'>{t('title')}</Label>
                     {errors.title && <span className='text-danger font-semibold text-xs'>{errors.title.message}</span>}
                     <Input {...register('title')} id='title' name='title' className='px-4 w-full py-2 bg-transparent rounded-[16px] border border-subText' />
                 </div>
-                {viewReply ? <div className='flex items-end max-md:flex-wrap justify-between w-full md:w-4/6 md:gap-4 gap-8'>
-                    <div className='flex flex-col gap-2 text-sm w-full text-subText'>
-                        <Label> برای نظر </Label>
-                        <div className='px-4 py-2 bg-transparent w-full rounded-[16px] border border-subText'> {title || 'نامعلوم'} </div>
-                    </div>
-                </div> : <div className='flex flex-col gap-2 text-sm w-3/5 text-subText max-md:w-full'>
-                    <Label htmlFor='rating' > امتیاز شما </Label>
-                    <div className="w-full bg-muted/20 rounded-[16px] p-2 flex flex-row-reverse items-center justify-between gap-4 border border-subText">
-                        <div className="flex items-center gap-2">
-                            <span className="font-bold text-md">{rating[0]}</span>
-                            <Star className="" size={16} />
+                {viewReply ? (
+                    <div className='flex items-end max-md:flex-wrap justify-between w-full md:w-4/6 md:gap-4 gap-8'>
+                        <div className='flex flex-col gap-2 text-sm w-full text-subText'>
+                            <Label>{t('forComment')}</Label>
+                            <div className='px-4 py-2 bg-transparent w-full rounded-[16px] border border-subText'> {title || t('unknown')} </div>
                         </div>
-
-                        <Slider
-                            defaultValue={rating}
-                            max={5}
-                            min={0}
-                            step={0.1}
-                            onValueChange={setRating}
-                            className="w-full mx-4"
-                        />
-
                     </div>
-                </div>}
+                ) : (
+                    <div className='flex flex-col gap-2 text-sm w-3/5 text-subText max-md:w-full'>
+                        <Label htmlFor='rating'>{t('rating')}</Label>
+                        <div className="w-full bg-muted/20 rounded-[16px] p-2 flex flex-row-reverse items-center justify-between gap-4 border border-subText">
+                            <div className="flex items-center gap-2">
+                                <span className="font-bold text-md">{rating[0]}</span>
+                                <Star className="" size={16} />
+                            </div>
+                            <Slider
+                                defaultValue={rating}
+                                max={5}
+                                min={0}
+                                step={0.1}
+                                onValueChange={setRating}
+                                className="w-full mx-4"
+                            />
+                        </div>
+                    </div>
+                )}
             </div>
             <div className='flex items-end max-md:flex-wrap justify-between w-full md:gap-4 gap-8'>
                 <div className='flex flex-col gap-2 text-sm w-full text-subText'>
-                    <Label htmlFor='caption' > پیام شما </Label>
+                    <Label htmlFor='caption'>{t('message')}</Label>
                     {errors.caption && <span className='text-danger font-semibold text-xs'>{errors.caption.message}</span>}
                     <Input {...register('caption')} id='caption' name='caption' className='px-4 py-2 bg-transparent w-full rounded-[16px] border border-subText' />
                 </div>
-                <CommonButton type='submit' classname='max-md:w-full text-primary-foreground' icon={isLoading ? <RefreshCcw /> : <ChevronLeft />} title={isLoading ? 'در حال ارسال...' : 'ارسال نظر'} />
+                <CommonButton
+                    type='submit'
+                    classname='max-md:w-full text-primary-foreground'
+                    icon={isLoading ? <RefreshCcw /> : <ChevronLeft />}
+                    title={isLoading ? t('sending') : t('send')}
+                />
             </div>
         </form>
     )

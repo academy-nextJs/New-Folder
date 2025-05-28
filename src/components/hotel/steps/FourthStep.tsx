@@ -4,15 +4,28 @@ import Image from 'next/image'
 import { redirect } from 'next/navigation'
 import React from 'react'
 import CheckGreen from '@/assets/CheckGreen.png'
+import { useTranslations } from 'next-intl'
 
 const FourthStep = ({ handleCurrentStepIncrease }: { handleCurrentStepIncrease: () => void }) => {
+    const t = useTranslations('hotel.fourth');
+
     return (
         <div className='flex flex-col w-full gap-8 items-center my-[100px]'>
             <Image src={CheckGreen} alt='' className='shadow-2xl w-[200px] shadow-[#0EEAB552] rounded-[50px]' />
-            <h2 className='font-bold text-2xl'> رزرو بلیط شما با موفقیت انجام شد ! </h2>
+            <h2 className='font-bold text-2xl'>{t('successMessage')}</h2>
             <div className='flex gap-4'>
-                <CommonButton onclick={() => redirect("/")} title={" بازگشت به صفحه اصلی "} icon={<ChevronLeft size={16} />} classname='bg-transparent border-foreground flex border w-fit text-foreground' />
-                <CommonButton onclick={handleCurrentStepIncrease} title={" بلیط های من "} icon={<ChevronLeft size={16} />} classname='bg-transparent flex border-primary border w-fit text-primary' />
+                <CommonButton
+                    onclick={() => redirect("/")}
+                    title={t('backToHome')}
+                    icon={<ChevronLeft size={16} />}
+                    classname='bg-transparent border-foreground flex border w-fit text-foreground'
+                />
+                <CommonButton
+                    onclick={handleCurrentStepIncrease}
+                    title={t('myTickets')}
+                    icon={<ChevronLeft size={16} />}
+                    classname='bg-transparent flex border-primary border w-fit text-primary'
+                />
             </div>
         </div>
     )

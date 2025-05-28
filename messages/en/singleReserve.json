@@ -34,5 +34,13 @@
     "footer": {
         "similarAds": "Similar ads",
         "seeAll": "See all"
-    }
+    },
+    "parking": "Parking",
+    "rooms": "{count} bedrooms",
+    "bathroom": "Bathroom",
+    "yard": "Yard",
+    "capacity": "Capacity",
+    "capacityValue": "{count} people",
+    "noCapacity": "None",
+    "noInfo": "No information available"
 }
