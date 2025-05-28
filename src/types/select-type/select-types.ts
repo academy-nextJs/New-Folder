@@ -10,6 +10,7 @@ export interface ISelect {
     selectItems: ISelectItems[];
     onValueChange?: (val: string) => void;
     icon?: ReactNode;
+    value?: string;
 }
 
 interface ISelectItems {

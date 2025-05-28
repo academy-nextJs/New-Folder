@@ -1,0 +1,38 @@
+{
+  "heroSection": {
+    "infoNumb": "Over 7000+",
+    "info": "Customer satisfaction from those who trusted Delta",
+    "infoLong": "Booking, mortgage, rent, and even buying or selling your property",
+    "infoLong2": "As easy as drinking water — only on Delta ___________",
+    "button": "Book Easily",
+    "button2": "Mortgage and Rent Property",
+    "infoButton": "Property for booking, mortgage, and rent",
+    "infoButton2": "Area for booking, villas, and cabins",
+    "searchButtonSubTitle": "Advanced Search",
+    "searchButtonTitle": "Search",
+    "searchBar": {
+      "firstInput": {
+        "label": "City",
+        "placeholder": "Select city"
+      },
+      "secondInput": {
+        "label": "Transaction Type",
+        "placeholder": "Select type",
+        "options": {
+          "mortgage": "Mortgage",
+          "rental": "Rental",
+          "direct_purchase": "Purchase",
+          "all": "All"
+        }
+      },
+      "thirdInput": {
+        "label": "Min Area",
+        "placeholder": "0 sqm"
+      },
+      "fourthInput": {
+        "label": "Max Area",
+        "placeholder": "0 sqm"
+      }
+    }
+  }
+}

@@ -2,7 +2,7 @@ import { Routes } from "@/types/routes-type/routes-type";
 import { BellDot, Coins, Heart, Home, House, HousePlus, PlusCircle, Settings, SquaresSubtract, User } from "lucide-react";
 
 export const routes = [
-  { label: "داشبورد", href: "/dashboard", icon: Home },
+  { label: "داشبورد", href: `/dashboard`, icon: Home },
   { label: "اطلاعات کاربری", href: "/dashboard/profile", icon: User },
   { label: "مدیریت رزرو ها", href: "/dashboard/manage-reserves", icon: PlusCircle },
   { label: "علاقه مندی ها", href: "/dashboard/favorites", icon: Heart },

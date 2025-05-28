@@ -1,0 +1,38 @@
+{
+    "heroSection": {
+        "infoNumb": "أكثر من 7000+",
+        "info": "رضا العملاء الذين وثقوا في دلتا",
+        "infoLong": "الحجز، الرهن، الإيجار وحتى شراء وبيع العقار الذي ترغب به",
+        "infoLong2": "بسهولة شرب الماء — فقط على دلتا ___________",
+        "button": "احجز بسهولة",
+        "button2": "رهن وإيجار العقار",
+        "infoButton": "عقار للحجز، الرهن، والإيجار",
+        "infoButton2": "منطقة للحجز، الفلل، والأكواخ",
+        "searchButtonSubTitle": "بحث متقدم",
+        "searchButtonTitle": "بحث",
+        "searchBar": {
+            "firstInput": {
+                "label": "المدينة",
+                "placeholder": "اختر المدينة"
+            },
+            "secondInput": {
+                "label": "نوع المعاملة",
+                "placeholder": "اختر النوع",
+                "options": {
+                    "mortgage": "رهن",
+                    "rental": "إيجار",
+                    "direct_purchase": "شراء",
+                    "all": "الكل"
+                }
+            },
+            "thirdInput": {
+                "label": "المساحة الدنيا",
+                "placeholder": "0 م²"
+            },
+            "fourthInput": {
+                "label": "المساحة القصوى",
+                "placeholder": "0 م²"
+            }
+        }
+    }
+}

@@ -1,0 +1,17 @@
+{
+  "header": {
+    "navbar": {
+      "quicklyReserve": "Quick Reservation",
+      "rentalMortgage": "Rent & Mortgage",
+      "aboutUs": "About Us",
+      "articles": "Our Articles",
+      "contactUs": "Contact Us"
+    },
+    "become-seller": "Become a Seller",
+    "signin": "Sign In / Register",
+    "goToAccount": "Go to Account",
+    "logout": "Logout",
+    "changeTheme": "Change theme:",
+    "changeLang": "Change language:"
+  }
+}

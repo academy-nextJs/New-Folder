@@ -7,6 +7,7 @@ import CommonInput from "@/components/common/inputs/common/CommonInput";
 import { useRouter } from "next/navigation";
 import { Label } from "@/components/ui/label";
 import CitySelectPopover from "@/components/common/inputs/common/CitySelectPopovar";
+import { useTranslations } from "next-intl";
 
 export const selectItems = [
   { label: "آذربایجان شرقی", value: "آذربایجان شرقی" },
@@ -42,7 +43,6 @@ export const selectItems = [
   { label: "یزد", value: "یزد" },
 ];
 
-
 const SearchBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
@@ -51,8 +51,9 @@ const SearchBar = () => {
   const [maxArea, setMaxArea] = useState("");
   const [location, setLocation] = useState("");
   const router = useRouter();
+  const [value, setValue] = React.useState("");
 
-  const [value, setValue] = React.useState("")
+  const t = useTranslations("landing.heroSection");
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -72,12 +73,10 @@ const SearchBar = () => {
 
   const handleClick = () => {
     const params = new URLSearchParams();
-
     if (location) params.set("location", location);
     if (transactionType) params.set("transactionType", transactionType);
     if (minArea) params.set("minArea", minArea);
     if (maxArea) params.set("maxArea", maxArea);
-
     router.push(`/rent?${params.toString()}`);
   };
 
@@ -86,34 +85,29 @@ const SearchBar = () => {
       <div className="md:hidden flex justify-center mt-10 items-center gap-2 ">
         <CommonButton
           onclick={() => setIsOpen(true)}
-          title="جستجوی پیشرفته"
-          classname={`bg-primary text-secondary p-2 text-xs rounded-xl ${isOpen ? "hidden" : "flex"
-            }`}
+          title={t("searchButtonSubTitle")}
+          classname={`bg-primary text-secondary p-2 text-xs rounded-xl ${isOpen ? "hidden" : "flex"}`}
           type="button"
           icon={<Search size={12} />}
         />
       </div>
       <div
         ref={searchRef}
-        className={`flex justify-between items-center w-full bg-subBg backdrop-blur-sm rounded-[32px] p-4 transition-all duration-300 ${isOpen ? "h-auto opacity-100" : "h-0 overflow-visible md:h-auto"
-          } ${isOpen ? "opacity-100" : "opacity-0 md:opacity-100"}`}
+        className={`flex justify-between items-center w-full bg-subBg backdrop-blur-sm rounded-[32px] p-4 transition-all duration-300 ${isOpen ? "h-auto opacity-100" : "h-0 overflow-visible md:h-auto"} ${isOpen ? "opacity-100" : "opacity-0 md:opacity-100"}`}
       >
         <button
           onClick={() => setIsOpen(false)}
-          className={`md:hidden absolute top-2 left-2 text-subText ${isOpen ? "block" : "hidden"
-            }`}
+          className={`md:hidden absolute top-2 left-2 text-subText ${isOpen ? "block" : "hidden"}`}
         >
           <X size={20} />
         </button>
 
         <div
-          className={`flex-1 flex flex-col md:flex-row items-center justify-around gap-4 w-full ${isOpen ? "block" : "hidden md:flex"
-            }`}
+          className={`flex-1 flex flex-col md:flex-row items-center justify-around gap-4 w-full ${isOpen ? "block" : "hidden md:flex"}`}
         >
-
           <div className="w-full md:w-auto flex-col flex gap-1">
             <Label className={`text-[13px] flex gap-0.5 text-subText`}>
-              <span> مقصد مورد نظر شما </span>
+              <span> {t("searchBar.firstInput.label")} </span>
               <span> : </span>
             </Label>
             <CitySelectPopover
@@ -123,26 +117,25 @@ const SearchBar = () => {
                 setLocation(val === "همه" ? "" : val);
               }}
               items={selectItems}
-              placeholder="استان یا شهر را انتخاب کنید"
+              placeholder={t("searchBar.firstInput.placeholder")}
             />
           </div>
-
 
           <div className="w-full md:w-auto">
             <CommonSelect
               onValueChange={(value) => {
                 setTransactionType(value === "all" ? "" : value);
               }}
-              placeholder="رهن و اجاره"
+              placeholder={t("searchBar.secondInput.placeholder")}
               icon={<Coins size={16} className="text-subText" />}
               selectItems={[
-                { label: "رهن", value: "mortgage" },
-                { label: "اجاره", value: "rental" },
-                { label: "خرید", value: "direct_purchase" },
-                { label: "همه", value: "all" },
+                { label: t("searchBar.secondInput.options.mortgage"), value: "mortgage" },
+                { label: t("searchBar.secondInput.options.rental"), value: "rental" },
+                { label: t("searchBar.secondInput.options.direct_purchase"), value: "direct_purchase" },
+                { label: t("searchBar.secondInput.options.all"), value: "all" },
               ]}
               color="text-subText"
-              label={"نوع ملک"}
+              label={t("searchBar.secondInput.label")}
               classname="px-4 py-5 border-subText w-full"
             />
           </div>
@@ -150,10 +143,10 @@ const SearchBar = () => {
           <div className="w-full md:w-auto">
             <CommonInput
               onchange={(e) => setMinArea(e.target.value)}
-              label="حداقل متراژ"
+              label={t("searchBar.thirdInput.label")}
               classname="px-4 py-2 border-subText w-full outline-none"
               color="text-subText placeholder:text-subText"
-              placeholder=" 0 متر "
+              placeholder={t("searchBar.thirdInput.placeholder")}
               type="number"
             />
           </div>
@@ -161,10 +154,10 @@ const SearchBar = () => {
           <div className="w-full md:w-auto">
             <CommonInput
               onchange={(e) => setMaxArea(e.target.value)}
-              label="حداکثر متراژ"
+              label={t("searchBar.fourthInput.label")}
               classname="px-4 py-2 border-subText w-full outline-none"
               color="text-subText placeholder:text-subText"
-              placeholder=" 0 متر "
+              placeholder={t("searchBar.fourthInput.placeholder")}
               type="number"
             />
           </div>
@@ -172,14 +165,14 @@ const SearchBar = () => {
           <div className="w-full md:w-auto">
             <CommonButton
               onclick={handleClick}
-              title="جستجو کن"
+              title={t("searchButtonTitle")}
               classname="px-8 py-7 text-sm font-bold w-full overflow-hidden text-primary-foreground"
               type="button"
             />
           </div>
         </div>
       </div>
-    </div >
+    </div>
   );
 };
 

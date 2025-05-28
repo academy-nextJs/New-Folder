@@ -18,7 +18,8 @@ const TabletSidebar = ({
   setView: React.Dispatch<React.SetStateAction<number>>;
 }) => {
 
-    const pathname = usePathname();
+    const cleanPath = usePathname();
+      const pathname = cleanPath.replace(/^\/(fa|en|ar)/, "")
 
     const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
