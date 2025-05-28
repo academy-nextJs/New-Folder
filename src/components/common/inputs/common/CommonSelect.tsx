@@ -19,7 +19,7 @@ const CommonSelect: FC<ISelect> = ({ background, color, label, mandatory, classn
                     {icon && <span className="flex-shrink-0">{icon}</span>}
                     <SelectValue placeholder={`${placeholder}`}></SelectValue>
                 </SelectTrigger>
-                <SelectContent className={`rtl ${background} ${color}`}>
+                <SelectContent className={`rtl z-[10000] ${background} ${color}`}>
                     <ScrollArea>
                         <SelectGroup>
                             <SelectLabel> {label} </SelectLabel>

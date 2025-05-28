@@ -1,15 +1,18 @@
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 
 const NavbarSection = () => {
+  const t = useTranslations("common.header")
+
   return (
-    <nav className="flex items-center justify-center lg:gap-6 md:gap-3 text-[14px] lg:text-[16px] md:text-[12px] h-full relative">
+    <nav className="flex items-center whitespace-nowrap justify-center xl:gap-6 md:gap-3 text-[14px] xl:text-[16px] md:text-[12px] h-full relative">
       {/* رزرو سریع */}
       <div className="group flex items-center h-full relative">
         <Link
           href="/reserve/reserve-house"
           className="flex items-center h-full text-subText transition-colors pb-1 group-hover:text-primary"
         >
-          رزرو سریع
+          {t("navbar.quicklyReserve")}
         </Link>
         <span className="absolute left-0 right-0 bottom-0 h-[2px] bg-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-bottom group-hover:origin-bottom z-20"></span>
       </div>
@@ -19,7 +22,7 @@ const NavbarSection = () => {
           href="/rent"
           className="text-subText transition-colors flex items-center lg:gap-1 pb-1 h-full group-hover:text-primary"
         >
-          رهن و اجاره
+          {t("navbar.rentalMortgage")}
           {/* بردر پایین */}
           <span className="absolute left-0 right-0 bottom-0 h-[2px] bg-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-bottom group-hover:origin-bottom z-20"></span>
         </Link>
@@ -31,7 +34,7 @@ const NavbarSection = () => {
           href="/about"
           className="flex items-center h-full text-subText transition-colors pb-1 group-hover:text-primary"
         >
-          درباره ما
+          {t("navbar.aboutUs")}
           {/* بردر پایین */}
           <span className="absolute left-0 right-0 bottom-0 h-[2px] bg-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-bottom group-hover:origin-bottom z-20"></span>
         </Link>
@@ -42,7 +45,7 @@ const NavbarSection = () => {
           href="/articles"
           className="flex items-center h-full text-subText transition-colors pb-1 group-hover:text-primary"
         >
-          مقالات ما
+          {t("navbar.articles")}
           {/* بردر پایین */}
           <span className="absolute left-0 right-0 bottom-0 h-[2px] bg-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-bottom group-hover:origin-bottom z-20"></span>
         </Link>
@@ -53,14 +56,14 @@ const NavbarSection = () => {
           href="/contact"
           className="flex items-center h-full text-subText transition-colors pb-1 group-hover:text-primary"
         >
-          تماس با ما
+          {t("navbar.contactUs")}
           {/* بردر پایین */}
           <span className="absolute left-0 right-0 bottom-0 h-[2px] bg-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-bottom group-hover:origin-bottom z-20"></span>
         </Link>
       </div>
       <Link
         href="/become-seller"
-        className="bg-accent hidden text-[#f2f2f2] lg:w-[138px] h-[80%] px-4 py-1.5 rounded-[10px] hover:opacity-90 transition-opacity lg:flex items-center justify-center lg:text-[14px] md:text-[12px] md:px-3 md:py-1"
+        className="bg-accent hidden whitespace-nowrap text-accent-foreground w-fit gap-2 h-[80%] px-4 py-1.5 rounded-[10px] hover:opacity-90 transition-opacity xl:flex items-center justify-center lg:text-[14px] md:text-[12px] md:px-3 md:py-1"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -74,7 +77,7 @@ const NavbarSection = () => {
           <path d="M15 8v4" strokeLinecap="round" />
           <path d="M17 9v2" strokeLinecap="round" />
         </svg>
-        فروشنده شو
+        {t("become-seller")}
       </Link>
     </nav>
   );

@@ -1,3 +1,17 @@
 {
-    
+  "header": {
+    "navbar": {
+      "quicklyReserve": "حجز سريع",
+      "rentalMortgage": "رهن وإيجار",
+      "aboutUs": "من نحن",
+      "articles": "مقالاتنا",
+      "contactUs": "اتصل بنا"
+    },
+    "become-seller": "كن بائعًا",
+    "signin": "تسجيل الدخول / إنشاء حساب",
+    "goToAccount": "الذهاب إلى الحساب",
+    "logout": "تسجيل الخروج",
+    "changeTheme": "تغيير الموضوع",
+    "changeLang": "تغيير اللغة:"
+  }
 }

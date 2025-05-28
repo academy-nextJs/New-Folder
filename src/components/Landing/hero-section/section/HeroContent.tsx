@@ -20,7 +20,7 @@ const HeroContent = () => {
         </p>
       </div>
 
-      <div className="flex justify-center gap-2 sm:gap-4 md:gap-8">
+      <div className="flex justify-center gap-2 sm:gap-4 md:gap-8 flex-wrap">
         <LinkButtons variant="scale" classname="bg-secondary text-foreground text-xs md:text-sm lg:text-base w-fit" link="/reserve/reserve-house" title={t("button")} />
         <LinkButtons variant="scale" classname="bg-foreground text-secondary text-xs md:text-sm lg:text-base w-fit" link="/rent" title={t("button2")} />
       </div>

@@ -2,9 +2,12 @@
 import Link from "next/link";
 import { useTheme } from "@/utils/service/TanstakProvider";
 import { Moon, Sun } from "lucide-react";
+import { useTranslations } from "next-intl";
+import LanguageSwitcher from "./LangSwitcher";
 
 const MobileNavbarSection = () => {
   const { theme, toggleTheme } = useTheme();
+  const t = useTranslations("common.header")
 
   return (
     <nav className="flex flex-col w-full space-y-6">
@@ -15,7 +18,7 @@ const MobileNavbarSection = () => {
           href={`/reserve/reserve-house`}
         >
           <span className="text-subText hover:text-primary transition-colors flex items-center gap-1">
-            رزرو سریع
+            {t("navbar.quicklyReserve")}
           </span>
         </Link>
       </div>
@@ -27,7 +30,7 @@ const MobileNavbarSection = () => {
           href={`/rent`}
         >
           <span className="text-subText hover:text-primary transition-colors flex items-center gap-1">
-            رهن و اجاره
+            {t("navbar.rentalMortgage")}
           </span>
         </Link>
       </div>
@@ -38,7 +41,7 @@ const MobileNavbarSection = () => {
           href="/about"
           className="text-subText transition-colors hover:text-primary block"
         >
-          درباره ما
+          {t("navbar.aboutUs")}
         </Link>
       </div>
 
@@ -48,7 +51,7 @@ const MobileNavbarSection = () => {
           href="/articles"
           className="text-subText transition-colors hover:text-primary block"
         >
-          مقالات ما
+          {t("navbar.articles")}
         </Link>
       </div>
 
@@ -58,12 +61,12 @@ const MobileNavbarSection = () => {
           href="/contact"
           className="text-subText transition-colors hover:text-primary block"
         >
-          تماس با ما
+          {t("navbar.contactUs")}
         </Link>
       </div>
 
       <div className="flex items-center pt-2">
-        <span className="text-foreground ml-3">تغییر تم:</span>
+        <span className="text-foreground ml-3"> {t("changeTheme")} </span>
         <button
           onClick={toggleTheme}
           className="p-2 rounded-full hover:bg-subBg2 transition-colors"
@@ -79,10 +82,15 @@ const MobileNavbarSection = () => {
         </button>
       </div>
 
+      <div className="flex items-center pt-2">
+        <span className="text-foreground ml-3"> {t("changeLang")} </span>
+        <LanguageSwitcher />
+      </div>
+
       <div className="pt-4 mt-2 border-t border-border">
         <Link
           href="/become-seller"
-          className="bg-accent text-card-foreground px-4 py-2 rounded-[10px] hover:opacity-90 transition-opacity flex items-center justify-center"
+          className="bg-accent text-accent-foreground px-4 py-2 rounded-[10px] hover:opacity-90 transition-opacity flex items-center justify-center"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -96,7 +104,7 @@ const MobileNavbarSection = () => {
             <path d="M15 8v4" strokeLinecap="round" />
             <path d="M17 9v2" strokeLinecap="round" />
           </svg>
-          !فروشنده شو
+          {t("become-seller")}
         </Link>
       </div>
     </nav>

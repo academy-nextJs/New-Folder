@@ -1,3 +1,17 @@
 {
-    
+    "header": {
+        "navbar": {
+            "quicklyReserve":  " رزرو سریع ",
+            "rentalMortgage": " رهن و اجاره ",
+            "aboutUs": " درباره ما ",
+            "articles": " مقالات ما ",
+            "contactUs": " تماس با ما "
+        },
+        "become-seller": " فروشنده شو ",
+        "signin": " ورود / ثبت نام ",
+        "goToAccount": " ورود به حساب کاربری ",
+        "logout": " خروج از حساب ",
+        "changeTheme": " تغییر تم: ",
+        "changeLang": " تغییر زبان: "
+    }
 }

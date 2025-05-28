@@ -5,12 +5,15 @@ import NavbarSection from "./sections/NavbarSection";
 import MobileNavbarSection from "./sections/MobileNavbarSection";
 import LoginSection from "./sections/LoginSection";
 import { usePathname } from "next/navigation";
+import { useDirection } from "@/utils/hooks/useDirection";
 
 const Header = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const drawerRef = useRef<HTMLDivElement>(null);
   const cleanPath = usePathname();
   const pathname = cleanPath.replace(/^\/(fa|en|ar)/, "")
+
+  const dir = useDirection()
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -59,7 +62,7 @@ const Header = () => {
 
     <div
       ref={drawerRef}
-      className={`fixed md:hidden top-0 right-0 h-full w-72 bg-secondary z-[100] shadow-lg transform ${isDrawerOpen ? "animate-drawerSlideIn" : "translate-x-full"
+      className={`fixed lg:hidden top-0 right-0 h-full w-72 bg-secondary z-[100] shadow-lg transform ${isDrawerOpen ? "animate-drawerSlideIn" : "translate-x-full"
         } overflow-y-auto`}
     >
       <div className="p-6 ">
@@ -92,17 +95,17 @@ const Header = () => {
       </div>
     </div>
 
-    <div className="w-[100%] flex items-center justify-between lg:h-[48px] md:h-[36px] h-[40px] absolute top-[24px] bg-subBg text-subText rounded-[16px]  z-50">
-      <div className="hidden md:flex items-center h-full gap-5 ">
+    <div dir={dir} className="w-[100%] flex items-center justify-between lg:h-[48px] md:h-[36px] h-[40px] absolute top-[24px] bg-subBg text-subText rounded-[16px]  z-50">
+      <div className="hidden lg:flex items-center h-full gap-5 ">
         <LogoSection />
         <NavbarSection />
       </div>
 
-      <div className="hidden md:flex items-center">
+      <div className="hidden lg:flex items-center">
         <LoginSection />
       </div>
 
-      <div className="flex md:hidden items-center justify-between w-full">
+      <div className="flex lg:hidden items-center px-4 justify-between w-full">
         <div>
           <button
             onClick={() => setIsDrawerOpen(!isDrawerOpen)}
