@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import arrow from "@/assets/arrow.svg";
 import { Star, Calendar } from "lucide-react";
 import plygen from "@/assets/Polygon 1.png";
+import { useTranslations } from "next-intl";
 
 interface Comment {
   id: number;
@@ -20,6 +21,7 @@ interface CommentCardProps {
 }
 
 const CommentUsers = () => {
+  const t = useTranslations("landing.commentUsers");
   const [activeSlideGroup, setActiveSlideGroup] = useState(0);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
@@ -32,50 +34,50 @@ const CommentUsers = () => {
     {
       id: 1,
       rating: convertToPersianNumber("4.5"),
-      text: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است...",
-      author: "محمدرضا ساداتی",
-      date: "۱۲ مرداد - ۱۴۰۱",
-      time: "۱۲:۳۳",
+      text: t("comment1Text"),
+      author: t("comment1Author"),
+      date: t("comment1Date"),
+      time: t("comment1Time"),
     },
     {
       id: 2,
       rating: convertToPersianNumber("4.3"),
-      text: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است...",
-      author: "مریم رضایی",
-      date: "۵ شهریور - ۱۴۰۱",
-      time: "۱۵:۲۰",
+      text: t("comment2Text"),
+      author: t("comment2Author"),
+      date: t("comment2Date"),
+      time: t("comment2Time"),
     },
     {
       id: 3,
       rating: convertToPersianNumber("4.5"),
-      text: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است...",
-      author: "محمدرضا ساداتی",
-      date: "۱۲ مرداد - ۱۴۰۱",
-      time: "۱۲:۳۳",
+      text: t("comment3Text"),
+      author: t("comment3Author"),
+      date: t("comment3Date"),
+      time: t("comment3Time"),
     },
     {
       id: 4,
       rating: convertToPersianNumber("4.3"),
-      text: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است...",
-      author: "مریم رضایی",
-      date: "۵ شهریور - ۱۴۰۱",
-      time: "۱۵:۲۰",
+      text: t("comment4Text"),
+      author: t("comment4Author"),
+      date: t("comment4Date"),
+      time: t("comment4Time"),
     },
     {
       id: 5,
       rating: convertToPersianNumber("4.7"),
-      text: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است...",
-      author: "امیر کاضمی",
-      date: "۱۴ آذر - ۱۴۰۱",
-      time: "۱۱:۲۵",
+      text: t("comment5Text"),
+      author: t("comment5Author"),
+      date: t("comment5Date"),
+      time: t("comment5Time"),
     },
     {
       id: 6,
       rating: convertToPersianNumber("4.9"),
-      text: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است...",
-      author: "علی احمدی",
-      date: "۲۹ دی - ۱۴۰۱",
-      time: "۱۸:۰۵",
+      text: t("comment6Text"),
+      author: t("comment6Author"),
+      date: t("comment6Date"),
+      time: t("comment6Time"),
     },
   ];
 
@@ -129,7 +131,7 @@ const CommentUsers = () => {
           onClick={goToPrevSlide}
         />
         <span className="text-sm sm:text-base md:text-lg" dir="rtl">
-          نظرات کاربران
+          {t("title")}
         </span>
         <Image
           src={arrow}
@@ -140,11 +142,11 @@ const CommentUsers = () => {
       </div>
 
       <h1 className="text-center text-xl sm:text-2xl md:text-3xl font-bold mb-2 sm:mb-4" dir="rtl">
-        رضایت شما اعتبار و ارزش دلتا را می‌سازد!
+        {t("subtitle")}
       </h1>
 
       <p className="text-center text-xs sm:text-sm md:text-base mb-4 sm:mb-5 mx-auto max-w-2xl font-sans break-words leading-5 sm:leading-6 md:leading-7" dir="rtl">
-        تیم دلتا با ارائه بهترین نیروهای خدماتی و سرویس‌های املاکی سعی دارد تا در تمام لحظات کنار شما باشد.
+        {t("description")}
       </p>
 
       <div className="flex flex-col items-center">

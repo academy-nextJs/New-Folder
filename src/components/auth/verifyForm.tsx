@@ -11,9 +11,10 @@ import { redirect, useRouter } from "next/navigation";
 import OtpInput from "../common/inputs/auth/OtpInput";
 import TimerButton from "../common/buttons/timer/TimerButton";
 import { useEmailStore, useUserStore } from "@/utils/zustand/store";
+import { useTranslations } from "next-intl";
 
 const VerifyForm = () => {
-
+    const t = useTranslations('auth.verifyForm');
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [code, setCode] = useState<string>()
     const tempUserId = useUserStore(state => state.tempUserId)
@@ -42,22 +43,18 @@ const VerifyForm = () => {
             }
 
             if (res) {
-                showToast("success", " کد تایید شد ", "بستن", " کد ارسال شده برای ایمیل شما تایید شد ")
+                showToast("success", t("successTitle"), t("close"), t("successMessage"))
                 setIsLoading(false)
                 reset()
                 router.push("/completeRegister")
             }
         } catch (error: any) {
             console.log(error)
-            if (error.response.data.message) {
-                showToast("error", "مشکل در تایید کد",
-                    "بستن",
-                    error.response.data.message, 5000)
+            if (error.response?.data?.message) {
+                showToast("error", t("errorTitle"), t("close"), error.response.data.message, 5000)
             }
             else {
-                showToast("error", "مشکل در تایید کد",
-                    "بستن",
-                    " مشکلی در تایید کد وجود دارد ", 5000)
+                showToast("error", t("errorTitle"), t("close"), t("errorMessage"), 5000)
             }
             setIsLoading(false)
         }
@@ -79,22 +76,18 @@ const VerifyForm = () => {
                                     setTempUserId(res.tempUserId)
                                 }
                                 if (res) {
-                                    showToast("success", " کد تایید شد ", "بستن", " کد ارسال شده برای ایمیل شما تایید شد ")
+                                    showToast("success", t("resendSuccessTitle"), t("close"), t("resendSuccessMessage"))
                                     setIsLoading(false)
                                     reset()
                                     router.push("/verifyCode")
                                 }
                             } catch (error: any) {
                                 console.log(error)
-                                if (error.response.data.message) {
-                                    showToast("error", "مشکل در تایید کد",
-                                        "بستن",
-                                        error.response.data.message, 5000)
+                                if (error.response?.data?.message) {
+                                    showToast("error", t("errorTitle"), t("close"), error.response.data.message, 5000)
                                 }
                                 else {
-                                    showToast("error", "مشکل در تایید کد",
-                                        "بستن",
-                                        " مشکلی در تایید کد وجود دارد ", 5000)
+                                    showToast("error", t("errorTitle"), t("close"), t("errorMessage"), 5000)
                                 }
                             }
                         }
@@ -103,9 +96,9 @@ const VerifyForm = () => {
                 </div>
 
                 <div className="flex flex-row-reverse gap-4 md:flex-nowrap flex-wrap">
-                    <CommonButton type="submit" title={isLoading ? "در حال تایید..." : "تایید کد"}
+                    <CommonButton type="submit" title={isLoading ? t("loading") : t("submit")}
                         icon={isLoading ? <Loader /> : <ChevronLeft size={16} />} classname="md:w-1/2 w-full text-primary-foreground" />
-                    <CommonButton type="button" title={"تغییر ایمیل"}
+                    <CommonButton type="button" title={t("changeEmail")}
                         onclick={() => redirect('/login')}
                         icon={<RefreshCcw size={16} />} classname="bg-transparent border border-card-foreground text-card-foreground md:w-1/2 w-full" />
                 </div>

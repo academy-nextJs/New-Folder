@@ -8,6 +8,7 @@ import Love from "@/assets/heart3 1.png";
 import { ClockIcon, HomeIcon, SmileIcon, TrophyIcon } from "lucide-react";
 import arrow from "@/assets/arrow.svg";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 
 interface Props {
   icon: ReactNode;
@@ -18,6 +19,9 @@ interface Props {
 }
 
 export default function DeltaAboutUsSection() {
+
+  const t = useTranslations("landing.aboutUs");
+
   const CustomCard = ({
     icon,
     title,
@@ -127,7 +131,7 @@ export default function DeltaAboutUsSection() {
               dir="rtl"
               className="flex items-center justify-center h-full text-text-about text-[20px] sm:text-xl md:text-xl lg:text-[22px] text-center px-2 sm:px-4 leading-relaxed"
             >
-               لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو د... 
+              {t("centerCardText")}
             </div>
           </foreignObject>
         </svg>
@@ -167,7 +171,7 @@ export default function DeltaAboutUsSection() {
             />
           </svg>
         </div>
-        <span className="text-sm"> درباره ما </span>
+        <span className="text-sm">{t("aboutUs")}</span>
         <div className="flex gap-1 justify-center items-center dark:hidden">
           <svg
             width="48"
@@ -200,11 +204,11 @@ export default function DeltaAboutUsSection() {
       </div>
 
       <h1 className="text-center md:text-3xl text-xl font-bold mb-4 text-foreground">
-         دلتا را بیشتر بشناس! 
+        {t("knowDelta")}
       </h1>
 
       <p className="text-center md:text-base text-sm md:mb-8 mb-12 mx-auto max-w-full font-sans break-words">
-         تیم دلتا با ارائه بهترین تورهای خدماتی و سرویس های آنلاین سعی دارد تا بتواند در تمام لحظات کنار شما باشد. 
+        {t("deltaTeam")}
       </p>
 
       <div className="max-w-6xl mx-auto">
@@ -212,16 +216,16 @@ export default function DeltaAboutUsSection() {
           <div className="w-full min-[540px]:w-1/3 flex flex-col gap-0">
             <CustomCard
               icon={<HomeIcon className="text-iconsecendary  w-10 h-10" />}
-              title="+۱۲۰۰۰ خونه فعال"
-              description="خانه‌هایی که نظافت و امنیت‌شان تأمین شده!"
+              title={t("activeHouses")}
+              description={t("activeHousesDesc")}
               image={productMangment}
               useBlueFill={true}
             />
 
             <CustomCard
               icon={<TrophyIcon className="text-iconsecendary w-10 h-10" />}
-              title="+10 سال سابقه درخشان"
-              description="در مهمان نوازی به شما مسافران عزیز"
+              title={t("yearsOfExperience")}
+              description={t("yearsOfExperienceDesc")}
               image={Jam}
             />
           </div>
@@ -233,15 +237,15 @@ export default function DeltaAboutUsSection() {
           <div className="w-full min-[540px]:w-1/3 flex flex-col gap-0">
             <CustomCard
               icon={<ClockIcon className="text-iconsecendary  w-10 h-10" />}
-              title= "27/7 ساعت شبانه روز"
-              description="تیم پشتیبانی در تمام طول روز همراه شما هستن"
+              title={t("supportHours")}
+              description={t("supportHoursDesc")}
               image={Speaker}
             />
 
             <CustomCard
               icon={<SmileIcon className="text-iconsecendary  w-10 h-10" />}
-              title="15,000+ نظرات کاربران"
-              description="رضایت مسافرانی که از پلتفرم دلتا استفاده کردن"
+              title={t("userReviews")}
+              description={t("userReviewsDesc")}
               image={Love}
               useBlueFill={true}
             />

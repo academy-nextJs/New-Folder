@@ -4,6 +4,7 @@ import { AtSign, ChevronLeft, Phone } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 import AnimationForm from '@/components/contact-us/AnimationForm'
+import { useTranslations } from 'next-intl'
 
 export const metadata = {
   title: "ارتباط با ما | ",
@@ -11,18 +12,19 @@ export const metadata = {
   keywords: ["ارتباط با ما", "دلتا", "پشتیبانی", "تماس"],
 };
 
-const page = () => {
+const ContactPage = () => {
+  const t = useTranslations('contactUs.page');
 
   return (
-    <div className='flex xl:flex-row flex-col gap-[100px] mt-[100px] px-8 text-card-foreground'>
+    <div className='flex xl:flex-row flex-col gap-[100px] mt-[100px] px-8 text-card-foreground justify-between w-full'>
       <div className='flex gap-6 flex-col'>
         <div className='flex gap-3 items-center w-fit text-[13px]'>
-          <Link href={`/`}> خانه </Link>
+          <Link href={`/`}>{t('home')}</Link>
           <ChevronLeft className='text-[#AAAAAA]' size={20} />
-          <Link href={`/contact-us`} className='text-primary'> ارتباط با ما </Link>
+          <Link href={`/contact-us`} className='text-primary'>{t('contact')}</Link>
         </div>
         <div className="flex flex-row w-fit items-center gap-4 justify-end">
-          <span className="xl:text-base text-primary text-sm"> ارتباط با ما </span>
+          <span className="xl:text-base text-primary text-sm">{t('contact')}</span>
           <div className='dark:flex hidden gap-1 justify-center items-center'>
             <svg width="48" height="16" viewBox="0 0 48 16" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M45 9.73205C46.3333 8.96225 46.3333 7.03775 45 6.26795L39 2.80385C37.6667 2.03405 36 2.9963 36 4.5359L36 11.4641C36 13.0037 37.6667 13.966 39 13.1962L45 9.73205Z" fill="#8CFF45" />
@@ -38,11 +40,13 @@ const page = () => {
             </svg>
           </div>
         </div>
-        <h2 className='xl:text-[32px] lg:text-[24px] text-[20px] font-[300]'> هر ساعت از شبانه روز که باشه ،<span className='font-semibold'> ما کنارتیم </span> ! </h2>
-        <p className='font-[400] xl:text-base text-sm'> هر ساعت از شبانه روز که باشه تیم پیشتیبانی دلتا پاسخگوی سوالات و انتقادات شما هستند تا در اسرع وقت مشکلتان را حل کنیم ! </p>
-        <AboutBox title='09229167194 - 098541612310' icon={<Phone />} />
-        <AboutBox title='Delta@gmail.com' icon={<AtSign />} />
-        <AboutBox title='گیلان ، رشت ، میدان آزادی ، جنب چهار راه عظیمی زاده' icon={<AtSign />} />
+        <h2 className='xl:text-[32px] lg:text-[24px] text-[20px] font-[300]'>
+          {t('title1')}<span className='font-semibold'> {t('title2')} </span> {t('title3')}
+        </h2>
+        <p className='font-[400] xl:text-base text-sm'>{t('desc')}</p>
+        <AboutBox title={t('phone')} icon={<Phone />} />
+        <AboutBox title={t('email')} icon={<AtSign />} />
+        <AboutBox title={t('address')} icon={<AtSign />} />
       </div>
       <AnimationForm />
       <div className='bg-card-secondary3 rounded-[32px] xl:hidden block'>
@@ -52,4 +56,4 @@ const page = () => {
   )
 }
 
-export default page
+export default ContactPage

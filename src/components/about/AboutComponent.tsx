@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import { UserCircle2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 const container = {
   hidden: { opacity: 0, y: 40 },
@@ -26,7 +27,8 @@ const item = {
 };
 
 export default function AboutComponent() {
-  const teamMembers = ["کیان جانلو", "مهدی قاسمی", "محمد درزی", "عارف سالاریه"];
+  const t = useTranslations("about");
+  const teamMembers = t.raw("teamMembers") as string[];
 
   return (
     <div className="relative min-h-screen bg-gradient-to-br px-6 py-20 text-white overflow-hidden">
@@ -43,21 +45,21 @@ export default function AboutComponent() {
           className="text-5xl font-extrabold mb-6 bg-gradient-to-r from-primary to-cyan-400 text-transparent bg-clip-text drop-shadow-lg"
           variants={item}
         >
-          درباره دلتا
+          {t("title")}
         </motion.h1>
 
         <motion.p
           className="text-lg leading-relaxed mb-14 text-gray-300 max-w-3xl mx-auto"
           variants={item}
         >
-          مشاوره املاک دلتا با سال‌ها تجربه در حوزه‌ی خرید، فروش، رهن و اجاره‌ی ملک، بستری مطمئن برای مشتریان فراهم کرده تا با خیالی آسوده معاملات ملکی خود را انجام دهند. تیم ما با شناخت دقیق بازار، تحلیل‌های حرفه‌ای و مشاوره‌ی تخصصی، همراه مطمئن شما در تمامی مراحل معامله است.
+          {t("desc")}
         </motion.p>
 
         <motion.h2
           className="text-2xl font-semibold text-white mb-10 tracking-widest uppercase"
           variants={item}
         >
-          اعضای تیم دلتا
+          {t("teamTitle")}
         </motion.h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-8">

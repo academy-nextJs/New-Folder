@@ -9,53 +9,49 @@ import star from "@/assets/Star 7.png";
 import { MoveLeftIcon } from "lucide-react";
 import { Loader } from "@/components/common/Loader";
 import arrow from "@/assets/arrow.svg";
-import { useTheme } from "@/utils/service/TanstakProvider";
 import { useRouter } from "next/navigation";
 import { Category } from "@/types/categories-type/categories-type";
 import { getCategories } from "@/utils/service/api/categories";
+import { useTranslations } from "next-intl";
 
 const CardSvgBackground = ({ isHovered }: { isHovered: boolean }) => (
-  <svg className="w-full " xmlns="http://www.w3.org/2000/svg">
+  <svg className="w-full" xmlns="http://www.w3.org/2000/svg">
     <path
       d="M103.688 23.5C108.543 23.5 113.052 20.9839 115.602 16.8515L121.898 6.6485C124.448 2.51609 128.956 0 133.812 0H199C206.732 0 213 6.26801 213 14V75C213 82.732 206.732 89 199 89H14C6.26802 89 0 82.732 0 75V37.5C0 29.768 6.26801 23.5 14 23.5H103.688Z"
       stroke="black"
       strokeWidth="2"
       className={`transition-all duration-300 ${
-        isHovered
-          ? "dark:fill-primary fill-primary"
-          : "dark:fill-card-body fill-white"
-      }   stroke-primary dark:stroke-none`}
+        isHovered ? "dark:fill-primary fill-primary" : "dark:fill-card-body fill-white"
+      } stroke-primary dark:stroke-none`}
     />
   </svg>
 );
+
 const categoryIcons = [villaIcon4, villaIcon2, villaIcon, villaIcon3];
 
 const Categories = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [cardsToShow, setCardsToShow] = useState(1);
-  const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [categoryData, setCategoryData] = useState<Category[]>([]);
+  const t = useTranslations("landing.categories");
+  const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const Data = await getCategories()
+        const Data = await getCategories();
         setCategoryData(Data);
       } catch (error) {
         console.error("Failed to fetch categories:", error);
       }
     };
-
     fetchData();
   }, []);
 
   useEffect(() => {
     const updateCardsToShow = () => {
       const width = window.innerWidth;
-
-      setIsSmallScreen(width <= 448);
-
       if (width >= 1346) setCardsToShow(6);
       else if (width >= 1024) setCardsToShow(4);
       else if (width >= 640) setCardsToShow(3);
@@ -82,15 +78,9 @@ const Categories = () => {
     return categoryIcons[index % categoryIcons.length];
   };
 
-  const { theme } = useTheme();
-
-  const router = useRouter();
-
   const handleClick = (type: string) => {
     const params = new URLSearchParams();
-
-    params.set("propertyType", type)
-
+    params.set("propertyType", type);
     router.push(`/rent?${params.toString()}`);
   };
 
@@ -100,24 +90,22 @@ const Categories = () => {
         <Image
           src={arrow}
           alt="arrow"
-          className="w-8 h-8 sm:w-12 sm:h-12 rotate-180  brightness-0 dark:brightness-100 transition-all duration-300"
+          className="w-8 h-8 sm:w-12 sm:h-12 rotate-180 brightness-0 dark:brightness-100 transition-all duration-300"
         />
-        <span className="text-sm sm:text-base md:text-lg">
-           دسته بندی املاک دلتا 
-        </span>
+        <span className="text-sm sm:text-base md:text-lg">{t("title")}</span>
         <Image
           src={arrow}
           alt="arrow"
-          className="w-8 h-8 sm:w-12 sm:h-12  brightness-0 dark:brightness-100 transition-all duration-300"
+          className="w-8 h-8 sm:w-12 sm:h-12 brightness-0 dark:brightness-100 transition-all duration-300"
         />
       </div>
 
       <h1 className="text-center text-xl sm:text-2xl md:text-3xl font-bold mb-2 sm:mb-4">
-         هر ملکی بخوای اینجا پیدا میشه ! 
+        {t("headline")}
       </h1>
 
       <p className="text-center text-subText sm:text-sm mb-8 sm:mb-12 mx-auto max-w-full font-sans break-words">
-         با کلیک به روی هر دسته بندی می‌توانید تمام آگهی مربوط به آن را مشاهده کنید و به ملک مورد علاقه خود برسید 
+        {t("description")}
       </p>
 
       <div className="relative w-full flex items-center justify-center">
@@ -126,9 +114,7 @@ const Categories = () => {
             <Loader />
           </div>
         ) : (
-          <div
-            className="flex justify-center items-center w-full"
-          >
+          <div className="flex justify-center items-center w-full">
             <div className="flex gap-4 sm:gap-8 overflow-x-auto px-2 sm:px-6 mx-auto">
               {visibleCards.map((cardIndex) => {
                 const category = categoryData[cardIndex];
@@ -141,96 +127,67 @@ const Categories = () => {
                     onMouseEnter={() => setHoveredIndex(cardIndex)}
                     onMouseLeave={() => setHoveredIndex(null)}
                   >
-                    <div
-                      className="w-full h-full rounded-lg overflow-hidden"
-                    >
-                      <CardSvgBackground
-                        isHovered={hoveredIndex === cardIndex}
-                      />
+                    <div className="w-full h-full rounded-lg overflow-hidden">
+                      <CardSvgBackground isHovered={hoveredIndex === cardIndex} />
                     </div>
 
                     <div
-                      className={`absolute left-6 bottom-[80px] rounded-lg transition-colors duration-300
-    dark:bg-transparent dark:border-none 
-    ${hoveredIndex === cardIndex ? "bg-primary" : "bg-white"}
-    dark:${hoveredIndex === cardIndex ? "" : ""}
-    border border-primary dark:border-none
-  `}
+                      className={`absolute left-6 bottom-[80px] rounded-lg transition-colors duration-300 ${
+                        hoveredIndex === cardIndex ? "bg-primary" : "bg-white"
+                      } border border-primary dark:border-none dark:bg-transparent`}
                       onClick={handleNextSlide}
                     >
                       <MoveLeftIcon
-                        className={`w-8 h-[18px] transition-colors duration-300
-      ${hoveredIndex === cardIndex ? "text-white" : "text-primary"}
-      dark:text-subText
-    `}
+                        className={`w-8 h-[18px] transition-colors duration-300 ${
+                          hoveredIndex === cardIndex ? "text-white" : "text-primary"
+                        } dark:text-subText`}
                       />
                     </div>
 
                     <div
                       className={`
-    absolute bottom-14 
-    ${isSmallScreen ? "right-8" : "right-8"}
-    w-12 h-12 flex items-center justify-center rounded-md
-    ${
-      theme === "light"
-        ? "bg-secondary-light2"
-        : hoveredIndex === cardIndex
-        ? "bg-secondary-light2"
-        : "bg-secondary-light2"
-    }
-    backdrop-blur-md transition-all duration-300
-  `}
+                        absolute bottom-14 right-8
+                        w-12 h-12 flex items-center justify-center rounded-md
+                        bg-secondary-light2 backdrop-blur-md transition-all duration-300
+                      `}
                     >
                       <Image
-                        alt="villa"
+                        alt="icon"
                         src={icon}
                         className="w-6 h-6 invert dark:invert-0"
                       />
                     </div>
 
                     <div
-                      className={`
-    absolute bottom-4 left-1/2 transform -translate-x-1/2
-    flex items-center gap-1 group font-bold text-center
-  `}
-                      style={{
-                        bottom: "20px",
-                      }}
+                      className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex items-center gap-1 group font-bold text-center"
+                      style={{ bottom: "20px" }}
                     >
                       <Image
                         alt="star"
                         src={star}
-                        className={`
-      w-4 h-4 transition-all duration-300
-      ${
-        hoveredIndex === cardIndex
-          ? "invert-0 dark:invert"
-          : "invert dark:invert-0"
-      }
-    `}
+                        className={`w-4 h-4 transition-all duration-300 ${
+                          hoveredIndex === cardIndex
+                            ? "invert-0 dark:invert"
+                            : "invert dark:invert-0"
+                        }`}
                       />
-
                       <span
-                        className={`
-      transition-all duration-300 
-      ${hoveredIndex === cardIndex ? "text-card-body" : "text-foreground"}
-    `}
+                        className={`transition-all duration-300 ${
+                          hoveredIndex === cardIndex
+                            ? "text-card-body"
+                            : "text-foreground"
+                        }`}
                       >
-                        {category?.name}
-                        {/* {category?.name || t("categories.defaultName")} */}
+                        {category?.name || t("defaultName")}
                       </span>
-
                       <Image
                         alt="star"
                         src={star}
-                        className={`
-      w-4 h-4 transition-all duration-300
-      ${
-        hoveredIndex === cardIndex
-          ? "invert-0 dark:invert"
-          : "invert dark:invert-0"
-      }
-    `}
+                        className={`w-4 h-4 transition-all duration-300 ${
+                          hoveredIndex === cardIndex
+                            ? "invert-0 dark:invert"
+                            : "invert dark:invert-0"
+                        }`}
                       />
                     </div>
                   </div>

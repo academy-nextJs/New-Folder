@@ -13,6 +13,7 @@ import {
 } from '@/components/ui/pagination'
 import ReserveCardSkeleton from '../card/ReserveCardSkeleton'
 import { motion } from 'framer-motion'
+import { useTranslations } from 'next-intl'
 
 interface IReserveContent {
   houses: IHouse[]
@@ -22,7 +23,8 @@ interface IReserveContent {
   setLocation: React.Dispatch<React.SetStateAction<string>>
 }
 
-const ReserveContent: React.FC<IReserveContent> = ({ houses, isLoading, setMaxPrice, setMinPrice }) => {
+const ReserveContent: React.FC<IReserveContent> = ({ houses, isLoading, setMaxPrice, setMinPrice}) => {
+  const t = useTranslations('reserve.content');
   const [currentPage, setCurrentPage] = useState(1)
   const itemsPerPage = 4
   const totalPages = Math.ceil(houses.length / itemsPerPage)
@@ -44,19 +46,19 @@ const ReserveContent: React.FC<IReserveContent> = ({ houses, isLoading, setMaxPr
           <div className="w-1/2">
             <CommonInput
               onchange={(e) => setMinPrice(Number(e.target.value))}
-              label="حداقل قیمت"
+              label={t('minPrice')}
               classname="px-4 py-2 border-subText w-full outline-none"
               color="text-subText placeholder:text-subText"
-              placeholder="0 تومان"
+              placeholder={t('minPricePlaceholder')}
             />
           </div>
           <div className="w-1/2">
             <CommonInput
               onchange={(e) => setMaxPrice(Number(e.target.value))}
-              label="حداکثر قیمت"
+              label={t('maxPrice')}
               classname="px-4 py-2 border-subText w-full outline-none"
               color="text-subText placeholder:text-subText"
-              placeholder="0 تومان"
+              placeholder={t('maxPricePlaceholder')}
             />
           </div>
         </div>
@@ -76,7 +78,7 @@ const ReserveContent: React.FC<IReserveContent> = ({ houses, isLoading, setMaxPr
           </div>
           {paginatedHouses.length === 0 && (
             <span className='text-sm font-semibold mx-auto'>
-              درحال حاضر هیچ آگهی وجود ندارد
+              {t('noAds')}
             </span>
           )}
 

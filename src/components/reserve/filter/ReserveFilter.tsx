@@ -9,6 +9,7 @@ import { motion } from 'framer-motion'
 import { Label } from '@/components/ui/label'
 import CitySelectPopover from '@/components/common/inputs/common/CitySelectPopovar'
 import { selectItems } from '@/components/Landing/hero-section/section/SearchBar'
+import { useTranslations } from 'next-intl'
 
 interface IReserveFilter {
     setOrder: React.Dispatch<React.SetStateAction<'DESC' | 'ASC'>>
@@ -19,9 +20,9 @@ interface IReserveFilter {
 }
 
 const ReserveFilter: FC<IReserveFilter> = ({ setOrder, setSort, setSearch, houseLength, setLocation }) => {
+    const t = useTranslations('reserve.filter');
     const [isOpen, setIsOpen] = useState<boolean>(false)
     const [value, setValue] = React.useState("")
-
 
     return (
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} className='bg-secondary-light4 w-full lg:flex-nowrap flex-wrap gap-4 rounded-[24px] px-4 py-3 flex justify-between'>
@@ -29,17 +30,17 @@ const ReserveFilter: FC<IReserveFilter> = ({ setOrder, setSort, setSearch, house
 
                 <div className="w-fill md-w-auto flex-col flex gap-1">
                     <Label className={`text-[13px] flex gap-0.5 text-subText`}>
-                        <span> مقصد مورد نظر شما </span>
+                        <span>{t('destination')}</span>
                         <span> : </span>
                     </Label>
                     <CitySelectPopover
                         value={value}
                         onChange={(val) => {
                             setValue(val);
-                            setLocation(val === "همه" ? "" : val);
+                            setLocation(val === t('all') ? "" : val);
                         }}
                         items={selectItems}
-                        placeholder="استان یا شهر را انتخاب کنید"
+                        placeholder={t('cityPlaceholder')}
                     />
                 </div>
 
@@ -58,32 +59,32 @@ const ReserveFilter: FC<IReserveFilter> = ({ setOrder, setSort, setSearch, house
                             setOrder('DESC')
                         }
                     })}
-                    placeholder="جدید ترین ها"
+                    placeholder={t('latest')}
                     icon={<Filter size={16} className='text-subText' />}
                     selectItems={[
-                        { label: 'جدید ترین ها', value: 'last_updated' },
-                        { label: 'ارزان ترین ها', value: 'price_low' },
-                        { label: 'محبوب ترین ها', value: 'rate' },
+                        { label: t('latest'), value: 'last_updated' },
+                        { label: t('cheapest'), value: 'price_low' },
+                        { label: t('popular'), value: 'rate' },
                     ]}
                     color='text-subText dark:group-hover:text-white'
-                    label='مرتب سازی بر اساس'
+                    label={t('sortBy')}
                     classname='px-4 py-5 border-subText w-full dark:group-hover:text-white dark:group-hover:border-white outline-none'
                 />
                 <CommonInput
                     onchange={(e) => setSearch(e.target.value)}
-                    label='جستجو'
+                    label={t('search')}
                     classname='px-4 py-2 border-subText xl:w-[600px] w-full dark:group-hover:placeholder:text-white placeholder:text-subText dark:group-hover:text-white dark:group-hover:border-white outline-none'
                     color='text-subText dark:group-hover:text-white'
-                    placeholder='نام هتل مورد نظر .....'
+                    placeholder={t('hotelPlaceholder')}
                 />
 
             </div>
             <div className='flex gap-4 justify-center items-center'>
                 <div className='px-4 py-2 border lg:mx-0 mx-auto border-card-foreground items-center justify-center rounded-[16px] flex flex-nowrap gap-2 text-sm'>
                     <Megaphone size={20} />
-                    <span className='whitespace-nowrap'> تعداد آگهی : {houseLength} </span>
+                    <span className='whitespace-nowrap'>{t('count')} : {houseLength} </span>
                 </div>
-                <CommonButton onclick={() => setIsOpen(true)} icon={<MapPin />} title='نقشه' classname='bg-transparent border-foreground border text-foreground flex xl:hidden' />
+                <CommonButton onclick={() => setIsOpen(true)} icon={<MapPin />} title={t('map')} classname='bg-transparent border-foreground border text-foreground flex xl:hidden' />
                 <ReserveModalMap isOpen={isOpen} setIsOpen={setIsOpen} />
             </div>
         </motion.div>

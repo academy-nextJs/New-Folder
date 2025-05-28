@@ -7,6 +7,7 @@ import { ChevronLeft, Coins, House, Minus, Plus } from 'lucide-react'
 import React, { FC, useState } from 'react'
 import jalaali from 'jalaali-js'
 import { motion } from 'framer-motion'
+import { useTranslations } from 'next-intl'
 
 interface IProps {
     discountedPrice?: number;
@@ -14,6 +15,7 @@ interface IProps {
 }
 
 const SingleReserveBooking: FC<IProps> = ({ discountedPrice, price }) => {
+    const t = useTranslations('singleReserve.booking');
     const [count, setCount] = useState(0)
     const [startDate, setStartDate] = useState<string>('')
     const [endDate, setEndDate] = useState<string>('')
@@ -33,13 +35,13 @@ const SingleReserveBooking: FC<IProps> = ({ discountedPrice, price }) => {
     return (
         <motion.div initial={{ x: 50, opacity: 0 }} whileInView={{ x: 0, opacity: 1 }} transition={{ duration: 1 }} className='bg-secondary-light2 px-6 gap-4 rounded-[32px] pb-[20px] flex flex-col items-center justify-center h-fit xl:w-3/12 w-full'>
             <div className='rounded-b-[32px] bg-subBg2 h-[49] mb-[20px] w-2/3 flex gap-2 justify-center items-center text-base max-xl:text-sm flex-row-reverse'>
-                رزرو خونه برای : <House size={20} />
+                {t('reserveFor')} <House size={20} />
             </div>
 
             <DatePickerInput
-                label='تاریخ رفت '
+                label={t('startDate')}
                 className='w-[100%] text-sm'
-                placeholder='تاریخ رفت را انتخاب کنید'
+                placeholder={t('startDatePlaceholder')}
                 onChange={(e) => {
                     if (e) {
                         const gDate = convertToGregorian(e.year, e.month.number, e.day)
@@ -49,8 +51,8 @@ const SingleReserveBooking: FC<IProps> = ({ discountedPrice, price }) => {
             />
 
             <DatePickerInput
-                label='تاریخ برگشت'
-                placeholder='تاریخ برگشت را انتخاب کنید'
+                label={t('endDate')}
+                placeholder={t('endDatePlaceholder')}
                 className='text-sm w-[100%]'
                 onChange={(e) => {
                     if (e) {
@@ -65,7 +67,7 @@ const SingleReserveBooking: FC<IProps> = ({ discountedPrice, price }) => {
                     value={count}
                     onchange={(e) => setCount(e.target.valueAsNumber)}
                     type='number'
-                    label='تعداد مسافران'
+                    label={t('passengerCount')}
                     classname='w-full border-subText'
                     color='text-subText'
                 />
@@ -79,7 +81,7 @@ const SingleReserveBooking: FC<IProps> = ({ discountedPrice, price }) => {
             <div className='w-full flex items-center flex-col'>
                 <div className='border border-[#646464] w-full mt-[20px]'></div>
                 <div className='rounded-b-[32px] bg-subBg2 h-[49] w-2/3 flex gap-2 justify-center items-center text-base max-xl:text-sm flex-row-reverse'>
-                    قیمت های رزرو <Coins size={20} />
+                    {t('reservePrices')} <Coins size={20} />
                 </div>
             </div>
 
@@ -89,13 +91,13 @@ const SingleReserveBooking: FC<IProps> = ({ discountedPrice, price }) => {
                     {discountedPrice && <div className='bg-danger text-accent-foreground rounded-[12px] px-4 text-sm py-1 w-fit'> %{discount_percentage} </div>}
                 </div>
                 <div className='text-primary text-[24px]'>
-                    {discountedPrice ? SplitNumber(discountedPrice) : SplitNumber(price)} ت
+                    {discountedPrice ? SplitNumber(discountedPrice) : SplitNumber(price)} {t('currency')}
                 </div>
             </div>
 
             <CommonButton
                 icon={<ChevronLeft size={16} />}
-                title='همین الان رزرو کن'
+                title={t('reserveNow')}
                 classname='w-full text-primary-foreground'
                 onclick={handleSubmit}
             />
