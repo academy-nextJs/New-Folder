@@ -4,14 +4,13 @@ import LogoSection from "./sections/LogoSection";
 import NavbarSection from "./sections/NavbarSection";
 import MobileNavbarSection from "./sections/MobileNavbarSection";
 import LoginSection from "./sections/LoginSection";
-import { usePathname } from "next/navigation";
 import { useDirection } from "@/utils/hooks/useDirection";
+import useClearPathname from "@/utils/helper/clearPathname/clearPathname";
 
 const Header = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const drawerRef = useRef<HTMLDivElement>(null);
-  const cleanPath = usePathname();
-  const pathname = cleanPath.replace(/^\/(fa|en|ar)/, "")
+  const pathname = useClearPathname()
 
   const dir = useDirection()
 
