@@ -5,14 +5,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useRef, useState } from 'react'
 import { routeSelect } from '../routeSelect';
-import { usePathname } from 'next/navigation';
 import { MoreHorizontal, X } from 'lucide-react';
 import DeltaIcon from "@/app/[locale]/icon.png";
+import useClearPathname from '@/utils/helper/clearPathname/clearPathname';
 
 const MobileSidebar = () => {
 
-    const cleanPath = usePathname();
-    const pathname = cleanPath.replace(/^\/(fa|en|ar)/, "")
+    const pathname = useClearPathname();
     const [showMore, setShowMore] = useState(false);
     const moreRef = useRef<HTMLDivElement | null>(null);
 

@@ -6,16 +6,16 @@ import CommonModal from "../../modal/CommonModal";
 import { signOut, useSession } from 'next-auth/react'
 import { handleLogout } from "@/core/logOut";
 import NotifModal from "../../modal/NotifModal";
-import { redirect, usePathname } from "next/navigation";
+import { redirect } from "next/navigation";
 import { routeSelect } from "../routeSelect";
 import { TypingAnimation } from "@/components/magicui/typing-animation";
+import useClearPathname from "@/utils/helper/clearPathname/clearPathname";
 
 const HeaderDashboard: React.FC = () => {
     const { theme, toggleTheme } = useTheme();
     const [modalView, setModalView] = React.useState(false);
     const moreRef = useRef<HTMLDivElement | null>(null);
-    const cleanPath = usePathname();
-    const pathname = cleanPath.replace(/^\/(fa|en|ar)/, "")
+    const pathname = useClearPathname();
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
