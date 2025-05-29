@@ -2,7 +2,7 @@ import { BlurFade } from '@/components/magicui/blur-fade'
 import Link from 'next/link'
 import React from 'react'
 
-const MiniCard = ({ number, title, idx }: { number: number, title: string, idx: number }) => {
+const MiniCard = ({ number, title, idx, value }: { number?: number, title: string, value?: string, idx: number }) => {
     return (
         <BlurFade delay={(idx / 5)} inView className='bg-subBg rounded-[12px] h-[140px] max-lg:w-full w-1/4 relative flex justify-between gap-3 items-center pt-4 px-4 pb-2 flex-col'>
             <div className='absolute top-0 right-4 bg-bgDash flex justify-center items-center w-[50] h-[60] rounded-b-[12px] py-4'>
@@ -20,14 +20,14 @@ const MiniCard = ({ number, title, idx }: { number: number, title: string, idx: 
                 <line y1="-0.5" x2="524" y2="-0.5" transform="matrix(1 0.000108856 -7.8105e-05 1 0 1)" stroke="#888888" strokeOpacity="0.26" strokeDasharray="7 7" />
             </svg>
 
-            <Link href={" "} className='w-full cursor-pointer flex justify-between'>
+            {value ? <span> {value} </span> : <Link href={" "} className='w-full cursor-pointer flex justify-between'>
                 <span className='text-muted'> مشاهده </span>
                 <svg width="63" height="18" viewBox="0 0 63 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M3.7677 10.6382C2.2526 9.91281 2.25259 7.75581 3.76769 7.03041L12.8127 2.69983C14.1402 2.06424 15.6764 3.03189 15.6764 4.50373L15.6764 13.1649C15.6764 14.6367 14.1402 15.6044 12.8127 14.9688L3.7677 10.6382Z" fill="#7A7A7A" />
                     <path d="M31.566 10.1869C30.4297 9.64286 30.4297 8.02511 31.566 7.48106L38.3498 4.23313C39.3454 3.75643 40.4975 4.48217 40.4975 5.58605L40.4975 12.0819C40.4975 13.1858 39.3454 13.9115 38.3498 13.4348L31.566 10.1869Z" fill="#7A7A7A" fillOpacity="0.5" />
                     <path d="M54.1378 9.73561C53.3802 9.37291 53.3802 8.29441 54.1378 7.93171L58.6603 5.76642C59.324 5.44862 60.0921 5.93245 60.0921 6.66837L60.0921 10.9989C60.0921 11.7349 59.324 12.2187 58.6603 11.9009L54.1378 9.73561Z" fill="#7A7A7A" fillOpacity="0.25" />
                 </svg>
-            </Link>
+            </Link>}
 
         </BlurFade>
     )
