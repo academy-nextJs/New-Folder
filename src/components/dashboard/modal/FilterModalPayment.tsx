@@ -5,6 +5,7 @@ import { X } from 'lucide-react'
 import React, { useState } from 'react'
 import CommonButton from '@/components/common/buttons/common/CommonButton'
 import { selectItems } from '@/components/Landing/hero-section/section/SearchBar'
+import CommonInput from '@/components/common/inputs/common/CommonInput'
 
 const FilterModalPayment = ({ categories }: { categories: {label: string, value: string}[] }) => {
     const [open, setOpen] = useState<boolean>(false)
@@ -41,16 +42,18 @@ const FilterModalPayment = ({ categories }: { categories: {label: string, value:
                     />
                 </div>
 
-                <div className='w-full'>
-                    <CommonSelect
-                        label='وضعیت رزرو'
-                        selectItems={[
-                            { label: 'تایید شده', value: 'تایید شده' },
-                            { label: 'لغو شده', value: 'لغو شده' },
-                        ]}
-                        placeholder='تایید شده'
+                <div className='grid grid-cols-1 md:grid-cols-2 gap-4 mb-6'>
+                    <CommonInput
+                        label=' حداقل قیمت '
+                        placeholder='0 تومن'
                         color='text-subText'
-                        classname='border-subText py-5 rounded-xl w-full'
+                        classname='border-subText rounded-xl w-full'
+                    />
+                    <CommonInput
+                        label=' حداکثر قیمت '
+                        placeholder='0 تومن'
+                        color='text-subText'
+                        classname='border-subText rounded-xl w-full'
                     />
                 </div>
 
