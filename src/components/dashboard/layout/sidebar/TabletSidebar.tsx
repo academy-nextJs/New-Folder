@@ -8,7 +8,7 @@ import {
 import { ChevronDown, CreditCard, LogIn } from 'lucide-react';
 import { routeSelect } from '../routeSelect';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import useClearPathname from '@/utils/helper/clearPathname/clearPathname';
 
 const TabletSidebar = ({
   view,
@@ -18,8 +18,7 @@ const TabletSidebar = ({
   setView: React.Dispatch<React.SetStateAction<number>>;
 }) => {
 
-    const cleanPath = usePathname();
-      const pathname = cleanPath.replace(/^\/(fa|en|ar)/, "")
+    const pathname = useClearPathname();
 
     const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 

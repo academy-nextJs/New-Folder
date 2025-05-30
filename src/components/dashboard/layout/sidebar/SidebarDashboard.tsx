@@ -8,11 +8,11 @@ import {
 } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import PaymentsModal from "../../modal/PaymentsModal";
 import { footerSidebarSelect, routeSelect } from "../routeSelect";
 import MobileSidebar from "./MobileSidebar";
 import TabletSidebar from "./TabletSidebar";
+import useClearPathname from "@/utils/helper/clearPathname/clearPathname";
 
 const SidebarDashboard = ({
   view,
@@ -21,8 +21,7 @@ const SidebarDashboard = ({
   view: number;
   setView: React.Dispatch<React.SetStateAction<number>>;
 }) => {
-  const cleanPath = usePathname();
-  const pathname = cleanPath.replace(/^\/(fa|en|ar)/, "")
+  const pathname = useClearPathname();
   const moreRef = useRef<HTMLDivElement | null>(null);
   const Icon = footerSidebarSelect.icon;
   const [show, setShow] = useState<boolean>(false);

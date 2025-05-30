@@ -6,14 +6,14 @@ import Person from '@/assets/FooterPicture.png'
 import DeltaLogo from '@/assets/delta-logo.png'
 import Image from 'next/image'
 import FooterForm from './footer-form/FooterForm'
-import { usePathname } from 'next/navigation'
 import { useTranslations } from 'next-intl'
+import useClearPathname from '@/utils/helper/clearPathname/clearPathname'
 
 const Footer = () => {
-    const pathname = usePathname()
+    const pathname = useClearPathname()
     const t = useTranslations('common.footer')
 
-    if (pathname.startsWith("/dashboard")) return null;
+    if (pathname.includes("/dashboard")) return null;
 
     return (
         <div className='bg-primary text-primary-foreground  w-full md:rounded-2xl'>

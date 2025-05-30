@@ -33,17 +33,8 @@ const ReservesContent = () => {
             if (moreRef.current && !moreRef.current.contains(event.target as Node)) {
                 setOpenModalIndex(null);
             }
-        }
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, []);
-
-    useEffect(() => {
-        const handleClickOutside = (event: MouseEvent) => {
             if (moreRef2.current && !moreRef2.current.contains(event.target as Node)) {
-                setOpenModalIndex2(null);
+                setOpenModalIndex(null);
             }
         }
         document.addEventListener('mousedown', handleClickOutside);
@@ -111,7 +102,7 @@ const ReservesContent = () => {
             <div className='flex flex-col gap-4 w-full lg:hidden'>
                 {houses.map((house, idx) => (
                     <div key={idx} className='w-full px-4 py-4 bg-subBg2 rounded-xl flex flex-col gap-4 text-sm relative'>
-                        <div ref={idx === openModalIndex2 ? moreRef : null} className='flex justify-between items-center'>
+                        <div ref={idx === openModalIndex2 ? moreRef2 : null} className='flex justify-between items-center'>
                             <div className='font-bold text-base'>{house.name}</div>
                             <MoreHorizontal
                                 onClick={() => {
