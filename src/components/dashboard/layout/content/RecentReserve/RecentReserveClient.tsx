@@ -44,7 +44,7 @@ export default function RecentReserveClient({ reservations }: Props) {
           className="flex flex-col md:flex-row md:justify-between md:items-center bg-secondary-light2 dark:bg-secondary-light3 w-full rounded-xl mb-2 relative"
         >
           <div className="hidden md:flex md:flex-row md:w-full md:items-center">
-            <div className="w-24 md:w-28 lg:w-36 h-14 bg-bacgkroundW rounded-xl mr-2 md:mr-4 flex-shrink-0"></div>
+            <img alt=" " src={"  "} className="w-24 md:w-28 my-2 lg:w-36 h-20 bg-subBg2 rounded-xl mr-2 md:mr-4 flex-shrink-0"/> 
 
             <div className="grid grid-cols-4 w-full pr-4 md:pr-2 py-4">
               <div className="text-right font-medium text-xs md:text-sm lg:text-base">

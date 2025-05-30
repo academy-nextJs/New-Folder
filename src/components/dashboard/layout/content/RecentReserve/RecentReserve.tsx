@@ -1,6 +1,12 @@
-import RecentReserveClient from "../RecentReserve/RecentReserveClient";
+/* eslint-disable */
 
-async function getReservations() {
+"use client";
+import { useEffect, useState } from "react";
+import { BlurFade } from "@/components/magicui/blur-fade";
+import RecentReserveClient from "../RecentReserve/RecentReserveClient";
+import { useTranslations } from "next-intl";
+
+function getReservations() {
   return [
     {
       id: 1,
@@ -40,11 +46,17 @@ async function getReservations() {
   ];
 }
 
-export default async function RecentReserve() {
-  const reservations = await getReservations();
+export default function RecentReserve() {
+  const t = useTranslations("dashboardBuyer");
+  const [reservations, setReservations] = useState<Array<any>>([]);
+
+  useEffect(() => {
+    // Simulate async fetch
+    setReservations(getReservations());
+  }, []);
 
   return (
-    <div className="w-full flex flex-col justify-center gap-4 px-2 md:px-4 bg-background dark:bg-secondary-light2 rounded-xl">
+    <BlurFade className="w-full flex flex-col justify-center gap-4 px-2 md:px-4 bg-background dark:bg-secondary-light2 rounded-xl">
       <div className="w-full flex flex-row justify-between px-2 md:px-4 pt-4">
         <h2 className="items-center flex gap-2 md:gap-4 text-sm md:text-base lg:text-lg">
           <svg
@@ -61,7 +73,7 @@ export default async function RecentReserve() {
             <polyline points="17 21 17 13 7 13 7 21" />
             <polyline points="7 3 7 8 15 8" />
           </svg>
-          رزرو های اخیر
+          {t("recentReserves")}
         </h2>
         <div className="flex gap-1 rotate-180 items-center justify-between">
           <svg
@@ -88,19 +100,19 @@ export default async function RecentReserve() {
             />
           </svg>
           <h2 className="rotate-180 text-xs md:text-sm lg:text-base text-primary font-medium cursor-pointer hover:underline">
-            مشاهده همه
+            {t("seeAll")}
           </h2>
         </div>
       </div>
 
       <div className="hidden md:grid grid-cols-4 text-center border bg-border rounded-lg p-4 mb-2 font-medium text-xs md:text-sm lg:text-base">
-        <div className="text-center mr-16">نام اقامتگاه</div>
-        <div className="text-center mr-12">تاریخ رزرو</div>
-        <div>قیمت</div>
-        <div className="text-center">وضعیت</div>
+        <div className="text-center mr-16">{t("hotelName")}</div>
+        <div className="text-center mr-12">{t("reserveDate")}</div>
+        <div>{t("price")}</div>
+        <div className="text-center">{t("status")}</div>
       </div>
 
       <RecentReserveClient reservations={reservations} />
-    </div>
+    </BlurFade>
   );
 }

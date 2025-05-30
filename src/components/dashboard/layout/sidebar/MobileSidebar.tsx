@@ -8,9 +8,11 @@ import { routeSelect } from '../routeSelect';
 import { MoreHorizontal, X } from 'lucide-react';
 import DeltaIcon from "@/app/[locale]/icon.png";
 import useClearPathname from '@/utils/helper/clearPathname/clearPathname';
+import { useTranslations } from 'next-intl';
 
 const MobileSidebar = () => {
 
+    const t = useTranslations("dashboardSidebar")
     const pathname = useClearPathname();
     const [showMore, setShowMore] = useState(false);
     const moreRef = useRef<HTMLDivElement | null>(null);
@@ -48,7 +50,7 @@ const MobileSidebar = () => {
                                     />
                                 </TooltipTrigger>
                                 <TooltipContent className="dark:bg-accent bg-subBg2 dark:accent-foreground text-foreground">
-                                    <p> {label} </p>
+                                    <p> {t(label)} </p>
                                 </TooltipContent>
                             </Tooltip>
                         </TooltipProvider>
@@ -90,7 +92,7 @@ const MobileSidebar = () => {
                                                 onClick={() => setShowMore(false)}
                                             >
                                                 <Icon className="min-w-4 min-h-4 h-4 w-4" />
-                                                <span>{label}</span>
+                                                <span>{t(label)}</span>
                                             </Link>
                                         );
                                     })
@@ -105,7 +107,7 @@ const MobileSidebar = () => {
                                         onClick={() => setShowMore(false)}
                                     >
                                         <Icon className="min-w-4 min-h-4 h-4 w-4" />
-                                        <span>{label}</span>
+                                        <span>{t(label)}</span>
                                     </Link>
                                 );
                             })}

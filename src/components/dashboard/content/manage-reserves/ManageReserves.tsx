@@ -33,6 +33,7 @@ import FilterModal from "./FilterModal";
 import ReserveModal from "./ReserveModal";
 import GuestCount from "./GuestCount";
 import { BlurFade } from "@/components/magicui/blur-fade";
+import { useTranslations } from "next-intl";
 
 interface Reservation {
   id: number;
@@ -63,6 +64,7 @@ const CommonModal = ({ button }: CommonModalProps) => {
 };
 
 export default function HotelReservationList() {
+  const t = useTranslations("dashboardBuyer.manageReserves");
   const [isReserveModalOpen, setIsReserveModalOpen] = useState(false);
   const [isGuestCount, setIsGuestCount] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
@@ -149,7 +151,6 @@ export default function HotelReservationList() {
   }, [searchTerm, filters]);
 
   const handleApplyFilters = (filterValues: FilterValues) => {
-    console.log("Applied filters:", filterValues);
     setFilters(filterValues);
   };
 
@@ -158,14 +159,21 @@ export default function HotelReservationList() {
       return (
         <div className="flex items-center w-fit bg-primary text-background text-xs rounded-full px-2 py-1 whitespace-nowrap">
           <CheckCircle className="w-3 h-3 ml-1" />
-          <span>تایید شده</span>
+          <span>{t("confirmed")}</span>
         </div>
       );
     } else if (status === "waiting") {
       return (
         <div className="flex items-center bg-yellow-100 text-yellow-700 text-xs rounded-full px-2 py-1 whitespace-nowrap">
           <AlertCircle className="w-3 h-3 ml-1" />
-          <span>در انتظار</span>
+          <span>{t("waiting")}</span>
+        </div>
+      );
+    } else if (status === "cancelled") {
+      return (
+        <div className="flex items-center w-fit bg-danger text-background text-xs rounded-full px-2 py-1 whitespace-nowrap">
+          <X className="w-3 h-3 ml-1" />
+          <span>{t("cancelled")}</span>
         </div>
       );
     } else {
@@ -178,21 +186,21 @@ export default function HotelReservationList() {
       return (
         <div className="flex items-center whitespace-nowrap">
           <CreditCard className="w-4 h-4 ml-1" />
-          <span>پرداخت</span>
+          <span>{t("paid")}</span>
         </div>
       );
     } else if (status === "waiting") {
       return (
         <div className="flex items-center w-fit bg-yellow-100 text-yellow-700 text-xs rounded-full px-2 py-1 whitespace-nowrap">
           <AlertCircle className="w-3 h-3 ml-1" />
-          <span>در انتظار</span>
+          <span>{t("waiting")}</span>
         </div>
       );
     } else if (status === "cancelled") {
       return (
         <div className="flex items-center w-fit bg-danger text-background text-xs rounded-full px-2 py-1 whitespace-nowrap">
           <X className="w-3 h-3 ml-1" />
-          <span>لغو شده</span>
+          <span>{t("cancelled")}</span>
         </div>
       );
     } else if (status === "confirmed") {
@@ -210,7 +218,7 @@ export default function HotelReservationList() {
     <BlurFade className="flex flex-col justify-between gap-8 bg-subBg p-4 sm:p-6 lg:p-8 rounded-xl w-full min-h-screen">
       <div className="flex flex-col gap-4">
         <h1 className="text-xl font-bold text-right text-foreground">
-          لیست رزرو های شما
+          {t("reservationListTitle")}
         </h1>
 
         <div
@@ -222,7 +230,7 @@ export default function HotelReservationList() {
             onClick={() => setIsFilterModalOpen(true)}
           >
             <Filter className="w-4 h-4 ml-2" />
-            فیلترها
+            {t("filters")}
           </button>
 
           <div className="relative flex-grow max-w-full sm:max-w-md lg:max-w-sm">
@@ -231,7 +239,7 @@ export default function HotelReservationList() {
             </div>
             <input
               type="text"
-              placeholder="... نام هتل مورد نظر"
+              placeholder={t("searchPlaceholder")}
               className="pl-10 pr-4 py-2 rounded-lg border bg-border dark:bg-card text-right w-full"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
@@ -260,22 +268,22 @@ export default function HotelReservationList() {
           <TableHeader className="bg-subBg2 text-foreground">
             <TableRow className="text-right rounded-xl">
               <TableHead className="text-right text-foreground whitespace-nowrap">
-                نام اقامتگاه
+                {t("hotelName")}
               </TableHead>
               <TableHead className="text-right text-foreground whitespace-nowrap">
-                تاریخ رزرو
+                {t("reserveDate")}
               </TableHead>
               <TableHead className="text-right text-foreground whitespace-nowrap">
-                قیمت کل
+                {t("totalPrice")}
               </TableHead>
               <TableHead className="text-right text-foreground whitespace-nowrap">
-                تعداد مسافر
+                {t("guestCount")}
               </TableHead>
               <TableHead className="text-right text-foreground whitespace-nowrap">
-                وضعیت رزرو
+                {t("reservationStatus")}
               </TableHead>
               <TableHead className="text-right text-foreground whitespace-nowrap">
-                وضعیت پرداخت
+                {t("paymentStatus")}
               </TableHead>
               <TableHead className="text-right text-foreground"></TableHead>
             </TableRow>
@@ -334,17 +342,17 @@ export default function HotelReservationList() {
                           setOpenModalIndex(null);
                         }}
                       >
-                        جزییات <Info size={16} />
+                        {t("details")} <Info size={16} />
                       </div>
                       <div className="bg-subBg px-4 py-1 flex gap-2 rounded-xl justify-between flex-row-reverse cursor-pointer hover:bg-border">
-                        ویرایش <Edit size={16} />
+                        {t("edit")} <Edit size={16} />
                       </div>
                       <CommonModal
-                        handleClick="حذف"
-                        title=" آیا از حذف ملک مطمئن هستید؟ "
+                        handleClick={t("delete")}
+                        title={t("deleteConfirm")}
                         button={
                           <div className="bg-subBg px-4 py-1 flex gap-2 rounded-xl justify-between flex-row-reverse cursor-pointer hover:bg-border">
-                            حذف <Delete size={16} />
+                            {t("delete")} <Delete size={16} />
                           </div>
                         }
                       />
@@ -388,16 +396,16 @@ export default function HotelReservationList() {
                             setOpenModalIndex(null);
                           }}
                         >
-                          جزییات
+                          {t("details")}
                         </span>
                         <Info size={16} />
                       </button>
                       <button className="flex items-center justify-between gap-2 px-3 py-2 hover:bg-border rounded-md">
-                        <span>ویرایش</span>
+                        <span>{t("edit")}</span>
                         <Edit size={16} />
                       </button>
                       <button className="flex items-center justify-between gap-2 px-3 py-2 hover:bg-border rounded-md text-danger">
-                        <span>حذف</span>
+                        <span>{t("delete")}</span>
                         <Delete size={16} />
                       </button>
                     </div>
@@ -418,22 +426,22 @@ export default function HotelReservationList() {
 
             <div className="grid grid-cols-2 gap-x-2 gap-y-3 p-4">
               <div className="flex justify-between">
-                <span className="text-subText">تعداد مسافر:</span>
+                <span className="text-subText">{t("guestCount")}:</span>
                 <span className="font-medium">{reservation.guestCount}</span>
               </div>
 
               <div className="flex justify-between">
-                <span className="text-subText">قیمت کل:</span>
+                <span className="text-subText">{t("totalPrice")}:</span>
                 <span className="font-medium">{reservation.price}</span>
               </div>
 
               <div className="flex justify-between items-center">
-                <span className="text-subText">وضعیت رزرو:</span>
+                <span className="text-subText">{t("reservationStatus")}:</span>
                 {renderStatusBadge(reservation.status)}
               </div>
 
               <div className="flex justify-between items-center">
-                <span className="text-subText">وضعیت پرداخت:</span>
+                <span className="text-subText">{t("paymentStatus")}:</span>
                 {renderPaymentStatusBadge(reservation.paymentStatus)}
               </div>
             </div>
@@ -470,17 +478,17 @@ export default function HotelReservationList() {
                         setOpenModalIndex(null);
                       }}
                     >
-                      جزییات <Info size={16} />
+                      {t("details")} <Info size={16} />
                     </div>
                     <div className="flex items-center justify-between px-3 py-1 rounded-lg hover:bg-border cursor-pointer transition">
-                      ویرایش <Edit size={16} />
+                      {t("edit")} <Edit size={16} />
                     </div>
                     <CommonModal
-                      handleClick="حذف"
-                      title=" آیا از حذف ملک مطمئن هستید؟ "
+                      handleClick={t("delete")}
+                      title={t("deleteConfirm")}
                       button={
                         <div className="flex items-center justify-between px-3 py-1 rounded-lg hover:bg-border cursor-pointer transition">
-                          حذف <Delete size={16} />
+                          {t("delete")} <Delete size={16} />
                         </div>
                       }
                     />
@@ -496,29 +504,29 @@ export default function HotelReservationList() {
                   {reservation.hotelName}
                 </span>
                 <span className="text-xs text-subText">
-                  {reservation.guestCount} مهمان
+                  {reservation.guestCount} {t("guest")}
                 </span>
               </div>
             </div>
 
             <div className="text-sm grid grid-cols-2 gap-y-3 gap-x-2 text-gray-700">
               <div className="col-span-2 flex justify-between">
-                <span className="text-subText">تاریخ رزرو:</span>
+                <span className="text-subText">{t("reserveDate")}:</span>
                 <span className="text-subText">{reservation.date}</span>
               </div>
 
               <div className="col-span-2 flex justify-between">
-                <span className="text-subText">قیمت کل:</span>
+                <span className="text-subText">{t("totalPrice")}:</span>
                 <span className="text-subText">{reservation.price}</span>
               </div>
 
               <div className="col-span-2 flex justify-between">
-                <span className="text-subText">وضعیت رزرو:</span>
+                <span className="text-subText">{t("reservationStatus")}:</span>
                 <span>{renderStatusBadge(reservation.status)}</span>
               </div>
 
               <div className="col-span-2 flex justify-between">
-                <span className="text-subText">وضعیت پرداخت:</span>
+                <span className="text-subText">{t("paymentStatus")}:</span>
                 <span>
                   {renderPaymentStatusBadge(reservation.paymentStatus)}
                 </span>

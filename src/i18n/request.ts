@@ -25,6 +25,10 @@ export default getRequestConfig(async ({ requestLocale }) => {
       singleReserve: (await import(`../../messages/${locale}/singleReserve.json`)).default,
       rental: (await import(`../../messages/${locale}/rental.json`)).default,
       hotel: (await import(`../../messages/${locale}/hotel.json`)).default,
+      modals: (await import(`../../messages/${locale}/dashboard/modals.json`)).default,
+      dashboardHeader: (await import(`../../messages/${locale}/dashboard/header.json`)).default,
+      dashboardSidebar: (await import(`../../messages/${locale}/dashboard/sidebar.json`)).default,
+      dashboardBuyer: (await import(`../../messages/${locale}/dashboard/buyer.json`)).default,
     }
   };
 });

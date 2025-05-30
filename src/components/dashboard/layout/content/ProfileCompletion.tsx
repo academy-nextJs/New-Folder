@@ -3,8 +3,11 @@
 import { BlurFade } from "@/components/magicui/blur-fade";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import { useTranslations } from "next-intl";
 
 const ProfileCompletion = ({ percentage }: { percentage: number }) => {
+  const t = useTranslations("dashboardBuyer");
+
   return (
       <BlurFade
         className=" lg:w-[40%] md:w-full sm:w-full w-full h-60 bg-subBg rounded-2xl p-6 flex items-center gap-6 shadow-lg border ltr "
@@ -27,7 +30,7 @@ const ProfileCompletion = ({ percentage }: { percentage: number }) => {
           <div className="flex justify-between items-center mb-2">
             <div className="flex gap-1 rotate-180 items-center  justify-between ml-[-100px]">
               <h2 className=" rotate-180 text-sm text-primary font-medium cursor-pointer hover:underline">
-                ویرایش
+                {t("edit")}
               </h2>
               <svg
                 width="42"
@@ -54,17 +57,16 @@ const ProfileCompletion = ({ percentage }: { percentage: number }) => {
             </div>
 
             <h2 className="text-sm md:text-sm font-semibold sm:text-sm lg:text-base">
-              وضعیت پروفایل شما
+              {t("profileStatus")}
             </h2>
           </div>
 
           <p className="text-3xl font-bold text-primary">{percentage}%</p>
           <p className="text-sm lg:text-sm md:text-xs sm:text-xs text-muted-foreground leading-relaxed mt-2">
-            برای اینکه بازدید خوبی داشته باشید، پروفایل شما باید حداقل ۷۰٪ تکمیل
-            شده باشد.
+            {t("profileCompletionHint")}
           </p>
           <span className="text-xs text-ring mt-3">
-            آخرین تغییرات در ۳ دقیقه پیش
+            {t("lastUpdate")}
           </span>
         </div>
       </BlurFade>

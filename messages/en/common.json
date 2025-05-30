@@ -53,5 +53,8 @@
     "email": "Delta@gmail.com",
     "address": "Gilan, Rasht, Azadi Square, next to Azimizadeh Crossroad",
     "copyright": "All rights reserved for Delta."
+  },
+  "modal": {
+    "cancel": "Cancel"
   }
 }

@@ -1,8 +1,9 @@
 /* eslint-disable */
 import CommonButton from '@/components/common/buttons/common/CommonButton'
-import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, } from '@/components/ui/dialog'
+import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { X } from 'lucide-react'
 import React, { useRef, useState } from 'react'
+import { useTranslations } from 'next-intl'
 
 const SelectImageModal = ({
     open,
@@ -18,6 +19,7 @@ const SelectImageModal = ({
 
     const fileInputRef = useRef<HTMLInputElement>(null)
     const [preview, setPreview] = useState<string | null>(null)
+    const t = useTranslations('modals.selectImage');
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0]
@@ -44,10 +46,10 @@ const SelectImageModal = ({
             <DialogContent onMouseDown={(e) => e.stopPropagation()} className='rounded-2xl flex flex-col gap-8 items-center'>
                 <DialogHeader className='flex justify-between flex-row w-full items-center mt-4'>
                     <DialogTitle className='text-xl'>
-                        انتخاب پروفایل
+                        {t('selectProfile')}
                     </DialogTitle>
                     <DialogDescription>
-                        <CommonButton onclick={() => setOpen(false)} title='بستن' icon={<X />} classname='border border-danger bg-transparent text-danger' />
+                        <CommonButton onclick={() => setOpen(false)} title={t('close')} icon={<X />} classname='border border-danger bg-transparent text-danger' />
                     </DialogDescription>
                 </DialogHeader>
                 <svg width="100%" height="2" viewBox="0 0 1131 2" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -73,9 +75,11 @@ const SelectImageModal = ({
                 </div>
                 <DialogFooter className='flex gap-4 flex-row mx-auto justify-center items-center'>
                     <DialogClose className='text-sm'>
-                        انصراف
+                        {t('cancel')}
                     </DialogClose>
-                    <div onClick={handleSelect} className='bg-primary text-sm text-primary-foreground px-4 py-2 rounded-2xl cursor-pointer w-fit'> انتخاب </div>
+                    <div onClick={handleSelect} className='bg-primary text-sm text-primary-foreground px-4 py-2 rounded-2xl cursor-pointer w-fit'>
+                        {t('select')}
+                    </div>
                 </DialogFooter>
             </DialogContent>
         </Dialog>

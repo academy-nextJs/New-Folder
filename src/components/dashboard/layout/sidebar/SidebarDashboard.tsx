@@ -13,6 +13,7 @@ import { footerSidebarSelect, routeSelect } from "../routeSelect";
 import MobileSidebar from "./MobileSidebar";
 import TabletSidebar from "./TabletSidebar";
 import useClearPathname from "@/utils/helper/clearPathname/clearPathname";
+import { useTranslations } from "next-intl";
 
 const SidebarDashboard = ({
   view,
@@ -25,6 +26,7 @@ const SidebarDashboard = ({
   const moreRef = useRef<HTMLDivElement | null>(null);
   const Icon = footerSidebarSelect.icon;
   const [show, setShow] = useState<boolean>(false);
+  const t = useTranslations("dashboardSidebar")
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -68,7 +70,7 @@ const SidebarDashboard = ({
       >
         <div className="flex justify-between items-center mb-6 min-w-[200px]">
           <Link href={"/"} className="text-2xl font-bold">
-            دلتا
+            {t("brand")}
           </Link>
           <LogOut
             onClick={() => setView(2)}
@@ -100,7 +102,7 @@ const SidebarDashboard = ({
                   >
                     <div className="flex gap-2">
                       <Icon className="min-w-5 min-h-5 h-5 w-5" />
-                      <span>{label}</span>
+                      <span>{t(label)}</span>
                     </div>
                     {children && (
                       <ChevronDown
@@ -127,7 +129,7 @@ const SidebarDashboard = ({
                           >
                             <div className="flex gap-2">
                               <Icon className="min-w-5 min-h-5 h-5 w-5" />
-                              <span>{label}</span>
+                              <span>{t(label)}</span>
                             </div>
                           </Link>
                         );
@@ -164,8 +166,8 @@ const SidebarDashboard = ({
               </svg>
               <Icon className="mx-4" />
               <div className="flex flex-col h-full justify-between" >
-                <h2 className="text-lg font-bold"> {footerSidebarSelect.title} </h2>
-                <span className="text-sm text-subText"> {footerSidebarSelect.description} </span>
+                <h2 className="text-lg font-bold"> {t(footerSidebarSelect.title)} </h2>
+                <span className="text-sm text-subText"> {t(footerSidebarSelect.description)} </span>
               </div>
             </div>
             {show && (
@@ -175,7 +177,7 @@ const SidebarDashboard = ({
               >
                 <div className="flex items-center gap-2 px-3 py-2 hover:bg-muted rounded-md cursor-pointer transition-colors">
                   <PlusCircle size={16} className="text-primary" />
-                  <span className="text-sm">شارژ کردن کیف پول</span>
+                  <span className="text-sm">{t("chargeWallet")}</span>
                 </div>
                 <svg
                   width="160"
@@ -211,8 +213,8 @@ const SidebarDashboard = ({
                   />
                 </svg>
                 <div className="flex items-center gap-2 px-3 py-2 hover:bg-muted rounded-md cursor-pointer transition-colors">
-                  {" "}
-                  <LogIn size={20} /> برداشت وجه{" "}
+                  <LogIn size={20} />
+                  <span className="text-sm">{t("withdraw")}</span>
                 </div>
               </div>
             )}

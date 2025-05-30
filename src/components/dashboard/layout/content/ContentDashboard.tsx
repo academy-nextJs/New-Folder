@@ -4,24 +4,27 @@ import Image from "next/image";
 import React from "react";
 import img from "@/assets/Rectangle 6486.png";
 import ProfileCompletion from "./ProfileCompletion";
-import RecentReserve from "./RecentReserve";
 import { BlurFade } from "@/components/magicui/blur-fade";
-
-const cardData = [
-  { id: 1, title: "5", subtitle: "کل رزرو‌ها" },
-  { id: 2, title: "12", subtitle: " رزرو های فعال" },
-  { id: 3, title: "3", subtitle: " علاقه مندی ها" },
-  { id: 4, title: "20", subtitle: "نظرات " },
-];
+import { useTranslations } from "next-intl";
+import RecentReserve from "./RecentReserve/RecentReserve";
 
 const ContentDashboard = () => {
+  const t = useTranslations("dashboardBuyer");
+
+  const cardData = [
+    { id: 1, title: "5", subtitle: t("totalReserves") },
+    { id: 2, title: "12", subtitle: t("activeReserves") },
+    { id: 3, title: "3", subtitle: t("favorites") },
+    { id: 4, title: "20", subtitle: t("comments") },
+  ];
+
   return (
     <div className="flex justify-center flex-col w-full gap-2">
       <div className="flex flex-wrap justify-between gap-7 w-full overflow-x-hidden">
         {cardData.map((item, idx) => (
           <BlurFade
             inView
-            delay={( idx / 5 )}
+            delay={idx / 5}
             key={idx}
             className="relative bg-subBg rounded-xl px-4 pt-4 flex flex-col items-center justify-between
               w-full sm:w-[47%] md:w-[30%] lg:w-[22%] xl:w-[21%]"
@@ -50,7 +53,7 @@ const ContentDashboard = () => {
             />
             <div className="flex flex-row justify-between w-full items-center mt-2">
               <span className=" text-textComment dark:text-bacgkroundW">
-                جزئیات
+                {t("details")}
               </span>
 
               <div className="flex gap-1 rotate-180 justify-center items-center ">
