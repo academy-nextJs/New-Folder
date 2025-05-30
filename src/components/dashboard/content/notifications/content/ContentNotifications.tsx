@@ -18,6 +18,7 @@ import {
 } from '@/components/ui/pagination'
 import { CheckCircle2, ChevronDown, ChevronUp } from 'lucide-react'
 import CommonButton from '@/components/common/buttons/common/CommonButton'
+import { useTranslations } from 'next-intl'
 
 const notifications = [
     {
@@ -53,6 +54,7 @@ const notifications = [
 ]
 
 export default function ContentNotifications() {
+    const t = useTranslations('dashboardBuyer.notifications')
     const [openUnread, setOpenUnread] = useState(true)
     const [openRead, setOpenRead] = useState(false)
 
@@ -64,8 +66,8 @@ export default function ContentNotifications() {
             <Table className='text-right max-lg:hidden overflow-hidden w-full'>
                 <TableHeader className='bg-subBg2 rounded-t-2xl text-foreground'>
                     <TableRow className='text-right'>
-                        <TableHead className='text-right text-foreground'>اعلان</TableHead>
-                        <TableHead className='text-right text-foreground'>تاریخ</TableHead>
+                        <TableHead className='text-right text-foreground'>{t('notification')}</TableHead>
+                        <TableHead className='text-right text-foreground'>{t('date')}</TableHead>
                         <TableHead className='text-right text-foreground'></TableHead>
                     </TableRow>
                 </TableHeader>
@@ -76,7 +78,7 @@ export default function ContentNotifications() {
                         className='cursor-pointer bg-subBg'
                     >
                         <TableCell colSpan={3} className='flex w-fit gap-4 justify-between items-center py-3'>
-                            خوانده‌ نشده ({unread.length})
+                            {t('unread')} ({unread.length})
                             {openUnread ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
                         </TableCell>
                     </TableRow>
@@ -88,7 +90,7 @@ export default function ContentNotifications() {
                             </TableCell>
                             <TableCell className='whitespace-nowrap'>{not.date}</TableCell>
                             <TableCell>
-                                <CommonButton title='علامت گذاری به عنوان خوانده شده' icon={<CheckCircle2 size={14} />} classname='flex-row-reverse' />
+                                <CommonButton title={t('markAsRead')} icon={<CheckCircle2 size={14} />} classname='flex-row-reverse' />
                             </TableCell>
                         </TableRow>
                     ))}
@@ -98,7 +100,7 @@ export default function ContentNotifications() {
                         className='cursor-pointer bg-subBg'
                     >
                         <TableCell colSpan={3} className='flex w-fit gap-4 justify-between items-center py-3'>
-                            خوانده‌ شده‌ ({read.length})
+                            {t('read')} ({read.length})
                             {openRead ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
                         </TableCell>
                     </TableRow>
@@ -119,7 +121,7 @@ export default function ContentNotifications() {
                         onClick={() => setOpenUnread(v => !v)}
                         className='flex justify-between items-center bg-subBg2 px-4 py-2 rounded-lg cursor-pointer'
                     >
-                        <span>خوانده‌ نشده‌ ({unread.length})</span>
+                        <span>{t('unread')} ({unread.length})</span>
                         {openUnread ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
                     </div>
                     {openUnread && unread.map((not, i) => (
@@ -131,7 +133,7 @@ export default function ContentNotifications() {
                             <div className='flex justify-between items-center'>
                                 <span className='text-xs text-muted-foreground'>{not.date}</span>
                                 <div className='inline-flex items-center gap-1 bg-primary text-primary-foreground cursor-pointer px-2 py-1 rounded-lg text-xs'>
-                                    <CheckCircle2 size={12} /> علامت‌گذاری
+                                    <CheckCircle2 size={12} /> {t('mark')}
                                 </div>
                             </div>
                         </div>
@@ -143,7 +145,7 @@ export default function ContentNotifications() {
                         onClick={() => setOpenRead(v => !v)}
                         className='flex justify-between items-center bg-subBg2 px-4 py-2 rounded-lg cursor-pointer'
                     >
-                        <span>خوانده‌ شده‌  ({read.length})</span>
+                        <span>{t('read')} ({read.length})</span>
                         {openRead ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
                     </div>
                     {openRead && read.map((not, i) => (

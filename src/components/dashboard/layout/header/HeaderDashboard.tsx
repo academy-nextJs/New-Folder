@@ -10,8 +10,14 @@ import { redirect } from "next/navigation";
 import { routeSelect } from "../routeSelect";
 import { TypingAnimation } from "@/components/magicui/typing-animation";
 import useClearPathname from "@/utils/helper/clearPathname/clearPathname";
+import LanguageSwitcher from "@/components/common/header/sections/LangSwitcher";
+import LangModal from "../../modal/LangSwitcherModal";
+import { useTranslations } from "next-intl";
+import { useDirection } from "@/utils/hooks/useDirection";
 
 const HeaderDashboard: React.FC = () => {
+    const t = useTranslations('dashboardHeader');
+    const tRout = useTranslations('dashboardSidebar');
     const { theme, toggleTheme } = useTheme();
     const [modalView, setModalView] = React.useState(false);
     const moreRef = useRef<HTMLDivElement | null>(null);
@@ -32,25 +38,28 @@ const HeaderDashboard: React.FC = () => {
     }, [modalView])
 
     const { data: session } = useSession();
-
+    const dir = useDirection()
 
     return (
         <Fragment>
-            <div className='bg-subBg w-full rounded-[12px] px-8 py-3 flex items-center justify-between'>
+            <div dir={dir} className='bg-subBg w-full rounded-[12px] px-8 py-3 flex items-center justify-between'>
                 {routeSelect.map(({ label, href }) => {
                     return pathname === href && (
-                        <TypingAnimation key={label} className='font-extrabold text-xl'>
-                            {label}
+                        <TypingAnimation key={tRout(label)} className='font-extrabold text-xl'>
+                            {tRout(label)}
                         </TypingAnimation>
                     )
                 }
                 )}
                 <div></div>
                 <div className='flex gap-4 items-center'>
+                    <div className="max-md:hidden">
+                        <LanguageSwitcher />
+                    </div>
                     <button
                         onClick={toggleTheme}
                         className="flex items-center justify-center w-8 h-8 rounded-full hover:bg-subBg2 transition-colors"
-                        aria-label={theme === "dark" ? "تغییر به حالت روشن" : "تغییر به حالت تاریک"}
+                        aria-label={theme === "dark" ? t('lightMode') : t('darkMode')}
                     >
                         {theme === "dark" ? (
                             <Sun className="w-5 h-5 text-subText hover:text-primary" />
@@ -61,17 +70,12 @@ const HeaderDashboard: React.FC = () => {
                     <Bell onClick={() => redirect("/dashboard/notifications")} className="cursor-pointer" />
                     <div className="relative">
                         <div onClick={() => {
-                            if (modalView) {
-                                setModalView(false)
-                            }
-                            else {
-                                setModalView(true)
-                            }
+                            setModalView(!modalView)
                         }} className="flex relative gap-4 items-center cursor-pointer">
                             <img src={session?.user?.image || " "} alt="" className="size-[40px] border-0 outline-none bg-secondary-light rounded-[8px]" />
                             <div className="flex max-md:hidden flex-col justify-between">
-                                <h2> امیر محمد ملایی </h2>
-                                <span className="text-muted-foreground text-sm"> خریدار </span>
+                                <h2>{session?.user?.name || t('userName')}</h2>
+                                <span className="text-muted-foreground text-sm">{t('userRole')}</span>
                             </div>
                             {!modalView && <ChevronDown className="cursor-pointer" size={12} />}
                             {modalView && <ChevronUp className="cursor-pointer" size={12} />}
@@ -83,17 +87,18 @@ const HeaderDashboard: React.FC = () => {
                             <div className="flex flex-col divide-y divide-border">
                                 <div className="flex items-center gap-2 px-3 py-2 hover:bg-muted rounded-md cursor-pointer transition-colors">
                                     <PlusCircle size={16} className="text-primary" />
-                                    <span className="text-sm">شارژ کردن کیف پول</span>
+                                    <span className="text-sm">{t('walletCharge')}</span>
                                 </div>
+                                <LangModal />
 
                                 <NotifModal />
 
                                 <CommonModal
-                                    handleClick="خروج"
-                                    buttonTitle="خروج از حساب"
+                                    handleClick={t('logout')}
+                                    buttonTitle={t('logoutAccount')}
                                     buttonIcon={<LogOut size={16} className="text-destructive" />}
                                     onClick={handleLogout(signOut, "/login")}
-                                    title="آیا از خروج خود مطمئن هستید؟"
+                                    title={t('logoutConfirm')}
                                 />
                             </div>
                         </div>

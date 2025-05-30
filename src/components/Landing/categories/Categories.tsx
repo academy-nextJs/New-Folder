@@ -122,8 +122,7 @@ const Categories = () => {
                 return (
                   <div
                     key={cardIndex}
-                    onClick={() => handleClick(category.name)}
-                    className="w-[230px] h-[100px] relative flex items-center justify-center cursor-pointer transition-all duration-300"
+                    className="w-[230px] h-[100px] relative flex items-center justify-center transition-all duration-300"
                     onMouseEnter={() => setHoveredIndex(cardIndex)}
                     onMouseLeave={() => setHoveredIndex(null)}
                   >
@@ -138,15 +137,16 @@ const Categories = () => {
                       onClick={handleNextSlide}
                     >
                       <MoveLeftIcon
-                        className={`w-8 h-[18px] transition-colors duration-300 ${
+                        className={`w-8 h-[18px] cursor-pointer transition-colors duration-300 ${
                           hoveredIndex === cardIndex ? "text-white" : "text-primary"
                         } dark:text-subText`}
                       />
                     </div>
 
                     <div
+                      onClick={() => handleClick(category.name)}
                       className={`
-                        absolute bottom-14 right-8
+                        absolute bottom-14 right-8 cursor-pointer
                         w-12 h-12 flex items-center justify-center rounded-md
                         bg-secondary-light2 backdrop-blur-md transition-all duration-300
                       `}

@@ -4,6 +4,7 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { X } from 'lucide-react';
 import React, { useState } from 'react'
+import { useTranslations } from 'next-intl'
 
 const payments = [
     { date: "12 مرداد - 1401 / 12:33", phoneNumber: 123456789123456, price: 1250000 },
@@ -13,21 +14,21 @@ const payments = [
 ]
 
 const PaymentsModalReserves = () => {
-
     const [open, setOpen] = useState<boolean>(false);
+    const t = useTranslations('modals.paymentsReserves');
 
     return (
         <Dialog onOpenChange={setOpen} open={open} >
             <DialogTrigger>
-                <CommonButton title='پرداختی ها' classname='bg-primary text-primary-foreground' />
+                <CommonButton title={t('payments')} classname='bg-primary text-primary-foreground' />
             </DialogTrigger>
             <DialogContent onMouseDown={(e) => e.stopPropagation()} className='rounded-2xl max-w-[800px] flex flex-col gap-8 items-center'>
                 <DialogHeader className='flex justify-between flex-row w-full items-center my-4'>
                     <DialogTitle className='text-xl'>
-                        لیست پرداختی ها
+                        {t('paymentsList')}
                     </DialogTitle>
                     <DialogDescription>
-                        <CommonButton onclick={() => setOpen(false)} title='بستن' icon={<X />} classname='border border-danger bg-transparent text-danger' />
+                        <CommonButton onclick={() => setOpen(false)} title={t('close')} icon={<X />} classname='border border-danger bg-transparent text-danger' />
                     </DialogDescription>
                 </DialogHeader>
                 <DialogFooter className='w-full'>
@@ -38,10 +39,10 @@ const PaymentsModalReserves = () => {
                         <Table className='text-right w-full overflow-hidden'>
                             <TableHeader className='bg-subBg2 rounded-2xl text-foreground'>
                                 <TableRow className='text-right'>
-                                    <TableHead className='text-right text-foreground'> تاریخ </TableHead>
-                                    <TableHead className='text-right text-foreground'> شماره پیگیری </TableHead>
-                                    <TableHead className='text-right text-foreground'> مبلغ </TableHead>
-                                    <TableHead className='text-right text-foreground'>  </TableHead>
+                                    <TableHead className='text-right text-foreground'>{t('date')}</TableHead>
+                                    <TableHead className='text-right text-foreground'>{t('trackingNumber')}</TableHead>
+                                    <TableHead className='text-right text-foreground'>{t('amount')}</TableHead>
+                                    <TableHead className='text-right text-foreground'></TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
@@ -57,7 +58,7 @@ const PaymentsModalReserves = () => {
                                             {payment.price}
                                         </TableCell>
                                         <TableCell className='relative whitespace-nowrap cursor-pointer'>
-                                            مشاهده رسید
+                                            {t('viewReceipt')}
                                         </TableCell>
                                     </TableRow>
                                 ))}

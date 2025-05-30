@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useState } from "react";
 import PaymentListModal from "./PaymentListModal";
 import ReservesModals from "./ReservesModal";
+import { useTranslations } from "next-intl";
 
 interface ReserveModalProps {
   isOpen: boolean;
@@ -12,47 +13,36 @@ interface ReserveModalProps {
 export default function ReserveModal({ isOpen, onClose }: ReserveModalProps) {
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
   const [isReserveModals, setIsReserveModals] = useState(false);
+  const t = useTranslations("modals.reserveModal");
 
   if (!isOpen) return null;
 
   return (
     <>
       <div
-        className="fixed inset-0 z-50 flex lg:items-center md:items-center  sm:items-start items-start justify-center bg-black/50 backdrop-blur-sm overflow-y-auto max-h-screen
-"
+        className="fixed inset-0 z-50 flex lg:items-center md:items-center  sm:items-start items-start justify-center bg-black/50 backdrop-blur-sm overflow-y-auto max-h-screen"
       >
         <div className="relative w-[95%] max-w-6xl rounded-2xl bg-border p-6 text-right shadow-xl ">
           <h2 className="mb-4 lg:text-2xl md:text-2xl sm:text-2xl font-bold text-foreground text-sm">
-            هتل همایون فر کیش ایران
+            {t("hotelName")}
           </h2>
           <button
             onClick={onClose}
             className="absolute left-4 top-4 flex items-center gap-2 rounded-full border border-danger px-4 py-1 text-danger hover:bg-subBg"
           >
-            بستن <X />
+            {t("close")} <X />
           </button>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2" dir="ltr">
             <div className="space-y-4">
               <p className="text-sm leading-7 text-subText">
-                آپارتمانی دنج و آرام در قلب شهر، جایی که زندگی روزمره راحت و
-                سبک‌تر است. فضایی مدرن با طراحی منحصربه‌فرد، یادآور خانه‌های دنج
-                و دل‌نشین. محلی برای لحظه‌های خوش، آرامش و شروعی نو در زندگی
-                روزمره‌تان. آپارتمانی دنج و آرام در قلب شهر، جایی که زندگی
-                روزمره راحت و سبک‌تر است. فضایی مدرن با طراحی منحصربه‌فرد،
-                یادآور خانه‌های دنج و دل‌نشین. محلی برای لحظه‌های خوش، آرامش و
-                شروعی نو در زندگی روزمره‌تان. آپارتمانی دنج و آرام در قلب شهر،
-                جایی که زندگی روزمره راحت و سبک‌تر است. فضایی مدرن با طراحی
-                منحصربه‌فرد، یادآور خانه‌های دنج و دل‌نشین. محلی برای لحظه‌های
-                خوش، آرامش و شروعی نو در زندگی روزمره‌تان. محلی برای لحظه‌های
-                خوش، آرامش و شروعی نو در زندگی روزمره‌تان. محلی برای لحظه‌های
-                خوش، آرامش و شروعی نو در زندگی روزمره‌تان.
+                {t("description")}
               </p>
 
               <div
                 className="flex flex-wrap items-center gap-3 text-sm"
                 dir="rtl"
               >
-                <span className="text-subText">برچسب ها :</span>
+                <span className="text-subText">{t("tags")} :</span>
                 {["بالکن", "مسکونی", "آپارتمان", "آپارتمان", "آپارتمان"].map(
                   (tag, index) => (
                     <span
@@ -79,7 +69,7 @@ export default function ReserveModal({ isOpen, onClose }: ReserveModalProps) {
 
               <div className="absolute right-3 top-3 rounded-md bg-gradient-to-r from-accent to-accent px-3 py-1 text-foreground shadow-md">
                 <span className="flex items-center gap-1 text-sm text-bacgkroundW">
-                  <Star className="text-bacgkroundW" /> ۵ ستاره
+                  <Star className="text-bacgkroundW" /> {t("stars")}
                 </span>
               </div>
             </div>
@@ -87,31 +77,30 @@ export default function ReserveModal({ isOpen, onClose }: ReserveModalProps) {
 
           <div className="mt-6 border-t pt-4 text-sm text-gray-600">
             <p className="mb-2 text-foreground">
-              <strong>آدرس :</strong> گیلان، رشت، میدان آزادی، جنب چهارراه
-              عظیمی، گیلان، رشت...
+              <strong>{t("addressLabel")} :</strong> {t("address")}
             </p>
             <div className="flex flex-wrap items-center gap-4 text-xs text-foreground">
               <span className="flex items-center gap-1">
-                <BedDouble size={16} />۴ خواب
+                <BedDouble size={16} />{t("bedrooms")}
               </span>
               <span className="flex items-center gap-1">
-                <Car size={16} />۱ پارکینگ
+                <Car size={16} />{t("parking")}
               </span>
               <span className="flex items-center gap-1">
-                <Bath size={16} />۲ حمام
+                <Bath size={16} />{t("bathrooms")}
               </span>
               <span className="flex items-center gap-1">
                 <Trees size={16} />
-                ۵۰ متر حیاط
+                {t("yard")}
               </span>
             </div>
           </div>
 
           <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
             <div className="text-md text-subText">
-              <strong>قیمت خرید :</strong>
+              <strong>{t("priceLabel")} :</strong>
               <span className="ml-2 rounded-md bg-border px-4 py-1 text-subText">
-                ۵,۰۰۰,۰۰۰ ت
+                {t("price")}
               </span>
             </div>
 
@@ -120,13 +109,13 @@ export default function ReserveModal({ isOpen, onClose }: ReserveModalProps) {
                 className="rounded-xl bg-primary px-6 py-2 text-background"
                 onClick={() => setIsReserveModals(true)}
               >
-                رزرو ها
+                {t("reserves")}
               </button>
               <button
                 onClick={() => setIsPaymentModalOpen(true)}
                 className="rounded-xl border border-primary px-6 py-2 text-background bg-primary"
               >
-                پرداختی ها
+                {t("payments")}
               </button>
             </div>
           </div>

@@ -9,6 +9,7 @@ import { ChevronDown, CreditCard, LogIn } from 'lucide-react';
 import { routeSelect } from '../routeSelect';
 import Link from 'next/link';
 import useClearPathname from '@/utils/helper/clearPathname/clearPathname';
+import { useTranslations } from 'next-intl';
 
 const TabletSidebar = ({
   view,
@@ -19,7 +20,7 @@ const TabletSidebar = ({
 }) => {
 
     const pathname = useClearPathname();
-
+    const t = useTranslations("dashboardSidebar")
     const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
     useEffect(() => {
@@ -88,7 +89,7 @@ const TabletSidebar = ({
                                                 )}
                                             </TooltipTrigger>
                                             <TooltipContent className="dark:bg-accent bg-subBg2 dark:accent-foreground absolute right-6 whitespace-nowrap text-foreground">
-                                                <p> {label} </p>
+                                                <p> {t(label)} </p>
                                             </TooltipContent>
                                         </Tooltip>
                                     </TooltipProvider>
@@ -114,7 +115,7 @@ const TabletSidebar = ({
                                                                     <Icon className="w-5 h-5 min-w-5 min-h-5" />
                                                                 </TooltipTrigger>
                                                                 <TooltipContent className="dark:bg-accent bg-subBg2 dark:accent-foreground absolute right-6 whitespace-nowrap text-foreground">
-                                                                    <p> {label} </p>
+                                                                    <p> {t(label)} </p>
                                                                 </TooltipContent>
                                                             </Tooltip>
                                                         </TooltipProvider>

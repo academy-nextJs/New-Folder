@@ -20,7 +20,7 @@ const HeroSection = () => {
   }, [theme]);
 
   return (
-    <div className="relative w-full h-[480px] sm:h-[625] md:h-[775px] 2xl:h-[820px] ">
+    <div className="relative w-full h-[480px] sm:h-[625] md:h-[760px] 2xl:h-[840px] ">
       <div className="absolute inset-0 z-0">
         <Image
           src={heroSection}
