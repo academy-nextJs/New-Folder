@@ -1,14 +1,16 @@
 import { Check } from "lucide-react";
-
-const steps = [
-    "مشخصات اولیه",
-    "آدرس",
-    "امکانات",
-    "تصاویر ملک",
-    "تایید نهایی",
-];
+import { useTranslations } from "next-intl";
 
 export default function Stepper({ currentStep }: { currentStep: number }) {
+    const t = useTranslations('dashboardSeller.addHouses')
+    const steps = [
+        t('basicInfo'),
+        t('address'),
+        t('facilities'),
+        t('images'),
+        t('finalConfirm'),
+    ];
+
     return (
         <div className="flex items-center max-xl:justify-around justify-center gap-8 bg-subBg2 p-4 rounded-3xl shadow-sm">
             {steps.map((label, index) => {
@@ -34,7 +36,6 @@ export default function Stepper({ currentStep }: { currentStep: number }) {
                             <svg className="w-[80] max-2xl:w-[30] max-xl:hidden" height="2" viewBox="0 0 88 2" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <line x1="87" y1="1" x2="1" y2="1.00001" stroke="#777777" strokeWidth="2" strokeLinecap="round" strokeDasharray="7 7" />
                             </svg>
-
                         )}
                     </div>
                 );

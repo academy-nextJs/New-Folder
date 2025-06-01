@@ -14,6 +14,7 @@ import MobileSidebar from "./MobileSidebar";
 import TabletSidebar from "./TabletSidebar";
 import useClearPathname from "@/utils/helper/clearPathname/clearPathname";
 import { useTranslations } from "next-intl";
+import { useDirection } from "@/utils/hooks/useDirection";
 
 const SidebarDashboard = ({
   view,
@@ -27,6 +28,7 @@ const SidebarDashboard = ({
   const Icon = footerSidebarSelect.icon;
   const [show, setShow] = useState<boolean>(false);
   const t = useTranslations("dashboardSidebar")
+  const dir = useDirection()
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -63,6 +65,7 @@ const SidebarDashboard = ({
   return (
     <>
       <div
+        dir={dir}
         className={`bg-subBg md:flex hidden transition-all duration-300 ease-in-out px-4 border py-8 gap-8 rounded-xl w-fit flex-col shadow-md ${view === 1
           ? "opacity-100 scale-100 pointer-events-auto"
           : "opacity-0 scale-95 pointer-events-none absolute"
@@ -74,7 +77,7 @@ const SidebarDashboard = ({
           </Link>
           <LogOut
             onClick={() => setView(2)}
-            className="cursor-pointer hover:text-accent transition-colors"
+            className={`cursor-pointer hover:text-accent transition-colors ${dir === 'rtl' ? "rotate-0" : "rotate-180"}`}
           />
         </div>
         <div className="flex flex-col justify-between h-full">

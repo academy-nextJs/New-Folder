@@ -1,11 +1,9 @@
-/* eslint-disable */
-
 import { BlurFade } from '@/components/magicui/blur-fade'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { SplitNumber } from '@/utils/helper/spliter/SplitNumber'
-import { CheckCircle2, Coins, Flower, LayoutGrid, Pin, Rocket, Text, X } from 'lucide-react'
+import { CheckCircle2, Coins, Flower, Pin, Rocket, Text, X } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import Link from 'next/link'
-import React from 'react'
 
 const reserves = [
     { image: null, title: " هتل سراوان رانین رشت ", date: "12 مرداد - 1401 / 12:33", price: "1800000", status: true },
@@ -16,15 +14,16 @@ const reserves = [
 ]
 
 const RecentReserves = () => {
+    const t = useTranslations('dashboardSeller.dashboard')
     return (
         <BlurFade delay={1} className='w-full min-h-full rounded-[12px] bg-subBg flex gap-4 px-4 py-4 flex-col'>
             <div className='flex justify-between w-full items-center flex-wrap gap-4'>
                 <div className='flex gap-2 w-fit items-center'>
                     <Pin size={24} />
-                    <span className='text-base font-bold'> رزرو های اخیر مشتریان </span>
+                    <span className='text-base font-bold'>{t('title')}</span>
                 </div>
                 <Link href={"/dashboard/seller/profile"} className='w-fit cursor-pointer gap-8 items-center flex justify-between'>
-                    <span className='text-muted'> مشاهده همه </span>
+                    <span className='text-muted'>{t('viewAll')}</span>
                     <svg width="63" height="18" viewBox="0 0 63 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M3.7677 10.6382C2.2526 9.91281 2.25259 7.75581 3.76769 7.03041L12.8127 2.69983C14.1402 2.06424 15.6764 3.03189 15.6764 4.50373L15.6764 13.1649C15.6764 14.6367 14.1402 15.6044 12.8127 14.9688L3.7677 10.6382Z" fill="#7A7A7A" />
                         <path d="M31.566 10.1869C30.4297 9.64286 30.4297 8.02511 31.566 7.48106L38.3498 4.23313C39.3454 3.75643 40.4975 4.48217 40.4975 5.58605L40.4975 12.0819C40.4975 13.1858 39.3454 13.9115 38.3498 13.4348L31.566 10.1869Z" fill="#7A7A7A" fillOpacity="0.5" />
@@ -39,10 +38,10 @@ const RecentReserves = () => {
             <Table className='text-right max-lg:hidden overflow-hidden w-full'>
                 <TableHeader className='bg-subBg2 rounded-t-2xl text-foreground'>
                     <TableRow className='text-right'>
-                        <TableHead className='text-right text-foreground'> نام اقامتگاه </TableHead>
-                        <TableHead className='text-right text-foreground'> تاریخ رزرو </TableHead>
-                        <TableHead className='text-right text-foreground'> قیمت </TableHead>
-                        <TableHead className='text-right text-foreground'> وضعیت </TableHead>
+                        <TableHead className='text-right text-foreground'>{t('hotelName')}</TableHead>
+                        <TableHead className='text-right text-foreground'>{t('reserveDate')}</TableHead>
+                        <TableHead className='text-right text-foreground'>{t('price')}</TableHead>
+                        <TableHead className='text-right text-foreground'>{t('status')}</TableHead>
                     </TableRow>
                 </TableHeader>
 
@@ -57,10 +56,10 @@ const RecentReserves = () => {
                                 {reserve.date}
                             </TableCell>
                             <TableCell className='whitespace-nowrap'>
-                                {SplitNumber(reserve.price)} تومن
+                                {SplitNumber(reserve.price)} {t('currency')}
                             </TableCell>
                             <TableCell>
-                                <div className={`px-2 py-1 flex gap-2 whitespace-nowrap w-fit rounded-[16px] pl-6 items-center ${reserve.status ? "bg-primary text-primary-foreground" : "bg-danger text-accent-foreground"}`}> {reserve.status ? <CheckCircle2 size={14} /> : <X size={14} />} {reserve.status ? " تایید شده " : " تایید نشده "} </div>
+                                <div className={`px-2 py-1 flex gap-2 whitespace-nowrap w-fit rounded-[16px] pl-6 items-center ${reserve.status ? "bg-primary text-primary-foreground" : "bg-danger text-accent-foreground"}`}> {reserve.status ? <CheckCircle2 size={14} /> : <X size={14} />} {reserve.status ? t('confirmed') : t('notConfirmed')} </div>
                             </TableCell>
                         </TableRow>
                     ))}
@@ -71,10 +70,10 @@ const RecentReserves = () => {
                     <div key={idx} className='w-full max-sm:flex-col bg-subBg2 px-4 py-4 rounded-xl flex gap-4'>
                         <img src={reserve.image || "  "} alt=' ' className=' min-h-full w-[200px] max-sm:w-full max-sm:h-[200px] bg-card rounded-[12px]' />
                         <div className=' h-full flex flex-col gap-2 max-sm:gap-4 text-base'>
-                            <div className='flex gap-4 items-center flex-wrap'> <Text className='text-subText' size={20} /> <p className='text-subText'>  نام اقامتگاه : </p> <span> {reserve.title} </span> </div>
-                            <div className='flex gap-4 items-center flex-wrap'> <Rocket className='text-subText' size={20} />  <p className='text-subText'> تاریخ : </p> <span> {reserve.date} </span> </div>
-                            <div className='flex gap-4 items-center flex-wrap'> <Coins className='text-subText' size={20} /> <p className='text-subText'> قیمت : </p> <span className='gap-2 flex'> {SplitNumber(reserve.price)} <p>تومن </p>  </span> </div>
-                            <div className='flex gap-4 items-center flex-wrap'> <Flower className='text-subText' size={20} /> <div className={`px-2 py-1 flex gap-2 whitespace-nowrap w-fit rounded-[16px] pl-6 items-center ${reserve.status ? "bg-primary text-primary-foreground" : "bg-danger text-accent-foreground"}`}> {reserve.status ? <CheckCircle2 size={14} /> : <X size={14} />} {reserve.status ? " تایید شده " : " تایید نشده "} </div> </div>
+                            <div className='flex gap-4 items-center flex-wrap'> <Text className='text-subText' size={20} /> <p className='text-subText'> {t('hotelName')} : </p> <span> {reserve.title} </span> </div>
+                            <div className='flex gap-4 items-center flex-wrap'> <Rocket className='text-subText' size={20} />  <p className='text-subText'> {t('reserveDate')} : </p> <span> {reserve.date} </span> </div>
+                            <div className='flex gap-4 items-center flex-wrap'> <Coins className='text-subText' size={20} /> <p className='text-subText'> {t('price')} : </p> <span className='gap-2 flex'> {SplitNumber(reserve.price)} <p>{t('currency')}</p>  </span> </div>
+                            <div className='flex gap-4 items-center flex-wrap'> <Flower className='text-subText' size={20} /> <div className={`px-2 py-1 flex gap-2 whitespace-nowrap w-fit rounded-[16px] pl-6 items-center ${reserve.status ? "bg-primary text-primary-foreground" : "bg-danger text-accent-foreground"}`}> {reserve.status ? <CheckCircle2 size={14} /> : <X size={14} />} {reserve.status ? t('confirmed') : t('notConfirmed')} </div> </div>
                         </div>
                     </div>
                 ))}

@@ -22,7 +22,7 @@ export default function LanguageSwitcher() {
   return (
     <div className="flex gap-4 z-[1000]" onMouseDown={(e) => e.stopPropagation()}>
       <CommonSelect
-        classname="border-subText px-2 py-1 max-lg:text-xs z-[1000]"      
+        classname="border-subText px-2 py-1 max-lg:text-xs z-[1]"      
         placeholder=""
         value={currentLocale}
         onValueChange={(value => {

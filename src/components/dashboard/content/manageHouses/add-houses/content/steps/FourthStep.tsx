@@ -6,6 +6,8 @@ import Image from 'next/image'
 import mainImage from '@/assets/MainImage.png'
 import addImage from '@/assets/AddImage.png'
 import { X } from 'lucide-react'
+import { useTranslations } from 'next-intl'
+import { useDirection } from '@/utils/hooks/useDirection'
 
 const FileImage = ({ defaultImage }: { defaultImage: any }) => {
     const [selectedImage, setSelectedImage] = useState<string | null>(null)
@@ -37,13 +39,16 @@ const FileImage = ({ defaultImage }: { defaultImage: any }) => {
 }
 
 const FourthStep = () => {
+    const t = useTranslations('dashboardSeller.fourthStep')
+    const dir = useDirection()
+
     return (
-        <div className="flex flex-col gap-24">
+        <div dir={dir} className="flex flex-col gap-24">
             <div className="flex flex-col gap-4">
-                <h2>آدرس ملک</h2>
+                <h2>{t('title')}</h2>
                 <span>
-                    <span className="text-primary">یک تصویر بهتر از هزار کلمه.</span> با
-                    قرار دادن عکس شانس دیده شدن ملک‌تان را ۵ برابر کنید.
+                    <span className="text-primary">{t('desc1')}</span>
+                    {t('desc2')}
                 </span>
             </div>
             <div className="flex max-xl:flex-wrap max-xl:items-center w-full justify-center gap-8">

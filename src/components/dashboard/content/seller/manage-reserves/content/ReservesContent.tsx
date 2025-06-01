@@ -10,8 +10,10 @@ import { SplitNumber } from '@/utils/helper/spliter/SplitNumber'
 import { CheckCircle, Coins, Delete, Edit, Home, Info, LayoutGrid, MoreHorizontal, PlusCircle, Star, XCircle } from 'lucide-react'
 import { redirect } from 'next/navigation'
 import React, { useEffect, useRef } from 'react'
+import { useTranslations } from 'next-intl'
 
 const ReservesContent = () => {
+    const t = useTranslations('dashboardSeller.reserves')
     const houses = [
         { name: "هتل سراوان رانین رشت", passengerInformation: "سبحان عرب خزائلی ،4/1/8...", date: "12 مرداد - 1401 / 12:33", reserveStatus: "تایید شده", price: "1800000", paymentStatus: "لغو شده", },
         { name: "هتل سراوان رانین رشت", passengerInformation: "سبحان عرب خزائلی ،4/1/8...", date: "12 مرداد - 1401 / 12:33", reserveStatus: "در حال انتظار", price: "1800000", paymentStatus: "لغو شده", },
@@ -49,12 +51,12 @@ const ReservesContent = () => {
             <Table className='text-right max-lg:hidden overflow-hidden'>
                 <TableHeader className='bg-subBg2 rounded-2xl text-foreground'>
                     <TableRow className='text-right'>
-                        <TableHead className='text-right text-foreground'> نام ملک </TableHead>
-                        <TableHead className='text-right text-foreground'> اطلاعات مسافر </TableHead>
-                        <TableHead className='text-right text-foreground'> تاریخ رزرو </TableHead>
-                        <TableHead className='text-right text-foreground'> مبلغ </TableHead>
-                        <TableHead className='text-right text-foreground'> وضعیت رزرو </TableHead>
-                        <TableHead className='text-right text-foreground'> وضعیت پرداخت </TableHead>
+                        <TableHead className='text-right text-foreground'>{t('hotelName')}</TableHead>
+                        <TableHead className='text-right text-foreground'>{t('passengerInfo')}</TableHead>
+                        <TableHead className='text-right text-foreground'>{t('reserveDate')}</TableHead>
+                        <TableHead className='text-right text-foreground'>{t('amount')}</TableHead>
+                        <TableHead className='text-right text-foreground'>{t('reserveStatus')}</TableHead>
+                        <TableHead className='text-right text-foreground'>{t('paymentStatus')}</TableHead>
                         <TableHead className='text-right text-foreground'>  </TableHead>
                     </TableRow>
                 </TableHeader>
@@ -71,13 +73,13 @@ const ReservesContent = () => {
                                 {house.date}
                             </TableCell>
                             <TableCell>
-                                {SplitNumber(house.price)}ت
+                                {SplitNumber(house.price)}{t('currencyShort')}
                             </TableCell>
                             <TableCell>
-                                <div className={` px-4 w-[120px] flex justify-center py-1 rounded-2xl ${house.reserveStatus === 'تایید شده' && "bg-primary text-primary-foreground"} ${house.reserveStatus === 'در حال انتظار' && "bg-orange text-orange-foreground"} ${house.reserveStatus === 'رد شده' && "bg-danger text-accent-foreground"} `}> <span> {house.reserveStatus} </span> </div>
+                                <div className={` px-4 w-[120px] flex justify-center py-1 rounded-2xl ${house.reserveStatus === t('confirmed') && "bg-primary text-primary-foreground"} ${house.reserveStatus === t('pending') && "bg-orange text-orange-foreground"} ${house.reserveStatus === t('rejected') && "bg-danger text-accent-foreground"} `}> <span> {house.reserveStatus} </span> </div>
                             </TableCell>
                             <TableCell>
-                                <div className={` px-4 w-[120px] py-1 flex justify-center rounded-2xl ${house.paymentStatus === 'پرداخت شده' && "bg-primary text-primary-foreground"} ${house.paymentStatus === 'لغو شده' && "bg-danger text-accent-foreground"} `}> <span> {house.paymentStatus} </span> </div>
+                                <div className={` px-4 w-[120px] py-1 flex justify-center rounded-2xl ${house.paymentStatus === t('paid') && "bg-primary text-primary-foreground"} ${house.paymentStatus === t('canceled') && "bg-danger text-accent-foreground"} `}> <span> {house.paymentStatus} </span> </div>
                             </TableCell>
                             <TableCell className='relative' ref={idx === openModalIndex ? moreRef : null}>
                                 <MoreHorizontal
@@ -88,10 +90,10 @@ const ReservesContent = () => {
                                 />
                                 {openModalIndex === idx && (
                                     <div className={`flex absolute left-full ${idx > 1 ? "bottom-0" : "top-0"} flex-col backdrop-blur-md border rounded-xl gap-2 p-2 z-20 shadow-2xl`}>
-                                        <div className='px-4 py-1 flex gap-2 rounded-xl justify-end flex-row-reverse cursor-pointer hover:bg-subBg2 whitespace-nowrap'> تایید رزرو <CheckCircle size={16} /> </div>
-                                        <div className='px-4 py-1 flex gap-2 rounded-xl justify-end flex-row-reverse cursor-pointer hover:bg-subBg2 whitespace-nowrap'>  لغو رزرو <XCircle size={16} /> </div>
+                                        <div className='px-4 py-1 flex gap-2 rounded-xl justify-end flex-row-reverse cursor-pointer hover:bg-subBg2 whitespace-nowrap'>{t('approveReserve')} <CheckCircle size={16} /> </div>
+                                        <div className='px-4 py-1 flex gap-2 rounded-xl justify-end flex-row-reverse cursor-pointer hover:bg-subBg2 whitespace-nowrap'>{t('cancelReserve')} <XCircle size={16} /> </div>
                                         <DetailReserveModal />
-                                        <CommonModal handleClick='حذف' title=' آیا از حذف رزرو مطمئن هستید؟ ' button={<div className='px-4 py-1 flex gap-2 rounded-xl justify-end flex-row-reverse cursor-pointer hover:bg-subBg2'> حذف <Delete size={16} /> </div>} />
+                                        <CommonModal handleClick={t('delete')} title={t('deleteConfirm')} button={<div className='px-4 py-1 flex gap-2 rounded-xl justify-end flex-row-reverse cursor-pointer hover:bg-subBg2'> {t('delete')} <Delete size={16} /> </div>} />
                                     </div>
                                 )}
                             </TableCell>
@@ -112,25 +114,25 @@ const ReservesContent = () => {
                             />
                             {openModalIndex2 === idx && (
                                 <div className={`flex absolute left-4 bottom-full mt-2 flex-col backdrop-blur-xl border rounded-xl gap-2 p-2 z-20 shadow-2xl w-[200px] bg-transparent`}>
-                                    <div className='px-4 py-1 flex gap-2 rounded-xl justify-end flex-row-reverse cursor-pointer hover:bg-subBg2 whitespace-nowrap'> تایید رزرو <CheckCircle size={16} /> </div>
-                                    <div className='px-4 py-1 flex gap-2 rounded-xl justify-end flex-row-reverse cursor-pointer hover:bg-subBg2 whitespace-nowrap'>  لغو رزرو <XCircle size={16} /> </div>
-                                    <div className='px-4 py-1 flex gap-2 rounded-xl justify-end flex-row-reverse cursor-pointer hover:bg-subBg2'> جزییات <Info size={16} /> </div>
-                                    <CommonModal handleClick='حذف' title=' آیا از حذف رزرو مطمئن هستید؟ ' button={<div className='px-4 py-1 flex gap-2 rounded-xl justify-end flex-row-reverse cursor-pointer hover:bg-subBg2'> حذف <Delete size={16} /> </div>} />
+                                    <div className='px-4 py-1 flex gap-2 rounded-xl justify-end flex-row-reverse cursor-pointer hover:bg-subBg2 whitespace-nowrap'>{t('approveReserve')} <CheckCircle size={16} /> </div>
+                                    <div className='px-4 py-1 flex gap-2 rounded-xl justify-end flex-row-reverse cursor-pointer hover:bg-subBg2 whitespace-nowrap'>{t('cancelReserve')} <XCircle size={16} /> </div>
+                                    <div className='px-4 py-1 flex gap-2 rounded-xl justify-end flex-row-reverse cursor-pointer hover:bg-subBg2'> {t('details')} <Info size={16} /> </div>
+                                    <CommonModal handleClick={t('delete')} title={t('deleteConfirm')} button={<div className='px-4 py-1 flex gap-2 rounded-xl justify-end flex-row-reverse cursor-pointer hover:bg-subBg2'> {t('delete')} <Delete size={16} /> </div>} />
                                 </div>
                             )}
                         </div>
 
                         <div className='flex flex-col gap-4 text-right'>
-                            <div className='flex gap-2'><span className='font-semibold'>اطلاعات مسافر:</span> {house.passengerInformation}</div>
-                            <div className='flex gap-2'><span className='font-semibold'>تاریخ رزرو:</span> {house.date}</div>
-                            <div className='flex gap-2'><span className='font-semibold'>مبلغ:</span> {SplitNumber(house.price)}ت</div>
-                            <div className='flex gap-2'><span className='font-semibold'>وضعیت رزرو:</span>
-                                <span className={`ml-2 px-3 py-1 rounded-xl ${house.reserveStatus === 'تایید شده' && "bg-primary text-primary-foreground"} ${house.reserveStatus === 'در حال انتظار' && "bg-orange text-orange-foreground"} ${house.reserveStatus === 'رد شده' && "bg-danger text-accent-foreground"}`}>
+                            <div className='flex gap-2'><span className='font-semibold'>{t('passengerInfo')}:</span> {house.passengerInformation}</div>
+                            <div className='flex gap-2'><span className='font-semibold'>{t('reserveDate')}:</span> {house.date}</div>
+                            <div className='flex gap-2'><span className='font-semibold'>{t('amount')}:</span> {SplitNumber(house.price)}{t('currencyShort')}</div>
+                            <div className='flex gap-2'><span className='font-semibold'>{t('reserveStatus')}:</span>
+                                <span className={`ml-2 px-3 py-1 rounded-xl ${house.reserveStatus === t('confirmed') && "bg-primary text-primary-foreground"} ${house.reserveStatus === t('pending') && "bg-orange text-orange-foreground"} ${house.reserveStatus === t('rejected') && "bg-danger text-accent-foreground"}`}>
                                     {house.reserveStatus}
                                 </span>
                             </div>
-                            <div className='flex gap-2'><span className='font-semibold'>وضعیت پرداخت:</span>
-                                <span className={`ml-2 px-3 py-1 rounded-xl ${house.paymentStatus === 'پرداخت شده' && "bg-primary text-primary-foreground"} ${house.paymentStatus === 'لغو شده' && "bg-danger text-accent-foreground"}`}>
+                            <div className='flex gap-2'><span className='font-semibold'>{t('paymentStatus')}:</span>
+                                <span className={`ml-2 px-3 py-1 rounded-xl ${house.paymentStatus === t('paid') && "bg-primary text-primary-foreground"} ${house.paymentStatus === t('canceled') && "bg-danger text-accent-foreground"}`}>
                                     {house.paymentStatus}
                                 </span>
                             </div>
