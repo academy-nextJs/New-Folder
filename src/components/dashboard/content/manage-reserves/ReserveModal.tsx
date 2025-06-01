@@ -1,5 +1,6 @@
+/* eslint-disable */
+
 import { Bath, BedDouble, Car, LucideCopy, Star, Trees, X } from "lucide-react";
-import Image from "next/image";
 import { useState } from "react";
 import PaymentListModal from "./PaymentListModal";
 import ReservesModals from "./ReservesModal";
@@ -57,11 +58,11 @@ export default function ReserveModal({ isOpen, onClose }: ReserveModalProps) {
             </div>
 
             <div className="relative h-64 w-full rounded-2xl bg-gray-100">
-              <Image
+              <img
                 alt=""
-                src={""}
+                src=" "
                 className="absolute inset-0 flex items-center justify-center text-2xl text-gray-400"
-              ></Image>
+              ></img>
 
               <button className="absolute left-3 top-3 rounded-md bg-primary p-1.5 text-foreground shadow-md">
                 <LucideCopy className="text-bacgkroundW" size={20} />

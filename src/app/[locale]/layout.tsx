@@ -9,7 +9,7 @@ import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 
 export const metadata: Metadata = {
-  title: { template: "%s پروژه مسکن", default: "پروژه مسکن" },
+  title: { template: "%s | پروژه مسکن", default: "پروژه مسکن" },
   description: " املاک دلتا دوست خوب بچه ها ",
 };
 

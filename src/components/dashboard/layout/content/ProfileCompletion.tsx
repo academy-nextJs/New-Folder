@@ -4,6 +4,7 @@ import { BlurFade } from "@/components/magicui/blur-fade";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
 
 const ProfileCompletion = ({ percentage }: { percentage: number }) => {
   const t = useTranslations("dashboardBuyer");
@@ -29,9 +30,9 @@ const ProfileCompletion = ({ percentage }: { percentage: number }) => {
         <div className="flex flex-col justify-between h-full text-right w-full">
           <div className="flex justify-between items-center mb-2">
             <div className="flex gap-1 rotate-180 items-center  justify-between ml-[-100px]">
-              <h2 className=" rotate-180 text-sm text-primary font-medium cursor-pointer hover:underline">
+              <Link href={"/dashboard/profile"} className=" rotate-180 text-sm text-primary font-medium cursor-pointer hover:underline">
                 {t("edit")}
-              </h2>
+              </Link>
               <svg
                 width="42"
                 height="15"

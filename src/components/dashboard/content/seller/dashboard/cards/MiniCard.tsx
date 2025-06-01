@@ -8,7 +8,8 @@ const MiniCard = ({
   title,
   idx,
   value,
-}: { number?: number; title: string; value?: string; idx: number }) => {
+  href
+}: { number?: number; title: string; value?: string; idx: number, href?: string }) => {
   const t = useTranslations('dashboardSeller.dashboard.miniCard')
   return (
     <BlurFade
@@ -34,7 +35,7 @@ const MiniCard = ({
       {value ? (
         <span> {value} {t("currency")} </span>
       ) : (
-        <Link href={' '} className="w-full cursor-pointer flex justify-between">
+        <Link href={href || " "} className="w-full cursor-pointer flex justify-between">
           <span className="text-muted">{t('view')}</span>
           <svg width="63" height="18" viewBox="0 0 63 18" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M3.7677 10.6382C2.2526 9.91281 2.25259 7.75581 3.76769 7.03041L12.8127 2.69983C14.1402 2.06424 15.6764 3.03189 15.6764 4.50373L15.6764 13.1649C15.6764 14.6367 14.1402 15.6044 12.8127 14.9688L3.7677 10.6382Z" fill="#7A7A7A" />

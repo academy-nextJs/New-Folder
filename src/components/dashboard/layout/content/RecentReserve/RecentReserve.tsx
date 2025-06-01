@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { BlurFade } from "@/components/magicui/blur-fade";
 import RecentReserveClient from "../RecentReserve/RecentReserveClient";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
 
 function getReservations() {
   return [
@@ -99,9 +100,9 @@ export default function RecentReserve() {
               fillOpacity="0.25"
             />
           </svg>
-          <h2 className="rotate-180 text-xs md:text-sm lg:text-base text-primary font-medium cursor-pointer hover:underline">
+          <Link href={"/dashboard/manage-reserves"} className="rotate-180 text-xs md:text-sm lg:text-base text-primary font-medium cursor-pointer hover:underline">
             {t("seeAll")}
-          </h2>
+          </Link>
         </div>
       </div>
 

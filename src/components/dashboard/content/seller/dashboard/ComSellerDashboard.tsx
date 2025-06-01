@@ -6,10 +6,10 @@ import RecentReserves from './cards/RecentReserves'
 
 const ComSellerDashboard = () => {
   const dataMiniCards = [
-    { number: 2, title: "totalProperties" },
-    { number: 8, title: "activeReserves" },
-    { number: 6, title: "pendingReserves" },
-    { number: 5, title: "todayVisits" },
+    { number: 2, title: "totalProperties", href: "/dashboard/seller/manage-houses/my-houses" },
+    { number: 8, title: "activeReserves", href: "/dashboard/seller/manage-reserves" },
+    { number: 6, title: "pendingReserves", href: "/dashboard/seller/manage-reserves" },
+    { number: 5, title: "todayVisits", href: "/dashboard/seller/manager-houses/my-houses" },
   ]
 
   return (
