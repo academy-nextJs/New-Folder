@@ -6,9 +6,10 @@ export const directionMap = {
   ar: 'rtl'
 } as const;
 
-export const locales = ['en', 'fa', 'ar']
+export const defaultLocale = "fa"
+export const locales = ['fa', 'en', 'ar']
 
 export const routing = defineRouting({
-  locales: locales,
-  defaultLocale: 'fa'
+  locales,
+  defaultLocale
 });

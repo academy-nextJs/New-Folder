@@ -2,7 +2,7 @@ import AuthContainer from "@/components/auth/container";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "ورود یا ثبت‌نام | ",
+  title: "ورود یا ثبت‌نام ",
   description: "به حساب کاربری خود وارد شوید یا یک حساب جدید ایجاد کنید.",
   keywords: ["ورود", "ثبت‌ نام", "دلتا", "احراز هویت"],
 };
