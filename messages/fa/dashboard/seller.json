@@ -14,6 +14,7 @@
         "confirmed": "تایید شده",
         "notConfirmed": "تایید نشده",
         "miniCard": {
+            "view": "مشاهده",
             "currentMonthIncome": "درآمد ماه جاری",
             "lastMonthIncome": "درآمد ماه قبل",
             "totalIncome": "درآمد کل",
@@ -113,5 +114,64 @@
         "nextStep": "مرحله بعد",
         "prevStep": "مرحله قبل",
         "submitAd": "ثبت آگهی"
+    },
+    "firstStep": {
+        "houseName": "نام ملک",
+        "houseNamePlaceholder": "آپارتمان الهیه",
+        "capacity": "ظرفیت (نفر)",
+        "capacityPlaceholder": "12 نفر",
+        "dealType": "نوع معامله",
+        "direct_purchase": "فروش",
+        "reservation": "رزرو",
+        "rental": "اجاره",
+        "mortgage": "رهن",
+        "price": "قیمت",
+        "pricePlaceholder": "1.500.000 تومن",
+        "type": "نوع ملک",
+        "typePlaceholder": "مسکونی",
+        "subtype": "زیرنوع ملک",
+        "subtypePlaceholder": "آپارتمانی",
+        "description": "توضیحات ملک",
+        "descriptionPlaceholder": "آپارتمان لوتوس 102 در ساری ..."
+    },
+    "secondStep": {
+        "rooms": "تعداد اتاق",
+        "roomsPlaceholder": "5",
+        "roomUnit": "اتاق",
+        "bathrooms": "تعداد حمام",
+        "bathroomsPlaceholder": "5",
+        "bathroomUnit": "حمام",
+        "parking": "تعداد پارکینگ",
+        "parkingPlaceholder": "1",
+        "parkingUnit": "پارکینگ",
+        "yardType": "نوع حیاط",
+        "balcony": "بالکونی",
+        "tags": "برچسب ها",
+        "tagsPlaceholder": "برچسب را وارد کنید و Enter بزنید"
+    },
+    "thirdStep": {
+        "address": "آدرس ملک",
+        "addressPlaceholder": "مثال : ساری، دنیای آرزو، پژوهشگاه سپهرگان",
+        "desc1": "با انتخاب موقعیت مکانی ملک خود از روی نقشه به راحتی",
+        "desc2": "موقعیت ملک",
+        "desc3": "را تعیین کنید."
+    },
+    "fourthStep": {
+        "title": "تصاویر ملک",
+        "desc1": "یک تصویر بهتر از هزار کلمه.",
+        "desc2": " با قرار دادن عکس شانس دیده شدن ملک‌تان را ۵ برابر کنید."
+    },
+    "fifthStep": {
+        "title": "آپارتمان لوکس زعفرانیه",
+        "description": "آرامش و شروعی نو در زندگی روزمره‌تان. آپارتمانی دنج و آرام در قلب شهر، جایی که زندگی روزمره راحت و سبک‌تر است. فضایی مدرن با طراحی منحصربه‌فرد، یادآور خانه‌های دنج و دل‌نشین. محلی برای لحظه‌های خوش، آرامش و شروعی نو در زندگی روزمره‌تان.",
+        "tags": "برچسب ها",
+        "apartment": "آپارتمان",
+        "residential": "مسکونی",
+        "balcony": "بالکن",
+        "address": "خیابان ولیعصر، تهران، منطقه مرکزی",
+        "details": "2 خوابه ، 2 حمامه  ، 1 پارکینگ ، ظرفیت 6 نفر",
+        "yard": "حیاط بالکنی",
+        "dealType": "رهن ، اجاره",
+        "currency": "تومن"
     }
 }

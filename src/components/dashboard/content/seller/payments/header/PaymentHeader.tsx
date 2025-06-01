@@ -1,5 +1,6 @@
 import React from 'react'
 import MiniCard from '../../dashboard/cards/MiniCard'
+import { SplitNumber } from '@/utils/helper/spliter/SplitNumber'
 
 const PaymentHeader = () => {
     const dataMiniCards = [
@@ -12,7 +13,7 @@ const PaymentHeader = () => {
     return (
         <div className='w-full max-lg:flex-col flex flex-row gap-4 justify-between '>
             {dataMiniCards.map((data, idx) => (
-                <MiniCard key={idx} {...data} idx={idx} />
+                <MiniCard key={idx} {...data} idx={idx} value={SplitNumber(Number(data.value))} />
             ))}
         </div>
     )

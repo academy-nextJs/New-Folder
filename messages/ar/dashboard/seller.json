@@ -14,6 +14,7 @@
         "confirmed": "تم التأكيد",
         "notConfirmed": "لم يتم التأكيد",
         "miniCard": {
+            "view": "عرض",
             "totalProperties": "إجمالي العقارات",
             "activeReserves": "الحجوزات النشطة",
             "pendingReserves": "الحجوزات المعلقة",
@@ -113,5 +114,64 @@
         "nextStep": "الخطوة التالية",
         "prevStep": "الخطوة السابقة",
         "submitAd": "تسجيل الإعلان"
+    },
+    "firstStep": {
+        "houseName": "اسم العقار",
+        "houseNamePlaceholder": "شقة الإلهية",
+        "capacity": "السعة (أشخاص)",
+        "capacityPlaceholder": "12 شخصًا",
+        "dealType": "نوع الصفقة",
+        "direct_purchase": "بيع",
+        "reservation": "حجز",
+        "rental": "إيجار",
+        "mortgage": "رهن",
+        "price": "السعر",
+        "pricePlaceholder": "1,500,000 تومان",
+        "type": "نوع العقار",
+        "typePlaceholder": "سكني",
+        "subtype": "نوع فرعي للعقار",
+        "subtypePlaceholder": "شقة",
+        "description": "وصف العقار",
+        "descriptionPlaceholder": "شقة لوتوس 102 في ساري ..."
+    },
+    "secondStep": {
+        "rooms": "عدد الغرف",
+        "roomsPlaceholder": "5",
+        "roomUnit": "غرفة",
+        "bathrooms": "عدد الحمامات",
+        "bathroomsPlaceholder": "5",
+        "bathroomUnit": "حمام",
+        "parking": "عدد مواقف السيارات",
+        "parkingPlaceholder": "1",
+        "parkingUnit": "موقف",
+        "yardType": "نوع الحديقة",
+        "balcony": "شرفة",
+        "tags": "الوسوم",
+        "tagsPlaceholder": "أدخل وسمًا واضغط Enter"
+    },
+    "thirdStep": {
+        "address": "عنوان العقار",
+        "addressPlaceholder": "مثال: ساري، دنياي آرزو، مركز أبحاث سپهرغان",
+        "desc1": "من خلال اختيار موقع العقار على الخريطة يمكنك بسهولة تحديد",
+        "desc2": "موقع العقار",
+        "desc3": "."
+    },
+    "fourthStep": {
+        "title": "صور العقار",
+        "desc1": "الصورة بألف كلمة.",
+        "desc2": " من خلال إضافة الصور تزيد فرصة ظهور عقارك 5 مرات."
+    },
+    "fifthStep": {
+        "title": "شقة فاخرة في زعفرانية",
+        "description": "الهدوء وبداية جديدة في حياتك اليومية. شقة هادئة ومريحة في قلب المدينة، حيث تصبح الحياة اليومية أسهل وأكثر راحة. مساحة عصرية بتصميم فريد تذكرك بالمنازل الدافئة والجميلة. مكان للحظات السعيدة والهدوء وبداية جديدة في حياتك اليومية.",
+        "tags": "الوسوم",
+        "apartment": "شقة",
+        "residential": "سكني",
+        "balcony": "شرفة",
+        "address": "شارع وليعصر، طهران، المنطقة المركزية",
+        "details": "غرفتان نوم، حمامان، موقف سيارة واحد، السعة 6 أشخاص",
+        "yard": "حديقة مع شرفة",
+        "dealType": "رهن، إيجار",
+        "currency": "تومان"
     }
 }

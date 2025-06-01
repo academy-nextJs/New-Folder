@@ -6,15 +6,17 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { X } from 'lucide-react'
 import React, { useState } from 'react'
-
-const selectItems = [
-    { label: "بالکونی", value: "balcony" }
-]
+import { useTranslations } from 'next-intl'
 
 const SecondStep = () => {
-
+    const t = useTranslations('dashboardSeller.secondStep')
+    
     const [tags, setTags] = useState<string[]>([]);
     const [input, setInput] = useState('');
+
+    const selectItems = [
+        { label: t('balcony'), value: "balcony" }
+    ]
 
     const handleKeyDown = (e: any) => {
         if ((e.key === 'Enter' || e.key === ',') && input.trim()) {
@@ -37,22 +39,22 @@ const SecondStep = () => {
         <div className='flex w-full flex-col gap-8'>
             <div className='flex w-full max-lg:flex-col justify-between gap-8 items-center'>
                 <div className='w-1/2 max-lg:w-full flex flex-col gap-2 relative'>
-                    <Label htmlFor='rooms' className='text-subText text-sm'> تعداد اتاق </Label>
-                    <Input name='rooms' id='rooms' placeholder='5' className='w-full px-4 py-2 text-sm bg-transparent border rounded-xl text-subText border-subText' />
-                    <div className='absolute left-4 top-9 text-muted'> اتاق </div>
+                    <Label htmlFor='rooms' className='text-subText text-sm'>{t('rooms')}</Label>
+                    <Input name='rooms' id='rooms' placeholder={t('roomsPlaceholder')} className='w-full px-4 py-2 text-sm bg-transparent border rounded-xl text-subText border-subText' />
+                    <div className='absolute left-4 top-9 text-muted'>{t('roomUnit')}</div>
                 </div>
 
                 <div className='w-1/2 max-lg:w-full flex flex-col gap-2 relative'>
-                    <Label htmlFor='bathrooms' className='text-subText text-sm'> تعداد حمام </Label>
-                    <Input name='bathrooms' id='bathrooms' placeholder='5' className='w-full text-sm px-4 placeholder:text-subText py-2 bg-transparent border rounded-xl text-subText border-subText' />
-                    <div className='absolute left-4 top-9 text-muted'> حمام </div>
+                    <Label htmlFor='bathrooms' className='text-subText text-sm'>{t('bathrooms')}</Label>
+                    <Input name='bathrooms' id='bathrooms' placeholder={t('bathroomsPlaceholder')} className='w-full text-sm px-4 placeholder:text-subText py-2 bg-transparent border rounded-xl text-subText border-subText' />
+                    <div className='absolute left-4 top-9 text-muted'>{t('bathroomUnit')}</div>
                 </div>
             </div>
             <div className='flex w-full max-lg:flex-col justify-between gap-8 items-center'>
                 <div className='w-1/2 max-lg:w-full flex flex-col gap-2 relative'>
-                    <Label htmlFor='parking' className='text-subText text-sm'> تعداد پارکینگ </Label>
-                    <Input name='parking' id='parking' placeholder='1' className='w-full px-4 py-2 text-sm bg-transparent border rounded-xl text-subText border-subText' />
-                    <div className='absolute left-4 top-9 text-muted'> پارکینگ </div>
+                    <Label htmlFor='parking' className='text-subText text-sm'>{t('parking')}</Label>
+                    <Input name='parking' id='parking' placeholder={t('parkingPlaceholder')} className='w-full px-4 py-2 text-sm bg-transparent border rounded-xl text-subText border-subText' />
+                    <div className='absolute left-4 top-9 text-muted'>{t('parkingUnit')}</div>
                 </div>
 
                 <div className='w-1/2 max-lg:w-full flex flex-col gap-2 relative'>
@@ -61,13 +63,13 @@ const SecondStep = () => {
                         placeholder=''
                         classname='text-subText placeholder:text-subText rounded-xl py-5 border border-subText w-full'
                         color='text-subText'
-                        label='نوع حیاط'
+                        label={t('yardType')}
                     />
                 </div>
             </div>
             <div className="w-full flex flex-col gap-2">
                 <Label htmlFor="tags" className="text-subText text-sm">
-                    برچسب ها
+                    {t('tags')}
                 </Label>
                 <div className="flex flex-wrap gap-2 px-4 py-2 border border-subText rounded-xl">
                     {tags.map((tag, index) => (
@@ -92,7 +94,7 @@ const SecondStep = () => {
                         onChange={(e) => setInput(e.target.value)}
                         onKeyDown={handleKeyDown}
                         className="flex-grow bg-transparent text-subText text-sm focus:outline-none"
-                        placeholder="برچسب را وارد کنید و Enter بزنید"
+                        placeholder={t('tagsPlaceholder')}
                     />
                 </div>
             </div>

@@ -32,7 +32,7 @@ const MiniCard = ({
       </svg>
 
       {value ? (
-        <span> {value} </span>
+        <span> {value} {t("currency")} </span>
       ) : (
         <Link href={' '} className="w-full cursor-pointer flex justify-between">
           <span className="text-muted">{t('view')}</span>

@@ -5,11 +5,12 @@ import {
     TooltipProvider,
     TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { ChevronDown, CreditCard, LogIn } from 'lucide-react';
+import { ChevronDown, CreditCard, LogOut } from 'lucide-react';
 import { routeSelect } from '../routeSelect';
 import Link from 'next/link';
 import useClearPathname from '@/utils/helper/clearPathname/clearPathname';
 import { useTranslations } from 'next-intl';
+import { useDirection } from '@/utils/hooks/useDirection';
 
 const TabletSidebar = ({
   view,
@@ -21,6 +22,7 @@ const TabletSidebar = ({
 
     const pathname = useClearPathname();
     const t = useTranslations("dashboardSidebar")
+    const dir = useDirection()
     const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
     useEffect(() => {
@@ -47,9 +49,9 @@ const TabletSidebar = ({
                 }`}
         >
             <div className="flex justify-center items-center mb-6">
-                <LogIn
+                <LogOut
                     onClick={() => setView(1)}
-                    className="cursor-pointer rotate-180 hover:text-accent transition-colors"
+                    className={`cursor-pointer rotate-180 hover:text-accent transition-colors ${dir === 'rtl' ? "rotate-180" : "rotate-0"} `}
                 />
             </div>
             <div className="flex flex-col justify-between h-full items-center">
