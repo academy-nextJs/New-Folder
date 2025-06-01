@@ -12,9 +12,11 @@ import OtpInput from "../common/inputs/auth/OtpInput";
 import TimerButton from "../common/buttons/timer/TimerButton";
 import { useEmailStore, useUserStore } from "@/utils/zustand/store";
 import { useTranslations } from "next-intl";
+import { useDirection } from "@/utils/hooks/useDirection";
 
 const VerifyForm = () => {
     const t = useTranslations('auth.verifyForm');
+    const dir = useDirection()
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [code, setCode] = useState<string>()
     const tempUserId = useUserStore(state => state.tempUserId)
@@ -61,7 +63,7 @@ const VerifyForm = () => {
     }
 
     return (
-        <div>
+        <div dir={dir} >
             <form className="mt-8 space-y-10" onSubmit={handleSubmit(handleRegister)}>
                 <div className="flex flex-col gap-4">
                     <div className="w-full flex xl:flex-row flex-col xl:gap-4 gap-8 justify-between xl:items-center items-start text-card-foreground">

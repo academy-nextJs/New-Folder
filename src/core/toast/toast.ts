@@ -1,16 +1,15 @@
-'use client'
-import { toast } from "sonner"
+import { toast } from "react-toastify"
 
-type ToastType = "success" | "error"
+type ToastType = "success" | "error" | "warning"
 
-export const showToast = (type: ToastType, message: string, label: string, description?: string, duration?: number) => {
+export const showToast = (type: ToastType, message: string, label?: string, description?: string, duration?: number) => {
+
     toast[type](message, {
-        className: "max-w-full sm:max-w-md mx-auto p-4 text-sm sm:text-base",
-        action: {
-            label,
-            onClick: () => console.log(""),
-        },
-        description,
-        duration,
+        position: "top-center",
+        className: "bg-subBg text-foreground font-semibold text-sm  ",
+        delay: duration,
+        pauseOnHover: true,
+        closeButton: false,
+        
     });
 }

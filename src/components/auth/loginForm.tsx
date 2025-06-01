@@ -15,6 +15,7 @@ import { redirect } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { fetchApi } from "@/core/interceptore/fetchApi";
 import { useTranslations } from "next-intl";
+import { useDirection } from "@/utils/hooks/useDirection";
 
 export interface LoginResponse {
   accessToken: string;
@@ -23,6 +24,7 @@ export interface LoginResponse {
 
 const LoginForm = () => {
   const t = useTranslations('auth.loginForm');
+  const dir = useDirection()
   const [showPassword, setShowPassword] = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -59,7 +61,7 @@ const LoginForm = () => {
   };
 
   return (
-    <div>
+    <div dir={dir} >
       <form
         className="mt-8 space-y-6 text-foreground"
         onSubmit={handleSubmit(handleLogin)}
@@ -101,7 +103,7 @@ const LoginForm = () => {
                 <Button
                   variant={"scale"}
                   onClick={() => setShowPassword(!showPassword)}
-                  className={`cursor-pointer bg-transparent text-card-foreground absolute top-2 left-3`}
+                  className={`cursor-pointer bg-transparent text-card-foreground absolute top-2 ${dir === "rtl" ? "left-3" : "right-3"} `}
                   type="button"
                 >
                   {showPassword ? (
@@ -118,7 +120,7 @@ const LoginForm = () => {
                 )}
               </div>
               <span className="text-card-foreground flex gap-2 text-sm cursor-pointer">
-                <p>{t("forgotPassword")}</p> <ArrowLeft size={20} />
+                <p>{t("forgotPassword")}</p> <ArrowLeft className={` ${dir === "ltr" && "rotate-180"} `} size={20} />
               </span>
             </div>
           </div>
