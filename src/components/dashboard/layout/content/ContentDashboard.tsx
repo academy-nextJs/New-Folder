@@ -7,15 +7,16 @@ import ProfileCompletion from "./ProfileCompletion";
 import { BlurFade } from "@/components/magicui/blur-fade";
 import { useTranslations } from "next-intl";
 import RecentReserve from "./RecentReserve/RecentReserve";
+import Link from "next/link";
 
 const ContentDashboard = () => {
   const t = useTranslations("dashboardBuyer");
 
   const cardData = [
-    { id: 1, title: "5", subtitle: t("totalReserves") },
-    { id: 2, title: "12", subtitle: t("activeReserves") },
-    { id: 3, title: "3", subtitle: t("favorites") },
-    { id: 4, title: "20", subtitle: t("comments") },
+    { id: 1, title: "5", subtitle: t("totalReserves"), href: "/dashboard/manage-reserves" },
+    { id: 2, title: "12", subtitle: t("activeReserves"), href: "/dashboard/manage-reserves" },
+    { id: 4, title: "20", subtitle: t("notPayments"), href: "/dashboard/manage-reserves" },
+    { id: 3, title: "3", subtitle: t("favorites"), href: "/dashboard/favorites" },
   ];
 
   return (
@@ -52,9 +53,9 @@ const ContentDashboard = () => {
               className="w-full rounded-b-xl object-cover"
             />
             <div className="flex flex-row justify-between w-full items-center mt-2">
-              <span className=" text-textComment dark:text-bacgkroundW">
+              <Link href={item.href} className=" text-textComment dark:text-bacgkroundW">
                 {t("details")}
-              </span>
+              </Link>
 
               <div className="flex gap-1 rotate-180 justify-center items-center ">
                 <svg

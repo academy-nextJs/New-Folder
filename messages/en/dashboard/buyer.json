@@ -1,6 +1,7 @@
 {
     "totalReserves": "Total Reservations",
     "activeReserves": "Active Reservations",
+    "notPayments": "Unpaid Reservations",
     "favorites": "Favorites",
     "comments": "Comments",
     "details": "Details",
