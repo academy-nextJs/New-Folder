@@ -28,7 +28,7 @@ const onError = async (error: Response | Error) => {
                     await signIn("credentials", {
                         redirect: false,
                         accessToken: data?.accessToken,
-                        refreshToken: data?.refreshToken,
+                        refreshToken: refreshToken,
                     })
                 }
                 else {

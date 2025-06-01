@@ -14,9 +14,11 @@ import { Input } from "../ui/input";
 import { useUserStore } from "@/utils/zustand/store";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { useDirection } from "@/utils/hooks/useDirection";
 
 const CompleteRegisterForm = () => {
     const t = useTranslations('auth.completeRegisterForm');
+    const dir = useDirection()
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const router = useRouter()
     const userId = useUserStore(state => state.userId)
@@ -57,7 +59,7 @@ const CompleteRegisterForm = () => {
     }
 
     return (
-        <div>
+        <div dir={dir}>
             <form className="mt-8 space-y-10" onSubmit={handleSubmit(handleRegister)}>
                 <div className="flex md:flex-row flex-col gap-4">
                     <div className="md:w-1/2 w-full flex gap-1 flex-col text-card-foreground">

@@ -54,7 +54,7 @@ const Header = () => {
   return <div className="w-full flex justify-center items-center relative">
     {isDrawerOpen && (
       <div
-        className="relative inset-0 bg-black/50 z-60  animate-overlayShow"
+        className="relative inset-0 bg-black/50 z-60 animate-overlayShow"
         onClick={() => setIsDrawerOpen(false)}
       />
     )}
@@ -64,7 +64,7 @@ const Header = () => {
       className={`fixed lg:hidden top-0 right-0 h-full w-72 bg-secondary z-[100] shadow-lg transform ${isDrawerOpen ? "animate-drawerSlideIn" : "translate-x-full"
         } overflow-y-auto`}
     >
-      <div className="p-6 ">
+      <div className="p-6">
         <div className="flex items-center justify-between mb-8">
           <LogoSection />
           <button
@@ -94,7 +94,7 @@ const Header = () => {
       </div>
     </div>
 
-    <div dir={dir} className="w-[100%] flex items-center justify-between lg:h-[48px] md:h-[36px] h-[40px] absolute top-[24px] bg-subBg text-subText rounded-[16px]  z-50">
+    <div dir={dir} className="w-[100%] flex items-center justify-between py-1 absolute top-[24px] bg-subBg text-subText rounded-[16px]  z-50">
       <div className="hidden lg:flex items-center h-full gap-5 ">
         <LogoSection />
         <NavbarSection />

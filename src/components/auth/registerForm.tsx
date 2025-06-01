@@ -14,9 +14,11 @@ import { Input } from "../ui/input";
 import { useUserStore, useEmailStore } from "@/utils/zustand/store";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { useDirection } from "@/utils/hooks/useDirection";
 
 const RegisterForm = () => {
   const t = useTranslations('auth.registerForm');
+  const dir = useDirection()
   const router = useRouter()
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const setTempUserId = useUserStore(state => state.setTempUserId)
@@ -58,7 +60,7 @@ const RegisterForm = () => {
   }
 
   return (
-    <div>
+    <div dir={dir}>
       <form className="mt-8 space-y-10" onSubmit={handleSubmit(handleRegister)}>
         <div className="flex flex-col gap-4">
           <div className="w-full flex gap-1 flex-col text-card-foreground">

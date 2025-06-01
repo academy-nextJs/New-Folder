@@ -28,7 +28,7 @@ const onError = async (err: AxiosError) => {
                 await signIn("credentials", {
                     redirect: false,
                     accessToken: data?.accessToken,
-                    refreshToken: data?.refreshToken,
+                    refreshToken: refreshToken,
                 })
             }
             else {

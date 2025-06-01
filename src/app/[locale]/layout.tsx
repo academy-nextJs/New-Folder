@@ -3,11 +3,11 @@ import { Providers } from "@/utils/service/TanstakProvider";
 import type { Metadata } from "next";
 import "./globals.css";
 import Footer from "@/components/common/footer/Footer";
-import { Toaster } from "@/components/ui/sonner";
 import { NextIntlClientProvider, hasLocale } from 'next-intl';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
-
+import { ToastContainer } from 'react-toastify'
+ 
 export const metadata: Metadata = {
   title: { template: "%s | پروژه مسکن", default: "پروژه مسکن" },
   description: " املاک دلتا دوست خوب بچه ها ",
@@ -37,16 +37,15 @@ export default async function RootLayout({
               <div className="px-8 w-full">
                 <Header />
               </div>
-              <div className="mb-[100px]">
+              <div className="mb-[100px] mt-[20px]">
                 {children}
               </div>
               <div className="xl:px-8 px-0">
                 <Footer />
               </div>
-              <Toaster />
             </NextIntlClientProvider>
           </Providers>
-
+          <ToastContainer />
         </div>
       </body>
     </html>

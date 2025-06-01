@@ -173,7 +173,7 @@ const SidebarDashboard = ({
                 <span className="text-sm text-subText"> {t(footerSidebarSelect.description)} </span>
               </div>
             </div>
-            {show && (
+            {show && routeSelect && (
               <div
                 ref={moreRef}
                 className="absolute bottom-full left-0 z-50 min-w-[180px] w-max rounded-xl backdrop-blur-md shadow-xl border border-border text-sm p-2 flex flex-col gap-1 animate-in fade-in slide-in-from-top-1"

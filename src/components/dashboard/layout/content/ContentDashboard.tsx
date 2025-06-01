@@ -6,8 +6,9 @@ import img from "@/assets/Rectangle 6486.png";
 import ProfileCompletion from "./ProfileCompletion";
 import { BlurFade } from "@/components/magicui/blur-fade";
 import { useTranslations } from "next-intl";
-import RecentReserve from "./RecentReserve/RecentReserve";
 import Link from "next/link";
+import RecentReserves from "./RecentReserves";
+import ReservesCha from "./ReservesCha";
 
 const ContentDashboard = () => {
   const t = useTranslations("dashboardBuyer");
@@ -50,7 +51,7 @@ const ContentDashboard = () => {
             <Image
               alt="dashboard-img"
               src={img}
-              className="w-full rounded-b-xl object-cover"
+              className="w-full rounded-b-xl object-cover my-2 "
             />
             <div className="flex flex-row justify-between w-full items-center mt-2">
               <Link href={item.href} className=" text-textComment dark:text-bacgkroundW">
@@ -85,10 +86,10 @@ const ContentDashboard = () => {
           </BlurFade>
         ))}
         <div className="flex flex-col justify-center gap-8 w-full  sm:flex-col lg:flex-row ">
-          <BlurFade delay={0.35} inView className="lg:w-[60%] md:w-full  h-60 bg-subBg rounded-xl"> <p></p> </BlurFade>
-            <ProfileCompletion percentage={40} />
+          <ReservesCha />
+          <ProfileCompletion percentage={40} />
         </div>
-        <RecentReserve />
+        <RecentReserves />
       </div>
     </div>
   );
