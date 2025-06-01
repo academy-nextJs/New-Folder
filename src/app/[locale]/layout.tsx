@@ -37,7 +37,7 @@ export default async function RootLayout({
               <div className="px-8 w-full">
                 <Header />
               </div>
-              <div className="mb-[100px]">
+              <div className="mb-[100px] mt-[20px]">
                 {children}
               </div>
               <div className="xl:px-8 px-0">

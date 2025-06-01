@@ -5,7 +5,7 @@ const NavbarSection = () => {
   const t = useTranslations("common.header")
 
   return (
-    <nav className="flex items-center whitespace-nowrap justify-center xl:gap-6 md:gap-3 text-[14px] xl:text-[16px] md:text-[12px] h-full relative">
+    <nav className="flex items-center whitespace-nowrap justify-center gap-6 text-[16px] h-full relative">
       {/* رزرو سریع */}
       <div className="group flex items-center h-full relative">
         <Link

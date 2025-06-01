@@ -15,6 +15,9 @@
     "reserveDate": "Reservation Date",
     "price": "Price",
     "status": "Status",
+    "reserveCha": {
+        "title": "Your Reservation Chart"
+    },
     "profile": {
         "title": "Personal Information",
         "subtitle": "You can change your personal information",

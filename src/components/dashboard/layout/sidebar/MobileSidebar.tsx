@@ -116,8 +116,14 @@ const MobileSidebar = () => {
                 </div>
             )}
 
-            <Link href="/" className="p-1 rounded-full shadow-md">
-                <Image src={DeltaIcon} alt="Delta" width={32} height={32} />
+            <Link href="/" className="text-foreground flex items-center justify-center">
+                <Image
+                    src={DeltaIcon}
+                    alt="Delta Logo"
+                    width={50}
+                    height={50}
+                    className="w-auto h-auto max-h-[45px] md:max-h-[40px] lg:max-h-[50px] text-foreground filter invert-0 dark:invert"
+                />
             </Link>
         </div>
     )

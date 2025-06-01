@@ -26,7 +26,7 @@ const LoginSection = () => {
   }, [checkAuthStatus]);
 
   return (
-    <div className="flex whitespace-nowrap items-center px-8 justify-end gap-3 xl:text-[16px] text-[12px]">
+    <div className="flex whitespace-nowrap items-center xl:px-8 px-4 justify-end gap-3 xl:text-[16px] text-[12px]">
       <div className="max-md:hidden">
         <LanguageSwitcher />
       </div>
@@ -57,15 +57,15 @@ const LoginSection = () => {
         </Link>
       ) : (
         <div className="relative group" ref={dropdownRef}>
-          <div className="flex items-center gap-2 px-3 py-2 rounded-2lg hover:bg-subBg text-foreground cursor-pointer transition-colors rounded-full">
+          <Link href={"/login"} className="flex items-center gap-2 py-2 rounded-2lg hover:bg-subBg text-foreground cursor-pointer transition-colors rounded-full">
             {session?.user?.image ? <Image alt="" src={session.user?.image || ""} className="w-8 h-8 rounded-full" width={200} height={40} /> : <User className="text-subText w-6 h-6" />}
-          </div>
+          </Link>
 
           <div className={`absolute top-full ${dir === "rtl" ? "left-0" : "right-0"} mt-1 w-36 sm:w-44 md:w-48 lg:w-56 opacity-0 invisible md:group-hover:opacity-100 group-hover:visible transition-all duration-200 z-10`}>
             <div className="bg-secondary border border-border rounded-md shadow-lg py-1 text-right">
               <Link
                 href="/dashboard"
-                className="block px-2 sm:px-3 md:px-4 py-2 md:py-3 text-[10px] sm:text-xs md:text-sm text-foreground hover:bg-subBg transition-colors flex items-center gap-1 sm:gap-2"
+                className="px-2 sm:px-3 md:px-4 py-2 md:py-3 text-[10px] sm:text-xs md:text-sm text-foreground hover:bg-subBg transition-colors flex items-center gap-1 sm:gap-2"
               >
                 <LayoutDashboard
                   size={14}
@@ -75,7 +75,7 @@ const LoginSection = () => {
               </Link>
               <button
                 onClick={handleLogout(signOut, '/login')}
-                className="block w-full px-2 sm:px-3 md:px-4 py-2 md:py-3 text-[10px] sm:text-xs md:text-sm text-foreground hover:bg-subBg transition-colors flex items-center gap-1 sm:gap-2"
+                className="w-full px-2 sm:px-3 md:px-4 py-2 md:py-3 text-[10px] sm:text-xs md:text-sm text-foreground hover:bg-subBg transition-colors flex items-center gap-1 sm:gap-2"
               >
                 <LogOut
                   size={14}
