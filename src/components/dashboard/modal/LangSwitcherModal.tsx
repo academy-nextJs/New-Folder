@@ -1,6 +1,6 @@
 'use client'
 import LanguageSwitcher from '@/components/common/header/sections/LangSwitcher'
-import { Dialog, DialogContent, DialogHeader, DialogTrigger } from '@/components/ui/dialog'
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { Settings } from 'lucide-react'
 import React, { useState } from 'react'
 import { useTranslations } from 'next-intl'
@@ -20,10 +20,10 @@ const LangModal = () => {
             </DialogTrigger>
             <DialogContent onMouseDown={(e) => e.stopPropagation()} className='rounded-2xl flex flex-col gap-8 items-center'>
                 <DialogHeader className='w-full my-4'>
-                    <div dir={dir} className='w-full flex justify-between'>
+                    <DialogTitle dir={dir} className='w-full flex justify-between'>
                         <span className='text-lg'>{t('changeLanguageLabel')}</span>
                         <LanguageSwitcher />
-                    </div>
+                    </DialogTitle>
                 </DialogHeader>
             </DialogContent>
         </Dialog>

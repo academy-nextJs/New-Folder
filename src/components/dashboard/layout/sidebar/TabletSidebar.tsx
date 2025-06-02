@@ -7,7 +7,7 @@ import {
     TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { ChevronDown, CreditCard, LogOut } from 'lucide-react';
-import { routeSelect } from '../routeSelect';
+import { footerSidebarSelect, routeSelect } from '../routeSelect';
 import Link from 'next/link';
 import useClearPathname from '@/utils/helper/clearPathname/clearPathname';
 import { useTranslations } from 'next-intl';
@@ -142,7 +142,7 @@ const TabletSidebar = ({
                                 <CreditCard />
                             </TooltipTrigger>
                             <TooltipContent className="dark:bg-accent bg-subBg2 dark:accent-foreground absolute right-6 whitespace-nowrap text-foreground">
-                                <p> کیف پول </p>
+                                <p> {footerSidebarSelect.title} </p>
                             </TooltipContent>
                         </Tooltip>
                     </TooltipProvider>
