@@ -37,15 +37,17 @@ const ReserveMap: React.FC<ReserveMapProps> = ({ location }) => {
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
-    const checkDark = () => document.documentElement.classList.contains('dark');
-    setIsDark(checkDark());
-
-    const observer = new MutationObserver(() => {
+    if (typeof window !== 'undefined') {
+      const checkDark = () => document.documentElement.classList.contains('dark');
       setIsDark(checkDark());
-    });
-    observer.observe(document.documentElement, { attributes: true });
 
-    return () => observer.disconnect();
+      const observer = new MutationObserver(() => {
+        setIsDark(checkDark());
+      });
+      observer.observe(document.documentElement, { attributes: true });
+
+      return () => observer.disconnect();
+    }
   }, []);
 
   const darkTiles = 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png';

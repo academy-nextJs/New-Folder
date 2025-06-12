@@ -1,7 +1,9 @@
+/* eslint-disable */
+
 'use client'
 import { useTheme } from "@/utils/service/TanstakProvider";
 import { Bell, ChevronDown, ChevronUp, LogOut, Moon, PlusCircle, Sun } from "lucide-react";
-import React, { Fragment, useEffect, useRef } from "react";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 import CommonModal from "../../modal/CommonModal";
 import { signOut, useSession } from 'next-auth/react'
 import { handleLogout } from "@/core/logOut";
@@ -14,6 +16,8 @@ import LanguageSwitcher from "@/components/common/header/sections/LangSwitcher";
 import LangModal from "../../modal/LangSwitcherModal";
 import { useTranslations } from "next-intl";
 import { useDirection } from "@/utils/hooks/useDirection";
+import { getProfile } from "@/utils/service/api/getProfile";
+import { IProfile } from "@/types/profile-type/profile-type";
 
 const HeaderDashboard: React.FC = () => {
     const t = useTranslations('dashboardHeader');
@@ -22,6 +26,8 @@ const HeaderDashboard: React.FC = () => {
     const [modalView, setModalView] = React.useState(false);
     const moreRef = useRef<HTMLDivElement | null>(null);
     const pathname = useClearPathname();
+    const { data: session } = useSession() as any;
+    const dir = useDirection()
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -37,8 +43,18 @@ const HeaderDashboard: React.FC = () => {
         };
     }, [modalView])
 
-    const { data: session } = useSession();
-    const dir = useDirection()
+    const [profile, setProfile] = useState<IProfile | null>(null);
+
+    const getProfileState = async () => {
+        if (session?.userInfo?.id) {
+            const profile = await getProfile(session?.userInfo?.id);
+            setProfile(profile);
+        }
+    }
+
+    useEffect(() => {
+        getProfileState();
+    }, [session]);
 
     return (
         <Fragment>
@@ -72,10 +88,10 @@ const HeaderDashboard: React.FC = () => {
                         <div onClick={() => {
                             setModalView(!modalView)
                         }} className="flex relative gap-4 items-center cursor-pointer">
-                            <img src={session?.user?.image || " "} alt="" className="size-[40px] border-0 outline-none bg-secondary-light rounded-[8px]" />
+                            <img src={session?.user?.image || profile?.profilePicture || " "} alt="" className="size-[40px] border-0 outline-none bg-secondary-light rounded-[8px]" />
                             <div className="flex max-md:hidden flex-col justify-between">
-                                <h2>{session?.user?.name || t('userName')}</h2>
-                                <span className="text-muted-foreground text-sm">{t('userRole')}</span>
+                                <h2>{session?.user?.name || profile?.fullName}</h2>
+                                <span className="text-muted-foreground text-sm">{profile?.role}</span>
                             </div>
                             {!modalView && <ChevronDown className="cursor-pointer" size={12} />}
                             {modalView && <ChevronUp className="cursor-pointer" size={12} />}

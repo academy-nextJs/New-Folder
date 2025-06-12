@@ -5,6 +5,7 @@ import GoogleProvider from 'next-auth/providers/google';
 import GithubProvider from 'next-auth/providers/github';
 import CredentialsProvider from "next-auth/providers/credentials";
 import { JWT } from 'next-auth/jwt';
+import { jwtDecode } from 'jwt-decode';
 
 async function fetchBackendToken(githubToken: string): Promise<string | null> {
     try {
@@ -68,8 +69,12 @@ const handler = NextAuth({
             async authorize(credentials) {
                 try {
                     if (credentials?.accessToken && credentials.refreshToken) {
+
+                        const decoded = jwtDecode(credentials.accessToken);
+
                         return {
                             id: credentials.accessToken,
+                            userInfo: decoded,
                             accessToken: credentials.accessToken,
                             refreshToken: credentials.refreshToken,
                         };
@@ -105,6 +110,7 @@ const handler = NextAuth({
             if (user?.accessToken) {
                 token.accessToken = user.accessToken;
                 token.refreshToken = user.refreshToken;
+                token.userInfo = user.userInfo;
             }
 
             return token;
@@ -112,6 +118,7 @@ const handler = NextAuth({
         async session({ session, token }: any) {
             session.accessToken = token.accessToken;
             session.refreshToken = token.refreshToken;
+            session.userInfo = token.userInfo;
             return session;
         },
 
