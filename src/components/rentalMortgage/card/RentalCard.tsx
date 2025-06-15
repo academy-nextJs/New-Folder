@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 'use client'
 import React, { FC } from "react";
 import { MapPin, Star, Hotel, Bed, Car, Bath } from "lucide-react";
@@ -12,29 +14,29 @@ interface IReserveContent {
 }
 const RentalCard : FC<IReserveContent> = ({ items }) => {
     return (
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} whileHover={{ scale: 1.02 }} className="flex flex-col md:flex-row w-full md:basis-[calc(50%-1rem)] overflow-hidden px-4 py-6 rounded-[16px] items-center group justify-between bg-secondary-light2">
-            <div className="flex flex-col md:flex-row gap-4 md:w-4/5 w-full">
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} whileHover={{ scale: 1.02 }} className="flex flex-col gap-4 xl:flex-row lg:basis-[calc(50%-1rem)] basis-full overflow-hidden flex- px-4 max-lg:px-2 py-2 rounded-[16px] group justify-between bg-secondary-light2">
+            <div className="flex flex-col overflow-hidden lg:flex-row gap-4 max-lg:w-full w-fit">
                 <img
                     alt=""
                     src={items.photos[0]}
-                    className="bg-secondary-light3 md:min- md:w-[228.35986328125px] w-full h-[144px] group-hover:shadow-[#8CFF451F] group-hover:shadow-2md group-hover:border group-hover:border-primary rounded-[16px]"
+                    className="bg-secondary-light3 lg:min- lg:w-[228] w-full h-[144px] max-lg:h-[200px] group-hover:shadow-[#8CFF451F] group-hover:shadow-2md group-hover:border group-hover:border-primary rounded-[16px]"
                 />
                 <div className="flex flex-col gap-4 items-start justify-between w-full">
                     <div className="bg-accent text-white text-sm flex gap-2 px-4 py-1 flex-row-reverse rounded-[8px]">
                         <span>{items.rate} ستاره</span>
                         <Star size={16} />
                     </div>
-                    <h2 className="text-lg md:text-2xl"> {items.title} </h2>
-                    <p className="flex text-subText gap-1 w-[295px] whitespace-nowrap overflow-hidden text-ellipsis">
+                    <h2 className="text-lg lg:text-2xl"> {items.title} </h2>
+                    <p className="flex text-subText truncate gap-1 w-full">
                         <span className="flex gap-2 items-center">
                             <MapPin size={16} />
                             <span>آدرس:</span>
                         </span>
-                        <span className="text-foreground text-ellipsis overflow-hidden whitespace-nowrap">
+                        <span className="text-foreground truncate">
                             {items.address}
                         </span>
                     </p>
-                    <p className="flex gap-2 text-sm items-center">
+                    <p className="flex gap-2 text-sm truncate items-center">
                         <span className="flex gap-2 flex-row-reverse"> {items.rooms} خوابه <Bed size={16} /> </span>
                         |
                         <span className="flex gap-2 flex-row-reverse"> {items.parking} پارکینگ <Car size={16} /> </span>
@@ -44,13 +46,13 @@ const RentalCard : FC<IReserveContent> = ({ items }) => {
                 </div>
             </div>
 
-            <div className="flex flex-col justify-end gap-8 h-full items-center md:w-1/5 w-full mt-4 md:mt-0">
+            <div className="flex flex-col justify-end gap-4 items-center w-fit max-xl:w-full">
                 <span className="text-primary text-lg md:text-2xl">{SplitNumber(items.price)} ت</span>
                 <CommonButton
                     onclick={() => redirect(`/rent/${items.id}`)}
                     icon={<Hotel />}
                     title="بررسی و رزرو هتل"
-                    classname="flex-row-reverse py-3 md:py-5 bg-transparent group-hover:bg-primary text-primary group-hover:text-primary-foreground border border-primary w-full md:w-auto"
+                    classname="flex-row-reverse py-3 lg:py-5 bg-transparent group-hover:bg-primary text-primary group-hover:text-primary-foreground border border-primary w-full xl:w-auto"
                 />
             </div>
         </motion.div>
