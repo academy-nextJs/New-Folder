@@ -48,5 +48,12 @@ export interface IDatePicker {
   background?: string
   color?: string
   className?: string
-  icon?: React.ReactNode
+  icon?: React.ReactNode,
+  value?: Date | DateObject | null;
+}
+
+export interface IUpdatePassenger {
+  firstName: string,
+  lastName: string,
+  nationalId: string
 }

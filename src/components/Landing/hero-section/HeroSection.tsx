@@ -14,10 +14,21 @@ import { useTheme } from "@/utils/service/TanstakProvider";
 const HeroSection = () => {
   const { theme } = useTheme();
   const [heroSection, setHeroSection] = useState(darkHeroSection);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setHeroSection(theme === "dark" ? darkHeroSection : lightHeroSection);
-  }, [theme]);
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (mounted) {
+      setHeroSection(theme === "dark" ? darkHeroSection : lightHeroSection);
+    }
+  }, [theme, mounted]);
+
+  if (!mounted) {
+    return null;
+  }
 
   return (
     <div className="relative w-full h-[480px] sm:h-[625] md:h-[760px] 2xl:h-[840px] ">

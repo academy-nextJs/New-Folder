@@ -63,5 +63,18 @@
         "currency": "ت",
         "prevStep": "الخطوة السابقة",
         "onlinePayment": "الدفع عبر الإنترنت"
+    },
+    "updatePassengers": {
+        "firstName": "الاسم",
+        "lastName": "اسم العائلة",
+        "nationalId": "الرقم الوطني",
+        "gender": "الجنس",
+        "selectGender": "اختر",
+        "man": "ذكر",
+        "woman": "أنثى",
+        "birthDate": "تاريخ الميلاد",
+        "close": "إغلاق",
+        "edit": "تعديل",
+        "success": "تم تعديل الراكب بنجاح"
     }
 }

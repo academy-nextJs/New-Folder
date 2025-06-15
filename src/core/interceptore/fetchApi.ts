@@ -6,7 +6,8 @@ const baseURL = 'https://delta-project.liara.run/api'
 
 const onSuccess = async (response: Response) => {
     if (!response.ok) {
-        throw response;
+        const errorData = await response.json().catch(() => null);
+        throw new Error(errorData?.message || `HTTP error! status: ${response.status}`);
     }
     return response.json();
 }
@@ -15,42 +16,53 @@ const onError = async (error: Response | Error) => {
     const session = await getSession();
     const refreshToken = session?.refreshToken;
 
+    const handleRefreshToken = async () => {
+        if (refreshToken) {
+            const response = await fetch(`${baseURL}/auth/refresh`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ token: refreshToken })
+            });
+
+            const data = await response.json();
+            if (response.ok) {
+                await signIn("credentials", {
+                    redirect: false,
+                    accessToken: data?.accessToken,
+                    refreshToken: refreshToken,
+                });
+            } else {
+                await signOut({ callbackUrl: '/login' });
+                showToast("error", "شما وارد نشده‌اید!", "بستن");
+            }
+        } else {
+            await signOut({ callbackUrl: '/login' });
+            showToast("error", "شما وارد نشده‌اید!", "بستن");
+        }
+    }
+
     if (error instanceof Response) {
         if (error.status === 401 || error.status === 403) {
-            if (refreshToken) {
-                const response = await fetch(`${baseURL}/auth/refresh`, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ token: refreshToken })
-                })
-                const data = await response.json();
-                if (response.ok) {
-                    await signIn("credentials", {
-                        redirect: false,
-                        accessToken: data?.accessToken,
-                        refreshToken: refreshToken,
-                    })
-                }
-                else {
-                    await signOut({ callbackUrl: '/login' });
-                    showToast("error", " شما وارد نشدید! ", " بستن ")
-                }
-            }
-            else {
-                await signOut({ callbackUrl: '/login' });
-                showToast("error", " شما وارد نشدید! ", " بستن ")
-            }
+            handleRefreshToken()
         }
 
         if (error.status >= 400 && error.status < 500) {
-            console.log("Client request error:", error.status);
+            const errorData = await error.json().catch(() => null);
+            console.log("Client request error:", errorData?.message || error.status);
+            throw new Error(errorData?.message || `HTTP error! status: ${error.status}`);
         }
-    } else if (error.message === "Network Error") {
-        await signOut({ callbackUrl: '/login' });
+    }
+
+    if (error instanceof Error) {
+        if (error.message === "invalid token" || error.message === "Invalid token") {
+            await signOut({ callbackUrl: '/login' });
+            showToast("error", "توکن نامعتبر است. لطفا دوباره وارد شوید.", "بستن");
+        }
     }
 
     throw error;
 }
+
 
 async function fetchWithAuth(url: string, options: RequestInit = {}) {
     try {

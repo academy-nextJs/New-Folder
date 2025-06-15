@@ -1,7 +1,9 @@
+/* eslint-disable */
+
 "use client";
 import { User, LogOut, LayoutDashboard, Moon, Sun } from "lucide-react";
 import Link from "next/link";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { useUserStore } from "@/utils/zustand/store";
 import { useTheme } from "@/utils/service/TanstakProvider";
 import { motion } from "framer-motion";
@@ -11,12 +13,14 @@ import { handleLogout } from "@/core/logOut";
 import LanguageSwitcher from "./LangSwitcher";
 import { useTranslations } from "next-intl";
 import { useDirection } from "@/utils/hooks/useDirection";
+import { getProfile } from "@/utils/service/api/getProfile";
+import { IProfile } from "@/types/profile-type/profile-type";
 
 const LoginSection = () => {
   const { checkAuthStatus } = useUserStore();
   const { theme, toggleTheme } = useTheme();
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const { data: session } = useSession()
+  const { data: session } = useSession() as any;
 
   const t = useTranslations("common.header");
   const dir = useDirection();
@@ -24,6 +28,19 @@ const LoginSection = () => {
   useEffect(() => {
     checkAuthStatus();
   }, [checkAuthStatus]);
+
+  const [profile, setProfile] = useState<IProfile | null>(null);
+
+  const getProfileState = async () => {
+    if (session?.userInfo?.id) {
+      const profile = await getProfile(session?.userInfo?.id);
+      setProfile(profile);
+    }
+  }
+
+  useEffect(() => {
+    getProfileState();
+  }, [session]);
 
   return (
     <div className="flex whitespace-nowrap items-center xl:px-8 px-4 justify-end gap-3 xl:text-[16px] text-[12px]">
@@ -45,7 +62,7 @@ const LoginSection = () => {
           <Moon className="w-5 h-5 text-subText hover:text-primary" />
         )}
       </motion.button>
-      
+
 
       {!session ? (
         <Link
@@ -58,7 +75,17 @@ const LoginSection = () => {
       ) : (
         <div className="relative group" ref={dropdownRef}>
           <Link href={"/login"} className="flex items-center gap-2 py-2 rounded-2lg hover:bg-subBg text-foreground cursor-pointer transition-colors rounded-full">
-            {session?.user?.image ? <Image alt="" src={session.user?.image || ""} className="w-8 h-8 rounded-full" width={200} height={40} /> : <User className="text-subText w-6 h-6" />}
+            {(session.user?.image && session.user?.image !== "") || (profile?.profilePicture && profile?.profilePicture !== "") ? (
+              <Image
+                alt=" "
+                src={session.user?.image || profile?.profilePicture}
+                className="w-8 h-8 rounded-full"
+                width={200}
+                height={40}
+              />
+            ) : (
+              <User className="text-subText w-6 h-6" />
+            )}
           </Link>
 
           <div className={`absolute top-full ${dir === "rtl" ? "left-0" : "right-0"} mt-1 w-36 sm:w-44 md:w-48 lg:w-56 opacity-0 invisible md:group-hover:opacity-100 group-hover:visible transition-all duration-200 z-10`}>
