@@ -68,9 +68,9 @@ const RentalFilter: FC<IReserveFilter> = ({ setOrder, setSort, setSearch, houseL
                     classname='px-4 py-5 border-subText w-full dark:group-hover:text-white dark:group-hover:border-white outline-none'
                 />
                 <CommonSelect
-                    onValueChange={(value => {
-                        setParams("propertyType", "")
-                    })}
+                    onValueChange={(value) => {
+                        setParams("propertyType", value)
+                    }}
                     placeholder={t('apartment')}
                     icon={<House size={16} className='text-subText' />}
                     selectItems={[
