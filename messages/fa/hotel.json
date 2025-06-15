@@ -63,5 +63,18 @@
         "currency": "ت",
         "prevStep": "مرحله قبل",
         "onlinePayment": "پرداخت آنلاین"
+    },
+    "updatePassengers": {
+        "firstName": "نام",
+        "lastName": "نام خانوادگی",
+        "nationalId": "کد ملی",
+        "gender": "جنسیت",
+        "selectGender": "انتخاب کنید",
+        "man": "مرد",
+        "woman": "زن",
+        "birthDate": "تاریخ تولد",
+        "close": "بستن",
+        "edit": "ویرایش",
+        "success": "ویرایش مسافر با موفقیت انجام شد"
     }
 }

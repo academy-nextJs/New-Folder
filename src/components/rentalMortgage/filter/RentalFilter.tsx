@@ -7,6 +7,7 @@ import { Label } from '@/components/ui/label'
 import { Coins, Filter, House, Megaphone } from 'lucide-react'
 import React, { FC, useState } from 'react'
 import { useTranslations } from 'next-intl'
+import { setParams } from '@/utils/helper/set-params/setParams'
 
 interface IReserveFilter {
     setOrder: React.Dispatch<React.SetStateAction<'DESC' | 'ASC'>>
@@ -18,15 +19,15 @@ interface IReserveFilter {
     houseLength?: number
 }
 
-const RentalFilter: FC<IReserveFilter> = ({ setOrder, setSort, setSearch, setPropertyType, houseLength, setLocation, setTransactionType }) => {
+const RentalFilter: FC<IReserveFilter> = ({ setOrder, setSort, setSearch, houseLength, setLocation, setTransactionType }) => {
     const t = useTranslations('rental.filter');
     const [value, setValue] = useState('')
 
     return (
         <div className='w-full px-4 py-2 flex 2xl:flex-row flex-col max-2xl:gap-8 justify-between rounded-2xl bg-secondary-light2'>
             <div className='flex xl:flex-row flex-col gap-4'>
-                <div className="w-fill md-w-auto flex-col flex gap-1">
-                    <Label className={`text-[13px] flex gap-0.5 text-subText`}>
+                <div className="w-fit max-xl:w-full flex-col flex gap-1">
+                    <Label className={`min-w-[150px] text-[13px] flex gap-0.5 text-subText`}>
                         <span>{t('destination')}</span>
                         <span> : </span>
                     </Label>
@@ -68,7 +69,7 @@ const RentalFilter: FC<IReserveFilter> = ({ setOrder, setSort, setSearch, setPro
                 />
                 <CommonSelect
                     onValueChange={(value => {
-                        setPropertyType(value === "all" ? "" : value)
+                        setParams("propertyType", "")
                     })}
                     placeholder={t('apartment')}
                     icon={<House size={16} className='text-subText' />}

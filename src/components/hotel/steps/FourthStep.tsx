@@ -6,7 +6,7 @@ import React from 'react'
 import CheckGreen from '@/assets/CheckGreen.png'
 import { useTranslations } from 'next-intl'
 
-const FourthStep = ({ handleCurrentStepIncrease }: { handleCurrentStepIncrease: () => void }) => {
+const FourthStep = ({ removeBooking }: { removeBooking?: () => void }) => {
     const t = useTranslations('hotel.fourth');
 
     return (
@@ -15,13 +15,23 @@ const FourthStep = ({ handleCurrentStepIncrease }: { handleCurrentStepIncrease: 
             <h2 className='font-bold text-2xl'>{t('successMessage')}</h2>
             <div className='flex gap-4'>
                 <CommonButton
-                    onclick={() => redirect("/")}
+                    onclick={() => {
+                        if (removeBooking) {
+                            removeBooking()
+                            redirect("/")
+                        }
+                    }}
                     title={t('backToHome')}
                     icon={<ChevronLeft size={16} />}
                     classname='bg-transparent border-foreground flex border w-fit text-foreground'
                 />
                 <CommonButton
-                    onclick={handleCurrentStepIncrease}
+                    onclick={() => {
+                        if (removeBooking) {
+                            removeBooking()
+                            redirect("/dashboard/manage-reserves")
+                        }
+                    }}
                     title={t('myTickets')}
                     icon={<ChevronLeft size={16} />}
                     classname='bg-transparent flex border-primary border w-fit text-primary'

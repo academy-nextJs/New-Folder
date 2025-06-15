@@ -48,18 +48,21 @@ const SidebarDashboard = ({
 
   useEffect(() => {
     const checkScreenWidth = () => {
-      if (window.innerWidth < 1200) {
-        setView(2);
+      if (typeof window !== 'undefined') {
+        if (window.innerWidth < 1200) {
+          setView(2);
+        }
       }
     };
 
     checkScreenWidth();
 
-    window.addEventListener("resize", checkScreenWidth);
-
-    return () => {
-      window.removeEventListener("resize", checkScreenWidth);
-    };
+    if (typeof window !== 'undefined') {
+      window.addEventListener("resize", checkScreenWidth);
+      return () => {
+        window.removeEventListener("resize", checkScreenWidth);
+      };
+    }
   }, [setView]);
 
   return (
