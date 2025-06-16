@@ -13,7 +13,8 @@ const DatePickerInput: FC<IDatePicker> = ({
   placeholder,
   onChange,
   className = '',
-  icon
+  icon,
+  value,
 }) => {
   return (
     <div className={`rtl flex flex-col gap-1 w-full ${className}`}>
@@ -29,6 +30,7 @@ const DatePickerInput: FC<IDatePicker> = ({
         {icon && <span className={`text-subText ${color}`}>{icon}</span>}
         <div className="flex-1">
           <DatePicker
+            value={value}
             id={label}
             onChange={onChange}
             calendar={persian}

@@ -50,7 +50,6 @@ const RentalComponent = () => {
     currentPage * itemsPerPage
   )
 
-
   const goToPage = (page: number) => {
     if (page < 1 || page > totalPages) return
     setCurrentPage(page)
@@ -78,6 +77,10 @@ const RentalComponent = () => {
   useEffect(() => {
     fetchHouses()
   }, [search, order, sort, location, minRent, maxRent, minMortgage, maxMortgage, minArea, maxArea, propertyType, transactionType])
+
+  useEffect(() => {
+    setPropertyType(urlProperty)
+  }, [urlProperty])
 
   return (
     <div className='px-8 flex flex-col gap-4'>

@@ -1,50 +1,20 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import {
-  MoreHorizontal,
-  X,
-  CheckCircle,
-  AlertCircle,
-  CreditCard,
-  Info,
-  Edit,
-  Delete,
-  Search,
-  Filter,
-} from "lucide-react";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination";
-import FilterModal from "./FilterModal";
-import ReserveModal from "./ReserveModal";
-import GuestCount from "./GuestCount";
-import { BlurFade } from "@/components/magicui/blur-fade";
+import { useState, useEffect, useMemo } from "react";
+import { Filter, Search, CheckCircle, AlertCircle, X } from "lucide-react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { getAllBookings } from "@/utils/service/api/booking/getAllBookings";
+import { IReserveType } from "@/types/reserves-type/reserves-type";
 import { useTranslations } from "next-intl";
-
-interface Reservation {
-  id: number;
-  hotelName: string;
-  date: string;
-  price: string;
-  guestCount: string;
-  status: "confirmed" | "waiting" | "cancelled";
-  paymentStatus: "paid" | "waiting" | "cancelled" | "confirmed";
-  propertyType?: string;
-}
+import { BlurFade } from "@/components/magicui/blur-fade";
+import FilterModal from "./FilterModal";
+import ReservationTable from "./components/ReservationTable";
+import ReservationMobile from "./components/ReservationMobile";
+import LoadingSkeleton from "./components/LoadingSkeleton";
+import ErrorState from "./components/ErrorState";
+import ReservationPagination from "./components/ReservationPagination";
+import { getHouseById } from "@/utils/service/api/houses-api";
+import { IHouse } from "@/types/houses-type/house-type";
 
 interface FilterValues {
   checkInDate: string;
@@ -53,22 +23,10 @@ interface FilterValues {
   propertyType: string;
 }
 
-interface CommonModalProps {
-  handleClick: string;
-  title: string;
-  button: React.ReactNode;
-}
-
-const CommonModal = ({ button }: CommonModalProps) => {
-  return <div className="cursor-pointer">{button}</div>;
-};
-
 export default function HotelReservationList() {
   const t = useTranslations("dashboardBuyer.manageReserves");
-  const [isReserveModalOpen, setIsReserveModalOpen] = useState(false);
-  const [isGuestCount, setIsGuestCount] = useState(false);
+  const queryClient = useQueryClient();
   const [searchTerm, setSearchTerm] = useState("");
-  const [openModalIndex, setOpenModalIndex] = useState<number | null>(null);
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
   const [filters, setFilters] = useState<FilterValues | null>(null);
   const moreRef = useRef<HTMLTableCellElement | null>(null);
@@ -77,7 +35,7 @@ export default function HotelReservationList() {
   const reservations: Reservation[] = [
     {
       id: 1,
-      hotelName: "هتل سراوان رالین ",
+      hotelName: "هتل سراوان رالین رشت",
       date: "۱۴ مرداد - ۱۴۰۱/۰۴/۱۳",
       price: "۸,۰۰۰,۰۰۰ تومان",
       guestCount: "۲ عدد مسافر",
@@ -125,6 +83,30 @@ export default function HotelReservationList() {
     useState<Reservation[]>(reservations);
 
   useEffect(() => {
+    if (bookingsData?.data?.length) {
+      fetchHouses();
+    }
+  }, [bookingsData?.data]);
+
+  const reservations = useMemo(
+    () =>
+      bookingsData?.data.map((booking) => ({
+        id: booking.id,
+        houseId: booking.houseId.toString(),
+        hotelName:
+          housesData[booking.houseId]?.title || booking.houseId.toString(),
+        date: booking.reservedDates[0]?.value || "",
+        price: housesData[booking.houseId]?.price || "0",
+        guestCount: `${booking.traveler_details.length} ${t("guest")}`,
+        status: booking.status as "confirmed" | "waiting" | "cancelled",
+        paymentStatus: "waiting" as const,
+        propertyType: housesData[booking.houseId]?.categories?.name || "",
+        traveler_details: booking.traveler_details,
+      })) || [],
+    [bookingsData?.data, t, housesData]
+  );
+
+  const filteredReservations = useMemo(() => {
     let filtered = reservations;
 
     if (searchTerm) {
@@ -132,26 +114,31 @@ export default function HotelReservationList() {
     }
 
     if (filters) {
-      if (filters.reservationStatus) {
+      if (filters.reservationStatus && filters.reservationStatus !== "all") {
         filtered = filtered.filter(
           (r) => r.status === filters.reservationStatus
         );
       }
-      if (filters.propertyType) {
-        filtered = filtered.filter(
-          (r) => r.propertyType === filters.propertyType
-        );
+      if (filters.propertyType && filters.propertyType !== "all") {
+        filtered = filtered.filter((r) => {
+          const house = housesData[r.houseId];
+          return house?.categories?.name === filters.propertyType;
+        });
       }
       if (filters.checkInDate) {
         filtered = filtered.filter((r) => r.date.includes(filters.checkInDate));
       }
     }
 
-    setFilteredReservations(filtered);
-  }, [searchTerm, filters]);
+    return filtered;
+  }, [searchTerm, filters, reservations, housesData]);
 
   const handleApplyFilters = (filterValues: FilterValues) => {
     setFilters(filterValues);
+  };
+
+  const handleClearFilters = () => {
+    setFilters(null);
   };
 
   const renderStatusBadge = (status: string) => {
@@ -162,7 +149,7 @@ export default function HotelReservationList() {
           <span>{t("confirmed")}</span>
         </div>
       );
-    } else if (status === "waiting") {
+    } else if (status === "pending") {
       return (
         <div className="flex items-center bg-yellow-100 text-yellow-700 text-xs rounded-full px-2 py-1 whitespace-nowrap">
           <AlertCircle className="w-3 h-3 ml-1" />
@@ -176,43 +163,26 @@ export default function HotelReservationList() {
           <span>{t("cancelled")}</span>
         </div>
       );
-    } else {
-      return null;
     }
+    return null;
   };
 
-  const renderPaymentStatusBadge = (status: string) => {
-    if (status === "paid") {
-      return (
-        <div className="flex items-center whitespace-nowrap">
-          <CreditCard className="w-4 h-4 ml-1" />
-          <span>{t("paid")}</span>
-        </div>
-      );
-    } else if (status === "waiting") {
-      return (
-        <div className="flex items-center w-fit bg-yellow-100 text-yellow-700 text-xs rounded-full px-2 py-1 whitespace-nowrap">
-          <AlertCircle className="w-3 h-3 ml-1" />
-          <span>{t("waiting")}</span>
-        </div>
-      );
-    } else if (status === "cancelled") {
-      return (
-        <div className="flex items-center w-fit bg-danger text-background text-xs rounded-full px-2 py-1 whitespace-nowrap">
-          <X className="w-3 h-3 ml-1" />
-          <span>{t("cancelled")}</span>
-        </div>
-      );
-    } else if (status === "confirmed") {
-      return (
-        <div className="flex items-center whitespace-nowrap">
-          <CheckCircle className="w-4 h-4 text-primary ml-1" />
-        </div>
-      );
-    } else {
-      return null;
-    }
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
   };
+
+  // const totalPages = Math.ceil(filteredReservations.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentReservations = filteredReservations.slice(startIndex, endIndex);
+
+  if (isLoading) {
+    return <LoadingSkeleton />;
+  }
+
+  if (error) {
+    return <ErrorState />;
+  }
 
   return (
     <BlurFade className="flex flex-col justify-between gap-8 bg-subBg p-4 sm:p-6 lg:p-8 rounded-xl w-full min-h-screen">
@@ -225,13 +195,24 @@ export default function HotelReservationList() {
           className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2"
           dir="ltr"
         >
-          <button
-            className="w-28 bg-primary text-background px-4 py-2 rounded-lg whitespace-nowrap gap-2 flex items-center justify-center"
-            onClick={() => setIsFilterModalOpen(true)}
-          >
-            <Filter className="w-4 h-4 ml-2" />
-            {t("filters")}
-          </button>
+          <div className="flex gap-2">
+            <button
+              className="w-fit bg-primary text-background px-4 py-2 rounded-lg whitespace-nowrap gap-2 flex items-center justify-center"
+              onClick={() => setIsFilterModalOpen(true)}
+            >
+              <Filter className="w-4 h-4 ml-2" />
+              {t("filters")}
+            </button>
+            {filters && (
+              <button
+                className="w-fit bg-danger text-background px-4 py-2 rounded-lg whitespace-nowrap gap-2 flex items-center justify-center"
+                onClick={handleClearFilters}
+              >
+                <X className="w-5 h-5" />
+                حذف فیلتر
+              </button>
+            )}
+          </div>
 
           <div className="relative flex-grow max-w-full sm:max-w-md lg:max-w-sm">
             <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">

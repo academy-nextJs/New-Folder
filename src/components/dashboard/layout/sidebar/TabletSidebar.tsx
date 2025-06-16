@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 'use client'
 import React, { useEffect, useState } from 'react'
 import {
@@ -6,25 +8,52 @@ import {
     TooltipProvider,
     TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { ChevronDown, CreditCard, LogOut } from 'lucide-react';
-import { footerSidebarSelect, routeSelect } from '../routeSelect';
+import { ChevronDown, CreditCard, LogOut, SquaresSubtract } from 'lucide-react';
 import Link from 'next/link';
 import useClearPathname from '@/utils/helper/clearPathname/clearPathname';
 import { useTranslations } from 'next-intl';
 import { useDirection } from '@/utils/hooks/useDirection';
+import { useSession } from 'next-auth/react';
+import { getProfileById } from '@/utils/service/api/profile/getProfileById';
+import { routes, sellerRoutes } from '../routes/routes';
 
 const TabletSidebar = ({
-  view,
-  setView,
+    view,
+    setView,
 }: {
-  view: number;
-  setView: React.Dispatch<React.SetStateAction<number>>;
+    view: number;
+    setView: React.Dispatch<React.SetStateAction<number>>;
 }) => {
 
     const pathname = useClearPathname();
     const t = useTranslations("dashboardSidebar")
     const dir = useDirection()
     const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+
+    const [role, setRole] = useState("");
+    const footerSidebarSelect = role === "buyer"
+        ? {
+            title: "wallet",
+            description: "noBalance",
+            icon: CreditCard,
+        }
+        : {
+            title: "newComments",
+            description: "commentsCount",
+            icon: SquaresSubtract,
+        };
+    const Icon = footerSidebarSelect.icon;
+
+    const { data: session } = useSession() as any
+
+    const getProfile = async () => {
+        const user = await getProfileById(session?.userInfo.id)
+        setRole(user.role)
+    }
+
+    useEffect(() => {
+        getProfile()
+    }, [])
 
     useEffect(() => {
         const checkScreenWidth = () => {
@@ -41,6 +70,8 @@ const TabletSidebar = ({
             window.removeEventListener("resize", checkScreenWidth);
         };
     }, [setView]);
+
+    const routeSelect = role === "seller" ? sellerRoutes : routes;
 
     return (
         <div

@@ -5,7 +5,6 @@ import arrow from "@/assets/arrow.svg";
 import { Star, Calendar } from "lucide-react";
 import plygen from "@/assets/Polygon 1.png";
 import { useTranslations } from "next-intl";
-import { fetchApi } from "@/core/interceptore/fetchApi";
 
 interface Comment {
   id: number;
@@ -15,19 +14,9 @@ interface Comment {
   date: string;
   time: string;
 }
-interface CommentApi {
-  id: string;
-  house_id: string;
-  parent_comment_id: string | null;
-  rating: string;
-  title: string;
-  caption: string;
-  user_id: string | null;
-  created_at: string;
-}
 
 interface CommentCardProps {
-  comment: Comment;
+  comment: ICommentAll;
   isSmallScreen: boolean;
 }
 
@@ -35,15 +24,13 @@ const CommentUsers = () => {
   const t = useTranslations("landing.commentUsers");
   const [activeSlideGroup, setActiveSlideGroup] = useState(0);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
-  const [comments, setComments] = useState<Comment[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
 
   function convertToPersianNumber(number: string) {
     const persianNumbers = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
     return number.replace(/\d/g, (digit) => persianNumbers[parseInt(digit)]);
   }
 
-  const staticComments: Comment[] = [
+  const comments: Comment[] = [
     {
       id: 1,
       rating: convertToPersianNumber("4.5"),
@@ -94,71 +81,8 @@ const CommentUsers = () => {
     },
   ];
 
-  const formatDate = (dateString: string) => {
-    try {
-      const date = new Date(dateString);
-      const persianDate = date.toLocaleDateString("fa-IR");
-      const persianTime = date.toLocaleTimeString("fa-IR", {
-        hour: "2-digit",
-        minute: "2-digit",
-      });
-      return { date: persianDate, time: persianTime };
-    } catch {
-      return { date: "تاریخ نامشخص", time: "زمان نامشخص" };
-    }
-  };
-
-  const mergeCommentsWithFallback = (apiComments: CommentApi[]): Comment[] => {
-    const mergedComments: Comment[] = [];
-
-    apiComments.forEach((apiComment, index) => {
-      const staticFallback = staticComments[index] || staticComments[0];
-      const { date, time } = formatDate(apiComment.created_at);
-
-      mergedComments.push({
-        id: parseInt(apiComment.id) || staticFallback.id,
-        rating: apiComment.rating
-          ? convertToPersianNumber(apiComment.rating)
-          : staticFallback.rating,
-        text: apiComment.caption || apiComment.title || staticFallback.text,
-        author: apiComment.user_id || staticFallback.author,
-        date: date || staticFallback.date,
-        time: time || staticFallback.time,
-      });
-    });
-
-    if (mergedComments.length < staticComments.length) {
-      const remainingStatic = staticComments.slice(mergedComments.length);
-      mergedComments.push(...remainingStatic);
-    }
-
-    return mergedComments;
-  };
-
-  const fetchComments = async () => {
-    try {
-      setIsLoading(true);
-      const response = await fetchApi.get("/comments");
-
-      if (response && Array.isArray(response)) {
-        const mergedData = mergeCommentsWithFallback(response);
-        setComments(mergedData);
-      } else {
-        setComments(staticComments);
-      }
-    } catch (error) {
-      console.error("Error fetching comments:", error);
-      setComments(staticComments);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   useEffect(() => {
     fetchComments();
-  }, []);
-
-  useEffect(() => {
     const handleResize = () => {
       setIsSmallScreen(window.innerWidth < 768);
     };
@@ -292,9 +216,22 @@ const CommentUsers = () => {
 };
 
 const CommentCard = ({ comment, isSmallScreen }: CommentCardProps) => {
+  const [user, setUser] = useState<IPublicProfile | null>(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const userData = await getPublicProfileById(comment.user_id);
+      setUser(userData);
+    };
+    fetchUser();
+  }, [comment.user_id]);
+
   const trimmedText = isSmallScreen
-    ? comment.text.slice(0, 78) + (comment.text.length > 50 ? "..." : "")
-    : comment.text;
+    ? comment?.caption?.slice(0, 78) +
+      (comment?.caption && comment?.caption?.length > 50 ? "..." : "")
+    : comment.caption;
+
+  if (!user) return null;
 
   return (
     <div className="relative w-[65vw] sm:w-[70vw] md:w-[40vw] lg:w-[40vw] h-full">
@@ -342,16 +279,15 @@ const CommentCard = ({ comment, isSmallScreen }: CommentCardProps) => {
 
           <div className="relative z-10 flex items-center h-full px-2 sm:px-3 md:px-4 lg:px-5">
             <div className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 lg:w-10 lg:h-10 rounded-md bg-ring flex items-center justify-center text-primary-foreground text-[10px] sm:text-xs md:text-sm lg:text-base">
-              {comment.author.charAt(0)}
+              {user.name.charAt(0)}
             </div>
             <div className="text-right mr-2 sm:mr-3 md:mr-4">
               <p className="font-semibold text-[8px] text-text-about sm:text-[10px] md:text-xs lg:text-sm">
-                {comment.author}
+                {user.name}
               </p>
               <div className="flex items-center text-[6px] sm:text-[8px] md:text-[10px] lg:text-xs text-ring mt-0.5">
                 <Calendar className="mx-1 w-2 h-2 sm:w-3 sm:h-3 md:w-4 md:h-4 lg:w-5 lg:h-5" />
-                <span>{comment.date}</span>
-                <span className="mx-1">{comment.time}</span>
+                <span>{convertToJalaliString(comment.created_at)}</span>
               </div>
             </div>
           </div>

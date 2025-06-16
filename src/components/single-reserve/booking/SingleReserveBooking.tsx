@@ -8,28 +8,46 @@ import React, { FC, useState } from 'react'
 import jalaali from 'jalaali-js'
 import { motion } from 'framer-motion'
 import { useTranslations } from 'next-intl'
+import { redirect } from 'next/navigation'
+import { useBooking } from '@/utils/zustand/booking'
+import { IHouse } from '@/types/houses-type/house-type'
 
 interface IProps {
     discountedPrice?: number;
     price: string;
+    house: IHouse;
 }
 
-const SingleReserveBooking: FC<IProps> = ({ discountedPrice, price }) => {
+export const convertToGregorian = (year: number, month: number, day: number): string => {
+    const { gy, gm, gd } = jalaali.toGregorian(year, month, day)
+    const now = new Date()
+    const hours = now.getHours().toString().padStart(2, '0')
+    const minutes = now.getMinutes().toString().padStart(2, '0')
+    const seconds = now.getSeconds().toString().padStart(2, '0')
+    return `${gy}-${gm.toString().padStart(2, '0')}-${gd.toString().padStart(2, '0')}T${hours}:${minutes}:${seconds}`
+}
+
+const SingleReserveBooking: FC<IProps> = ({ discountedPrice, price, house }) => {
+
     const t = useTranslations('singleReserve.booking');
     const [count, setCount] = useState(0)
     const [startDate, setStartDate] = useState<string>('')
     const [endDate, setEndDate] = useState<string>('')
+    const { setHouse, setReservedDates, setCountPassengers, removeBooking } = useBooking();
 
     const discount_percentage = discountedPrice ? Math.ceil(((Number(price) - discountedPrice) / Number(price)) * 100) : 0
 
-    const convertToGregorian = (year: number, month: number, day: number): string => {
-        const { gy, gm, gd } = jalaali.toGregorian(year, month, day)
-        return `${gy}-${gm.toString().padStart(2, '0')}-${gd.toString().padStart(2, '0')}`
-    }
 
     const handleSubmit = () => {
-        const reservedDates = [startDate, endDate]
-        console.log(reservedDates)
+        if (removeBooking) {
+            removeBooking()
+        }
+        setHouse(house)
+        setReservedDates(startDate, endDate)
+        if (setCountPassengers) {
+            setCountPassengers(count || 1)
+        }
+        redirect("/hotelPage")
     }
 
     return (

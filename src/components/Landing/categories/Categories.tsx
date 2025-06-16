@@ -43,7 +43,7 @@ const Categories = () => {
     const fetchData = async () => {
       try {
         const Data = await getCategories();
-        setCategoryData(Data);
+        setCategoryData(Data.data);
       } catch (error) {
         console.error("Failed to fetch categories:", error);
       }
@@ -53,17 +53,21 @@ const Categories = () => {
 
   useEffect(() => {
     const updateCardsToShow = () => {
-      const width = window.innerWidth;
-      if (width >= 1346) setCardsToShow(6);
-      else if (width >= 1024) setCardsToShow(4);
-      else if (width >= 640) setCardsToShow(3);
-      else if (width >= 450) setCardsToShow(2);
-      else setCardsToShow(1);
+      if (typeof window !== 'undefined') {
+        const width = window.innerWidth;
+        if (width >= 1346) setCardsToShow(6);
+        else if (width >= 1024) setCardsToShow(4);
+        else if (width >= 640) setCardsToShow(3);
+        else if (width >= 450) setCardsToShow(2);
+        else setCardsToShow(1);
+      }
     };
 
     updateCardsToShow();
-    window.addEventListener("resize", updateCardsToShow);
-    return () => window.removeEventListener("resize", updateCardsToShow);
+    if (typeof window !== 'undefined') {
+      window.addEventListener("resize", updateCardsToShow);
+      return () => window.removeEventListener("resize", updateCardsToShow);
+    }
   }, []);
 
   const handleNextSlide = () => {

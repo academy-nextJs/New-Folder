@@ -7,64 +7,41 @@ import ProfileCompletion from "./ProfileCompletion";
 import { BlurFade } from "@/components/magicui/blur-fade";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import RecentReserves from "./RecentReserves";
 import ReservesCha from "./ReservesCha";
-import { fetchApi } from "@/core/interceptore/fetchApi";
 
 const ContentDashboard = () => {
   const t = useTranslations("dashboardBuyer");
-  const [summary, setSummary] = useState({
-    houses: 0,
-    users: 0,
-    bookings: 0,
-    averageRating: "0.0",
-  });
-
-  useEffect(() => {
-    const getSummary = async () => {
-      try {
-        const res = (await fetchApi.get("/dashboard/summary")) as {
-          houses: number;
-          users: number;
-          bookings: number;
-          averageRating: string;
-        };
-        console.log("res:", res);
-        setSummary(res);
-      } catch (error) {
-        console.error("خطا در دریافت اطلاعات داشبورد:", error);
-      }
-    };
-
-    getSummary();
-  }, []);
 
   const cardData = [
     {
       id: 1,
-      title: summary?.houses,
+      title: "5",
       subtitle: t("totalReserves"),
       href: "/dashboard/manage-reserves",
     },
     {
       id: 2,
-      title: summary.users,
+      title: "12",
       subtitle: t("activeReserves"),
       href: "/dashboard/manage-reserves",
     },
     {
       id: 4,
-      title: summary.bookings,
+      title: "20",
       subtitle: t("notPayments"),
       href: "/dashboard/manage-reserves",
     },
     {
       id: 3,
-      title: summary.averageRating,
+      title: "3",
       subtitle: t("favorites"),
       href: "/dashboard/favorites",
     },
   ];
+
+  useEffect(() => {
+    getSummary();
+  }, []);
 
   return (
     <div className="flex justify-center flex-col w-full gap-2">
@@ -138,7 +115,7 @@ const ContentDashboard = () => {
           <ReservesCha />
           <ProfileCompletion percentage={40} />
         </div>
-        <RecentReserves />
+        <CallReserves />
       </div>
     </div>
   );

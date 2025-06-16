@@ -117,7 +117,8 @@
         "hotel": "Hotel",
         "villa": "Villa",
         "suite": "Suite",
-        "applyFilter": "Apply Filter"
+        "applyFilter": "Apply Filter",
+        "clearFilters": "Delete Filter"
     },
     "paymentList": {
         "title": "Payment List",

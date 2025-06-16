@@ -63,5 +63,18 @@
         "currency": "T",
         "prevStep": "Previous step",
         "onlinePayment": "Online payment"
+    },
+    "updatePassengers": {
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "nationalId": "National ID",
+        "gender": "Gender",
+        "selectGender": "Select",
+        "man": "Male",
+        "woman": "Female",
+        "birthDate": "Birth Date",
+        "close": "Close",
+        "edit": "Edit",
+        "success": "Passenger updated successfully"
     }
 }
