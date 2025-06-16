@@ -19,7 +19,7 @@ interface IReserveFilter {
     houseLength?: number
 }
 
-const RentalFilter: FC<IReserveFilter> = ({ setOrder, setSort, setSearch, setPropertyType, houseLength, setLocation, setTransactionType }) => {
+const RentalFilter: FC<IReserveFilter> = ({ setOrder, setSort, setSearch, houseLength, setLocation, setTransactionType }) => {
     const t = useTranslations('rental.filter');
     const [value, setValue] = useState('')
 
@@ -68,16 +68,15 @@ const RentalFilter: FC<IReserveFilter> = ({ setOrder, setSort, setSearch, setPro
                     classname='px-4 py-5 border-subText w-full dark:group-hover:text-white dark:group-hover:border-white outline-none'
                 />
                 <CommonSelect
-                    onValueChange={(value => {
-                        setParams("propertyType", "")
-                        setPropertyType(value === "all" ? "" : value)
-                    })}
+                    onValueChange={(value) => {
+                        setParams("propertyType", value === "all" ? "" : value)
+                    }}
                     placeholder={t('apartment')}
                     icon={<House size={16} className='text-subText' />}
                     selectItems={[
-                        { label: t('apartment'), value: t('apartment') },
-                        { label: t('villa'), value: t('villa') },
-                        { label: t('rural'), value: t('rural') },
+                        { label: t('apartment'), value: "apartment" },
+                        { label: t('villa'), value: "villa" },
+                        { label: t('rural'), value: "house" },
                         { label: t('all'), value: 'all' },
                     ]}
                     color='text-subText dark:group-hover:text-white'
@@ -86,7 +85,7 @@ const RentalFilter: FC<IReserveFilter> = ({ setOrder, setSort, setSearch, setPro
                 />
                 <CommonSelect
                     onValueChange={(value => {
-                        setTransactionType(value === "all" ? "" : value)
+                        setTransactionType(value === 'all' ? "" : value)
                     })}
                     placeholder={t('mortgageAndRental')}
                     icon={<Coins size={16} className='text-subText' />}

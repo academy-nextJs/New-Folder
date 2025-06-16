@@ -65,6 +65,7 @@ const handler = NextAuth({
             credentials: {
                 accessToken: { label: "AccessToken", type: "text" },
                 refreshToken: { label: "RefreshToken", type: "text" },
+                password: { label: "Password", type: "text" },
             },
             async authorize(credentials) {
                 try {
@@ -77,6 +78,7 @@ const handler = NextAuth({
                             userInfo: decoded,
                             accessToken: credentials.accessToken,
                             refreshToken: credentials.refreshToken,
+                            password: credentials.password,
                         };
                     }
                     return null
@@ -111,6 +113,7 @@ const handler = NextAuth({
                 token.accessToken = user.accessToken;
                 token.refreshToken = user.refreshToken;
                 token.userInfo = user.userInfo;
+                token.password = user.password;
             }
 
             return token;
@@ -119,6 +122,7 @@ const handler = NextAuth({
             session.accessToken = token.accessToken;
             session.refreshToken = token.refreshToken;
             session.userInfo = token.userInfo;
+            session.password = token.password;
             return session;
         },
 

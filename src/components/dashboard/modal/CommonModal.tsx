@@ -18,7 +18,7 @@ const CommonModal: FC<IModal> = ({
             <DialogTrigger>
                 {button ? button : <div className="flex items-center gap-2 px-3 py-2 hover:bg-muted rounded-md cursor-pointer transition-colors text-danger"> {buttonIcon} {buttonTitle} </div>}
             </DialogTrigger>
-            <DialogContent onMouseDown={(e) => e.stopPropagation()} className='rounded-2xl flex flex-col gap-8 items-center'>
+            <DialogContent onMouseDown={(e) => e.stopPropagation()} className='rounded-2xl flex flex-col gap-8 items-center !z-[99999]'>
                 <DialogHeader className='flex flex-col gap-8 items-center'>
                     <DialogTitle className='mx-auto'>
                         <svg width="98" height="98" viewBox="0 0 98 98" fill="none" xmlns="http://www.w3.org/2000/svg">

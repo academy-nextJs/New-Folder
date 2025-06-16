@@ -1,14 +1,18 @@
+/* eslint-disable */
+
 'use client'
 
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useRef, useState } from 'react'
-import { routeSelect } from '../routeSelect';
-import { MoreHorizontal, X } from 'lucide-react';
+import { CreditCard, MoreHorizontal, SquaresSubtract, X } from 'lucide-react';
 import DeltaIcon from "@/app/[locale]/icon.png";
 import useClearPathname from '@/utils/helper/clearPathname/clearPathname';
 import { useTranslations } from 'next-intl';
+import { getProfileById } from '@/utils/service/api/profile/getProfileById';
+import { useSession } from 'next-auth/react';
+import { routes, sellerRoutes } from '../routes/routes';
 
 const MobileSidebar = () => {
 
@@ -16,6 +20,32 @@ const MobileSidebar = () => {
     const pathname = useClearPathname();
     const [showMore, setShowMore] = useState(false);
     const moreRef = useRef<HTMLDivElement | null>(null);
+
+    const [role, setRole] = useState("");
+    const routeSelect = role === "seller" ? sellerRoutes : routes;
+    const footerSidebarSelect = role === "buyer"
+        ? {
+            title: "wallet",
+            description: "noBalance",
+            icon: CreditCard,
+        }
+        : {
+            title: "newComments",
+            description: "commentsCount",
+            icon: SquaresSubtract,
+        };
+    const Icon = footerSidebarSelect.icon;
+
+    const { data: session } = useSession() as any
+
+    const getProfile = async () => {
+        const user = await getProfileById(session?.userInfo.id)
+        setRole(user.role)
+    }
+
+    useEffect(() => {
+        getProfile()
+    }, [])  
 
     const mainRoutes = routeSelect.slice(0, 4);
     const extraRoutes = routeSelect.slice(4);

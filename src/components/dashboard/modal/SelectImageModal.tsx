@@ -9,12 +9,14 @@ const SelectImageModal = ({
     open,
     setOpen,
     setSelectedImage,
-    selectedImage
+    selectedImage,
+    handleEditProfile
 }: {
     open: boolean,
     setOpen: React.Dispatch<React.SetStateAction<boolean>>
     setSelectedImage: React.Dispatch<React.SetStateAction<string | null>>,
     selectedImage: string | null,
+    handleEditProfile: () => void
 }) => {
 
     const fileInputRef = useRef<HTMLInputElement>(null)

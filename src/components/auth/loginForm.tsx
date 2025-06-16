@@ -48,6 +48,7 @@ const LoginForm = () => {
       redirect: false,
       accessToken: user?.accessToken,
       refreshToken: user?.refreshToken,
+      password: values.password
     });
 
     if (res?.ok) {

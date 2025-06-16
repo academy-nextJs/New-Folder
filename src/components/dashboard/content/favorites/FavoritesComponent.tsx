@@ -6,7 +6,7 @@ import { getCategories } from '@/utils/service/api/categories'
 import { Category } from '@/types/categories-type/categories-type'
 
 const FavoritesComponent = async () => {
-    const categories = await getCategories() as Category[]
+    const categories = (await getCategories()).data  as Category[]
 
     return (
         <BlurFade className='px-4 bg-subBg rounded-xl py-4 flex flex-col gap-6'>
