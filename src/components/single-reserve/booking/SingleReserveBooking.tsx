@@ -28,6 +28,7 @@ export const convertToGregorian = (year: number, month: number, day: number): st
 }
 
 const SingleReserveBooking: FC<IProps> = ({ discountedPrice, price, house }) => {
+
     const t = useTranslations('singleReserve.booking');
     const [count, setCount] = useState(0)
     const [startDate, setStartDate] = useState<string>('')

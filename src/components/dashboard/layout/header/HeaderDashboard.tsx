@@ -2,22 +2,22 @@
 
 'use client'
 import { useTheme } from "@/utils/service/TanstakProvider";
-import { Bell, ChevronDown, ChevronUp, LogOut, Moon, PlusCircle, Sun } from "lucide-react";
+import { Bell, ChevronDown, ChevronUp, CreditCard, LogOut, Moon, PlusCircle, SquaresSubtract, Sun } from "lucide-react";
 import React, { Fragment, useEffect, useRef, useState } from "react";
 import CommonModal from "../../modal/CommonModal";
 import { signOut, useSession } from 'next-auth/react'
 import { handleLogout } from "@/core/logOut";
 import NotifModal from "../../modal/NotifModal";
 import { redirect } from "next/navigation";
-import { routeSelect } from "../routeSelect";
 import { TypingAnimation } from "@/components/magicui/typing-animation";
 import useClearPathname from "@/utils/helper/clearPathname/clearPathname";
 import LanguageSwitcher from "@/components/common/header/sections/LangSwitcher";
 import LangModal from "../../modal/LangSwitcherModal";
 import { useTranslations } from "next-intl";
 import { useDirection } from "@/utils/hooks/useDirection";
-import { getProfile } from "@/utils/service/api/getProfile";
 import { IProfile } from "@/types/profile-type/profile-type";
+import { getProfileById } from "@/utils/service/api/profile/getProfileById";
+import { routes, sellerRoutes } from "../routes/routes";
 
 const HeaderDashboard: React.FC = () => {
     const t = useTranslations('dashboardHeader');
@@ -28,6 +28,23 @@ const HeaderDashboard: React.FC = () => {
     const pathname = useClearPathname();
     const { data: session } = useSession() as any;
     const dir = useDirection()
+
+    const [role, setRole] = useState("");
+    const footerSidebarSelect = role === "buyer"
+        ? {
+            title: "wallet",
+            description: "noBalance",
+            icon: CreditCard,
+        }
+        : {
+            title: "newComments",
+            description: "commentsCount",
+            icon: SquaresSubtract,
+        };
+    const Icon = footerSidebarSelect.icon;
+
+    const routeSelect = role === "seller" ? sellerRoutes : routes;
+
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -47,14 +64,15 @@ const HeaderDashboard: React.FC = () => {
 
     const getProfileState = async () => {
         if (session?.userInfo?.id) {
-            const profile = await getProfile(session?.userInfo?.id);
+            const profile = await getProfileById(session.userInfo.id);
             setProfile(profile);
+            setRole(profile?.role)
         }
     }
 
     useEffect(() => {
         getProfileState();
-    }, [session]);
+    }, [session?.userInfo?.id]);
 
     return (
         <Fragment>
@@ -90,7 +108,7 @@ const HeaderDashboard: React.FC = () => {
                         }} className="flex relative gap-4 items-center cursor-pointer">
                             <img src={session?.user?.image || profile?.profilePicture || " "} alt="" className="size-[40px] border-0 outline-none bg-secondary-light rounded-[8px]" />
                             <div className="flex max-md:hidden flex-col justify-between">
-                                <h2>{session?.user?.name || profile?.fullName}</h2>
+                                <h2>{session?.user?.name || profile?.firstName + " " + profile?.lastName || ""}</h2>
                                 <span className="text-muted-foreground text-sm">{profile?.role}</span>
                             </div>
                             {!modalView && <ChevronDown className="cursor-pointer" size={12} />}

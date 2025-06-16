@@ -12,7 +12,7 @@ const FavoritesHeader: React.FC<FavoritesHeaderProps> = ({ categories }) => {
     const t = useTranslations('dashboardBuyer.favoritesPage');
     const selectItems = categories.map((category) => ({
         label: category.name,
-        value: category.name
+        value: category.name || category.id?.toString()
     }))
 
     return (

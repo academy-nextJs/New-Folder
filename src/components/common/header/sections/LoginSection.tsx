@@ -13,8 +13,8 @@ import { handleLogout } from "@/core/logOut";
 import LanguageSwitcher from "./LangSwitcher";
 import { useTranslations } from "next-intl";
 import { useDirection } from "@/utils/hooks/useDirection";
-import { getProfile } from "@/utils/service/api/getProfile";
 import { IProfile } from "@/types/profile-type/profile-type";
+import { getProfileById } from "@/utils/service/api/profile/getProfileById";
 
 const LoginSection = () => {
   const { checkAuthStatus } = useUserStore();
@@ -33,7 +33,7 @@ const LoginSection = () => {
 
   const getProfileState = async () => {
     if (session?.userInfo?.id) {
-      const profile = await getProfile(session?.userInfo?.id);
+      const profile = await getProfileById(session?.userInfo?.id);
       setProfile(profile);
     }
   }

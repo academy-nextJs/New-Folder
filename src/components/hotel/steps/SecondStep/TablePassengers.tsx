@@ -47,7 +47,7 @@ const TablePassengers: FC<ITablePassengers> = ({ book }) => {
                                     {passenger.nationalId || "-"}
                                 </TableCell>
                                 <TableCell className='whitespace-nowrap'>
-                                    {passenger?.birthDate ? convertToJalaliString(new Date(passenger.birthDate).getDay() + " / " + (new Date(passenger.birthDate).getMonth() + 1) + " / " + new Date(passenger.birthDate).getFullYear()).replace("/ 00:00", "") : "-"}
+                                    { passenger?.birthDate && convertToJalaliString((passenger.birthDate).toString()) }
                                 </TableCell>
                                 <TableCell className='whitespace-nowrap'>
                                     {"-"}

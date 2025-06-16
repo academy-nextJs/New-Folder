@@ -1,17 +1,10 @@
 'use client';
 
-import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
-import L from 'leaflet';
-import { useEffect, useState } from 'react';
-
-const customIcon = new L.Icon({
-  iconUrl: 'https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi2_hdpi.png',
-  iconSize: [27, 43],
-  iconAnchor: [13, 43],
-  popupAnchor: [0, -36],
-  shadowSize: [41, 41],
-});
+import React, { useState, useEffect } from "react";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+import { customIcon } from "@/utils/helper/map/MapIcon";
+import AddMarkerOnClick from "./AddMarkerOnClick";
 
 interface MarkerType {
   lat: number;
@@ -22,21 +15,13 @@ interface ReserveMapProps {
   location?: MarkerType;
 }
 
-const AddMarkerOnClick: React.FC<{ setMarker: React.Dispatch<React.SetStateAction<MarkerType | null>> }> = ({ setMarker }) => {
-  useMapEvents({
-    click(e) {
-      const { lat, lng } = e.latlng;
-      setMarker({ lat, lng });
-    },
-  });
-  return null;
-};
-
 const ReserveMap: React.FC<ReserveMapProps> = ({ location }) => {
   const [marker, setMarker] = useState<MarkerType | null>(location || null);
   const [isDark, setIsDark] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
+    setIsMounted(true);
     if (typeof window !== 'undefined') {
       const checkDark = () => document.documentElement.classList.contains('dark');
       setIsDark(checkDark());
@@ -49,6 +34,8 @@ const ReserveMap: React.FC<ReserveMapProps> = ({ location }) => {
       return () => observer.disconnect();
     }
   }, []);
+
+  if (!isMounted) return null;
 
   const darkTiles = 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png';
   const lightTiles = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';

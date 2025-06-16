@@ -10,7 +10,7 @@ import CitySelectPopover from "@/components/common/inputs/common/CitySelectPopov
 import { useTranslations } from "next-intl";
 
 export const selectItems = [
-  { label: "همه", value: "" },
+  { label: "همه", value: "all" },
   { label: "آذربایجان شرقی", value: "آذربایجان شرقی" },
   { label: "آذربایجان غربی", value: "آذربایجان غربی" },
   { label: "اردبیل", value: "اردبیل" },

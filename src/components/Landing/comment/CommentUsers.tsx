@@ -5,18 +5,14 @@ import arrow from "@/assets/arrow.svg";
 import { Star, Calendar } from "lucide-react";
 import plygen from "@/assets/Polygon 1.png";
 import { useTranslations } from "next-intl";
-
-interface Comment {
-  id: number;
-  rating: string;
-  text: string;
-  author: string;
-  date: string;
-  time: string;
-}
+import { getComments } from "@/utils/service/api/comments";
+import { ICommentAll } from "@/types/comment-type/comment-type";
+import { getPublicProfileById } from "@/utils/service/api/profile/getProfileById";
+import { IPublicProfile } from "@/types/profile-type/profile-type";
+import { convertToJalaliString } from "@/utils/helper/shamsiDate/ShamsDate";
 
 interface CommentCardProps {
-  comment: Comment;
+  comment: ICommentAll;
   isSmallScreen: boolean;
 }
 
@@ -24,64 +20,15 @@ const CommentUsers = () => {
   const t = useTranslations("landing.commentUsers");
   const [activeSlideGroup, setActiveSlideGroup] = useState(0);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [comments, setComments] = useState<ICommentAll[]>([]);
 
-  function convertToPersianNumber(number: string) {
-    const persianNumbers = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
-    return number.replace(/\d/g, (digit) => persianNumbers[parseInt(digit)]);
-  }
-
-  const comments: Comment[] = [
-    {
-      id: 1,
-      rating: convertToPersianNumber("4.5"),
-      text: t("comment1Text"),
-      author: t("comment1Author"),
-      date: t("comment1Date"),
-      time: t("comment1Time"),
-    },
-    {
-      id: 2,
-      rating: convertToPersianNumber("4.3"),
-      text: t("comment2Text"),
-      author: t("comment2Author"),
-      date: t("comment2Date"),
-      time: t("comment2Time"),
-    },
-    {
-      id: 3,
-      rating: convertToPersianNumber("4.5"),
-      text: t("comment3Text"),
-      author: t("comment3Author"),
-      date: t("comment3Date"),
-      time: t("comment3Time"),
-    },
-    {
-      id: 4,
-      rating: convertToPersianNumber("4.3"),
-      text: t("comment4Text"),
-      author: t("comment4Author"),
-      date: t("comment4Date"),
-      time: t("comment4Time"),
-    },
-    {
-      id: 5,
-      rating: convertToPersianNumber("4.7"),
-      text: t("comment5Text"),
-      author: t("comment5Author"),
-      date: t("comment5Date"),
-      time: t("comment5Time"),
-    },
-    {
-      id: 6,
-      rating: convertToPersianNumber("4.9"),
-      text: t("comment6Text"),
-      author: t("comment6Author"),
-      date: t("comment6Date"),
-      time: t("comment6Time"),
-    },
-  ];
+  const fetchComments = async () => {
+    const response = await getComments(1, 10, "created_at", "DESC");
+    setComments(response.data);
+  };
 
   useEffect(() => {
+    fetchComments()
     const handleResize = () => {
       setIsSmallScreen(window.innerWidth < 768);
     };
@@ -193,9 +140,21 @@ const CommentUsers = () => {
 };
 
 const CommentCard = ({ comment, isSmallScreen }: CommentCardProps) => {
+  const [user, setUser] = useState<IPublicProfile | null>(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const userData = await getPublicProfileById(comment.user_id);
+      setUser(userData);
+    };
+    fetchUser();
+  }, [comment.user_id]);
+
   const trimmedText = isSmallScreen
-    ? comment.text.slice(0, 78) + (comment.text.length > 50 ? "..." : "")
-    : comment.text;
+    ? comment?.caption?.slice(0, 78) + (comment?.caption && comment?.caption?.length > 50 ? "..." : "")
+    : comment.caption;
+
+  if (!user) return null;
 
   return (
     <div className="relative w-[65vw] sm:w-[70vw] md:w-[40vw] lg:w-[40vw] h-full">
@@ -243,16 +202,15 @@ const CommentCard = ({ comment, isSmallScreen }: CommentCardProps) => {
 
           <div className="relative z-10 flex items-center h-full px-2 sm:px-3 md:px-4 lg:px-5">
             <div className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 lg:w-10 lg:h-10 rounded-md bg-ring flex items-center justify-center text-primary-foreground text-[10px] sm:text-xs md:text-sm lg:text-base">
-              {comment.author.charAt(0)}
+              {user.name.charAt(0)}
             </div>
             <div className="text-right mr-2 sm:mr-3 md:mr-4">
               <p className="font-semibold text-[8px] text-text-about sm:text-[10px] md:text-xs lg:text-sm">
-                {comment.author}
+                {user.name}
               </p>
               <div className="flex items-center text-[6px] sm:text-[8px] md:text-[10px] lg:text-xs text-ring mt-0.5">
                 <Calendar className="mx-1 w-2 h-2 sm:w-3 sm:h-3 md:w-4 md:h-4 lg:w-5 lg:h-5" />
-                <span>{comment.date}</span>
-                <span className="mx-1">{comment.time}</span>
+                <span>{convertToJalaliString(comment.created_at)}</span>
               </div>
             </div>
           </div>

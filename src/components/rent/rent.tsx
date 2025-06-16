@@ -55,28 +55,30 @@ const Rent = () => {
   }, [currentSlideIndex]);
 
   const handleCopy = async () => {
+    if (typeof window === 'undefined') return;
+    
     try {
       await navigator.clipboard.writeText(window.location.href);
       showToast("success", t("copied"), t("close"));
-    } catch {
-      showToast("error", t("notCopied"), t("close"));
+    } catch (error) {
+      console.error('Failed to copy:', error);
     }
   };
 
   const handleShare = async () => {
+    if (typeof window === 'undefined') return;
+    
     if (navigator.share) {
       try {
         await navigator.share({
-          title: document.title,
+          title: t("shareTitle"),
           text: t("shareText"),
           url: window.location.href,
         });
         showToast("success", t("shareSuccess"), t("close"));
-      } catch {
-        showToast("error", t("shareError"), t("close"));
+      } catch (error) {
+        console.error('Error sharing:', error);
       }
-    } else {
-      console.log(t("noShareSupport"));
     }
   };
 

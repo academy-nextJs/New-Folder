@@ -69,7 +69,7 @@ const RentalFilter: FC<IReserveFilter> = ({ setOrder, setSort, setSearch, houseL
                 />
                 <CommonSelect
                     onValueChange={(value) => {
-                        setParams("propertyType", value)
+                        setParams("propertyType", value === "all" ? "" : value)
                     }}
                     placeholder={t('apartment')}
                     icon={<House size={16} className='text-subText' />}

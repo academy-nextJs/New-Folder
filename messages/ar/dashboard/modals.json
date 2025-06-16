@@ -117,7 +117,8 @@
         "hotel": "فندق",
         "villa": "فيلا",
         "suite": "جناح",
-        "applyFilter": "تطبيق الفلتر"
+        "applyFilter": "تطبيق الفلتر",
+        "clearFilters": "حذف الفلتر"
     },
     "paymentList": {
         "title": "قائمة المدفوعات",
