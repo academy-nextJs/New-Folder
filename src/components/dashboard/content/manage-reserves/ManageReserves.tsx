@@ -77,7 +77,7 @@ export default function HotelReservationList() {
   const reservations: Reservation[] = [
     {
       id: 1,
-      hotelName: "هتل سراوان رالین رشت",
+      hotelName: "هتل سراوان رالین ",
       date: "۱۴ مرداد - ۱۴۰۱/۰۴/۱۳",
       price: "۸,۰۰۰,۰۰۰ تومان",
       guestCount: "۲ عدد مسافر",
@@ -290,10 +290,7 @@ export default function HotelReservationList() {
           </TableHeader>
           <TableBody>
             {filteredReservations.map((reservation, idx) => (
-              <TableRow
-                key={reservation.id}
-                className="hover:bg-subBg2"
-              >
+              <TableRow key={reservation.id} className="hover:bg-subBg2">
                 <TableCell className="py-4">
                   <div className="flex items-center gap-2">
                     <div className="w-[107] h-[72] rounded-[12px] bg-card-light flex-shrink-0"></div>

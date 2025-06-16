@@ -1,7 +1,7 @@
-'use client'
+"use client";
 import { HeartIcon, MessageCircleIcon, PinIcon } from "lucide-react";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import img from "@/assets/Rectangle 6486.png";
 import ProfileCompletion from "./ProfileCompletion";
 import { BlurFade } from "@/components/magicui/blur-fade";
@@ -9,15 +9,61 @@ import { useTranslations } from "next-intl";
 import Link from "next/link";
 import RecentReserves from "./RecentReserves";
 import ReservesCha from "./ReservesCha";
+import { fetchApi } from "@/core/interceptore/fetchApi";
 
 const ContentDashboard = () => {
   const t = useTranslations("dashboardBuyer");
+  const [summary, setSummary] = useState({
+    houses: 0,
+    users: 0,
+    bookings: 0,
+    averageRating: "0.0",
+  });
+
+  useEffect(() => {
+    const getSummary = async () => {
+      try {
+        const res = (await fetchApi.get("/dashboard/summary")) as {
+          houses: number;
+          users: number;
+          bookings: number;
+          averageRating: string;
+        };
+        console.log("res:", res);
+        setSummary(res);
+      } catch (error) {
+        console.error("خطا در دریافت اطلاعات داشبورد:", error);
+      }
+    };
+
+    getSummary();
+  }, []);
 
   const cardData = [
-    { id: 1, title: "5", subtitle: t("totalReserves"), href: "/dashboard/manage-reserves" },
-    { id: 2, title: "12", subtitle: t("activeReserves"), href: "/dashboard/manage-reserves" },
-    { id: 4, title: "20", subtitle: t("notPayments"), href: "/dashboard/manage-reserves" },
-    { id: 3, title: "3", subtitle: t("favorites"), href: "/dashboard/favorites" },
+    {
+      id: 1,
+      title: summary?.houses,
+      subtitle: t("totalReserves"),
+      href: "/dashboard/manage-reserves",
+    },
+    {
+      id: 2,
+      title: summary.users,
+      subtitle: t("activeReserves"),
+      href: "/dashboard/manage-reserves",
+    },
+    {
+      id: 4,
+      title: summary.bookings,
+      subtitle: t("notPayments"),
+      href: "/dashboard/manage-reserves",
+    },
+    {
+      id: 3,
+      title: summary.averageRating,
+      subtitle: t("favorites"),
+      href: "/dashboard/favorites",
+    },
   ];
 
   return (
@@ -54,7 +100,10 @@ const ContentDashboard = () => {
               className="w-full rounded-b-xl object-cover my-2 "
             />
             <div className="flex flex-row justify-between w-full items-center mt-2">
-              <Link href={item.href} className=" text-textComment dark:text-bacgkroundW">
+              <Link
+                href={item.href}
+                className=" text-textComment dark:text-bacgkroundW"
+              >
                 {t("details")}
               </Link>
 

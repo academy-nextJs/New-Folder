@@ -5,6 +5,7 @@ import arrow from "@/assets/arrow.svg";
 import { Star, Calendar } from "lucide-react";
 import plygen from "@/assets/Polygon 1.png";
 import { useTranslations } from "next-intl";
+import { fetchApi } from "@/core/interceptore/fetchApi";
 
 interface Comment {
   id: number;
@@ -13,6 +14,16 @@ interface Comment {
   author: string;
   date: string;
   time: string;
+}
+interface CommentApi {
+  id: string;
+  house_id: string;
+  parent_comment_id: string | null;
+  rating: string;
+  title: string;
+  caption: string;
+  user_id: string | null;
+  created_at: string;
 }
 
 interface CommentCardProps {
@@ -24,13 +35,15 @@ const CommentUsers = () => {
   const t = useTranslations("landing.commentUsers");
   const [activeSlideGroup, setActiveSlideGroup] = useState(0);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [comments, setComments] = useState<Comment[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   function convertToPersianNumber(number: string) {
     const persianNumbers = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
     return number.replace(/\d/g, (digit) => persianNumbers[parseInt(digit)]);
   }
 
-  const comments: Comment[] = [
+  const staticComments: Comment[] = [
     {
       id: 1,
       rating: convertToPersianNumber("4.5"),
@@ -81,6 +94,70 @@ const CommentUsers = () => {
     },
   ];
 
+  const formatDate = (dateString: string) => {
+    try {
+      const date = new Date(dateString);
+      const persianDate = date.toLocaleDateString("fa-IR");
+      const persianTime = date.toLocaleTimeString("fa-IR", {
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+      return { date: persianDate, time: persianTime };
+    } catch {
+      return { date: "تاریخ نامشخص", time: "زمان نامشخص" };
+    }
+  };
+
+  const mergeCommentsWithFallback = (apiComments: CommentApi[]): Comment[] => {
+    const mergedComments: Comment[] = [];
+
+    apiComments.forEach((apiComment, index) => {
+      const staticFallback = staticComments[index] || staticComments[0];
+      const { date, time } = formatDate(apiComment.created_at);
+
+      mergedComments.push({
+        id: parseInt(apiComment.id) || staticFallback.id,
+        rating: apiComment.rating
+          ? convertToPersianNumber(apiComment.rating)
+          : staticFallback.rating,
+        text: apiComment.caption || apiComment.title || staticFallback.text,
+        author: apiComment.user_id || staticFallback.author,
+        date: date || staticFallback.date,
+        time: time || staticFallback.time,
+      });
+    });
+
+    if (mergedComments.length < staticComments.length) {
+      const remainingStatic = staticComments.slice(mergedComments.length);
+      mergedComments.push(...remainingStatic);
+    }
+
+    return mergedComments;
+  };
+
+  const fetchComments = async () => {
+    try {
+      setIsLoading(true);
+      const response = await fetchApi.get("/comments");
+
+      if (response && Array.isArray(response)) {
+        const mergedData = mergeCommentsWithFallback(response);
+        setComments(mergedData);
+      } else {
+        setComments(staticComments);
+      }
+    } catch (error) {
+      console.error("Error fetching comments:", error);
+      setComments(staticComments);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchComments();
+  }, []);
+
   useEffect(() => {
     const handleResize = () => {
       setIsSmallScreen(window.innerWidth < 768);
@@ -121,6 +198,14 @@ const CommentUsers = () => {
 
   const sliderPosition = 100 * activeSlideGroup;
 
+  if (isLoading) {
+    return (
+      <div className="text-foreground px-8 flex justify-center items-center py-20">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+      </div>
+    );
+  }
+
   return (
     <div className="text-foreground px-8">
       <div className="flex justify-center items-center gap-2 py-2 sm:py-4 mb-2 sm:mb-4 text-primary">
@@ -141,11 +226,17 @@ const CommentUsers = () => {
         />
       </div>
 
-      <h1 className="text-center text-xl sm:text-2xl md:text-3xl font-bold mb-2 sm:mb-4" dir="rtl">
+      <h1
+        className="text-center text-xl sm:text-2xl md:text-3xl font-bold mb-2 sm:mb-4"
+        dir="rtl"
+      >
         {t("subtitle")}
       </h1>
 
-      <p className="text-center text-xs sm:text-sm md:text-base mb-4 sm:mb-5 mx-auto max-w-2xl font-sans break-words leading-5 sm:leading-6 md:leading-7" dir="rtl">
+      <p
+        className="text-center text-xs sm:text-sm md:text-base mb-4 sm:mb-5 mx-auto max-w-2xl font-sans break-words leading-5 sm:leading-6 md:leading-7"
+        dir="rtl"
+      >
         {t("description")}
       </p>
 
@@ -175,10 +266,18 @@ const CommentUsers = () => {
 
         <div className="flex items-center gap-4 mt-4 sm:mt-6">
           {Array.from({ length: slideGroupsCount }).map((_, index) => (
-            <div key={index} onClick={() => goToSlideGroup(index)} className="cursor-pointer">
+            <div
+              key={index}
+              onClick={() => goToSlideGroup(index)}
+              className="cursor-pointer"
+            >
               {activeSlideGroup === index ? (
                 <div>
-                  <Image src={plygen} className="dark:inline hidden w-3 h-3 sm:w-4 sm:h-4" alt="active" />
+                  <Image
+                    src={plygen}
+                    className="dark:inline hidden w-3 h-3 sm:w-4 sm:h-4"
+                    alt="active"
+                  />
                   <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-primary dark:hidden" />
                 </div>
               ) : (
