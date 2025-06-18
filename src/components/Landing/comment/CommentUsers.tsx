@@ -5,11 +5,15 @@ import arrow from "@/assets/arrow.svg";
 import { Star, Calendar } from "lucide-react";
 import plygen from "@/assets/Polygon 1.png";
 import { useTranslations } from "next-intl";
-import { getComments } from "@/utils/service/api/comments";
-import { ICommentAll } from "@/types/comment-type/comment-type";
-import { getPublicProfileById } from "@/utils/service/api/profile/getProfileById";
-import { IPublicProfile } from "@/types/profile-type/profile-type";
-import { convertToJalaliString } from "@/utils/helper/shamsiDate/ShamsDate";
+
+interface Comment {
+  id: number;
+  rating: string;
+  text: string;
+  author: string;
+  date: string;
+  time: string;
+}
 
 interface CommentCardProps {
   comment: ICommentAll;
@@ -20,15 +24,65 @@ const CommentUsers = () => {
   const t = useTranslations("landing.commentUsers");
   const [activeSlideGroup, setActiveSlideGroup] = useState(0);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
-  const [comments, setComments] = useState<ICommentAll[]>([]);
 
-  const fetchComments = async () => {
-    const response = await getComments(1, 10, "created_at", "DESC");
-    setComments(response.data);
-  };
+  function convertToPersianNumber(number: string) {
+    const persianNumbers = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
+    return number.replace(/\d/g, (digit) => persianNumbers[parseInt(digit)]);
+  }
+
+  const comments: Comment[] = [
+    {
+      id: 1,
+      rating: convertToPersianNumber("4.5"),
+      text: t("comment1Text"),
+      author: t("comment1Author"),
+      date: t("comment1Date"),
+      time: t("comment1Time"),
+    },
+    {
+      id: 2,
+      rating: convertToPersianNumber("4.3"),
+      text: t("comment2Text"),
+      author: t("comment2Author"),
+      date: t("comment2Date"),
+      time: t("comment2Time"),
+    },
+    {
+      id: 3,
+      rating: convertToPersianNumber("4.5"),
+      text: t("comment3Text"),
+      author: t("comment3Author"),
+      date: t("comment3Date"),
+      time: t("comment3Time"),
+    },
+    {
+      id: 4,
+      rating: convertToPersianNumber("4.3"),
+      text: t("comment4Text"),
+      author: t("comment4Author"),
+      date: t("comment4Date"),
+      time: t("comment4Time"),
+    },
+    {
+      id: 5,
+      rating: convertToPersianNumber("4.7"),
+      text: t("comment5Text"),
+      author: t("comment5Author"),
+      date: t("comment5Date"),
+      time: t("comment5Time"),
+    },
+    {
+      id: 6,
+      rating: convertToPersianNumber("4.9"),
+      text: t("comment6Text"),
+      author: t("comment6Author"),
+      date: t("comment6Date"),
+      time: t("comment6Time"),
+    },
+  ];
 
   useEffect(() => {
-    fetchComments()
+    fetchComments();
     const handleResize = () => {
       setIsSmallScreen(window.innerWidth < 768);
     };
@@ -68,6 +122,14 @@ const CommentUsers = () => {
 
   const sliderPosition = 100 * activeSlideGroup;
 
+  if (isLoading) {
+    return (
+      <div className="text-foreground px-8 flex justify-center items-center py-20">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+      </div>
+    );
+  }
+
   return (
     <div className="text-foreground px-8">
       <div className="flex justify-center items-center gap-2 py-2 sm:py-4 mb-2 sm:mb-4 text-primary">
@@ -88,11 +150,17 @@ const CommentUsers = () => {
         />
       </div>
 
-      <h1 className="text-center text-xl sm:text-2xl md:text-3xl font-bold mb-2 sm:mb-4" dir="rtl">
+      <h1
+        className="text-center text-xl sm:text-2xl md:text-3xl font-bold mb-2 sm:mb-4"
+        dir="rtl"
+      >
         {t("subtitle")}
       </h1>
 
-      <p className="text-center text-xs sm:text-sm md:text-base mb-4 sm:mb-5 mx-auto max-w-2xl font-sans break-words leading-5 sm:leading-6 md:leading-7" dir="rtl">
+      <p
+        className="text-center text-xs sm:text-sm md:text-base mb-4 sm:mb-5 mx-auto max-w-2xl font-sans break-words leading-5 sm:leading-6 md:leading-7"
+        dir="rtl"
+      >
         {t("description")}
       </p>
 
@@ -122,10 +190,18 @@ const CommentUsers = () => {
 
         <div className="flex items-center gap-4 mt-4 sm:mt-6">
           {Array.from({ length: slideGroupsCount }).map((_, index) => (
-            <div key={index} onClick={() => goToSlideGroup(index)} className="cursor-pointer">
+            <div
+              key={index}
+              onClick={() => goToSlideGroup(index)}
+              className="cursor-pointer"
+            >
               {activeSlideGroup === index ? (
                 <div>
-                  <Image src={plygen} className="dark:inline hidden w-3 h-3 sm:w-4 sm:h-4" alt="active" />
+                  <Image
+                    src={plygen}
+                    className="dark:inline hidden w-3 h-3 sm:w-4 sm:h-4"
+                    alt="active"
+                  />
                   <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-primary dark:hidden" />
                 </div>
               ) : (
@@ -151,7 +227,8 @@ const CommentCard = ({ comment, isSmallScreen }: CommentCardProps) => {
   }, [comment.user_id]);
 
   const trimmedText = isSmallScreen
-    ? comment?.caption?.slice(0, 78) + (comment?.caption && comment?.caption?.length > 50 ? "..." : "")
+    ? comment?.caption?.slice(0, 78) +
+      (comment?.caption && comment?.caption?.length > 50 ? "..." : "")
     : comment.caption;
 
   if (!user) return null;

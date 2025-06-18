@@ -21,7 +21,9 @@ const CardSvgBackground = ({ isHovered }: { isHovered: boolean }) => (
       stroke="black"
       strokeWidth="2"
       className={`transition-all duration-300 ${
-        isHovered ? "dark:fill-primary fill-primary" : "dark:fill-card-body fill-white"
+        isHovered
+          ? "dark:fill-primary fill-primary"
+          : "dark:fill-card-body fill-white"
       } stroke-primary dark:stroke-none`}
     />
   </svg>
@@ -75,7 +77,7 @@ const Categories = () => {
   };
 
   const visibleCards = Array.from({
-    length: Math.min(cardsToShow, categoryData.length),
+    length: Math.min(4, categoryData.length),
   }).map((_, idx) => (currentSlide + idx) % categoryData.length);
 
   const getCategoryIcon = (index: number) => {
@@ -89,7 +91,7 @@ const Categories = () => {
   };
 
   return (
-    <div className="mb-32 text-foreground p-2 sm:p-4">
+    <div className="text-foreground p-2 sm:p-4">
       <div className="flex justify-center items-center gap-2 py-2 sm:py-4 mb-2 sm:mb-4 text-primary">
         <Image
           src={arrow}
@@ -131,7 +133,9 @@ const Categories = () => {
                     onMouseLeave={() => setHoveredIndex(null)}
                   >
                     <div className="w-full h-full rounded-lg overflow-hidden">
-                      <CardSvgBackground isHovered={hoveredIndex === cardIndex} />
+                      <CardSvgBackground
+                        isHovered={hoveredIndex === cardIndex}
+                      />
                     </div>
 
                     <div
@@ -142,7 +146,9 @@ const Categories = () => {
                     >
                       <MoveLeftIcon
                         className={`w-8 h-[18px] cursor-pointer transition-colors duration-300 ${
-                          hoveredIndex === cardIndex ? "text-white" : "text-primary"
+                          hoveredIndex === cardIndex
+                            ? "text-white"
+                            : "text-primary"
                         } dark:text-subText`}
                       />
                     </div>
