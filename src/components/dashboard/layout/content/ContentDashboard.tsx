@@ -1,4 +1,4 @@
-"use client";
+'use client'
 import { HeartIcon, MessageCircleIcon, PinIcon } from "lucide-react";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
@@ -8,35 +8,24 @@ import { BlurFade } from "@/components/magicui/blur-fade";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import ReservesCha from "./ReservesCha";
+import CallReserves from "./CallReserves";
+import { getDashboardSummary } from "@/utils/service/api/dashboard/getDashboardSummary";
+import { IDashboardSummary } from "@/types/dashboard-type/summary-type/summary-type";
 
 const ContentDashboard = () => {
   const t = useTranslations("dashboardBuyer");
+  const [summary, setSummary] = useState<IDashboardSummary | null>(null);
+
+  const getSummary = async () => {
+    const summary = await getDashboardSummary();
+    setSummary(summary);
+  }
 
   const cardData = [
-    {
-      id: 1,
-      title: "5",
-      subtitle: t("totalReserves"),
-      href: "/dashboard/manage-reserves",
-    },
-    {
-      id: 2,
-      title: "12",
-      subtitle: t("activeReserves"),
-      href: "/dashboard/manage-reserves",
-    },
-    {
-      id: 4,
-      title: "20",
-      subtitle: t("notPayments"),
-      href: "/dashboard/manage-reserves",
-    },
-    {
-      id: 3,
-      title: "3",
-      subtitle: t("favorites"),
-      href: "/dashboard/favorites",
-    },
+    { id: 1, title: summary?.houses, subtitle: " کل املاک", href: "/dashboard/manage-reserves" },
+    { id: 2, title: summary?.bookings, subtitle: " کل رزرو ها", href: "/dashboard/manage-reserves" },
+    { id: 4, title: summary?.users, subtitle: " کل کاربران", href: "/dashboard/manage-reserves" },
+    { id: 3, title: summary?.averageRating, subtitle: " میانگین امتیاز", href: "/dashboard/favorites" },
   ];
 
   useEffect(() => {
@@ -77,10 +66,7 @@ const ContentDashboard = () => {
               className="w-full rounded-b-xl object-cover my-2 "
             />
             <div className="flex flex-row justify-between w-full items-center mt-2">
-              <Link
-                href={item.href}
-                className=" text-textComment dark:text-bacgkroundW"
-              >
+              <Link href={item.href} className=" text-textComment dark:text-bacgkroundW">
                 {t("details")}
               </Link>
 
