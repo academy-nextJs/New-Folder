@@ -83,7 +83,7 @@ const ReserveContent: React.FC<IReserveContent> = ({ houses, isLoading, setMaxPr
           )}
 
           <Pagination>
-            <PaginationContent className="justify-center mt-6">
+            <PaginationContent className="justify-center my-6">
               <PaginationItem>
                 <PaginationPrevious onClick={() => goToPage(currentPage - 1)} />
               </PaginationItem>

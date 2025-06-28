@@ -18,17 +18,12 @@ const onError = async (error: Response | Error) => {
 
     const handleRefreshToken = async () => {
         if (refreshToken) {
-            const response = await fetch(`${baseURL}/auth/refresh`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ token: refreshToken })
-            });
+            const response = await fetchApi.post(`${baseURL}/auth/refresh`, { token: refreshToken }) as { accessToken: string }
 
-            const data = await response.json();
-            if (response.ok) {
+            if (response) {
                 await signIn("credentials", {
                     redirect: false,
-                    accessToken: data?.accessToken,
+                    accessToken: response?.accessToken,
                     refreshToken: refreshToken,
                 });
             } else {

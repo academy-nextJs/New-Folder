@@ -93,7 +93,7 @@
         "price": "قیمت"
     },
     "payments": {
-        "title": "املاک من",
+        "title": "پرداخت های من",
         "paymentStatus": "وضعیت پرداخت",
         "paymentStatusPlaceholder": "تایید شده",
         "transactionType": "نوع تراکنش",

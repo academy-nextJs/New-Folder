@@ -37,7 +37,7 @@ const RegisterForm = () => {
     setIsLoading(true)
     try {
       setEmail(values.email)
-      const res = await axiosApi.post('/auth/start-registration', values) as any
+      const res = await axiosApi.post('/auth/register', values) as any
       if (res.tempUserId) {
         setTempUserId(res.tempUserId)
       }

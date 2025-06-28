@@ -25,7 +25,6 @@ interface ReserveModalProps {
 
 export default function ReserveModal({ houseId, button }: ReserveModalProps) {
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
-  const [isReserveModals, setIsReserveModals] = useState(false);
   const t = useTranslations("modals.reserveModal");
 
   const [house, setHouse] = useState<IHouse | null>(null)
@@ -137,18 +136,13 @@ export default function ReserveModal({ houseId, button }: ReserveModalProps) {
             </div>
 
             <div className="flex gap-4">
-              <button
-                className="rounded-xl bg-primary px-6 py-2 text-background"
-                onClick={() => setIsReserveModals(true)}
-              >
-                {t("reserves")}
-              </button>
-              <button
+              <ReservesModals houseId={Number(houseId)} />
+              {/* <button
                 onClick={() => setIsPaymentModalOpen(true)}
                 className="rounded-xl border border-primary px-6 py-2 text-background bg-primary"
               >
                 {t("payments")}
-              </button>
+              </button> */}
             </div>
           </div>
         </DialogContent>
@@ -157,10 +151,6 @@ export default function ReserveModal({ houseId, button }: ReserveModalProps) {
       <PaymentListModal
         isOpen={isPaymentModalOpen}
         onClose={() => setIsPaymentModalOpen(false)}
-      />
-      <ReservesModals
-        isOpen={isReserveModals}
-        onClose={() => setIsReserveModals(false)}
       />
     </>
   );

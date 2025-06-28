@@ -1,6 +1,7 @@
 import axios, { AxiosResponse, AxiosError } from "axios";
 import { showToast } from "../toast/toast";
 import { getSession, signIn, signOut } from "next-auth/react";
+import { fetchApi } from "./fetchApi";
 
 const baseURL = 'https://delta-project.liara.run/api';
 
@@ -18,18 +19,14 @@ const onError = async (err: AxiosError) => {
 
     if (err.message === "Network Error" || err.response?.status === 403) {
         if (refreshToken) {
-            const response = await fetch(`${baseURL}/auth/refresh`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ token: refreshToken })
-            })
-            const data = await response.json();
-            if (response.ok) {
+            const response = await fetchApi.post(`${baseURL}/auth/refresh`, { token: refreshToken }) as { accessToken: string }
+
+            if (response) {
                 await signIn("credentials", {
                     redirect: false,
-                    accessToken: data?.accessToken,
+                    accessToken: response?.accessToken,
                     refreshToken: refreshToken,
-                })
+                });
             }
             else {
                 await signOut({ callbackUrl: '/login' });

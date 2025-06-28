@@ -1,50 +1,77 @@
+'use client'
 import { X } from "lucide-react";
 import { useTranslations } from "next-intl";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogClose,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { getAllBookings } from "@/utils/service/api/booking/getAllBookings";
+import { useEffect, useState } from "react";
+import { IReserveType } from "@/types/reserves-type/reserves-type";
+import { convertToJalaliString } from "@/utils/helper/shamsiDate/ShamsDate";
 
-interface ListModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-}
-
-export default function ReservesModals({ isOpen, onClose }: ListModalProps) {
+export default function ReservesModals({ houseId }: { houseId: number }) {
   const t = useTranslations("modals.reservesList");
+  const t2 = useTranslations("modals.reserveModal");
+  const [reserves, setReserves] = useState<IReserveType[]>([]);
 
-  if (!isOpen) return null;
+  const fetchReserves = async () => {
+    const response = await getAllBookings(1, 10, "created_at", "DESC", houseId) as {data: IReserveType[], total: number};
+    setReserves(response.data);
+  }
+
+  useEffect(() => {
+    fetchReserves();
+  }, [])
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50  backdrop-blur-sm">
-      <div className="w-[95%] max-w-3xl bg-border p-6 rounded-xl text-right">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-bold text-foreground">{t("title")}</h2>
-          <button
-            onClick={onClose}
-            className="flex items-center gap-2 border border-danger text-danger px-4 py-1 rounded-full"
-          >
-            {t("close")} <X size={16} />
-          </button>
-        </div>
+    <Dialog>
+      <DialogTrigger asChild>
+        <button
+          className="rounded-xl bg-primary px-6 py-2 text-background"
+        >
+          {t2("reserves")}
+        </button>
+      </DialogTrigger>
+      <DialogContent className="max-w-3xl text-right pt-[50px]">
+        <DialogHeader>
+          <DialogTitle className="flex items-center justify-between text-xl font-bold text-foreground">
+            {t("title")}
+            <DialogClose asChild>
+              <button
+                className="flex items-center gap-2 border border-danger text-danger px-4 py-1 rounded-full"
+              >
+                {t("close")} <X size={16} />
+              </button>
+            </DialogClose>
+          </DialogTitle>
+        </DialogHeader>
 
         <div className="overflow-hidden rounded-xl">
           <table className="w-full text-sm text-center border-collapse">
             <thead className="bg-subText text-foreground">
               <tr className="bg-textComment dark:bg-subText rounded-xl">
                 <th className="p-2 rounded-r">{t("date")}</th>
-                <th className="p-2 rounded-r"></th>
+                <th className="p-2 rounded-r">{t("guestCount")}</th>
               </tr>
             </thead>
             <tbody>
-              {[1, 2, 3, 4].map((_, index) => (
+              {reserves?.map((reserve, index) => (
                 <tr key={index} className="bg-subBg">
-                  <td className="p-2">{t("sampleDate")}</td>
+                  <td className="p-2"> {convertToJalaliString(reserve.createdAt)} </td>
                   <td className="p-2 text-primary cursor-pointer">
-                    {t("guestCount")}
+                    {reserve.traveler_details.length} مسافر حاضر
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
-      </div>
-    </div>
+      </DialogContent>
+    </Dialog>
   );
 }
