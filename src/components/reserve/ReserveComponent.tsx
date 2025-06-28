@@ -1,8 +1,9 @@
 'use client'
-import ReserveContent from '@/components/reserve/content/ReserveContent'
+import ReserveContent, { MarkerType } from '@/components/reserve/content/ReserveContent'
 import ReserveFilter from '@/components/reserve/filter/ReserveFilter'
 import ReserveHeader from '@/components/reserve/header/ReserveHeader'
 import { IHouse } from '@/types/houses-type/house-type'
+import { getDistanceFromLatLonInKm } from '@/utils/helper/map/MapIcon'
 import { getHouses } from '@/utils/service/api/houses-api'
 import React, { useEffect, useState } from 'react'
 const ReserveComponent = () => {
@@ -14,6 +15,7 @@ const ReserveComponent = () => {
     const [maxPrice, setMaxPrice] = useState<number | "">("")
     const [houses, setHouses] = useState<IHouse[]>([])
     const [isLoading, setIsLoading] = useState<boolean>(true)
+    const [marker, setMarker] = useState<MarkerType | null>(null)
 
     const fetchHouses = async () => {
         setIsLoading(true)
@@ -27,6 +29,27 @@ const ReserveComponent = () => {
         }
     }
 
+    useEffect(() => {
+      if (!marker) {
+        fetchHouses(); 
+        return;
+      }
+    
+      const radius = 10;
+    
+      const filtered = houses.filter((house) => {
+        if (!house.location) return false;
+    
+        const lat = house.location.lat;
+        const lng = house.location.lng;
+    
+        const distance = getDistanceFromLatLonInKm(marker.lat, marker.lng, lat, lng);
+        return distance <= radius;
+      });
+    
+      setHouses(filtered);
+    }, [marker]);
+    
 
     useEffect(() => {
         fetchHouses()
@@ -42,13 +65,15 @@ const ReserveComponent = () => {
         <div className='px-8 mt-[120px] flex flex-col gap-4'>
             <ReserveHeader />
             <ReserveFilter
+                marker={marker}
+                setMarker={setMarker}
                 setOrder={setOrder}
                 setSort={setSort}
                 setSearch={setSearch}
                 houseLength={houses.length}
                 setLocation={setLocation}
             />
-            <ReserveContent isLoading={isLoading} houses={houses} setMaxPrice={setMaxPrice} setMinPrice={setMinPrice} setLocation={setLocation} />
+            <ReserveContent marker={marker} setMarker={setMarker} isLoading={isLoading} houses={houses} setMaxPrice={setMaxPrice} setMinPrice={setMinPrice} setLocation={setLocation} />
         </div>
     )
 }

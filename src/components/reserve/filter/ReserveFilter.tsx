@@ -10,6 +10,7 @@ import { Label } from '@/components/ui/label'
 import CitySelectPopover from '@/components/common/inputs/common/CitySelectPopovar'
 import { selectItems } from '@/components/Landing/hero-section/section/SearchBar'
 import { useTranslations } from 'next-intl'
+import { MarkerType } from '../content/ReserveContent'
 
 interface IReserveFilter {
     setOrder: React.Dispatch<React.SetStateAction<'DESC' | 'ASC'>>
@@ -17,9 +18,11 @@ interface IReserveFilter {
     setSearch: React.Dispatch<React.SetStateAction<string>>
     setLocation: React.Dispatch<React.SetStateAction<string>>
     houseLength?: number
+    marker: MarkerType | null
+    setMarker: React.Dispatch<React.SetStateAction<MarkerType | null>>
 }
 
-const ReserveFilter: FC<IReserveFilter> = ({ setOrder, setSort, setSearch, houseLength, setLocation }) => {
+const ReserveFilter: FC<IReserveFilter> = ({ setOrder, setSort, setSearch, houseLength, setLocation, marker, setMarker }) => {
     const t = useTranslations('reserve.filter');
     const [isOpen, setIsOpen] = useState<boolean>(false)
     const [value, setValue] = React.useState("")
@@ -85,7 +88,7 @@ const ReserveFilter: FC<IReserveFilter> = ({ setOrder, setSort, setSearch, house
                     <span className='whitespace-nowrap'>{t('count')} : {houseLength} </span>
                 </div>
                 <CommonButton onclick={() => setIsOpen(true)} icon={<MapPin />} title={t('map')} classname='bg-transparent border-foreground border text-foreground flex xl:hidden' />
-                <ReserveModalMap isOpen={isOpen} setIsOpen={setIsOpen} />
+                <ReserveModalMap marker={marker} setMarker={setMarker} isOpen={isOpen} setIsOpen={setIsOpen} />
             </div>
         </motion.div>
     )

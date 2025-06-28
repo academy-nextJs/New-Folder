@@ -5,18 +5,15 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { customIcon } from "@/utils/helper/map/MapIcon";
 import AddMarkerOnClick from "./AddMarkerOnClick";
-
-interface MarkerType {
-  lat: number;
-  lng: number;
-}
+import { MarkerType } from "../content/ReserveContent";
 
 interface ReserveMapProps {
   location?: MarkerType;
+  marker: MarkerType | null;
+  setMarker: React.Dispatch<React.SetStateAction<MarkerType | null>>;
 }
 
-const ReserveMap: React.FC<ReserveMapProps> = ({ location }) => {
-  const [marker, setMarker] = useState<MarkerType | null>(location || null);
+const ReserveMap: React.FC<ReserveMapProps> = ({ location, marker, setMarker }) => {
   const [isDark, setIsDark] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
 
