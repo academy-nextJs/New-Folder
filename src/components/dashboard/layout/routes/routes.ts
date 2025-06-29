@@ -12,7 +12,7 @@ export const routes = [
 
 export const sellerRoutes = [
   { label: "dashboard", href: "/dashboard/seller", icon: Home },
-  { label: "profile", href: "/dashboard/seller/profile", icon: User },
+  { label: "profile", href: "/dashboard/profile", icon: User },
   {
     label: "manageHouses", href: "/dashboard/seller/manage-houses", icon: Settings, children: [
       { label: "myHouses", href: "/dashboard/seller/manage-houses/my-houses", icon: House },

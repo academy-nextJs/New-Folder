@@ -38,18 +38,15 @@ const queryClient = new QueryClient({
 });
 
 function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<Theme>('dark');
+  const [theme, setTheme] = useState<Theme | null>(null);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme') as Theme | null;
-    if (savedTheme) {
-      setTheme(savedTheme);
-    }
+    setTheme(savedTheme ?? 'dark');
   }, []);
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
-    
+    if (!theme) return;
     const root = window.document.documentElement;
 
     if (theme === 'dark') {
@@ -65,12 +62,17 @@ function ThemeProvider({ children }: { children: ReactNode }) {
     setTheme((prevTheme) => (prevTheme === 'dark' ? 'light' : 'dark'));
   };
 
+  if (!theme) {
+    return null;
+  }
+
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
       {children}
     </ThemeContext.Provider>
   );
 }
+
 
 export function Providers({ children }: { children: ReactNode }) {
   return (

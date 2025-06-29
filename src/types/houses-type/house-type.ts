@@ -26,3 +26,27 @@ export interface IHouse {
     sellerName: string,
     caption: null
 }
+
+export interface ICreateHouse {
+    title: string,
+    address: string,
+    photos: string[],
+    price: string,
+    tags: string[],
+    capacity: number,
+    location: {
+        lat: number,
+        lng: number
+    },
+    categories: {
+        id: number,
+        name: string
+    },
+    bathrooms: number,
+    parking: number,
+    rooms: number,
+    yard_type: string,
+    transaction_type: string,
+    caption: string
+}
+

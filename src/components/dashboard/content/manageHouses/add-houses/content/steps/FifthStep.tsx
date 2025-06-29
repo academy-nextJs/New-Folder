@@ -15,6 +15,7 @@ const categories = [
 ]
 
 const FifthStep = () => {
+  
   const t = useTranslations('dashboardSeller.fifthStep')
   return (
     <Fragment>

@@ -50,8 +50,7 @@ const onError = async (error: Response | Error) => {
 
     if (error instanceof Error) {
         if (error.message === "invalid token" || error.message === "Invalid token") {
-            await signOut({ callbackUrl: '/login' });
-            showToast("error", "توکن نامعتبر است. لطفا دوباره وارد شوید.", "بستن");
+            handleRefreshToken()
         }
     }
 
@@ -85,14 +84,14 @@ export const fetchApi = {
     get: <T>(url: string, options?: RequestInit): Promise<T> =>
         fetchWithAuth(url, { ...options, method: 'GET' }),
 
-    post: <T>(url: string, data: any, options?: RequestInit): Promise<T> =>
+    post: <T>(url: string, data?: any, options?: RequestInit): Promise<T> =>
         fetchWithAuth(url, {
             ...options,
             method: 'POST',
             body: JSON.stringify(data)
         }),
 
-    put: <T>(url: string, data: any, options?: RequestInit): Promise<T> =>
+    put: <T>(url: string, data?: any, options?: RequestInit): Promise<T> =>
         fetchWithAuth(url, {
             ...options,
             method: 'PUT',

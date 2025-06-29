@@ -1,21 +1,45 @@
+/* eslint-disable */
+
+'use client'
+
 import { BlurFade } from '@/components/magicui/blur-fade'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
+import { IHouse } from '@/types/houses-type/house-type'
+import { IReserveType } from '@/types/reserves-type/reserves-type'
+import { convertToJalaliString } from '@/utils/helper/shamsiDate/ShamsDate'
 import { SplitNumber } from '@/utils/helper/spliter/SplitNumber'
+import { getHouseById } from '@/utils/service/api/houses-api'
 import { CheckCircle2, Coins, Flower, Pin, Rocket, Text, X } from 'lucide-react'
 import { useTranslations } from 'next-intl'
-import Image from 'next/image'
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
 
-const reserves = [
-    { image: null, title: " هتل سراوان رانین رشت ", date: "12 مرداد - 1401 / 12:33", price: "1800000", status: true },
-    { image: null, title: " هتل سراوان رانین رشت ", date: "12 مرداد - 1401 / 12:33", price: "1800000", status: true },
-    { image: null, title: " هتل سراوان رانین رشت ", date: "12 مرداد - 1401 / 12:33", price: "1800000", status: false },
-    { image: null, title: " هتل سراوان رانین رشت ", date: "12 مرداد - 1401 / 12:33", price: "1800000", status: false },
-    { image: null, title: " هتل سراوان رانین رشت ", date: "12 مرداد - 1401 / 12:33", price: "1800000", status: true },
-]
-
-const RecentReserves = () => {
+const RecentReserves = ({
+    reserves,
+}:
+    {
+        reserves: IReserveType[],
+    }) => {
     const t = useTranslations('dashboardSeller.dashboard')
+    const [housesData, setHousesData] = useState<Record<string, IHouse>>({})
+
+    useEffect(() => {
+        const fetchHouses = async () => {
+            const houses: Record<string, IHouse> = {}
+            for (const reserve of reserves) {
+                if (!houses[reserve.houseId]) {
+                    const house = await getHouseById(reserve.houseId.toString())
+                    houses[reserve.houseId] = house
+                }
+            }
+            setHousesData(houses)
+        }
+
+        if (reserves?.length) {
+            fetchHouses()
+        }
+    }, [reserves])
+
     return (
         <BlurFade delay={1} className='w-full min-h-full rounded-[12px] bg-subBg flex gap-4 px-4 py-4 flex-col'>
             <div className='flex justify-between w-full items-center flex-wrap gap-4'>
@@ -47,37 +71,43 @@ const RecentReserves = () => {
                 </TableHeader>
 
                 <TableBody>
-                    {reserves.map((reserve, idx) => (
-                        <TableRow key={idx}>
+                    {reserves && reserves.map((reserve, idx) => {
+                        const house = housesData[reserve.houseId]
+                        if (!house) return null
+
+                        return <TableRow key={idx}>
                             <TableCell className='py-4 whitespace-nowrap flex gap-2 items-center'>
-                                <Image src={reserve.image ? reserve.image : ""} alt='' width={107} height={78} className='rounded-[12px] bg-card-light' />
-                                {reserve.title}
+                                <img src={house.photos[0] ? house.photos[0] : ""} alt='' width={107} height={78} className='rounded-[12px] bg-card-light' />
+                                {house.title}
                             </TableCell>
                             <TableCell className='whitespace-nowrap'>
-                                {reserve.date}
+                                {convertToJalaliString(house.last_updated)}
                             </TableCell>
                             <TableCell className='whitespace-nowrap'>
-                                {SplitNumber(reserve.price)} {t('currency')}
+                                {SplitNumber(house.price)} {t('currency')}
                             </TableCell>
                             <TableCell>
                                 <div className={`px-2 py-1 flex gap-2 whitespace-nowrap w-fit rounded-[16px] pl-6 items-center ${reserve.status ? "bg-primary text-primary-foreground" : "bg-danger text-accent-foreground"}`}> {reserve.status ? <CheckCircle2 size={14} /> : <X size={14} />} {reserve.status ? t('confirmed') : t('notConfirmed')} </div>
                             </TableCell>
                         </TableRow>
-                    ))}
+                    })}
                 </TableBody>
             </Table>
             <div className='flex flex-col gap-4 w-full lg:hidden'>
-                {reserves.map((reserve, idx) => (
-                    <div key={idx} className='w-full max-sm:flex-col bg-subBg2 px-4 py-4 rounded-xl flex gap-4'>
-                        <Image src={reserve.image || ""} alt=' ' className=' min-h-full w-[200px] max-sm:w-full max-sm:h-[200px] bg-card rounded-[12px]' />
+                {reserves && reserves.map((reserve, idx) => {
+                    const house = housesData[reserve.houseId]
+                    if (!house) return null
+
+                    return <div key={idx} className='w-full max-sm:flex-col bg-subBg2 px-4 py-4 rounded-xl flex gap-4'>
+                        <img src={house.photos[0] || ""} alt=' ' className=' min-h-full w-[200px] max-sm:w-full max-sm:h-[200px] bg-card rounded-[12px]' />
                         <div className=' h-full flex flex-col gap-2 max-sm:gap-4 text-base'>
-                            <div className='flex gap-4 items-center flex-wrap'> <Text className='text-subText' size={20} /> <p className='text-subText'> {t('hotelName')} : </p> <span> {reserve.title} </span> </div>
-                            <div className='flex gap-4 items-center flex-wrap'> <Rocket className='text-subText' size={20} />  <p className='text-subText'> {t('reserveDate')} : </p> <span> {reserve.date} </span> </div>
-                            <div className='flex gap-4 items-center flex-wrap'> <Coins className='text-subText' size={20} /> <p className='text-subText'> {t('price')} : </p> <span className='gap-2 flex'> {SplitNumber(reserve.price)} <p>{t('currency')}</p>  </span> </div>
+                            <div className='flex gap-4 items-center flex-wrap'> <Text className='text-subText' size={20} /> <p className='text-subText'> {t('hotelName')} : </p> <span> {house.title} </span> </div>
+                            <div className='flex gap-4 items-center flex-wrap'> <Rocket className='text-subText' size={20} />  <p className='text-subText'> {t('reserveDate')} : </p> <span> {convertToJalaliString(house.last_updated)} </span> </div>
+                            <div className='flex gap-4 items-center flex-wrap'> <Coins className='text-subText' size={20} /> <p className='text-subText'> {t('price')} : </p> <span className='gap-2 flex'> {SplitNumber(house.price)} <p>{t('currency')}</p>  </span> </div>
                             <div className='flex gap-4 items-center flex-wrap'> <Flower className='text-subText' size={20} /> <div className={`px-2 py-1 flex gap-2 whitespace-nowrap w-fit rounded-[16px] pl-6 items-center ${reserve.status ? "bg-primary text-primary-foreground" : "bg-danger text-accent-foreground"}`}> {reserve.status ? <CheckCircle2 size={14} /> : <X size={14} />} {reserve.status ? t('confirmed') : t('notConfirmed')} </div> </div>
                         </div>
                     </div>
-                ))}
+                })}
             </div>
         </BlurFade>
     )

@@ -1,6 +1,6 @@
 import { toJalaali } from 'jalaali-js';
 
-export function convertToJalaliString(isoDate: string): string {
+export function convertToJalaliString(isoDate: string | Date): string {
   const utcDate = new Date(isoDate);
 
   const iranTime = new Date(
