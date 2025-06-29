@@ -6,11 +6,12 @@ import "leaflet/dist/leaflet.css";
 import { customIcon } from "@/utils/helper/map/MapIcon";
 import AddMarkerOnClick from "./AddMarkerOnClick";
 import { MarkerType } from "../content/ReserveContent";
+import { X } from "lucide-react";
 
 interface ReserveMapProps {
   location?: MarkerType;
-  marker: MarkerType | null;
-  setMarker: React.Dispatch<React.SetStateAction<MarkerType | null>>;
+  marker?: MarkerType | null;
+  setMarker?: React.Dispatch<React.SetStateAction<MarkerType | null>>;
 }
 
 const ReserveMap: React.FC<ReserveMapProps> = ({ location, marker, setMarker }) => {
@@ -37,9 +38,11 @@ const ReserveMap: React.FC<ReserveMapProps> = ({ location, marker, setMarker }) 
   const darkTiles = 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png';
   const lightTiles = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 
-  const mapCenter: [number, number] = marker
-    ? [marker.lat, marker.lng]
-    : [35.6892, 51.3890];
+  const mapCenter: [number, number] = location
+    ? [location.lat, location.lng]
+    : marker
+      ? [marker.lat, marker.lng]
+      : [35.6892, 51.3890];
 
   return (
     <MapContainer
@@ -53,7 +56,15 @@ const ReserveMap: React.FC<ReserveMapProps> = ({ location, marker, setMarker }) 
         attribution="&copy; OpenStreetMap contributors"
       />
 
-      {!location && <AddMarkerOnClick setMarker={setMarker} />}
+      {!location && setMarker && <AddMarkerOnClick setMarker={setMarker} />}
+
+      {location && (
+        <Marker position={[location.lat, location.lng]} icon={customIcon}>
+          <Popup>
+            موقعیت: {location.lat.toFixed(4)}, {location.lng.toFixed(4)}
+          </Popup>
+        </Marker>
+      )}
 
       {marker && (
         <Marker position={[marker.lat, marker.lng]} icon={customIcon}>
@@ -62,6 +73,27 @@ const ReserveMap: React.FC<ReserveMapProps> = ({ location, marker, setMarker }) 
           </Popup>
         </Marker>
       )}
+
+      {marker && setMarker && (
+        <button
+          style={{
+            position: "absolute",
+            top: 16,
+            right: 16,
+            zIndex: 1000,
+            border: "none",
+            borderRadius: "8px",
+            padding: "8px 16px",
+            cursor: "pointer",
+            boxShadow: "0 2px 8px rgba(0,0,0,0.15)"
+          }}
+          className="bg-danger"
+          onClick={() => setMarker(null)}
+        >
+          <X size={20} className="" />
+        </button>
+      )}
+
     </MapContainer>
   );
 };

@@ -40,7 +40,7 @@ const Security = () => {
 
     useEffect(() => {
         reset()
-    }, [])
+    }, [reset])
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}     className='flex w-full max-xl:flex-col flex-row max-xl:gap-8'>

@@ -1,4 +1,5 @@
 /* eslint-disable */
+
 import React from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination, Navigation } from 'swiper/modules'
@@ -23,7 +24,9 @@ export default function SliderPhotos({ photos, imageClassName }: ISliderPhotos) 
           <SwiperSlide key={index} className="flex justify-center">
             <img
               src={photo}
-              alt={""}
+              alt={" "}
+              width={200}
+              height={40}
               className={`w-full flex justify-center items-center bg-secondary-light2 h-[157px] object-cover ${imageClassName}`}
             />
           </SwiperSlide>

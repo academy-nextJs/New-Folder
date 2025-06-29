@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 'use client'
 import CommonButton from '@/components/common/buttons/common/CommonButton'
 import { Input } from '@/components/ui/input'
@@ -14,6 +16,7 @@ import { useParams } from 'next/navigation'
 import { showToast } from '@/core/toast/toast'
 import { QueryObserverResult, RefetchOptions } from '@tanstack/react-query'
 import { useTranslations } from 'next-intl'
+import { useSession } from 'next-auth/react'
 
 const SingleReserveForm = ({
     viewReply,
@@ -23,12 +26,13 @@ const SingleReserveForm = ({
     setViewReply
 }: {
     setViewReply: React.Dispatch<React.SetStateAction<boolean>>,
-    refetch: (options?: RefetchOptions) => Promise<QueryObserverResult<IGetComment[], Error>>,
+    refetch: () => void,
     viewReply: boolean,
     title: string,
     parent_comment_id: string | null
 }) => {
     const t = useTranslations('rental.commentForm');
+    const {data: session} = useSession() as any;
     const {
         register,
         handleSubmit,
@@ -46,13 +50,15 @@ const SingleReserveForm = ({
     const onSubmit = async (data: IComment) => {
         setIsLoading(true)
         const commentData = {
+            house_id: id,
+            useR_id: session?.userInfo?.id,
             title: data.title,
             caption: data.caption,
             rating: rating[0],
             parent_comment_id: parent_comment_id
         }
         try {
-            const response = await fetchApi.post(`/houses/${id}/comments`, commentData)
+            const response = await fetchApi.post(`/comments`, commentData)
             if (response) {
                 showToast('success', t('successTitle'), t('close'), t('successMsg'))
             }

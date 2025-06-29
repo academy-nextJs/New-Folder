@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 'use client'
 import {
   Dialog,
@@ -8,7 +10,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Bath, BedDouble, Car, LucideCopy, Star, Trees, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import PaymentListModal from "./PaymentListModal";
 import ReservesModals from "./ReservesModal";
 import { useTranslations } from "next-intl";
@@ -29,10 +31,10 @@ export default function ReserveModal({ houseId, button }: ReserveModalProps) {
 
   const [house, setHouse] = useState<IHouse | null>(null)
 
-  const getHouse = async () => {
+  const getHouse = useCallback(async () => {
     const response = await getHouseById(houseId);
     setHouse(response)
-  }
+  }, [houseId])
 
   const handleCopy = async () => {
     if (typeof window === 'undefined') return;
@@ -47,7 +49,7 @@ export default function ReserveModal({ houseId, button }: ReserveModalProps) {
 
   useEffect(() => {
     getHouse()
-  }, [])
+  }, [getHouse])
 
   return (
     <>

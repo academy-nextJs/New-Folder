@@ -1,42 +1,34 @@
-/* eslint-disable */
 import CommonButton from '@/components/common/buttons/common/CommonButton'
-import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog'
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { X } from 'lucide-react'
 import React, { useRef, useState } from 'react'
 import { useTranslations } from 'next-intl'
+import Image from 'next/image'
 
 const SelectImageModal = ({
     open,
     setOpen,
-    setSelectedImage,
-    selectedImage,
-    handleEditProfile
+    setSelectedImage
 }: {
     open: boolean,
     setOpen: React.Dispatch<React.SetStateAction<boolean>>
-    setSelectedImage: React.Dispatch<React.SetStateAction<string | null>>,
-    selectedImage: string | null,
-    handleEditProfile: () => void
+    setSelectedImage: React.Dispatch<React.SetStateAction<string | null>>
 }) => {
 
     const fileInputRef = useRef<HTMLInputElement>(null)
     const [preview, setPreview] = useState<string | null>(null)
     const t = useTranslations('modals.selectImage');
 
-    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0]
-        if (file) {
-            const url = URL.createObjectURL(file)
-            setPreview(url)
-        }
+    const handleFileChange = () => {
+        // Implement file change logic if needed
     }
 
-    const handleSelect = () => {
-        if (preview) {
-            setSelectedImage(preview)
-            setOpen(false)
-        }
-    }
+    // const handleSelect = () => {
+    //     if (preview) {
+    //         setSelectedImage(preview)
+    //         setOpen(false)
+    //     }
+    // }
 
     const handleDelete = () => {
         setSelectedImage(null)
@@ -57,7 +49,7 @@ const SelectImageModal = ({
                 <svg width="100%" height="2" viewBox="0 0 1131 2" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <line x1="-0.00439453" y1="0.881836" x2="1131" y2="0.881836" stroke="#888888" strokeOpacity="0.26" strokeDasharray="7 7" />
                 </svg>
-                <div className='relative'>
+                <DialogFooter className='relative'>
                     <input
                         ref={fileInputRef}
                         type='file'
@@ -65,23 +57,26 @@ const SelectImageModal = ({
                         className='hidden'
                         onChange={handleFileChange}
                     />
-                    <img
+                    <Image
                         onClick={() => fileInputRef.current?.click()}
-                        src={preview || '/default-profile.png'}
-                        alt=''
-                        className='size-[225px] bg-subBg2 rounded-full mx-auto cursor-pointer object-cover'
+                        src={preview || '/'}
+                        alt=' '
+                        width={225}
+                        height={225}
+                        className='bg-subBg2 rounded-full mx-auto cursor-pointer object-cover'
                     />
+                    {preview && (
+                        <div
+                            onClick={() => fileInputRef.current?.click()}
+                            className='bg-subBg2 rounded-full mx-auto cursor-pointer object-cover flex items-center justify-center'
+                            style={{ width: 225, height: 225 }}
+                        >
+                            <X size={22} />
+                        </div>
+                    )}
                     {preview && <div onClick={() => handleDelete()} className='bg-danger rounded-full flex items-center justify-center cursor-pointer absolute size-[31px] top-4 right-4 text-accent-foreground'>
                         <X size={22} />
                     </div>}
-                </div>
-                <DialogFooter className='flex gap-4 flex-row mx-auto justify-center items-center'>
-                    <DialogClose className='text-sm'>
-                        {t('cancel')}
-                    </DialogClose>
-                    <div onClick={handleSelect} className='bg-primary text-sm text-primary-foreground px-4 py-2 rounded-2xl cursor-pointer w-fit'>
-                        {t('select')}
-                    </div>
                 </DialogFooter>
             </DialogContent>
         </Dialog>

@@ -1,7 +1,7 @@
 /* eslint-disable */
 
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import {
     Tooltip,
     TooltipContent,
@@ -42,18 +42,17 @@ const TabletSidebar = ({
             description: "commentsCount",
             icon: SquaresSubtract,
         };
-    const Icon = footerSidebarSelect.icon;
 
     const { data: session } = useSession() as any
 
-    const getProfile = async () => {
+    const getProfile = useCallback(async () => {
         const user = await getProfileById(session?.userInfo.id)
         setRole(user.role)
-    }
+    }, [session])
 
     useEffect(() => {
         getProfile()
-    }, [])
+    }, [getProfile])
 
     useEffect(() => {
         const checkScreenWidth = () => {

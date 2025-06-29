@@ -5,8 +5,11 @@ import { Button } from '@/components/ui/button'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { Loader } from '@/components/common/Loader'
 
+const PAGE_SIZE = 10
+
 const SingleReserveComments = ({
   comments,
+  totalCount,
   isLoading,
   isFetching,
   page,
@@ -14,9 +17,9 @@ const SingleReserveComments = ({
   setViewReply,
   setTitle,
   setParent_comment_id,
-  hasNext
 }: {
   comments: IGetComment[]
+  totalCount: number
   isLoading: boolean
   isFetching: boolean
   page: number
@@ -24,12 +27,14 @@ const SingleReserveComments = ({
   setViewReply: Dispatch<SetStateAction<boolean>>
   setTitle: Dispatch<SetStateAction<string>>;
   setParent_comment_id: Dispatch<SetStateAction<string | null>>
-  hasNext: boolean
 }) => {
+  const totalPages = useMemo(() => {
+    return Math.ceil(totalCount / PAGE_SIZE)
+  }, [totalCount])
+
   const pages = useMemo(() => {
-    const last = hasNext ? page + 1 : page
-    return Array.from({ length: last }, (_, i) => i + 1)
-  }, [page, hasNext])
+    return Array.from({ length: totalPages }, (_, i) => i + 1)
+  }, [totalPages])
 
   return (
     <div className="flex flex-col mt-8 w-full">
@@ -37,11 +42,11 @@ const SingleReserveComments = ({
         <div className="flex justify-center w-fit h-fit mx-auto py-10">
           <Loader />
         </div>
-      ) : comments.length === 0 ? (
+      ) : !comments || comments.length === 0 ? (
         <p className="text-center text-sm text-subText mb-4">هیچ نظری وجود ندارد.</p>
       ) : (
         <div className="flex md:flex-row flex-col gap-4 max-md:gap-8 justify-center md:justify-start">
-          {comments.map((comment) => (
+          {comments && comments.map((comment) => (
             <div key={comment.id} className="md:w-1/2 w-full mt-[30px]">
               <QAWidget
                 {...comment}
@@ -80,8 +85,8 @@ const SingleReserveComments = ({
         <Button
           variant="outline"
           size="sm"
-          disabled={!hasNext || isFetching}
-          onClick={() => setPage((p) => p + 1)}
+          disabled={page === totalPages || isFetching}
+          onClick={() => setPage((p) => Math.min(p + 1, totalPages))}
         >
           <ChevronLeft size={16} />
         </Button>

@@ -11,7 +11,6 @@ const MobileNavbarSection = () => {
 
   return (
     <nav className="flex flex-col w-full space-y-6">
-      {/* رزرو سریع */}
       <div className="relative">
         <Link
           className="flex items-center justify-between w-full mb-2 cursor-pointer"
@@ -23,7 +22,6 @@ const MobileNavbarSection = () => {
         </Link>
       </div>
 
-      {/* رهن و اجاره */}
       <div className="relative">
         <Link
           className="flex items-center justify-between w-full mb-2 cursor-pointer"
@@ -35,7 +33,6 @@ const MobileNavbarSection = () => {
         </Link>
       </div>
 
-      {/* درباره ما */}
       <div>
         <Link
           href="/about"
@@ -45,7 +42,6 @@ const MobileNavbarSection = () => {
         </Link>
       </div>
 
-      {/* مقالات ما */}
       <div>
         <Link
           href="/articles"
@@ -55,7 +51,6 @@ const MobileNavbarSection = () => {
         </Link>
       </div>
 
-      {/* تماس با ما */}
       <div>
         <Link
           href="/contact"

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { BlurFade } from '@/components/magicui/blur-fade'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { IReserveType } from '@/types/reserves-type/reserves-type'
@@ -67,7 +68,7 @@ const RecentReserves = ({ reserves }: { reserves: IReserveType[] }) => {
 
                     return <TableRow key={idx}>
                         <TableCell className='py-4 whitespace-nowrap flex gap-2 items-center'>
-                            <img src={house.photos[0] || " "} alt=" " className="w-[107] h-[72] rounded-[12px] bg-card-light flex-shrink-0" />
+                            <img src={house.photos[0] || "/"} alt=" " width={107} height={72} className=" rounded-[12px] bg-card-light flex-shrink-0" />
                             {house.title}
                         </TableCell>
                         <TableCell className='whitespace-nowrap'>

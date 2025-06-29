@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import SingleReserveHeader from './header/SingleReserveHeader'
 import { getHouseById } from '@/utils/service/api/houses-api'
 import { IHouse } from '@/types/houses-type/house-type'
@@ -18,14 +18,14 @@ const SingleReserveComponent = () => {
     const params = useParams()
     const id = params?.id as string
 
-    const fetchHouse = async () => {
+    const fetchHouse = useCallback(async () => {
         const houseData = await getHouseById(id) as IHouse
         setHouse(houseData)
-    }
+    }, [id])
 
     useEffect(() => {
         fetchHouse()
-    }, [])
+    }, [fetchHouse])
 
     const facilities: TFacilities = []
     if (house?.parking && house?.parking > 0) { facilities.push({ title: <Car size={24} />, content: t('parking') }) }
@@ -37,7 +37,7 @@ const SingleReserveComponent = () => {
     return house ? <div className='px-8 flex flex-col gap-16'>
         <SingleReserveHeader house={house} />
         <div className='flex xl:flex-row flex-col-reverse gap-12 justify-between'>
-            <SingleReserveTab photos={house.photos} caption={house.caption || t('noInfo')} facilities={facilities} defaultValue='about' />
+            <SingleReserveTab id={id} photos={house.photos} caption={house.caption || t('noInfo')} facilities={facilities} defaultValue='about' />
             <SingleReserveBooking house={house} price={house?.price} discountedPrice={1000000} />
         </div>
         <SingleReserveFooter />

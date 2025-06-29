@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import { Filter, Search, CheckCircle, AlertCircle, X } from "lucide-react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getAllBookings } from "@/utils/service/api/booking/getAllBookings";
@@ -39,7 +39,7 @@ export default function HotelReservationList() {
     queryFn: () => getAllBookings(currentPage, itemsPerPage, 'created_at', 'DESC') as Promise<{ data: IReserveType[] }>
   });
 
-  const fetchHouses = async () => {
+  const fetchHouses = useCallback(async () => {
     const houses: Record<string, IHouse> = {};
     for (const booking of bookingsData?.data || []) {
       if (!houses[booking.houseId]) {
@@ -48,13 +48,13 @@ export default function HotelReservationList() {
       }
     }
     setHousesData(houses);
-  };
+  }, [bookingsData?.data])
 
   useEffect(() => {
-    if (bookingsData?.data?.length) {
+    if (bookingsData?.data.length) {
       fetchHouses();
     }
-  }, [bookingsData?.data]);
+  }, [bookingsData?.data, fetchHouses]);
 
   const reservations = useMemo(() =>
     bookingsData?.data.map(booking => ({

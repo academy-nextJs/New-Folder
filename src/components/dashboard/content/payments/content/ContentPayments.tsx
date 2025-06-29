@@ -1,8 +1,4 @@
-/* eslint-disable */
 
-'use client'
-import CommonButton from '@/components/common/buttons/common/CommonButton'
-import CommonModal from '@/components/dashboard/modal/CommonModal'
 import {
   Pagination,
   PaginationContent,
@@ -21,25 +17,15 @@ import {
 } from '@/components/ui/table'
 import { SplitNumber } from '@/utils/helper/spliter/SplitNumber'
 import {
-  Check,
-  CheckCircle,
   CheckCircle2,
   Coins,
-  Delete,
-  Edit,
   Flower,
-  Home,
-  Info,
   LayoutGrid,
-  MoreHorizontal,
   Phone,
-  PlusCircle,
   Rocket,
-  SquaresSubtract,
   X,
 } from 'lucide-react'
-import { redirect } from 'next/navigation'
-import React, { useEffect, useRef } from 'react'
+import React from 'react'
 import { useTranslations } from 'next-intl'
 
 const ContentPayment = () => {
@@ -51,21 +37,6 @@ const ContentPayment = () => {
     { date: "12 مرداد - 1401 / 12:33", phoneNumber: 123456789123456, price: 1250000, status: true, paymentType: "شارژ کیف پول" },
     { date: "12 مرداد - 1401 / 12:33", phoneNumber: 123456789123456, price: 1250000, status: true, paymentType: "شارژ کیف پول" },
   ]
-
-  const [openModalIndex, setOpenModalIndex] = React.useState<number | null>(null)
-  const moreRef = useRef<HTMLTableCellElement | null>(null)
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (moreRef.current && !moreRef.current.contains(event.target as Node)) {
-        setOpenModalIndex(null)
-      }
-    }
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [])
 
   return (
     <div className="flex flex-col justify-between gap-8">

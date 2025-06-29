@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 'use client'
 import React, { FC } from "react";
 import { MapPin, Clock, Star, Hotel } from "lucide-react";

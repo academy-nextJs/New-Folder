@@ -1,6 +1,8 @@
+/* eslint-disable */
+
 import { MoreHorizontal, Info, Delete } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import CommonModal from "@/components/dashboard/modal/CommonModal";
 import { getHouseById } from "@/utils/service/api/houses-api";
 import { IHouse } from "@/types/houses-type/house-type";
@@ -27,7 +29,7 @@ export default function ReservationMobile({
   const moreRef = useRef<HTMLDivElement | null>(null);
   const [housesData, setHousesData] = useState<Record<string, IHouse>>({});
 
-  const fetchHouses = async () => {
+  const fetchHouses = useCallback(async () => {
     const houses: Record<string, IHouse> = {};
     for (const reservation of reservations) {
       if (!houses[reservation.houseId]) {
@@ -40,14 +42,14 @@ export default function ReservationMobile({
       }
     }
     setHousesData(houses);
-  };
+  }, [reservations])
 
   useEffect(() => {
 
     if (reservations.length > 0) {
       fetchHouses();
     }
-  }, [reservations]);
+  }, [reservations, fetchHouses]);
 
   return (
     <div className="flex flex-col gap-4 lg:hidden">

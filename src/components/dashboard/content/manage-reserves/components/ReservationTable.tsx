@@ -1,5 +1,4 @@
 /* eslint-disable */
-
 import {
     Table,
     TableBody,
@@ -10,7 +9,7 @@ import {
 } from "@/components/ui/table";
 import { MoreHorizontal, Info, Delete } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import CommonModal from "@/components/dashboard/modal/CommonModal";
 import { getHouseById } from "@/utils/service/api/houses-api";
 import { IHouse } from "@/types/houses-type/house-type";
@@ -21,7 +20,6 @@ import { Reservation } from "@/types/reserves-type/reserves-type";
 import ReserveModal from "../ReserveModal";
 import { deleteBooking } from "@/utils/service/api/booking/deleteBooking";
 import { showToast } from "@/core/toast/toast";
-
 interface ReservationTableProps {
     reservations: Reservation[];
     renderStatusBadge: (status: string) => React.ReactNode;
@@ -38,7 +36,7 @@ export default function ReservationTable({
     const moreRef = useRef<HTMLTableCellElement | null>(null);
     const [housesData, setHousesData] = useState<Record<string, IHouse>>({});
 
-    const fetchHouses = async () => {
+    const fetchHouses = useCallback(async () => {
         const houses: Record<string, IHouse> = {};
         for (const reservation of reservations) {
             if (!houses[reservation.houseId]) {
@@ -51,14 +49,13 @@ export default function ReservationTable({
             }
         }
         setHousesData(houses);
-    };
+    }, [reservations])
 
     useEffect(() => {
-
         if (reservations.length > 0) {
             fetchHouses();
         }
-    }, [reservations]);
+    }, [fetchHouses, reservations.length]);
 
     return (
         <div className="overflow-hidden rounded-xl hidden lg:block">
@@ -93,10 +90,12 @@ export default function ReservationTable({
                             <TableRow key={reservation.id}>
                                 <TableCell className="py-4">
                                     <div className="flex items-center gap-2">
-                                        <img 
-                                            src={house?.photos?.[0] || " "} 
-                                            alt=" " 
-                                            className="w-[107] h-[72] rounded-[12px] bg-card-light flex-shrink-0" 
+                                        <img
+                                            src={house?.photos[0] || "/"}
+                                            alt=" "
+                                            width={107}
+                                            height={72}
+                                            className="rounded-[12px] bg-card-light flex-shrink-0"
                                         />
                                         <div className="text-right whitespace-nowrap overflow-hidden text-ellipsis max-w-xs">
                                             {house?.title || reservation.hotelName}
@@ -123,9 +122,8 @@ export default function ReservationTable({
                                     />
                                     {openModalIndex === idx && (
                                         <div
-                                            className={`flex absolute left-full ${
-                                                idx > 2 ? "bottom-full" : "top-2"
-                                            } flex-col rounded-xl gap-2 p-2 z-20 bg-subBg shadow-2xl`}
+                                            className={`flex absolute left-full ${idx > 2 ? "bottom-full" : "top-2"
+                                                } flex-col rounded-xl gap-2 p-2 z-20 bg-subBg shadow-2xl`}
                                         >
                                             <ReserveModal button={<div
                                                 className="bg-subBg px-4 py-1 flex gap-2 rounded-xl justify-between flex-row-reverse cursor-pointer hover:bg-border"
@@ -137,7 +135,7 @@ export default function ReservationTable({
                                                 title={t("deleteConfirm")}
                                                 onClick={async () => {
                                                     const response = await deleteBooking((reservation.id).toString());
-                                                    if(response) {
+                                                    if (response) {
                                                         showToast("success", " رزرو با موفقیت حذف شد ")
                                                         onDeleteSuccess();
                                                     }

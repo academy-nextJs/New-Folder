@@ -5,7 +5,8 @@ import ReserveHeader from '@/components/reserve/header/ReserveHeader'
 import { IHouse } from '@/types/houses-type/house-type'
 import { getDistanceFromLatLonInKm } from '@/utils/helper/map/MapIcon'
 import { getHouses } from '@/utils/service/api/houses-api'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
+
 const ReserveComponent = () => {
     const [search, setSearch] = useState<string>('')
     const [order, setOrder] = useState<'DESC' | 'ASC'>('DESC')
@@ -14,10 +15,11 @@ const ReserveComponent = () => {
     const [minPrice, setMinPrice] = useState<"" | number>("")
     const [maxPrice, setMaxPrice] = useState<number | "">("")
     const [houses, setHouses] = useState<IHouse[]>([])
+    const [filteredHouses, setFilteredHouses] = useState<IHouse[]>([])
     const [isLoading, setIsLoading] = useState<boolean>(true)
     const [marker, setMarker] = useState<MarkerType | null>(null)
 
-    const fetchHouses = async () => {
+    const fetchHouses = useCallback(async () => {
         setIsLoading(true)
         try {
             const response = await getHouses("reservation", search || "", order || "DESC", sort || "last_updated", location || "", "", minPrice, maxPrice)
@@ -27,39 +29,28 @@ const ReserveComponent = () => {
         } finally {
             setIsLoading(false)
         }
-    }
+    }, [search, order, sort, location, minPrice, maxPrice])
 
+    // فقط وقتی houses یا marker تغییر کرد، فیلتر کن
     useEffect(() => {
-      if (!marker) {
-        fetchHouses(); 
-        return;
-      }
-    
-      const radius = 10;
-    
-      const filtered = houses.filter((house) => {
-        if (!house.location) return false;
-    
-        const lat = house.location.lat;
-        const lng = house.location.lng;
-    
-        const distance = getDistanceFromLatLonInKm(marker.lat, marker.lng, lat, lng);
-        return distance <= radius;
-      });
-    
-      setHouses(filtered);
-    }, [marker]);
-    
+        if (!marker) {
+            setFilteredHouses(houses)
+            return
+        }
+        const radius = 10
+        const filtered = houses.filter((house) => {
+            if (!house.location) return false
+            const lat = house.location.lat
+            const lng = house.location.lng
+            const distance = getDistanceFromLatLonInKm(marker.lat, marker.lng, lat, lng)
+            return distance <= radius
+        })
+        setFilteredHouses(filtered)
+    }, [marker, houses])
 
     useEffect(() => {
         fetchHouses()
-    }, [])
-
-    useEffect(() => {
-        if (order || search || sort || location || minPrice || maxPrice) {
-            fetchHouses()
-        }
-    }, [search, order, sort, location, minPrice, maxPrice])
+    }, [fetchHouses])
 
     return (
         <div className='px-8 mt-[120px] flex flex-col gap-4'>
@@ -70,10 +61,10 @@ const ReserveComponent = () => {
                 setOrder={setOrder}
                 setSort={setSort}
                 setSearch={setSearch}
-                houseLength={houses.length}
+                houseLength={filteredHouses.length}
                 setLocation={setLocation}
             />
-            <ReserveContent marker={marker} setMarker={setMarker} isLoading={isLoading} houses={houses} setMaxPrice={setMaxPrice} setMinPrice={setMinPrice} setLocation={setLocation} />
+            <ReserveContent marker={marker} setMarker={setMarker} isLoading={isLoading} houses={filteredHouses} setMaxPrice={setMaxPrice} setMinPrice={setMinPrice} setLocation={setLocation} />
         </div>
     )
 }

@@ -1,7 +1,5 @@
 'use client'
-import React, { useState } from 'react'
-import { useParams } from 'next/navigation'
-import { useQuery } from '@tanstack/react-query'
+import { useCallback, useEffect, useState } from 'react'
 import { fetchComments } from '@/utils/service/api/fetchComments'
 import SingleReserveForm from '../../common/CommentForm'
 import SingleReserveComments from './SingleReserveComments'
@@ -9,34 +7,44 @@ import { IGetComment } from '@/types/comment-type/comment-type'
 
 const PAGE_SIZE = 2
 
-const SingleReserveComment = () => {
-  const [viewReply, setViewReply] = useState<boolean>(false)
-  const [title, setTitle] = useState<string>('')
-  const [parent_comment_id, setParent_comment_id] = useState<string | null>(null)
+interface Props {
+  id: string
+}
+
+const SingleReserveComment = ({ id }: Props) => {
+  const [comments, setComments] = useState<IGetComment[]>([])
+  const [totalCount, setTotalCount] = useState(0)
   const [page, setPage] = useState(1)
+  const [isLoading, setIsLoading] = useState(true)
+  const [isFetching, setIsFetching] = useState(false)
 
-  const params = useParams()
-  const id = params?.id as string
+  const fetchData = useCallback(async (pageNum: number) => {
+    setIsFetching(true)
+    try {
+      const res = await fetchComments(id, pageNum, PAGE_SIZE) as { data: IGetComment[], totalCount: number }
+      setComments(res.data)
+      setTotalCount(res.totalCount)
+    } catch {
+      setComments([])
+      setTotalCount(0)
+    }
+    setIsFetching(false)
+    setIsLoading(false)
+  }, [id])
 
-  const {
-    data: comments = [],
-    isLoading,
-    isFetching,
-    refetch,
-  } = useQuery<IGetComment[]>({
-    queryKey: ['comments', id, page],
-    queryFn: () => fetchComments(id, page, PAGE_SIZE),
-    refetchOnWindowFocus: false
-  })
+  useEffect(() => {
+    setIsLoading(true)
+    fetchData(page)
+  }, [id, page, fetchData])
 
   return (
     <div className="flex flex-col items-center gap-12 w-full">
       <SingleReserveForm
-        parent_comment_id={parent_comment_id}
-        title={title}
-        viewReply={viewReply}
-        refetch={refetch}
-        setViewReply={setViewReply}
+        parent_comment_id={null}
+        title=""
+        viewReply={false}
+        refetch={() => fetchData(page)}
+        setViewReply={() => {}}
       />
 
       <svg width="999" height="3" viewBox="0 0 999 3" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -52,14 +60,14 @@ const SingleReserveComment = () => {
 
       <SingleReserveComments
         comments={comments}
+        totalCount={totalCount}
         isLoading={isLoading}
         isFetching={isFetching}
         page={page}
         setPage={setPage}
-        setTitle={setTitle}
-        setParent_comment_id={setParent_comment_id}
-        setViewReply={setViewReply}
-        hasNext={comments.length === PAGE_SIZE}
+        setTitle={() => {}}
+        setParent_comment_id={() => {}}
+        setViewReply={() => {}}
       />
     </div>
   )

@@ -4,7 +4,7 @@
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -21,16 +21,16 @@ const PersonalInformation = () => {
 
   const [profile, setProfile] = useState<IProfile | null>(null)
 
-  const getProfile = async () => {
+  const getProfile = useCallback(async () => {
     if (session?.userInfo?.id) {
       const profile = await getProfileById(session?.userInfo?.id);
       setProfile(profile);
     }
-  }
+  }, [session?.userInfo?.id])
 
   useEffect(() => {
     getProfile()
-  }, [session?.userInfo?.id])
+  }, [getProfile])
 
   const {
     register,
@@ -47,20 +47,20 @@ const PersonalInformation = () => {
     }
   })
 
-  const handleReset = () => {
+  const handleReset = useCallback(() => {
     reset({
       firstName: profile?.firstName || "",
       lastName: profile?.lastName || "",
       email: profile?.email || "",
       phoneNumber: profile?.phoneNumber || "",
     });
-  }
+  }, [reset, profile])
 
   useEffect(() => {
     if (profile) {
       handleReset()
     }
-  }, [profile, reset]);
+  }, [profile, handleReset]);
 
   const onSubmit = async (data: IEditProfile) => {
     const response = await editProfile(session?.userInfo?.id, data)

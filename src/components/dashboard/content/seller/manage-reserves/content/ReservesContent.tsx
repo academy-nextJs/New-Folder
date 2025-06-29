@@ -1,14 +1,10 @@
-/* eslint-disable */
-
 'use client'
-import CommonButton from '@/components/common/buttons/common/CommonButton'
 import CommonModal from '@/components/dashboard/modal/CommonModal'
 import DetailReserveModal from '@/components/dashboard/modal/DetailReserveModal'
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '@/components/ui/pagination'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { SplitNumber } from '@/utils/helper/spliter/SplitNumber'
-import { CheckCircle, Coins, Delete, Edit, Home, Info, LayoutGrid, MoreHorizontal, PlusCircle, Star, XCircle } from 'lucide-react'
-import { redirect } from 'next/navigation'
+import { CheckCircle, Delete, Info, MoreHorizontal, XCircle } from 'lucide-react'
 import React, { useEffect, useRef } from 'react'
 import { useTranslations } from 'next-intl'
 

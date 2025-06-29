@@ -10,7 +10,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { getAllBookings } from "@/utils/service/api/booking/getAllBookings";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { IReserveType } from "@/types/reserves-type/reserves-type";
 import { convertToJalaliString } from "@/utils/helper/shamsiDate/ShamsDate";
 
@@ -19,14 +19,14 @@ export default function ReservesModals({ houseId }: { houseId: number }) {
   const t2 = useTranslations("modals.reserveModal");
   const [reserves, setReserves] = useState<IReserveType[]>([]);
 
-  const fetchReserves = async () => {
+  const fetchReserves = useCallback(async () => {
     const response = await getAllBookings(1, 10, "created_at", "DESC", houseId) as {data: IReserveType[], total: number};
     setReserves(response.data);
-  }
+  }, [houseId])
 
   useEffect(() => {
     fetchReserves();
-  }, [])
+  }, [fetchReserves])
 
   return (
     <Dialog>

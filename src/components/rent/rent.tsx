@@ -9,7 +9,7 @@ import {
   StarIcon,
 } from "lucide-react";
 import Link from "next/link";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import PropertyTabs from "./Tab";
 import { redirect, useParams } from "next/navigation";
 import { IHouse } from "@/types/houses-type/house-type";
@@ -29,22 +29,22 @@ const Rent = () => {
   const params = useParams();
   const id = params?.id as string;
 
-  const fetchHouse = async () => {
+  const fetchHouse = useCallback(async () => {
     const houseData = await getHouseById(id) as IHouse;
     setHouse(houseData);
-  };
+  }, [id])
 
   useEffect(() => {
     fetchHouse();
-  }, []);
+  }, [fetchHouse]);
 
-  const nextSlide = () => {
+  const nextSlide = useCallback(() => {
     if (house) {
       setCurrentSlideIndex((prev) =>
         prev === house?.photos.length - 1 ? 0 : prev + 1
       );
     }
-  };
+  }, [house])
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -52,7 +52,7 @@ const Rent = () => {
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [currentSlideIndex]);
+  }, [nextSlide]);
 
   const handleCopy = async () => {
     if (typeof window === 'undefined') return;
