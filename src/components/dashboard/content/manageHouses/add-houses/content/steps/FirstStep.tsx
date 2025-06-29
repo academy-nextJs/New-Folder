@@ -1,11 +1,29 @@
+'use client'
 import CommonSelect from '@/components/common/inputs/common/CommonSelect'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
-import React from 'react'
+import React, { Dispatch, SetStateAction, useState } from 'react'
 import { useTranslations } from 'next-intl'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { houseSchema } from '@/utils/validations/house-validation'
+import { useHouseStore } from '@/utils/zustand/house'
+import { ICreateHouse } from '@/types/houses-type/house-type'
+import CommonButton from '@/components/common/buttons/common/CommonButton'
+import { ChevronLeft } from 'lucide-react'
 
-const FirstStep = () => {
+const FirstStep = ({ setStep }: { setStep: Dispatch<SetStateAction<number>> }) => {
+    const {
+        handleSubmit,
+        register,
+        formState: { errors }
+    } = useForm({
+        resolver: zodResolver(houseSchema.partial())
+    })
+
+    const { setData, data: house } = useHouseStore();
+    const [transaction_type, setTransaction_type] = useState<string | null>(house.transaction_type || null)
     const t = useTranslations('dashboardSeller.firstStep')
     const selectItems = [
         { label: t('direct_purchase'), value: "direct_purchase" },
@@ -14,31 +32,55 @@ const FirstStep = () => {
         { label: t('mortgage'), value: "mortgage" },
     ]
 
+    const onSubmit = (values: Partial<ICreateHouse>) => {
+        const data = {
+            title: values.title,
+            capacity: values.capacity,
+            transaction_type: transaction_type || "direct_purchase",
+            price: values.price,
+            caption: values.caption
+        }
+        setData(data);
+        setStep(1);
+    }
+
+    const handleTransactionTypePlaceHolder = () => {
+        if(transaction_type === "direct_purchase"){ return " فروش " }
+        if(transaction_type === "reservation"){ return " رزرو " }
+        if(transaction_type === "rental"){ return " اجاره " }
+        if(transaction_type === "mortgage"){ return " رهن " }
+    }
+
     return (
-        <form className='flex flex-col gap-8 w-full'>
+        <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-8 w-full'>
             <div className='flex max-lg:flex-col w-full justify-between gap-8'>
                 <div className='w-1/2 max-lg:w-full flex flex-col gap-2'>
                     <Label htmlFor='title' className='text-subText'>{t('houseName')}</Label>
-                    <Input name='title' id='title' placeholder={t('houseNamePlaceholder')} className='w-full px-4 py-2 text-sm bg-transparent border rounded-xl text-subText border-subText' />
+                    <Input defaultValue={house.title} {...register("title")} name='title' id='title' placeholder={t('houseNamePlaceholder')} className='w-full px-4 py-2 text-sm bg-transparent border rounded-xl text-subText border-subText' />
+                    {errors.title && <span className='text-xs text-danger'> {errors.title.message} </span>}
                 </div>
                 <div className='w-1/2 max-lg:w-full flex flex-col gap-2'>
                     <Label htmlFor='capacity' className='text-subText'>{t('capacity')}</Label>
-                    <Input name='capacity' placeholder={t('capacityPlaceholder')} id='capacity' className='w-full text-sm px-4 py-2 bg-transparent border rounded-xl text-subText border-subText' />
+                    <Input defaultValue={house.capacity} {...register("capacity")} name='capacity' placeholder={t('capacityPlaceholder')} id='capacity' className='w-full text-sm px-4 py-2 bg-transparent border rounded-xl text-subText border-subText' />
+                    {errors.capacity && <span className='text-xs text-danger'> {errors.capacity.message} </span>}
                 </div>
             </div>
             <div className='flex max-lg:flex-col w-full justify-between gap-8'>
                 <div className='w-1/2 max-lg:w-full flex flex-col gap-2'>
                     <CommonSelect
+                        onValueChange={(val) => setTransaction_type(val)}
                         selectItems={selectItems}
-                        placeholder=''
+                        placeholder={handleTransactionTypePlaceHolder() || 'لطفا یک دسته بندی را انتخاب کنید'}
                         classname='text-subText placeholder:text-subText rounded-xl py-5 border border-subText w-full'
                         color='text-subText'
                         label={t('dealType')}
                     />
+                    {!transaction_type && transaction_type === null && <span className='text-xs text-danger'> نوع ملک خود رو انتخاب نمایید. </span>}
                 </div>
                 <div className='w-1/2 max-lg:w-full flex flex-col gap-2'>
                     <Label htmlFor='price' className='text-subText'>{t('price')}</Label>
-                    <Input name='price' placeholder={t('pricePlaceholder')} id='price' className='w-full text-sm px-4 py-2 bg-transparent border rounded-xl text-subText border-subText' />
+                    <Input defaultValue={house.price} {...register("price")} name='price' placeholder={t('pricePlaceholder')} id='price' className='w-full text-sm px-4 py-2 bg-transparent border rounded-xl text-subText border-subText' />
+                    {errors.price && <span className='text-xs text-danger'> {errors.price.message} </span>}
                 </div>
             </div>
             <div className='flex max-lg:flex-col w-full justify-between gap-8 items-center'>
@@ -56,7 +98,11 @@ const FirstStep = () => {
             </div>
             <div className='w-full max-lg:w-full flex flex-col gap-2'>
                 <Label htmlFor='caption' className='text-subText'>{t('description')}</Label>
-                <Textarea name='caption' placeholder={t('descriptionPlaceholder')} id='caption' className='w-full h-[244] rounded-xl border border-subText text-subText' />
+                <Textarea defaultValue={house.caption} {...register("caption")} name='caption' placeholder={t('descriptionPlaceholder')} id='caption' className='w-full h-[244] rounded-xl border border-subText text-subText' />
+                {errors.caption && <span className='text-xs text-danger'> {errors.caption.message} </span>}
+            </div>
+            <div className='w-full flex justify-end'>
+                <CommonButton type='submit' title={" مرحله بعد "} classname='w-fit' icon={<ChevronLeft size={16} />} />
             </div>
         </form>
     )

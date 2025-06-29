@@ -49,4 +49,3 @@ export interface ICreateHouse {
     transaction_type: string,
     caption: string
 }
-

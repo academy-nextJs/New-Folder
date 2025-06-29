@@ -17,20 +17,25 @@ const onError = async (error: Response | Error) => {
     const refreshToken = session?.refreshToken;
 
     const handleRefreshToken = async () => {
-        if (refreshToken) {
-            const response = await fetchApi.post(`${baseURL}/auth/refresh`, { token: refreshToken }) as { accessToken: string }
+        try {
+            if (refreshToken) {
+                const response = await fetchApi.post(`${baseURL}/auth/refresh`, { token: refreshToken }) as { accessToken: string }
 
-            if (response) {
-                await signIn("credentials", {
-                    redirect: false,
-                    accessToken: response?.accessToken,
-                    refreshToken: refreshToken,
-                });
+                if (response) {
+                    await signIn("credentials", {
+                        redirect: false,
+                        accessToken: response?.accessToken,
+                        refreshToken: refreshToken,
+                    });
+                } else {
+                    await signOut({ callbackUrl: '/login' });
+                    showToast("error", "شما وارد نشده‌اید!", "بستن");
+                }
             } else {
                 await signOut({ callbackUrl: '/login' });
                 showToast("error", "شما وارد نشده‌اید!", "بستن");
             }
-        } else {
+        } catch {
             await signOut({ callbackUrl: '/login' });
             showToast("error", "شما وارد نشده‌اید!", "بستن");
         }
