@@ -21,10 +21,7 @@ export const houseSchema = z.object({
     lat: z.number({ required_error: "مختصات عرض جغرافیایی الزامی است" }),
     lng: z.number({ required_error: "مختصات طول جغرافیایی الزامی است" }),
   }),
-  categories: z.object({
-    id: z.number({ required_error: "آیدی دسته‌بندی الزامی است" }),
-    name: z.string({ required_error: "نام دسته‌بندی الزامی است" }),
-  }),
+  category: z.string({ required_error: "نام دسته‌بندی الزامی است" }),
   bathrooms: z.coerce
     .number({ required_error: "تعداد سرویس بهداشتی الزامی است" })
     .min(0, "تعداد سرویس نمی‌تواند منفی باشد"),

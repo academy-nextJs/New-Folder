@@ -7,12 +7,26 @@ import CommonButton from '@/components/common/buttons/common/CommonButton'
 import DatePickerInput from '@/components/common/inputs/datePicker/DatePickerInput'
 import { useTranslations } from 'next-intl'
 
-const FilterModalReserve = () => {
+interface FilterModalReserveProps {
+    filters: {
+        startDate: Date | null;
+        endDate: Date | null;
+        status: string | null;
+    };
+    setFilters: React.Dispatch<React.SetStateAction<{
+        startDate: Date | null;
+        endDate: Date | null;
+        status: string | null;
+    }>>;
+    onApply: () => void;
+}
+
+const FilterModalReserve: React.FC<FilterModalReserveProps> = ({ filters, setFilters, onApply }) => {
     const [open, setOpen] = useState<boolean>(false)
     const t = useTranslations('modals.filterReserve');
 
     return (
-        <Dialog open={open} onOpenChange={setOpen} >
+        <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
                 <div className='cursor-pointer px-4 py-2 rounded-[14px] h-fit flex text-primary-foreground max-md:w-full justify-center bg-primary text-sm hover:scale-[1.02] transition-all'>
                     {t('filters')}
@@ -26,9 +40,15 @@ const FilterModalReserve = () => {
                     </div>
                 </DialogTitle>
 
-                <div className='grid grid-cols-1 md:grid-cols-2 gap-4 mb-6'>
-                    <DatePickerInput label={t('startDate')} icon={<Calendar size={16} />} />
-                    <DatePickerInput label={t('endDate')} icon={<Calendar size={16} />} />
+                <div className='w-full mb-6'>
+                    <DatePickerInput
+                        label="تاریخ رزرو"
+                        icon={<Calendar size={16} />}
+                        value={filters.startDate}
+                        onChange={(dateObj) =>
+                            setFilters((prev) => ({ ...prev, startDate: dateObj ? dateObj.toDate() : null }))
+                        }
+                    />
                 </div>
 
                 <div className='w-full'>
@@ -36,16 +56,25 @@ const FilterModalReserve = () => {
                         label={t('reserveStatus')}
                         selectItems={[
                             { label: t('confirmed'), value: 'confirmed' },
+                            { label: "در حال انتظار", value: 'pending' },
                             { label: t('canceled'), value: 'canceled' },
                         ]}
                         placeholder={t('confirmed')}
+                        value={filters.status || ""}
+                        onValueChange={(value) => setFilters((prev) => ({ ...prev, status: value }))}
                         color='text-subText'
                         classname='border-subText py-5 rounded-xl w-full'
                     />
                 </div>
 
                 <div className='w-fit mx-auto'>
-                    <CommonButton title={t('applyFilter')} />
+                    <CommonButton
+                        title={t('applyFilter')}
+                        onclick={() => {
+                            onApply()
+                            setOpen(false)
+                        }}
+                    />
                 </div>
             </DialogContent>
         </Dialog>

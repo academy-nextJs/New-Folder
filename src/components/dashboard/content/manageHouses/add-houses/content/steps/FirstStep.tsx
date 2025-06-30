@@ -9,9 +9,12 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { houseSchema } from '@/utils/validations/house-validation'
 import { useHouseStore } from '@/utils/zustand/house'
-import { ICreateHouse } from '@/types/houses-type/house-type'
+import { ICreateHouseValues } from '@/types/houses-type/house-type'
 import CommonButton from '@/components/common/buttons/common/CommonButton'
 import { ChevronLeft } from 'lucide-react'
+import { getCategories } from '@/utils/service/api/categories'
+import { Category } from '@/types/categories-type/categories-type'
+import { createCategory } from '@/utils/service/api/categories/createCategory'
 
 const FirstStep = ({ setStep }: { setStep: Dispatch<SetStateAction<number>> }) => {
     const {
@@ -23,6 +26,7 @@ const FirstStep = ({ setStep }: { setStep: Dispatch<SetStateAction<number>> }) =
     })
 
     const { setData, data: house } = useHouseStore();
+    const [categoryData, setCategoryData] = useState<Category | null>(null)
     const [transaction_type, setTransaction_type] = useState<string | null>(house.transaction_type || null)
     const t = useTranslations('dashboardSeller.firstStep')
     const selectItems = [
@@ -32,13 +36,28 @@ const FirstStep = ({ setStep }: { setStep: Dispatch<SetStateAction<number>> }) =
         { label: t('mortgage'), value: "mortgage" },
     ]
 
-    const onSubmit = (values: Partial<ICreateHouse>) => {
+    const onSubmit = async (values: Partial<ICreateHouseValues>) => {
+        const category = await getCategories(values.category);
+        if(category){
+            setCategoryData(category.data[0])
+        }
+        else{
+            if(values.category){
+                const category = await createCategory({ name: values.category });
+                setCategoryData(category)
+            }
+        }
+
         const data = {
             title: values.title,
             capacity: values.capacity,
             transaction_type: transaction_type || "direct_purchase",
             price: values.price,
-            caption: values.caption
+            caption: values.caption,
+            categories: {
+                id: Number(categoryData?.id),
+                name: categoryData?.name || "مسکونی"
+            },
         }
         setData(data);
         setStep(1);
@@ -85,8 +104,9 @@ const FirstStep = ({ setStep }: { setStep: Dispatch<SetStateAction<number>> }) =
             </div>
             <div className='flex max-lg:flex-col w-full justify-between gap-8 items-center'>
                 <div className='w-1/2 max-lg:w-full flex flex-col gap-2'>
-                    <Label htmlFor='type' className='text-subText'>{t('type')}</Label>
-                    <Input name='type' placeholder={t('typePlaceholder')} id='type' className='w-full px-4 py-2 text-sm bg-transparent border rounded-xl text-subText border-subText' />
+                    <Label htmlFor='category' className='text-subText'>{t('type')}</Label>
+                    <Input defaultValue={house.categories?.name} {...register("category")} name='category' placeholder={t('typePlaceholder')} id='category' className='w-full px-4 py-2 text-sm bg-transparent border rounded-xl text-subText border-subText' />
+                    {errors.category && <span className='text-xs text-danger'> {errors.category.message} </span>}
                 </div>
                 <svg width="21" height="14" viewBox="0 0 21 14" fill='none' xmlns="http://www.w3.org/2000/svg">
                     <path d="M21 5H9V1.43484C9 1.26397 8.79958 1.17179 8.66984 1.28299L2 7L8.66984 12.717C8.79958 12.8282 9 12.736 9 12.5652V9H21" className='stroke-foreground' strokeWidth="2" />

@@ -49,3 +49,23 @@ export interface ICreateHouse {
     transaction_type: string,
     caption: string
 }
+
+export interface ICreateHouseValues {
+    title: string,
+    address: string,
+    photos: string[],
+    price: string,
+    tags: string[],
+    capacity: number,
+    location: {
+        lat: number,
+        lng: number
+    },
+    category: string,
+    bathrooms: number,
+    parking: number,
+    rooms: number,
+    yard_type: string,
+    transaction_type: string,
+    caption: string
+}

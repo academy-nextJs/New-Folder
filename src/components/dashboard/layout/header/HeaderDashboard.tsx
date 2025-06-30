@@ -96,7 +96,7 @@ const HeaderDashboard: React.FC = () => {
                         }} className="flex relative gap-4 items-center cursor-pointer">
                             <Image src={session?.user?.image || profile?.profilePicture || "/"} alt="" width={40} height={40} className="border-0 outline-none bg-secondary-light rounded-[8px]" />
                             <div className="flex max-md:hidden flex-col justify-between">
-                                <h2>{session?.user?.name || profile?.firstName + " " + profile?.lastName || ""}</h2>
+                                <h2>{session?.user?.name || (profile?.firstName ?? "") + " " + (profile?.lastName ?? "")}</h2>
                                 <span className="text-muted-foreground text-sm">{profile?.role}</span>
                             </div>
                             {!modalView && <ChevronDown className="cursor-pointer" size={12} />}

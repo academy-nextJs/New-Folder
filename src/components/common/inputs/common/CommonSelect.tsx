@@ -21,7 +21,7 @@ const CommonSelect: FC<ISelect> = ({ background, color, label, mandatory, classn
                 </SelectTrigger>
                 <SelectContent className={`rtl z-[10000] ${background} ${color}`}>
                     <ScrollArea>
-                        <SelectGroup>
+                        <SelectGroup defaultValue={value}>
                             <SelectLabel> {label} </SelectLabel>
                             {selectItems.map((item, index) => (
                                 <SelectItem key={index} value={item.value}> {item.label} </SelectItem>

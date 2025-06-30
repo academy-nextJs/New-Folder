@@ -56,7 +56,7 @@ const FifthStep = ({ setStep }: { setStep: Dispatch<SetStateAction<number>> }) =
     <div className='w-full flex flex-col gap-32'>
       <div className='bg-secondary-light max-xl:hidden rounded-2xl border-border border p-4 flex justify-between gap-4'>
         <div className='w-5/12 flex flex-col gap-4'>
-          {house.photos && house.photos?.length > 0 ? <SliderPhotos photos={house.photos} /> : <div className='bg-secondary-light3 rounded-xl h-[226] w-full'></div>}
+          {house.photos && house.photos?.length > 0 ? <SliderPhotos imageClassName='h-[300px]' photos={house.photos} /> : <div className='bg-secondary-light3 rounded-xl h-[300] w-full'></div>}
           <div className='flex flex-col gap-4'>
             <div className='flex gap-2 items-center'> <MapPin className='text-muted' size={20} /> <span> {house.address} </span> </div>
             <div className="flex flex-wrap items-center gap-4 text-foreground">
@@ -93,13 +93,13 @@ const FifthStep = ({ setStep }: { setStep: Dispatch<SetStateAction<number>> }) =
                 </div>
               ))}
             </div>
-            <div className='flex gap-4 items-center'> <Drill className='text-muted' size={20} /> <span>{""}</span> </div>
+            <div className='flex gap-4 items-center'> <Drill className='text-muted' size={20} /> <span>{house.categories?.name}</span> </div>
             <div className='flex gap-4 items-center'> <Coins className='text-muted' size={20} /> <span className='text-primary'> {SplitNumber(house?.price || "")} {t('currency')} </span> </div>
           </div>
         </div>
       </div>
       <div className='bg-secondary-light max-xl:flex flex-col rounded-2xl border-border border p-4 hidden justify-between gap-8' >
-        {house.photos && house.photos?.length > 0 ? <SliderPhotos photos={house.photos} /> : <div className='bg-secondary-light3 rounded-xl h-[226] w-full'></div>}
+        {house.photos && house.photos?.length > 0 ? <SliderPhotos imageClassName='h-[300px]' photos={house.photos} /> : <div className='bg-secondary-light3 rounded-xl h-[300] w-full'></div>}
         <div className='w-full flex flex-col gap-4'>
           <h2 className='text-xl font-bold'>{t('title')}</h2>
           <span className='text-subText text-justify'>{t('description')}</span>
@@ -115,7 +115,7 @@ const FifthStep = ({ setStep }: { setStep: Dispatch<SetStateAction<number>> }) =
                 ))}
               </div>
             </div>
-            <div className='flex gap-4 items-center'> <Drill className='text-muted' size={20} /> <span>{""}</span> </div>
+            <div className='flex gap-4 items-center'> <Drill className='text-muted' size={20} /> <span>{house.categories?.name}</span> </div>
             <div className='flex gap-4 items-center'> <Coins className='text-muted' size={20} /> <span className='text-primary'> {SplitNumber(house?.price || "")} {t('currency')} </span> </div>
           </div>
           <div className="flex flex-wrap items-center gap-4 text-foreground">

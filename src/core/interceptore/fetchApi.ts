@@ -13,8 +13,9 @@ const onSuccess = async (response: Response) => {
 }
 
 const onError = async (error: Response | Error) => {
-    const session = await getSession();
+    const session = await getSession() as any;
     const refreshToken = session?.refreshToken;
+    const password = session?.password;
 
     const handleRefreshToken = async () => {
         try {
@@ -26,6 +27,7 @@ const onError = async (error: Response | Error) => {
                         redirect: false,
                         accessToken: response?.accessToken,
                         refreshToken: refreshToken,
+                        password: password
                     });
                 } else {
                     await signOut({ callbackUrl: '/login' });
@@ -43,7 +45,7 @@ const onError = async (error: Response | Error) => {
 
     if (error instanceof Response) {
         if (error.status === 401 || error.status === 403) {
-            handleRefreshToken()
+            await handleRefreshToken()
         }
 
         if (error.status >= 400 && error.status < 500) {
@@ -55,7 +57,7 @@ const onError = async (error: Response | Error) => {
 
     if (error instanceof Error) {
         if (error.message === "invalid token" || error.message === "Invalid token") {
-            handleRefreshToken()
+            await handleRefreshToken()
         }
     }
 
