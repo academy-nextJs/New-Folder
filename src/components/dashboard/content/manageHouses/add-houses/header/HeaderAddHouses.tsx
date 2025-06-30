@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl'
 
 const HeaderAddHouses = () => {
     const t = useTranslations('dashboardSeller.addHouses.header')
+    
     return (
         <div className='flex justify-between w-full'>
             <h2>{t('title')}</h2>

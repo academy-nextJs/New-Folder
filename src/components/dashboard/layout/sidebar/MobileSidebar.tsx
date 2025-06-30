@@ -5,8 +5,8 @@
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useEffect, useRef, useState } from 'react'
-import { CreditCard, MoreHorizontal, SquaresSubtract, X } from 'lucide-react';
+import React, { useCallback, useEffect, useRef, useState } from 'react'
+import { MoreHorizontal, X } from 'lucide-react';
 import DeltaIcon from "@/app/[locale]/icon.png";
 import useClearPathname from '@/utils/helper/clearPathname/clearPathname';
 import { useTranslations } from 'next-intl';
@@ -23,29 +23,17 @@ const MobileSidebar = () => {
 
     const [role, setRole] = useState("");
     const routeSelect = role === "seller" ? sellerRoutes : routes;
-    const footerSidebarSelect = role === "buyer"
-        ? {
-            title: "wallet",
-            description: "noBalance",
-            icon: CreditCard,
-        }
-        : {
-            title: "newComments",
-            description: "commentsCount",
-            icon: SquaresSubtract,
-        };
-    const Icon = footerSidebarSelect.icon;
 
     const { data: session } = useSession() as any
 
-    const getProfile = async () => {
+    const getProfile = useCallback(async () => {
         const user = await getProfileById(session?.userInfo.id)
         setRole(user.role)
-    }
+    }, [session])
 
     useEffect(() => {
         getProfile()
-    }, [])  
+    }, [getProfile])  
 
     const mainRoutes = routeSelect.slice(0, 4);
     const extraRoutes = routeSelect.slice(4);

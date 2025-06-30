@@ -9,7 +9,6 @@ import React, { FC, useState } from 'react'
 import { motion } from 'framer-motion'
 import { showToast } from '@/core/toast/toast'
 import { BlurFade } from '@/components/magicui/blur-fade'
-import { Lens } from '@/components/magicui/lense'
 import { useTranslations } from 'next-intl'
 
 interface IProps {
@@ -26,7 +25,7 @@ const SingleReserveHeader: FC<IProps> = ({ house }) => {
 
     const handleCopy = async () => {
         if (typeof window === 'undefined') return;
-        
+
         try {
             await navigator.clipboard.writeText(window.location.href)
             showToast('success', t('copied'), t('close'))
@@ -37,7 +36,7 @@ const SingleReserveHeader: FC<IProps> = ({ house }) => {
 
     const handleShare = async () => {
         if (typeof window === 'undefined') return;
-        
+
         if (navigator.share) {
             try {
                 await navigator.share({
@@ -89,15 +88,6 @@ const SingleReserveHeader: FC<IProps> = ({ house }) => {
             <div className='flex max-2xl:flex-col gap-6 mt-2'>
                 <div className='2xl:w-11/12 w-full'>
                     <BlurFade className='w-full max-lg:hidden h-[444px] bg-secondary-light2 rounded-[40px] overflow-hidden flex items-center justify-center'>
-                        <Lens>
-                            <img
-                                src={house.photos[currentIndex]}
-                                alt={`house-photo-${currentIndex}`}
-                                className='w-full h-full object-cover rounded-[40px]'
-                            />
-                        </Lens>
-                    </BlurFade>
-                    <BlurFade className='w-full lg:hidden h-[444px] bg-secondary-light2 rounded-[40px] overflow-hidden flex items-center justify-center'>
                         <img
                             src={house.photos[currentIndex]}
                             alt={`house-photo-${currentIndex}`}

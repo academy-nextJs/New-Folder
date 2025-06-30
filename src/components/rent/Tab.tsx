@@ -32,14 +32,17 @@ export default function PropertyTabs({ house }: { house: IHouse }) {
   const id = params?.id as string
 
   const {
-    data: comments = [],
+    data = [],
     isLoading,
     isFetching,
     refetch,
-  } = useQuery<IGetComment[]>({
+  } = useQuery({
     queryKey: ['comments', id, page],
     queryFn: () => fetchComments(id, page, PAGE_SIZE),
   })
+
+
+  const comments = data as { data: IGetComment[], totalCount: number } 
 
   const tabs = [
     { id: "description", label: t("description") },
@@ -94,7 +97,8 @@ export default function PropertyTabs({ house }: { house: IHouse }) {
             <SingleReserveForm setViewReply={setViewReply} refetch={refetch} title={title} parent_comment_id={parent_comment_id} viewReply={viewReply} />
             <div className="my-[100px]">
               <SingleReserveComments
-                comments={comments}
+                comments={comments.data}
+                totalCount={comments.totalCount}
                 isLoading={isLoading}
                 isFetching={isFetching}
                 page={page}
@@ -102,7 +106,6 @@ export default function PropertyTabs({ house }: { house: IHouse }) {
                 setTitle={setTitle}
                 setParent_comment_id={setParent_comment_id}
                 setViewReply={setViewReply}
-                hasNext={comments.length === PAGE_SIZE}
               />
             </div>
           </motion.div>

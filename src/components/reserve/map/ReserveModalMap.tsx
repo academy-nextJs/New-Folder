@@ -3,13 +3,16 @@
 import React, { Dispatch, FC, Fragment, SetStateAction } from 'react'
 import { Transition, Dialog } from '@headlessui/react'
 import ReserveMap from './ReserveMap'
+import { MarkerType } from '../content/ReserveContent'
 
 interface IReserveModalMap {
     isOpen: boolean
     setIsOpen: Dispatch<SetStateAction<boolean>>
+    marker: MarkerType | null;
+    setMarker: React.Dispatch<React.SetStateAction<MarkerType | null>>;
 }
 
-const ReserveModalMap: FC<IReserveModalMap> = ({ isOpen, setIsOpen }) => {
+const ReserveModalMap: FC<IReserveModalMap> = ({ isOpen, setIsOpen, marker, setMarker }) => {
 
     return (
         <Transition appear show={isOpen} as={Fragment}>
@@ -43,7 +46,7 @@ const ReserveModalMap: FC<IReserveModalMap> = ({ isOpen, setIsOpen }) => {
                                 </Dialog.Title>
                                 <div className="mt-2">
                                     <div className="text-sm w-full h-[400px] z-100">
-                                        <ReserveMap />
+                                        <ReserveMap marker={marker} setMarker={setMarker} />
                                     </div>
                                 </div>
 

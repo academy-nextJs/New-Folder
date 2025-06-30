@@ -1,5 +1,4 @@
-'use client';
-
+'use client'
 import React from 'react';
 import ViewAllButton from '../../common/buttons/common/ViewAllButton';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../ui/tabs';
@@ -18,7 +17,6 @@ const DestinationOfDreams = () => {
         <div className='flex gap-1 justify-center items-center'>
           <div className="flex flex-row w-fit items-center gap-4">
             <div className='dark:flex hidden gap-1 justify-center items-center'>
-              {/* icon */}
               <svg width="48" height="16" viewBox="0 0 48 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M3 9.73205C1.66666 8.96225 1.66667 7.03775 3 6.26795L9 2.80385C10.3333 2.03405 12 2.9963 12 4.5359L12 11.4641C12 13.0037 10.3333 13.966 9 13.1962L3 9.73205Z" fill="#8CFF45" />
                 <path d="M24.25 9.29904C23.25 8.72169 23.25 7.27831 24.25 6.70096L28.75 4.10289C29.75 3.52554 31 4.24722 31 5.40192L31 10.5981C31 11.7528 29.75 12.4745 28.75 11.8971L24.25 9.29904Z" fill="#8CFF45" fillOpacity="0.5" />

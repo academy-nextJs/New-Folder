@@ -14,9 +14,10 @@ interface IProps {
   facilities: TFacilities;
   caption: string;
   photos: string[];
+  id: string;
 }
 
-const SingleReserveTab: FC<IProps> = ({ defaultValue, facilities, caption, photos }) => {
+const SingleReserveTab: FC<IProps> = ({ defaultValue, facilities, caption, photos, id }) => {
   const t = useTranslations('singleReserve.tab');
   return (
     <Tabs defaultValue={defaultValue} className='rtl xl:w-9/12 w-full'>
@@ -52,7 +53,7 @@ const SingleReserveTab: FC<IProps> = ({ defaultValue, facilities, caption, photo
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
         >
-          <SingleReserveComment />
+          <SingleReserveComment id={id} />
         </motion.div>
       </TabsContent>
     </Tabs>

@@ -37,7 +37,7 @@ const RegisterForm = () => {
     setIsLoading(true)
     try {
       setEmail(values.email)
-      const res = await axiosApi.post('/auth/start-registration', values) as any
+      const res = await axiosApi.post('/auth/register', values) as any
       if (res.tempUserId) {
         setTempUserId(res.tempUserId)
       }
@@ -48,7 +48,6 @@ const RegisterForm = () => {
         router.push("/verifyCode")
       }
     } catch (error: any) {
-      console.log(error)
       if (error.response?.data?.message) {
         showToast("error", t("errorTitle"), t("close"), error.response.data.message, 5000)
       }

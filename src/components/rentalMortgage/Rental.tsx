@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import RentalHeader from './header/RentalHeader'
 import RentalFilter from './filter/RentalFilter'
 import RentalFilterCap from './filter/RentalFilterCap'
@@ -55,12 +55,13 @@ const RentalComponent = () => {
     setCurrentPage(page)
   }
 
-  const fetchHouses = async () => {
+  const fetchHouses = useCallback(async () => {
     setIsLoading(true)
-    console.log(transactionType)
     try {
-      const response = await getHouses(transactionType, search, order, sort, location,
-        propertyType, '', '', minRent, maxRent, minMortgage, maxMortgage, minArea, maxArea)
+      const response = await getHouses(
+        transactionType, search, order, sort, location,
+        propertyType, '', '', minRent, maxRent, minMortgage, maxMortgage, minArea, maxArea
+      )
       setHouses(response)
       setCurrentPage(1)
     } catch (error) {
@@ -68,15 +69,15 @@ const RentalComponent = () => {
     } finally {
       setIsLoading(false)
     }
-  }
-
-  useEffect(() => {
-    fetchHouses()
-  }, [])
-
-  useEffect(() => {
-    fetchHouses()
   }, [search, order, sort, location, minRent, maxRent, minMortgage, maxMortgage, minArea, maxArea, propertyType, transactionType])
+
+  useEffect(() => {
+    fetchHouses()
+  }, [fetchHouses])
+
+  useEffect(() => {
+    fetchHouses()
+  }, [fetchHouses])
 
   useEffect(() => {
     setPropertyType(urlProperty)

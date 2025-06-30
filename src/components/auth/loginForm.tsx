@@ -16,6 +16,7 @@ import { signIn } from "next-auth/react";
 import { fetchApi } from "@/core/interceptore/fetchApi";
 import { useTranslations } from "next-intl";
 import { useDirection } from "@/utils/hooks/useDirection";
+import { jwtDecode } from "jwt-decode";
 
 export interface LoginResponse {
   accessToken: string;
@@ -42,7 +43,13 @@ const LoginForm = () => {
     const user = await fetchApi.post("/auth/login", {
       email: values.email,
       password: values.password
-    }) as any
+    }) as any;
+
+    let decoded: any = null;
+
+    if (user?.accessToken) {
+      decoded = jwtDecode(user.accessToken);
+    }
 
     const res = await signIn("credentials", {
       redirect: false,
@@ -51,15 +58,21 @@ const LoginForm = () => {
       password: values.password
     });
 
-    if (res?.ok) {
+    setIsLoading(false);
+
+    if (res) {
       showToast("success", t("successTitle"), t("close"), "");
-      reset()
-      redirect("/dashboard");
+      reset();
+      if (decoded?.role === "seller") {
+        redirect("/dashboard/seller");
+      } else if (decoded?.role === "buyer") {
+        redirect("/dashboard");
+      }
     } else {
       showToast("error", t("errorTitle"), t("close"), t("errorMessage"));
     }
-    setIsLoading(false);
   };
+
 
   return (
     <div dir={dir} >

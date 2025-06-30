@@ -99,7 +99,7 @@ const ContentDashboard = () => {
         ))}
         <div className="flex flex-col justify-center gap-8 w-full  sm:flex-col lg:flex-row ">
           <ReservesCha />
-          <ProfileCompletion percentage={40} />
+          <ProfileCompletion />
         </div>
         <CallReserves />
       </div>

@@ -99,7 +99,7 @@ const FilterModal = ({ isOpen, onClose, onApplyFilters }: FilterModalProps) => {
               ]}
               value={reservationStatus}
               onValueChange={setReservationStatus}
-              placeholder={t("approved")}
+              placeholder={" همه "}
               color="text-subText"
               classname="border-subText py-5 rounded-xl w-full"
             />

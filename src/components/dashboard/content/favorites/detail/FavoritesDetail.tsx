@@ -4,14 +4,6 @@
 import CommonButton from '@/components/common/buttons/common/CommonButton'
 import CommonModal from '@/components/dashboard/modal/CommonModal'
 import {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from '@/components/ui/pagination'
-import {
   Table,
   TableBody,
   TableCell,
@@ -30,41 +22,10 @@ import {
 } from 'lucide-react'
 import React, { Fragment, useEffect, useRef } from 'react'
 import { useTranslations } from 'next-intl'
+import { IHouse } from '@/types/houses-type/house-type'
+import { redirect } from 'next/navigation'
 
-const favorites = [
-  {
-    image: null,
-    title: ' هتل سراوان رانین رشت ',
-    price: '1800000',
-    address: '  گیلان ، رشت ، میدان آزادی ، جنب چهار راه عظ....گیلان ، رشت... ',
-  },
-  {
-    image: null,
-    title: ' هتل سراوان رانین رشت ',
-    price: '1800000',
-    address: '  گیلان ، رشت ، میدان آزادی ، جنب چهار راه عظ....گیلان ، رشت... ',
-  },
-  {
-    image: null,
-    title: ' هتل سراوان رانین رشت ',
-    price: '1800000',
-    address: '  گیلان ، رشت ، میدان آزادی ، جنب چهار راه عظ....گیلان ، رشت... ',
-  },
-  {
-    image: null,
-    title: ' هتل سراوان رانین رشت ',
-    price: '1800000',
-    address: '  گیلان ، رشت ، میدان آزادی ، جنب چهار راه عظ....گیلان ، رشت... ',
-  },
-  {
-    image: null,
-    title: ' هتل سراوان رانین رشت ',
-    price: '1800000',
-    address: '  گیلان ، رشت ، میدان آزادی ، جنب چهار راه عظ....گیلان ، رشت... ',
-  },
-]
-
-const FavoritesDetail = () => {
+const FavoritesDetail = ({ favorites }: { favorites: IHouse[] }) => {
   const t = useTranslations('dashboardBuyer.favoritesPage')
   const [openModalIndex, setOpenModalIndex] = React.useState<number | null>(null)
   const moreRef = useRef<HTMLTableCellElement | null>(null)
@@ -104,7 +65,7 @@ const FavoritesDetail = () => {
             <TableRow key={idx}>
               <TableCell className="py-4 whitespace-nowrap flex gap-2 items-center">
                 <img
-                  src={favorite.image ? favorite.image : '  '}
+                  src={favorite.photos ? favorite.photos[0] : ' '}
                   alt=""
                   className="rounded-[12px] w-[107px] h-[78px] bg-card-light"
                 />
@@ -133,6 +94,7 @@ const FavoritesDetail = () => {
                     <CommonModal
                       handleClick={t('reserve')}
                       title={t('reserveConfirm')}
+                      onClick={() => redirect(`/hotel/${favorite.id}`)}
                       button={
                         <div className="px-4 py-1 flex gap-2 rounded-xl justify-end flex-row-reverse cursor-pointer hover:bg-subBg2">
                           {t('reserve')} <CheckCircle2 size={16} />
@@ -162,7 +124,7 @@ const FavoritesDetail = () => {
             className="w-full max-sm:flex-col bg-subBg2 px-4 py-4 rounded-xl flex gap-4"
           >
             <img
-              src={favorite.image || '  '}
+              src={favorite.photos[0] || ' '}
               alt=" "
               className=" min-h-full w-[200px] max-sm:w-full max-sm:h-[200px] bg-card rounded-[12px]"
             />
@@ -192,29 +154,6 @@ const FavoritesDetail = () => {
             </div>
           </div>
         ))}
-      </div>
-      <div className="flex w-full flex-wrap justify-between items-end">
-        <div></div>
-        <div>
-          <Pagination className="w-fit">
-            <PaginationContent className="justify-center mt-6">
-              <PaginationItem>
-                <PaginationPrevious />
-              </PaginationItem>
-
-              <PaginationItem className="flex gap-2">
-                <PaginationLink className="bg-primary text-primary-foreground">
-                  1
-                </PaginationLink>
-                <PaginationLink className="">2</PaginationLink>
-              </PaginationItem>
-
-              <PaginationItem>
-                <PaginationNext />
-              </PaginationItem>
-            </PaginationContent>
-          </Pagination>
-        </div>
       </div>
     </Fragment>
   )

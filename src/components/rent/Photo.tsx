@@ -34,7 +34,7 @@ const Photo: FC<{ images: string[], nextSlide: () => void, currentSlideIndex: nu
                                 <img
                                     src={image}
                                     alt={''}
-                                    className="w-full h-full object-cover rounded-[32px]"
+                                    className="w-full h-full object-cover bg-subBg rounded-[32px]"
                                 />
                             </div>
                         ))}

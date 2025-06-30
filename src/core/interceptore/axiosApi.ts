@@ -1,6 +1,8 @@
+/* eslint-disable */
 import axios, { AxiosResponse, AxiosError } from "axios";
 import { showToast } from "../toast/toast";
 import { getSession, signIn, signOut } from "next-auth/react";
+import { fetchApi } from "./fetchApi";
 
 const baseURL = 'https://delta-project.liara.run/api';
 
@@ -13,59 +15,50 @@ const onSuccess = (response: AxiosResponse) => {
 }
 
 const onError = async (err: AxiosError) => {
-    const session = await getSession();
+    const session = await getSession() as any;
     const refreshToken = session?.refreshToken;
+    const password = session?.password;
 
-    if (err.message === "Network Error" || err.response?.status === 403) {
-        if (refreshToken) {
-            const response = await fetch(`${baseURL}/auth/refresh`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ token: refreshToken })
-            })
-            const data = await response.json();
-            if (response.ok) {
-                await signIn("credentials", {
-                    redirect: false,
-                    accessToken: data?.accessToken,
-                    refreshToken: refreshToken,
-                })
-            }
-            else {
+    const handleRefreshToken = async () => {
+        try {
+            if (refreshToken) {
+                const response = await fetch(`${baseURL}/auth/refresh`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ token: refreshToken })
+                });
+
+                const data = await response.json();
+                if (!response.ok) throw new Error(data.message || "Failed to refresh token");
+
+                if (data) {
+                    await signIn("credentials", {
+                        redirect: false,
+                        accessToken: data?.accessToken,
+                        refreshToken: data,
+                        password: password
+                    });
+                } else {
+                    await signOut({ callbackUrl: '/login' });
+                    showToast("error", "شما وارد نشده‌اید!", "بستن");
+                }
+            } else {
                 await signOut({ callbackUrl: '/login' });
-                showToast("error", " شما وارد نشدید! ", " بستن ")
+                showToast("error", "شما وارد نشده‌اید!", "بستن");
             }
-        }
-        else {
+        } catch {
             await signOut({ callbackUrl: '/login' });
-            showToast("error", " شما وارد نشدید! ", " بستن ")
+            showToast("error", "شما وارد نشده‌اید!", "بستن");
         }
     }
 
+
+    if (err.response?.status === 403) {
+        await handleRefreshToken()
+    }
+
     if (err.response?.status === 401) {
-        if (refreshToken) {
-            const response = await fetch(`${baseURL}/auth/refresh`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ token: refreshToken })
-            })
-            const data = await response.json();
-            if (response.ok) {
-                await signIn("credentials", {
-                    redirect: false,
-                    accessToken: data?.accessToken,
-                    refreshToken: data?.refreshToken,
-                })
-            }
-            else {
-                await signOut({ callbackUrl: '/login' });
-                showToast("error", " شما وارد نشدید! ", " بستن ")
-            }
-        }
-        else {
-            await signOut({ callbackUrl: '/login' });
-            showToast("error", " شما وارد نشدید! ", " بستن ")
-        }
+        await handleRefreshToken()
     }
 
     if (err.response?.status && err.response?.status >= 400 && err.response?.status < 500) {

@@ -6,7 +6,6 @@ const NavbarSection = () => {
 
   return (
     <nav className="flex items-center whitespace-nowrap justify-center gap-6 text-[16px] h-full relative">
-      {/* رزرو سریع */}
       <div className="group flex items-center h-full relative">
         <Link
           href="/reserve/reserve-house"
@@ -16,48 +15,40 @@ const NavbarSection = () => {
         </Link>
         <span className="absolute left-0 right-0 bottom-0 h-[2px] bg-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-bottom group-hover:origin-bottom z-20"></span>
       </div>
-      {/* رهن و اجاره */}
       <div className="relative group flex items-center h-full">
         <Link
           href="/rent"
           className="text-subText transition-colors flex items-center lg:gap-1 pb-1 h-full group-hover:text-primary"
         >
           {t("navbar.rentalMortgage")}
-          {/* بردر پایین */}
           <span className="absolute left-0 right-0 bottom-0 h-[2px] bg-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-bottom group-hover:origin-bottom z-20"></span>
         </Link>
       </div>
 
-      {/* درباره ما */}
       <div className="group flex items-center h-full relative">
         <Link
           href="/about"
           className="flex items-center h-full text-subText transition-colors pb-1 group-hover:text-primary"
         >
           {t("navbar.aboutUs")}
-          {/* بردر پایین */}
           <span className="absolute left-0 right-0 bottom-0 h-[2px] bg-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-bottom group-hover:origin-bottom z-20"></span>
         </Link>
       </div>
-      {/* مقالات ما */}
       <div className="group flex items-center h-full relative">
         <Link
           href="/articles"
           className="flex items-center h-full text-subText transition-colors pb-1 group-hover:text-primary"
         >
           {t("navbar.articles")}
-          {/* بردر پایین */}
           <span className="absolute left-0 right-0 bottom-0 h-[2px] bg-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-bottom group-hover:origin-bottom z-20"></span>
         </Link>
       </div>
-      {/* تماس با ما */}
       <div className="group flex items-center h-full relative">
         <Link
           href="/contact"
           className="flex items-center h-full text-subText transition-colors pb-1 group-hover:text-primary"
         >
           {t("navbar.contactUs")}
-          {/* بردر پایین */}
           <span className="absolute left-0 right-0 bottom-0 h-[2px] bg-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-bottom group-hover:origin-bottom z-20"></span>
         </Link>
       </div>

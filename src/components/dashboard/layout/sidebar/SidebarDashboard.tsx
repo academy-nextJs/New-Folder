@@ -10,7 +10,7 @@ import {
   CreditCard,
   SquaresSubtract,
 } from "lucide-react";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import PaymentsModal from "../../modal/PaymentsModal";
 import MobileSidebar from "./MobileSidebar";
@@ -50,14 +50,14 @@ const SidebarDashboard = ({
 
   const { data: session } = useSession() as any
   
-  const getProfile = async () => {
+  const getProfile = useCallback(async () => {
     const user = await getProfileById(session?.userInfo.id)
     setRole(user.role)
-  }
+  }, [session])
 
   useEffect(() => {
     getProfile()
-  }, [])
+  }, [getProfile])
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {

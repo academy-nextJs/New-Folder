@@ -13,29 +13,38 @@ const onSuccess = async (response: Response) => {
 }
 
 const onError = async (error: Response | Error) => {
-    const session = await getSession();
+    const session = await getSession() as any;
     const refreshToken = session?.refreshToken;
+    const password = session?.password;
 
     const handleRefreshToken = async () => {
-        if (refreshToken) {
-            const response = await fetch(`${baseURL}/auth/refresh`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ token: refreshToken })
-            });
-
-            const data = await response.json();
-            if (response.ok) {
-                await signIn("credentials", {
-                    redirect: false,
-                    accessToken: data?.accessToken,
-                    refreshToken: refreshToken,
+        try {
+            if (refreshToken) {
+                const response = await fetch(`${baseURL}/auth/refresh`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ token: refreshToken })
                 });
+
+                const data = await response.json();
+                if (!response.ok) throw new Error(data.message || "Failed to refresh token");
+
+                if (data) {
+                    await signIn("credentials", {
+                        redirect: false,
+                        accessToken: data?.accessToken,
+                        refreshToken: data,
+                        password: password
+                    });
+                } else {
+                    await signOut({ callbackUrl: '/login' });
+                    showToast("error", "شما وارد نشده‌اید!", "بستن");
+                }
             } else {
                 await signOut({ callbackUrl: '/login' });
                 showToast("error", "شما وارد نشده‌اید!", "بستن");
             }
-        } else {
+        } catch {
             await signOut({ callbackUrl: '/login' });
             showToast("error", "شما وارد نشده‌اید!", "بستن");
         }
@@ -43,7 +52,7 @@ const onError = async (error: Response | Error) => {
 
     if (error instanceof Response) {
         if (error.status === 401 || error.status === 403) {
-            handleRefreshToken()
+            await handleRefreshToken()
         }
 
         if (error.status >= 400 && error.status < 500) {
@@ -55,8 +64,7 @@ const onError = async (error: Response | Error) => {
 
     if (error instanceof Error) {
         if (error.message === "invalid token" || error.message === "Invalid token") {
-            await signOut({ callbackUrl: '/login' });
-            showToast("error", "توکن نامعتبر است. لطفا دوباره وارد شوید.", "بستن");
+            await handleRefreshToken()
         }
     }
 
@@ -90,14 +98,14 @@ export const fetchApi = {
     get: <T>(url: string, options?: RequestInit): Promise<T> =>
         fetchWithAuth(url, { ...options, method: 'GET' }),
 
-    post: <T>(url: string, data: any, options?: RequestInit): Promise<T> =>
+    post: <T>(url: string, data?: any, options?: RequestInit): Promise<T> =>
         fetchWithAuth(url, {
             ...options,
             method: 'POST',
             body: JSON.stringify(data)
         }),
 
-    put: <T>(url: string, data: any, options?: RequestInit): Promise<T> =>
+    put: <T>(url: string, data?: any, options?: RequestInit): Promise<T> =>
         fetchWithAuth(url, {
             ...options,
             method: 'PUT',

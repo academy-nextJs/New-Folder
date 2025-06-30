@@ -1,11 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
+import Icon from "@/app/[locale]/icon.png"
 
 const LogoSection = () => (
   <div className=" w-[72px] lg:w-[92px] md:w-[72px] h-[80%] flex items-center justify-center rounded-[12px] lg:mr-[8px] md:mr-[4px]">
     <Link href="/" className="text-foreground flex items-center justify-center">
       <Image
-        src="/icon.png"
+        src={Icon}
         alt="Delta Logo"
         width={50}
         height={50}

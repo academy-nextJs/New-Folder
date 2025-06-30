@@ -8,52 +8,29 @@ import "react-circular-progressbar/dist/styles.css";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { getProfileById } from "@/utils/service/api/profile/getProfileById";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { IProfile } from "@/types/profile-type/profile-type";
 import { getRelativeTimeString } from "@/utils/helper/date";
-
-const calculateProfileCompletion = (profile: IProfile | null): number => {
-  if (!profile) return 0;
-  
-  let completion = 0;
-  
-  // Profile Picture - 10%
-  if (profile.profilePicture) completion += 10;
-  
-  // Basic Info - 40%
-  if (profile.firstName) completion += 10;
-  if (profile.lastName) completion += 10;
-  if (profile.phoneNumber) completion += 10;
-  if (profile.email) completion += 10;
-  
-  // Additional Info - 30%
-  if (profile.fullName) completion += 15;
-  if (profile.emailVerified) completion += 15;
-  
-  // Membership - 20%
-  if (profile.membershipDate) completion += 20;
-  
-  return Math.min(completion, 100);
-};
+import { calculateProfileCompletion } from "@/utils/helper/completeProfile/completeProfile";
 
 const ProfileCompletion = () => {
   const t = useTranslations("dashboardBuyer");
-  const { data: session, update: updateSession } = useSession() as any;
+  const { data: session } = useSession() as any;
   const [profile, setProfile] = useState<IProfile | null>(null);
   const [completionPercentage, setCompletionPercentage] = useState(0);
 
-  const getProfile = async () => {
+  const getProfile = useCallback(async () => {
       if (session?.userInfo?.id) {
         const profile = await getProfileById(session?.userInfo?.id);
         setProfile(profile);
         setCompletionPercentage(calculateProfileCompletion(profile));
       }
-  }
+  }, [session])
 
   useEffect(() => {
     getProfile()
-  }, [session?.userInfo?.id]);
+  }, [getProfile]);
 
   return (
     <BlurFade
@@ -72,7 +49,6 @@ const ProfileCompletion = () => {
         />
       </div>
 
-      {/* Info Box */}
       <div className="flex flex-col justify-between h-full text-right w-full">
         <div className="flex justify-between items-center mb-2">
           <div className="flex gap-1 rotate-180 items-center  justify-between ml-[-100px]">

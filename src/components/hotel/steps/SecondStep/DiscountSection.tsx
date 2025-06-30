@@ -4,7 +4,7 @@ import CommonInput from '@/components/common/inputs/common/CommonInput'
 import { showToast } from '@/core/toast/toast'
 import findDiscount from '@/utils/service/api/discount/findDiscount'
 import { useBooking } from '@/utils/zustand/booking'
-import { CheckCircle, Code } from 'lucide-react'
+import { CheckCircle, Code, Loader } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import React, { useState } from 'react'
 
@@ -12,8 +12,10 @@ const DiscountSection = () => {
     const t = useTranslations('hotel.second');
     const { setDiscount } = useBooking()
     const [code, setCode] = useState<string>("");
+    const [loading, setLoading] = useState<boolean>(false)
     
     const handleDiscount = async () => {
+        setLoading(true);
         const discount = await findDiscount(code);
         if(discount[0]){
             if(setDiscount){
@@ -28,6 +30,7 @@ const DiscountSection = () => {
             }
             setCode("");
         }
+        setLoading(false)
     }
 
     return (
@@ -41,7 +44,7 @@ const DiscountSection = () => {
 
             <div className='w-full flex gap-4 px-4 pb-4 items-end flex-wrap'>
                 <CommonInput value={code} onchange={(e) => setCode(e.target.value)} placeholder={t('discountCodePlaceholder')} label={t('discountCode')} classname='text-subText w-full placeholder:text-subText border-subText' color='text-subText' />
-                <CommonButton onclick={handleDiscount} title={t('applyDiscount')} icon={<CheckCircle size={16} />} classname='bg-transparent flex border-primary border w-fit text-primary' />
+                <CommonButton onclick={handleDiscount} title={t('applyDiscount')} icon={ loading ? <Loader size={16} /> : <CheckCircle size={16} />} classname={`bg-transparent flex border-primary border w-fit text-primary ${loading ? "cursor-not-allowed text-subText border-subText blur-[1]" : "cursor-pointer"} `} />
             </div>
         </div>
 

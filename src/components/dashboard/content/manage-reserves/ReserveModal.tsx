@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 'use client'
 import {
   Dialog,
@@ -8,7 +10,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Bath, BedDouble, Car, LucideCopy, Star, Trees, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import PaymentListModal from "./PaymentListModal";
 import ReservesModals from "./ReservesModal";
 import { useTranslations } from "next-intl";
@@ -25,15 +27,14 @@ interface ReserveModalProps {
 
 export default function ReserveModal({ houseId, button }: ReserveModalProps) {
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
-  const [isReserveModals, setIsReserveModals] = useState(false);
   const t = useTranslations("modals.reserveModal");
 
   const [house, setHouse] = useState<IHouse | null>(null)
 
-  const getHouse = async () => {
+  const getHouse = useCallback(async () => {
     const response = await getHouseById(houseId);
     setHouse(response)
-  }
+  }, [houseId])
 
   const handleCopy = async () => {
     if (typeof window === 'undefined') return;
@@ -48,7 +49,7 @@ export default function ReserveModal({ houseId, button }: ReserveModalProps) {
 
   useEffect(() => {
     getHouse()
-  }, [])
+  }, [getHouse])
 
   return (
     <>
@@ -96,7 +97,7 @@ export default function ReserveModal({ houseId, button }: ReserveModalProps) {
               </button>
               <div className="absolute right-3 top-3 rounded-md bg-gradient-to-r from-accent to-accent px-3 py-1 text-foreground shadow-md">
                 <span className="flex items-center gap-1 text-sm text-bacgkroundW">
-                  <Star className="text-bacgkroundW" /> {house?.rate}
+                  <Star className="text-bacgkroundW" /> {house?.rate || 0}
                 </span>
               </div>
             </div>
@@ -137,18 +138,13 @@ export default function ReserveModal({ houseId, button }: ReserveModalProps) {
             </div>
 
             <div className="flex gap-4">
-              <button
-                className="rounded-xl bg-primary px-6 py-2 text-background"
-                onClick={() => setIsReserveModals(true)}
-              >
-                {t("reserves")}
-              </button>
-              <button
+              <ReservesModals houseId={Number(houseId)} />
+              {/* <button
                 onClick={() => setIsPaymentModalOpen(true)}
                 className="rounded-xl border border-primary px-6 py-2 text-background bg-primary"
               >
                 {t("payments")}
-              </button>
+              </button> */}
             </div>
           </div>
         </DialogContent>
@@ -157,10 +153,6 @@ export default function ReserveModal({ houseId, button }: ReserveModalProps) {
       <PaymentListModal
         isOpen={isPaymentModalOpen}
         onClose={() => setIsPaymentModalOpen(false)}
-      />
-      <ReservesModals
-        isOpen={isReserveModals}
-        onClose={() => setIsReserveModals(false)}
       />
     </>
   );

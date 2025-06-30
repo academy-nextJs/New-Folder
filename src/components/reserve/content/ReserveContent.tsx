@@ -15,15 +15,22 @@ import ReserveCardSkeleton from '../card/ReserveCardSkeleton'
 import { motion } from 'framer-motion'
 import { useTranslations } from 'next-intl'
 
+export interface MarkerType {
+  lat: number;
+  lng: number;
+}
+
 interface IReserveContent {
   houses: IHouse[]
   isLoading: boolean
   setMinPrice: React.Dispatch<React.SetStateAction<number | ''>>
   setMaxPrice: React.Dispatch<React.SetStateAction<number | ''>>
   setLocation: React.Dispatch<React.SetStateAction<string>>
+  marker: MarkerType | null
+  setMarker: React.Dispatch<React.SetStateAction<MarkerType | null>>
 }
 
-const ReserveContent: React.FC<IReserveContent> = ({ houses, isLoading, setMaxPrice, setMinPrice}) => {
+const ReserveContent: React.FC<IReserveContent> = ({ houses, isLoading, setMaxPrice, setMinPrice, marker, setMarker }) => {
   const t = useTranslations('reserve.content');
   const [currentPage, setCurrentPage] = useState(1)
   const itemsPerPage = 4
@@ -83,7 +90,7 @@ const ReserveContent: React.FC<IReserveContent> = ({ houses, isLoading, setMaxPr
           )}
 
           <Pagination>
-            <PaginationContent className="justify-center mt-6">
+            <PaginationContent className="justify-center my-6">
               <PaginationItem>
                 <PaginationPrevious onClick={() => goToPage(currentPage - 1)} />
               </PaginationItem>
@@ -109,7 +116,7 @@ const ReserveContent: React.FC<IReserveContent> = ({ houses, isLoading, setMaxPr
         whileInView={{ opacity: 1, x: 0 }}
         className="bg-secondary-light3 rounded-[40px] xl:w-2/5 w-full h-[1032px] xl:block hidden"
       >
-        <ReserveMap />
+        <ReserveMap marker={marker} setMarker={setMarker} />
       </motion.div>
     </div>
   )
