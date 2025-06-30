@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 'use client'
 import CommonSelect from '@/components/common/inputs/common/CommonSelect'
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
@@ -7,11 +9,36 @@ import CommonButton from '@/components/common/buttons/common/CommonButton'
 import { Input } from '@/components/ui/input'
 import { useTranslations } from 'next-intl'
 
-const FilterModal = () => {
+const FilterModal = ({ handleFilterChange, filters }: { handleFilterChange: (key: string, value: any) => void, filters: {
+    sort: string;
+    transaction_type: string;
+    fromPrice: number;
+    toPrice: number;
+    search: string;
+} }) => {
     const [open, setOpen] = useState<boolean>(false)
-    const [priceFrom, setPriceFrom] = useState("0")
-    const [priceTo, setPriceTo] = useState("15000000")
+    const [transaction_type, setTransaction_type] = useState<string>(filters.transaction_type || "");
+    const [sort, setSort] = useState<string>(filters.sort || "");
+    const [priceFrom, setPriceFrom] = useState(filters.fromPrice || "0")
+    const [priceTo, setPriceTo] = useState(filters.toPrice || "15000000")
     const t = useTranslations('modals.filter');
+
+    const handleFilter = () => {
+        if(sort && sort !== ""){
+            handleFilterChange("sort", sort)
+        }
+        if(transaction_type && transaction_type !== ""){
+            handleFilterChange("transaction_type", transaction_type)
+        }
+        if(priceTo){
+            handleFilterChange("toPrice", priceTo)
+        }
+        if(priceFrom){
+            handleFilterChange("fromPrice", priceFrom)
+        }
+
+        setOpen(false)
+    }
 
     return (
         <Dialog open={open} onOpenChange={setOpen} >
@@ -30,23 +57,27 @@ const FilterModal = () => {
 
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-4 mb-6'>
                     <CommonSelect
+                        onValueChange={(val) => setTransaction_type(val)}
                         label={t('propertyType')}
                         selectItems={[
-                            { label: t('apartment'), value: 'apartment' },
-                            { label: t('villa'), value: 'villa' },
-                            { label: t('house'), value: 'house' },
+                            { label: "فروش", value: 'direct_purchase' },
+                            { label: "رهن", value: 'mortgage' },
+                            { label: "اجاره", value: 'rental' },
+                            { label: "رزرو", value: 'reservation' },
                         ]}
-                        placeholder={t('apartment')}
+                        placeholder={transaction_type !== "" && transaction_type ? transaction_type : "نوع ملک را انتخاب کنید"}
                         color='text-subText'
                         classname='bg-subBg2 w-full'
                     />
                     <CommonSelect
-                        label={t('ownerStatus')}
+                        label="ترتیب"
+                        onValueChange={(val) => setSort(val)}
                         selectItems={[
-                            { label: t('active'), value: 'active' },
-                            { label: t('inactive'), value: 'inactive' },
+                            { label: "جدیدترین ها", value: "created_at DESC" },
+                            { label: "قدیمی ترین ها", value: "created_at ASC" },
+                            { label: "محبوب ترین ها", value: "rate DESC" },
                         ]}
-                        placeholder={t('active')}
+                        placeholder="ترتیب املاک را انتخاب کنید"
                         color='text-subText'
                         classname='bg-subBg2 w-full'
                     />
@@ -56,7 +87,7 @@ const FilterModal = () => {
                     <div className='flex gap-2 whitespace-nowrap items-center'>
                         <span className='text-subText'>{t('priceFrom')}</span>
                         <Input
-                            defaultValue={priceFrom}
+                            value={priceFrom}
                             onChange={(e) => setPriceFrom(e.target.value)}
                             className='bg-transparent rounded px-3 py-2 w-full'
                         />
@@ -74,7 +105,7 @@ const FilterModal = () => {
                 </div>
 
                 <div className='w-fit mx-auto'>
-                    <CommonButton title={t('applyFilter')} />
+                    <CommonButton onclick={handleFilter} title={t('applyFilter')} />
                 </div>
             </DialogContent>
         </Dialog>

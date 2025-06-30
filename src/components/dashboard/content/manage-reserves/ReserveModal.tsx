@@ -97,7 +97,7 @@ export default function ReserveModal({ houseId, button }: ReserveModalProps) {
               </button>
               <div className="absolute right-3 top-3 rounded-md bg-gradient-to-r from-accent to-accent px-3 py-1 text-foreground shadow-md">
                 <span className="flex items-center gap-1 text-sm text-bacgkroundW">
-                  <Star className="text-bacgkroundW" /> {house?.rate}
+                  <Star className="text-bacgkroundW" /> {house?.rate || 0}
                 </span>
               </div>
             </div>

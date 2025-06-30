@@ -24,7 +24,8 @@ export interface IHouse {
     transaction_type: "" | "rental" | "mortgage" | "reservation" | "direct_purchase",
     sellerId: string,
     sellerName: string,
-    caption: null
+    caption: null,
+    isFavorite: boolean
 }
 
 export interface ICreateHouse {

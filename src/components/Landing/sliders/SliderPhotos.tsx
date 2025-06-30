@@ -23,7 +23,7 @@ export default function SliderPhotos({ photos, imageClassName }: ISliderPhotos) 
         {photos.map((photo, index) => (
           <SwiperSlide key={index} className="flex justify-center">
             <img
-              src={photo}
+              src={photo || " "}
               alt={" "}
               width={200}
               height={40}

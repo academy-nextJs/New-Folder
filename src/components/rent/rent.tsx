@@ -112,7 +112,7 @@ const Rent = () => {
             dir="rtl"
           >
             <StarIcon size={16} />
-            {house.rate} {t("star")}
+            {house.rate || 0} {t("star")}
           </button>
           <div className="h-8 w-px bg-subText"></div>
           {house.tags.map((item, idx) => (

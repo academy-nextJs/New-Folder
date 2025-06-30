@@ -9,6 +9,8 @@ import { useDirection } from '@/utils/hooks/useDirection'
 import CommonButton from '@/components/common/buttons/common/CommonButton'
 import { useHouseStore } from '@/utils/zustand/house'
 import { useUploadThing } from '@/utils/helper/uploadthing'
+import { Label } from '@/components/ui/label'
+import { showToast } from '@/core/toast/toast'
 
 interface FileImageProps {
   defaultImage: StaticImageData
@@ -74,6 +76,32 @@ const FourthStep: React.FC<{ setStep: Dispatch<SetStateAction<number>> }> = ({ s
   const { data: house, setData } = useHouseStore()
 
   const [selectedImages, setSelectedImages] = useState<(string | null)[]>([null, null, null, null])
+  const [photos, setPhotos] = useState<string[]>(house.photos || []);
+  const [input, setInput] = useState('');
+
+  const removePhotos = (indexToRemove: any) => {
+    setPhotos(photos.filter((_, index) => index !== indexToRemove));
+  };
+
+  const handleSubmitPhotos = () => {
+    setData({
+      photos: photos
+    })
+    showToast("success", " تصاویر با موفقیت ثبت شد ")
+  }
+
+  const handleKeyDown = (e: any) => {
+    if ((e.key === 'Enter' || e.key === ',') && input.trim()) {
+      e.preventDefault();
+      const newTag = input.trim()
+      if (!photos.includes(newTag)) {
+        setPhotos([...photos, newTag]);
+      }
+      setInput('');
+    } else if (e.key === 'Backspace' && !input && photos.length) {
+      setPhotos(photos.slice(0, -1));
+    }
+  };
 
   useEffect(() => {
     const initialPhotos = house.photos || []
@@ -106,6 +134,40 @@ const FourthStep: React.FC<{ setStep: Dispatch<SetStateAction<number>> }> = ({ s
           <span className="text-primary">{t('desc1')}</span>
           {t('desc2')}
         </span>
+      </div>
+      <div className='flex gap-4 max-w-[800px] items-end'>
+        <CommonButton title=" ثبت تصاویر " onclick={() => handleSubmitPhotos()} />
+        <div className="w-full flex flex-col gap-2">
+          <Label htmlFor="tags" className="text-subText text-sm">
+            تصاویر ملک
+          </Label>
+          <div className="flex flex-wrap gap-2 px-4 py-2 border border-subText rounded-xl">
+            {photos.map((tag, index) => (
+              <div
+                key={index}
+                className="flex items-center bg-primary text-primary-foreground gap-1 px-2 py-1 rounded-lg text-sm max-w-[200px] truncate line-clamp-1"
+              >
+                <button
+                  type="button"
+                  className="ml-1 text-primary-foreground"
+                  onClick={() => removePhotos(index)}
+                >
+                  <X size={14} />
+                </button>
+                {tag}
+              </div>
+            ))}
+            <input
+              id="photos"
+              name="photos"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={handleKeyDown}
+              className="flex-grow bg-transparent text-subText text-sm focus:outline-none"
+              placeholder=" تصویر ملک را وارد و Enter بزنید "
+            />
+          </div>
+        </div>
       </div>
       <div className="flex max-xl:flex-wrap max-xl:items-center w-full justify-center gap-8">
         <FileImage

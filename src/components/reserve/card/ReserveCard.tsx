@@ -23,7 +23,7 @@ const ReserveCard : FC<IReserveContent> = ({ items }) => {
                 />
                 <div className="flex flex-col gap-4 items-start justify-between w-full">
                     <div className="bg-accent text-white text-sm flex gap-2 px-4 py-1 flex-row-reverse rounded-[8px]">
-                        <span>{items.rate} ستاره</span>
+                        <span>{items.rate || 0} ستاره</span>
                         <Star size={16} />
                     </div>
                     <h2 className="text-lg md:text-2xl"> {items.title} </h2>
