@@ -23,6 +23,7 @@ import {
 import React, { Fragment, useEffect, useRef } from 'react'
 import { useTranslations } from 'next-intl'
 import { IHouse } from '@/types/houses-type/house-type'
+import { redirect } from 'next/navigation'
 
 const FavoritesDetail = ({ favorites }: { favorites: IHouse[] }) => {
   const t = useTranslations('dashboardBuyer.favoritesPage')
@@ -93,6 +94,7 @@ const FavoritesDetail = ({ favorites }: { favorites: IHouse[] }) => {
                     <CommonModal
                       handleClick={t('reserve')}
                       title={t('reserveConfirm')}
+                      onClick={() => redirect(`/hotel/${favorite.id}`)}
                       button={
                         <div className="px-4 py-1 flex gap-2 rounded-xl justify-end flex-row-reverse cursor-pointer hover:bg-subBg2">
                           {t('reserve')} <CheckCircle2 size={16} />

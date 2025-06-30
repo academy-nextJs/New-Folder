@@ -3,7 +3,7 @@ import CommonButton from '@/components/common/buttons/common/CommonButton'
 import CommonInput from '@/components/common/inputs/common/CommonInput'
 import DatePickerInput from '@/components/common/inputs/datePicker/DatePickerInput'
 import { SplitNumber } from '@/utils/helper/spliter/SplitNumber'
-import { ChevronLeft, Coins, House, Minus, Plus } from 'lucide-react'
+import { ChevronLeft, Coins, House, Loader, Minus, Plus } from 'lucide-react'
 import React, { FC, useState } from 'react'
 import jalaali from 'jalaali-js'
 import { motion } from 'framer-motion'
@@ -11,6 +11,7 @@ import { useTranslations } from 'next-intl'
 import { redirect } from 'next/navigation'
 import { useBooking } from '@/utils/zustand/booking'
 import { IHouse } from '@/types/houses-type/house-type'
+import { showToast } from '@/core/toast/toast'
 
 interface IProps {
     discountedPrice?: number;
@@ -33,12 +34,19 @@ const SingleReserveBooking: FC<IProps> = ({ discountedPrice, price, house }) => 
     const [count, setCount] = useState(0)
     const [startDate, setStartDate] = useState<string>('')
     const [endDate, setEndDate] = useState<string>('')
+    const [loading, setLoading] = useState<boolean>(false)
     const { setHouse, setReservedDates, setCountPassengers, removeBooking } = useBooking();
 
     const discount_percentage = discountedPrice ? Math.ceil(((Number(price) - discountedPrice) / Number(price)) * 100) : 0
 
 
     const handleSubmit = () => {
+        setLoading(true)
+        if(!startDate || startDate === "" || !endDate || endDate === "" || !count || count === 0){
+            showToast("error", " لطفا مقادیر خواسته شده را وارد کنید. ")
+            setLoading(false)
+            return null;
+        }
         if (removeBooking) {
             removeBooking()
         }
@@ -47,6 +55,7 @@ const SingleReserveBooking: FC<IProps> = ({ discountedPrice, price, house }) => 
         if (setCountPassengers) {
             setCountPassengers(count || 1)
         }
+        setLoading(false)
         redirect("/hotelPage")
     }
 
@@ -114,9 +123,9 @@ const SingleReserveBooking: FC<IProps> = ({ discountedPrice, price, house }) => 
             </div>
 
             <CommonButton
-                icon={<ChevronLeft size={16} />}
-                title={t('reserveNow')}
-                classname='w-full text-primary-foreground'
+                icon={loading ? <Loader size={16} /> :<ChevronLeft size={16} />}
+                title={loading ? " در حال بارگزاری " : t('reserveNow')}
+                classname={`w-full text-primary-foreground ${loading ? "cursor-not-allowed" : "cursor-pointer"} `}
                 onclick={handleSubmit}
             />
         </motion.div>

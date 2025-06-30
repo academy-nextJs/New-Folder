@@ -1,8 +1,8 @@
 'use client'
 import CommonButton from '@/components/common/buttons/common/CommonButton'
 import { SplitNumber } from '@/utils/helper/spliter/SplitNumber'
-import { Book, ChevronLeft, ChevronRight, Coins, Megaphone } from 'lucide-react'
-import React, { FC } from 'react'
+import { Book, ChevronLeft, ChevronRight, Coins, Loader, Megaphone } from 'lucide-react'
+import React, { FC, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { ISecondStep } from '@/types/booking-type/booking-type'
 import TablePassengers from './TablePassengers'
@@ -10,6 +10,7 @@ import DiscountSection from './DiscountSection'
 import { discountPrice } from '@/utils/helper/discount-price/DiscountPrice'
 import { useBooking } from '@/utils/zustand/booking'
 import { createBook } from '@/utils/service/api/booking/createBook'
+import { createPayment } from '@/utils/service/api/payment/createPayment'
 
 const SecondStep: FC<ISecondStep> = ({
     handleCurrentStepIncrease,
@@ -17,9 +18,11 @@ const SecondStep: FC<ISecondStep> = ({
 }) => {
     const t = useTranslations('hotel.second');
     const { book } = useBooking()
+    const [loading, setLoading] = useState<boolean>(false)
     const priceWithDiscount = discountPrice(Number(book?.house?.price), Number(book?.discount) || 0);
 
     const handleBooking = async () => {
+        setLoading(true)
         const bookData = {
             houseId: book?.house?.id,
             reservedDates: book?.reservedDates,
@@ -28,14 +31,23 @@ const SecondStep: FC<ISecondStep> = ({
                 lastName: passenger.lastName,
                 gender: passenger.gender,
                 birthDate: passenger.birthDate,
-                nationalId: passenger.nationalId,   
+                nationalId: passenger.nationalId,
             })),
             sharedEmail: book?.sharedEmail,
             sharedMobile: book?.sharedMobile
         }
         const response = await createBook(bookData)
-        if(response){
+        if (response) {
+            const paymentData = {
+                amount: Number(book?.house?.price),
+                callbackUrl: "/",
+                description: `پرداخت برای رزرو شماره ${response.id}`,
+                bookingId: response.id
+            }
+
+            setLoading(false)
             handleCurrentStepIncrease()
+            await createPayment(paymentData)
         }
     }
 
@@ -101,7 +113,7 @@ const SecondStep: FC<ISecondStep> = ({
                     </div>
                     <div className='flex gap-4'>
                         <CommonButton onclick={handleCurrentSteDecrease} title={t('prevStep')} icon={<ChevronRight size={16} />} classname='bg-transparent border-foreground flex flex-row-reverse border w-fit text-foreground' />
-                        <CommonButton onclick={handleBooking} title={t('onlinePayment')} icon={<ChevronLeft size={16} />} classname='bg-transparent flex border-primary border w-fit text-primary' />
+                        <CommonButton onclick={handleBooking} title={loading ? "در حال بارگزاری" : t('onlinePayment')} icon={loading ? <Loader size={16} /> : <ChevronLeft size={16} />} classname={`bg-transparent flex border-primary border w-fit text-primary ${loading ? "cursor-not-allowed" : "cursor-pointer"} `} />
                     </div>
                 </div>
             </div>
