@@ -26,7 +26,11 @@ const FirstStep = ({ setStep }: { setStep: Dispatch<SetStateAction<number>> }) =
     })
 
     const { setData, data: house } = useHouseStore();
-    const [categoryData, setCategoryData] = useState<Category | null>(null)
+    const [categoryData, setCategoryData] = useState<Category | null>(
+        house.categories
+            ? { name: house.categories.name, id: house.categories.id?.toString() }
+            : null
+    )
     const [transaction_type, setTransaction_type] = useState<string | null>(house.transaction_type || null)
     const t = useTranslations('dashboardSeller.firstStep')
     const selectItems = [
@@ -36,18 +40,20 @@ const FirstStep = ({ setStep }: { setStep: Dispatch<SetStateAction<number>> }) =
         { label: t('mortgage'), value: "mortgage" },
     ]
 
-    const onSubmit = async (values: Partial<ICreateHouseValues>) => {
-        const category = await getCategories(values.category);
-        if(category){
+    const handleCategory = async (val: string) => {
+        const category = await getCategories(val);
+        if(category.data.length > 0){
             setCategoryData(category.data[0])
         }
         else{
-            if(values.category){
-                const category = await createCategory({ name: values.category });
+            if(val){
+                const category = await createCategory({ name: val });
                 setCategoryData(category)
             }
         }
+    }
 
+    const onSubmit = (values: Partial<ICreateHouseValues>) => {
         const data = {
             title: values.title,
             capacity: values.capacity,
@@ -105,7 +111,9 @@ const FirstStep = ({ setStep }: { setStep: Dispatch<SetStateAction<number>> }) =
             <div className='flex max-lg:flex-col w-full justify-between gap-8 items-center'>
                 <div className='w-1/2 max-lg:w-full flex flex-col gap-2'>
                     <Label htmlFor='category' className='text-subText'>{t('type')}</Label>
-                    <Input defaultValue={house.categories?.name} {...register("category")} name='category' placeholder={t('typePlaceholder')} id='category' className='w-full px-4 py-2 text-sm bg-transparent border rounded-xl text-subText border-subText' />
+                    <Input defaultValue={house.categories?.name} onChange={async (e) => {
+                        await handleCategory(e.target.value)
+                    }} name='category' placeholder={t('typePlaceholder')} id='category' className='w-full px-4 py-2 text-sm bg-transparent border rounded-xl text-subText border-subText' />
                     {errors.category && <span className='text-xs text-danger'> {errors.category.message} </span>}
                 </div>
                 <svg width="21" height="14" viewBox="0 0 21 14" fill='none' xmlns="http://www.w3.org/2000/svg">

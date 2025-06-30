@@ -51,7 +51,6 @@ const VerifyForm = () => {
                 router.push("/completeRegister")
             }
         } catch (error: any) {
-            console.log(error)
             if (error.response?.data?.message) {
                 showToast("error", t("errorTitle"), t("close"), error.response.data.message, 5000)
             }
@@ -84,7 +83,6 @@ const VerifyForm = () => {
                                     router.push("/verifyCode")
                                 }
                             } catch (error: any) {
-                                console.log(error)
                                 if (error.response?.data?.message) {
                                     showToast("error", t("errorTitle"), t("close"), error.response.data.message, 5000)
                                 }

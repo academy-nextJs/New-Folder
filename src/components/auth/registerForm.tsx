@@ -48,7 +48,6 @@ const RegisterForm = () => {
         router.push("/verifyCode")
       }
     } catch (error: any) {
-      console.log(error)
       if (error.response?.data?.message) {
         showToast("error", t("errorTitle"), t("close"), error.response.data.message, 5000)
       }

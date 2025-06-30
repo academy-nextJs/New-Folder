@@ -20,13 +20,20 @@ const onError = async (error: Response | Error) => {
     const handleRefreshToken = async () => {
         try {
             if (refreshToken) {
-                const response = await fetchApi.post(`${baseURL}/auth/refresh`, { token: refreshToken }) as { accessToken: string }
+                const response = await fetch(`${baseURL}/auth/refresh`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ token: refreshToken })
+                });
 
-                if (response) {
+                const data = await response.json();
+                if (!response.ok) throw new Error(data.message || "Failed to refresh token");
+
+                if (data) {
                     await signIn("credentials", {
                         redirect: false,
-                        accessToken: response?.accessToken,
-                        refreshToken: refreshToken,
+                        accessToken: data?.accessToken,
+                        refreshToken: data,
                         password: password
                     });
                 } else {

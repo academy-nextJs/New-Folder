@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 'use client'
 import React, { useState } from 'react'
 import { fetchApi } from '@/core/interceptore/fetchApi'
@@ -43,8 +43,7 @@ const ContactForm = () => {
             }
             setIsLoading(false)
             reset()
-        } catch (error: any) {
-            console.log(error)
+        } catch{
             setIsLoading(false)
             showToast('error', t('errorTitle'), t('close'), t('errorMessage'))
         }

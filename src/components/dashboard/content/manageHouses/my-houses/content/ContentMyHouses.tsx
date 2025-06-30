@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 'use client'
 import CommonButton from '@/components/common/buttons/common/CommonButton'
 import CommonModal from '@/components/dashboard/modal/CommonModal'
@@ -8,7 +10,6 @@ import { Coins, Delete, Edit, Home, Info, LayoutGrid, MoreHorizontal, PlusCircle
 import { redirect } from 'next/navigation'
 import React, { useEffect, useRef } from 'react'
 import { useTranslations } from 'next-intl'
-import Image from 'next/image'
 
 const ContentMyHouses = () => {
     const t = useTranslations('dashboardSeller.myHouses')
@@ -54,7 +55,7 @@ const ContentMyHouses = () => {
                     {houses.map((house, idx) => (
                         <TableRow key={idx} className=''>
                             <TableCell className='py-4 flex gap-4 items-center'>
-                                <Image src={""} alt='' width={108} height={72} className='rounded-2xl bg-subBg2' />
+                                <img src={""} alt='' width={108} height={72} className='rounded-2xl bg-subBg2' />
                                 {house.name}
                             </TableCell>
                             <TableCell>
@@ -94,7 +95,7 @@ const ContentMyHouses = () => {
             <div className='flex flex-col gap-4 w-full lg:hidden'>
                 {houses.map((house, idx) => (
                     <div key={idx} className='w-full max-sm:flex-col bg-subBg2 px-4 py-2 rounded-xl flex gap-4'>
-                        <Image src={""} alt='' className='w-1/3 max-sm:w-full max-sm:h-[200px] bg-secondary-light3 rounded-xl' />
+                        <img src={""} alt='' className='w-1/3 max-sm:w-full max-sm:h-[200px] bg-secondary-light3 rounded-xl' />
                         <div className=' h-full flex flex-col gap-2 max-sm:gap-4 text-base'>
                             <div className='flex items-center text-base gap-4 my-2 max-sm:text-lg justify-between flex-wrap'> <span> {house.name} </span> <div className='bg-accent text-accent-foreground px-4 py-1 flex gap-2 text-sm rounded-2xl'> <Star size={16} /> {house.rating} {t('star')} </div> </div>
                             <div className='flex gap-2 items-center'> <LayoutGrid className='text-subText' size={16} /> <span className='text-subText'>{t('reserves')}:</span> <span> {house.reserves} {t('times')} </span> </div>

@@ -57,16 +57,11 @@ const RentalComponent = () => {
 
   const fetchHouses = useCallback(async () => {
     setIsLoading(true)
-    console.log('fetchHouses params:', {
-      transactionType, search, order, sort, location,
-      propertyType, minRent, maxRent, minMortgage, maxMortgage, minArea, maxArea
-    })
     try {
       const response = await getHouses(
         transactionType, search, order, sort, location,
         propertyType, '', '', minRent, maxRent, minMortgage, maxMortgage, minArea, maxArea
       )
-      console.log('getHouses response:', response)
       setHouses(response)
       setCurrentPage(1)
     } catch (error) {

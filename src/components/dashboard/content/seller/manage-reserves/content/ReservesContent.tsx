@@ -44,7 +44,6 @@ const ReservesContent = ({ reserves, fetchHouse, reset }: { reset: () => void, r
 
     const changeStatus = async (id: string, status: "continue" | "cancel") => {
         const res = await changeStatusBook(id, status);
-        console.log(res)
         if (res) {
             showToast("success", " وعضیت با موفقیت تغییر یافت ")
         }
@@ -64,7 +63,7 @@ const ReservesContent = ({ reserves, fetchHouse, reset }: { reset: () => void, r
             <Table className='text-right max-lg:hidden overflow-hidden'>
                 <TableHeader className='bg-subBg2 rounded-2xl text-foreground'>
                     <TableRow className='text-right'>
-                        <TableHead className='text-right text-foreground'>{t('hotelName')}</TableHead>
+                        <TableHead className='text-right text-foreground'>نام ملک</TableHead>
                         <TableHead className='text-right text-foreground'>{t('passengerInfo')}</TableHead>
                         <TableHead className='text-right text-foreground'>{t('reserveDate')}</TableHead>
                         <TableHead className='text-right text-foreground'>{t('amount')}</TableHead>

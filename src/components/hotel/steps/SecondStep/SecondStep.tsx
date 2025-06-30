@@ -33,9 +33,7 @@ const SecondStep: FC<ISecondStep> = ({
             sharedEmail: book?.sharedEmail,
             sharedMobile: book?.sharedMobile
         }
-        console.log(bookData)
         const response = await createBook(bookData)
-        console.log(response)
         if(response){
             handleCurrentStepIncrease()
         }

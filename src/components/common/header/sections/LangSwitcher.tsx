@@ -26,7 +26,6 @@ export default function LanguageSwitcher() {
         placeholder=""
         value={currentLocale}
         onValueChange={(value => {
-          console.log(value);
           changeLangUseSelection(value);
         })}
         selectItems={[

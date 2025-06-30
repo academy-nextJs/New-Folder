@@ -1,5 +1,4 @@
 /* eslint-disable */
-
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import type { StaticImageData } from 'next/image'
 import mainImage from '@/assets/MainImage.png'
@@ -9,6 +8,7 @@ import { useTranslations } from 'next-intl'
 import { useDirection } from '@/utils/hooks/useDirection'
 import CommonButton from '@/components/common/buttons/common/CommonButton'
 import { useHouseStore } from '@/utils/zustand/house'
+import { useUploadThing } from '@/utils/helper/uploadthing'
 
 interface FileImageProps {
   defaultImage: StaticImageData
@@ -17,10 +17,20 @@ interface FileImageProps {
 }
 
 const FileImage: React.FC<FileImageProps> = ({ defaultImage, selectedImage, onImageChange }) => {
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const { startUpload, isUploading } = useUploadThing("imageUploader");
+
+  const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
-      const fileUrl = URL.createObjectURL(e.target.files[0])
-      onImageChange(fileUrl)
+      const file = e.target.files[0]
+
+      try {
+        const res = await startUpload([file])
+        if (res && res[0]?.url) {
+          onImageChange(res[0].url)
+        }
+      } catch (error) {
+        console.error("Upload failed:", error)
+      }
     }
   }
 
@@ -46,6 +56,7 @@ const FileImage: React.FC<FileImageProps> = ({ defaultImage, selectedImage, onIm
           accept="image/*"
           onChange={handleChange}
           className="hidden"
+          disabled={isUploading}
         />
       )}
       <img
@@ -64,7 +75,6 @@ const FourthStep: React.FC<{ setStep: Dispatch<SetStateAction<number>> }> = ({ s
 
   const [selectedImages, setSelectedImages] = useState<(string | null)[]>([null, null, null, null])
 
-  // وقتی کامپوننت mount شد، photos از store بخوان
   useEffect(() => {
     const initialPhotos = house.photos || []
     const newImages: (string | null)[] = [null, null, null, null]

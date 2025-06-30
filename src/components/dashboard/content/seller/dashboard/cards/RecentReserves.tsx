@@ -77,7 +77,7 @@ const RecentReserves = ({
 
                         return <TableRow key={idx}>
                             <TableCell className='py-4 whitespace-nowrap flex gap-2 items-center'>
-                                <img src={house.photos[0] ? house.photos[0] : ""} alt='' width={107} height={78} className='rounded-[12px] bg-card-light' />
+                                <img src={house.photos[0] ? house.photos[0] : " "} alt=' ' width={107} height={78} className='rounded-[12px] bg-card-light' />
                                 {house.title}
                             </TableCell>
                             <TableCell className='whitespace-nowrap'>
@@ -99,7 +99,7 @@ const RecentReserves = ({
                     if (!house) return null
 
                     return <div key={idx} className='w-full max-sm:flex-col bg-subBg2 px-4 py-4 rounded-xl flex gap-4'>
-                        <img src={house.photos[0] || ""} alt=' ' className=' min-h-full w-[200px] max-sm:w-full max-sm:h-[200px] bg-card rounded-[12px]' />
+                        <img src={house.photos[0] || " "} alt=' ' className=' min-h-full w-[200px] max-sm:w-full max-sm:h-[200px] bg-card rounded-[12px]' />
                         <div className=' h-full flex flex-col gap-2 max-sm:gap-4 text-base'>
                             <div className='flex gap-4 items-center flex-wrap'> <Text className='text-subText' size={20} /> <p className='text-subText'> {t('hotelName')} : </p> <span> {house.title} </span> </div>
                             <div className='flex gap-4 items-center flex-wrap'> <Rocket className='text-subText' size={20} />  <p className='text-subText'> {t('reserveDate')} : </p> <span> {convertToJalaliString(house.last_updated)} </span> </div>
