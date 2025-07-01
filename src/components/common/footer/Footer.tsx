@@ -26,10 +26,7 @@ const Footer = () => {
                 </div>
                 <div
                     className={`
-                        bg-secondary w-10/12 dark:flex hidden justify-end relative
-                        after:content-[''] after:absolute after:top-[2] after:right-[-12]
-                        after:w-[33px] after:h-[100px] after:rotate-[20deg]
-                        after:bg-primary
+                        bg-secondary w-11/12 dark:flex hidden justify-end relative rounded-br-[10px]
                     `}
                 >
                     <Image alt="" src={DeltaLogo} />
