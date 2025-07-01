@@ -138,7 +138,7 @@ const ContentMyHouses = ({ houses, fetchReserve, reset }: {
                         {openMobileMenuIndex === idx && (
                             <div className={`flex absolute left-0 bottom-0 flex-col backdrop-blur-md border rounded-xl gap-2 p-2 z-20 shadow-2xl`}>
                                 <div onClick={() => redirect(`/rent/${house.id}`)} className='px-4 py-1 flex gap-2 rounded-xl justify-end flex-row-reverse cursor-pointer hover:bg-subBg2'> {t('details')} <Info size={16} /> </div>
-                                <div className='px-4 py-1 flex gap-2 rounded-xl justify-end flex-row-reverse cursor-pointer hover:bg-subBg2'> {t('edit')} <Edit size={16} /> </div>
+                                <EditHouseModal house={house} reset={reset} />
                                 <CommonModal onClick={() => handleDeleteHouse(house.id)} handleClick={t('delete')} title={t('deleteConfirm')} button={<div className='px-4 py-1 flex gap-2 rounded-xl justify-end flex-row-reverse cursor-pointer hover:bg-subBg2'> {t('delete')} <Delete size={16} /> </div>} />
                             </div>
                         )}

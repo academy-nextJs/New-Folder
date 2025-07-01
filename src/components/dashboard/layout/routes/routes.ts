@@ -7,7 +7,7 @@ export const routes = [
   { label: "dashboard", href: `/dashboard`, icon: Home },
   { label: "profile", href: "/dashboard/profile", icon: User },
   { label: "manageReserves", href: "/dashboard/manage-reserves", icon: PlusCircle },
-  { label: "favorites", href: "/dashboard/favorites", icon: Heart },
+  // { label: "favorites", href: "/dashboard/favorites", icon: Heart },
   // { label: "payments", href: "/dashboard/payments", icon: Coins },
   // { label: "notifications", href: "/dashboard/notifications", icon: BellDot },
 ] as Routes[]

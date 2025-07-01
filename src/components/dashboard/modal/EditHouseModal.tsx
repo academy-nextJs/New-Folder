@@ -4,7 +4,6 @@
 import { editHouse } from "@/utils/service/api/houses/editHouse"
 import { IHouse } from "@/types/houses-type/house-type"
 import { showToast } from "@/core/toast/toast"
-import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { useState } from "react"
@@ -21,20 +20,76 @@ import {
 } from "@/components/ui/dialog"
 import { Label } from "@/components/ui/label"
 import CommonButton from "@/components/common/buttons/common/CommonButton"
+import { z } from "zod";
 
 const schema = z.object({
-    title: z.string().min(1, "عنوان الزامی است."),
-    price: z.number({ invalid_type_error: "قیمت باید عدد باشد." }).min(1, "قیمت الزامی است."),
-    capacity: z.number({ invalid_type_error: "ظرفیت باید عدد باشد." }).min(1, "ظرفیت الزامی است."),
-    caption: z.string().min(1, "توضیحات الزامی است."),
+    title: z
+        .string({
+            required_error: "عنوان الزامی است.",
+            invalid_type_error: "عنوان باید رشته باشد.",
+        })
+        .min(1, "عنوان الزامی است."),
+
+    price: z
+        .number({
+            required_error: "قیمت الزامی است.",
+            invalid_type_error: "قیمت باید عدد باشد.",
+        })
+        .min(1, "قیمت باید حداقل 1 باشد."),
+
+    capacity: z
+        .number({
+            required_error: "ظرفیت الزامی است.",
+            invalid_type_error: "ظرفیت باید عدد باشد.",
+        })
+        .min(1, "ظرفیت باید حداقل 1 باشد."),
+
+    caption: z
+        .string({
+            required_error: "توضیحات الزامی است.",
+            invalid_type_error: "توضیحات باید رشته باشد.",
+        })
+        .min(1, "توضیحات الزامی است."),
+
     tags: z.array(z.string()).optional(),
-    rate: z.string().optional(),
-    address: z.string().min(1, "آدرس الزامی است."),
-    bathrooms: z.number({ invalid_type_error: "تعداد حمام باید عدد باشد." }).min(0, "تعداد حمام الزامی است."),
-    parking: z.number({ invalid_type_error: "تعداد پارکینگ باید عدد باشد." }).min(0, "تعداد پارکینگ الزامی است."),
-    rooms: z.number({ invalid_type_error: "تعداد اتاق باید عدد باشد." }).min(0, "تعداد اتاق الزامی است."),
-    transaction_type: z.enum(["", "rental", "mortgage", "reservation", "direct_purchase"]),
-})
+
+    address: z
+        .string({
+            required_error: "آدرس الزامی است.",
+            invalid_type_error: "آدرس باید رشته باشد.",
+        })
+        .min(1, "آدرس الزامی است."),
+
+    bathrooms: z
+        .number({
+            required_error: "تعداد حمام الزامی است.",
+            invalid_type_error: "تعداد حمام باید عدد باشد.",
+        })
+        .min(0, "تعداد حمام نمی‌تواند منفی باشد."),
+
+    parking: z
+        .number({
+            required_error: "تعداد پارکینگ الزامی است.",
+            invalid_type_error: "تعداد پارکینگ باید عدد باشد.",
+        })
+        .min(0, "تعداد پارکینگ نمی‌تواند منفی باشد."),
+
+    rooms: z
+        .number({
+            required_error: "تعداد اتاق الزامی است.",
+            invalid_type_error: "تعداد اتاق باید عدد باشد.",
+        })
+        .min(0, "تعداد اتاق نمی‌تواند منفی باشد."),
+
+    transaction_type: z.enum(
+        ["", "rental", "mortgage", "reservation", "direct_purchase"],
+        {
+            required_error: "نوع معامله الزامی است.",
+            invalid_type_error: "نوع معامله معتبر نیست.",
+        }
+    ),
+});
+
 
 type FormValues = z.infer<typeof schema>
 
@@ -76,13 +131,17 @@ const EditHouseModal = ({
             address: house.address,
             bathrooms: house.bathrooms,
             parking: house.parking,
-            rate: house.rate,
             rooms: house.rooms,
             transaction_type: house.transaction_type
         },
     })
 
+    const onError = (err: any) => {
+        console.log("Validation Errors:", err);
+    };
+
     const onSubmit = async (data: FormValues) => {
+        console.log("Submit")
         const dataSubmit = {
             title: data.title,
             price: JSON.stringify(data.price),
@@ -92,10 +151,8 @@ const EditHouseModal = ({
             address: data.address,
             bathrooms: data.bathrooms,
             parking: data.parking,
-            rate: data.rate,
             rooms: data.rooms,
             transaction_type: data.transaction_type
-
         }
 
         try {
@@ -119,15 +176,8 @@ const EditHouseModal = ({
             <DialogContent onMouseDown={(e) => e.stopPropagation()} className="max-w-[600px] overflow-y-auto max-h-dvh">
                 <DialogHeader>
                     <DialogTitle className="text-center">ویرایش مشخصات ملک</DialogTitle>
-                    <DialogClose asChild>
-                        <button
-                            className="absolute top-3 left-3 text-gray-500 hover:text-gray-700"
-                        >
-                            <X size={20} />
-                        </button>
-                    </DialogClose>
                 </DialogHeader>
-                <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 mt-2">
+                <form onSubmit={handleSubmit(onSubmit, onError)} className="flex flex-col gap-4 mt-2">
                     <div className="w-full flex flex-col gap-2">
                         <Label htmlFor="tags" className="text-subText text-sm">
                             تصاویر ملک
@@ -202,7 +252,7 @@ const EditHouseModal = ({
                             className="w-full h-[120px] rounded-xl border border-subText text-subText"
                         />
                         {errors.caption && <span className="text-xs text-danger">{errors.caption.message}</span>}
-                    </div>,
+                    </div>
                     <div className="flex flex-col gap-2">
                         <Label htmlFor="address" className="text-subText">آدرس</Label>
                         <Input
