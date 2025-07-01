@@ -121,11 +121,10 @@ html[lang="fa"] {
 }
 
 html[lang="en"] {
-  font-family: system-ui, sans-serif; /* یا 'Roboto', 'Open Sans', ... */
+  font-family: system-ui, sans-serif;
   direction: ltr;
 }
 
-/* اگه خواستی اعداد فارسی نشن در محیط فارسی */
 html[lang="fa"] .latin-digits {
   font-family: 'Roboto', sans-serif;
   direction: ltr;
