@@ -8,7 +8,7 @@ import FourthStep from './steps/FourthStep'
 import FifthStep from './steps/FifthStep'
 
 const ContentAddHouses = () => {
-  const [step, setStep] = useState<number>(3)
+  const [step, setStep] = useState<number>(0)
 
   return (
     <div className='flex flex-col gap-6'>

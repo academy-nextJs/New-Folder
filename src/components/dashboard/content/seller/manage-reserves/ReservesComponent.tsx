@@ -27,7 +27,6 @@ const ReservesComponent = () => {
         status: null,
     })
 
-    // ✅ اعمال فیلترها
     const handleApplyFilter = () => {
         let temp = [...reserves]
 
