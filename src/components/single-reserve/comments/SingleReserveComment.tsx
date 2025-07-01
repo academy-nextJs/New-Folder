@@ -17,6 +17,9 @@ const SingleReserveComment = ({ id }: Props) => {
   const [page, setPage] = useState(1)
   const [isLoading, setIsLoading] = useState(true)
   const [isFetching, setIsFetching] = useState(false)
+  const [viewReply, setViewReply] = useState<boolean>(false)
+  const [title, setTitle] = useState<string>('')
+  const [parent_comment_id, setParent_comment_id] = useState<string | null>(null)
 
   const fetchData = useCallback(async (pageNum: number) => {
     setIsFetching(true)
@@ -40,11 +43,11 @@ const SingleReserveComment = ({ id }: Props) => {
   return (
     <div className="flex flex-col items-center gap-12 w-full">
       <SingleReserveForm
-        parent_comment_id={null}
-        title=""
-        viewReply={false}
+        parent_comment_id={parent_comment_id}
+        title={title}
+        viewReply={viewReply}
         refetch={() => fetchData(page)}
-        setViewReply={() => {}}
+        setViewReply={setViewReply}
       />
 
       <svg width="999" height="3" viewBox="0 0 999 3" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -65,9 +68,9 @@ const SingleReserveComment = ({ id }: Props) => {
         isFetching={isFetching}
         page={page}
         setPage={setPage}
-        setTitle={() => {}}
-        setParent_comment_id={() => {}}
-        setViewReply={() => {}}
+        setTitle={setTitle}
+        setParent_comment_id={setParent_comment_id}
+        setViewReply={setViewReply}
       />
     </div>
   )
