@@ -31,7 +31,6 @@ const ReserveComponent = () => {
         }
     }, [search, order, sort, location, minPrice, maxPrice])
 
-    // فقط وقتی houses یا marker تغییر کرد، فیلتر کن
     useEffect(() => {
         if (!marker) {
             setFilteredHouses(houses)
