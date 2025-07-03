@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { HeartIcon, MessageCircleIcon, PinIcon } from "lucide-react";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
@@ -11,26 +11,58 @@ import ReservesCha from "./ReservesCha";
 import CallReserves from "./CallReserves";
 import { getDashboardSummary } from "@/utils/service/api/dashboard/getDashboardSummary";
 import { IDashboardSummary } from "@/types/dashboard-type/summary-type/summary-type";
+import { Loader } from "@/components/common/Loader";
 
 const ContentDashboard = () => {
   const t = useTranslations("dashboardBuyer");
   const [summary, setSummary] = useState<IDashboardSummary | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const getSummary = async () => {
     const summary = await getDashboardSummary();
     setSummary(summary);
-  }
+    setLoading(false);
+  };
 
   const cardData = [
-    { id: 1, title: summary?.houses, subtitle: " کل املاک", href: "/dashboard/manage-reserves" },
-    { id: 2, title: summary?.bookings, subtitle: " کل رزرو ها", href: "/dashboard/manage-reserves" },
-    { id: 4, title: summary?.users, subtitle: " کل کاربران", href: "/dashboard/manage-reserves" },
-    { id: 3, title: summary?.averageRating, subtitle: " میانگین امتیاز", href: "/dashboard/favorites" },
+    {
+      id: 1,
+      title: summary?.houses,
+      subtitle: " کل املاک",
+      href: "/dashboard/manage-reserves",
+    },
+    {
+      id: 2,
+      title: summary?.bookings,
+      subtitle: " کل رزرو ها",
+      href: "/dashboard/manage-reserves",
+    },
+    {
+      id: 4,
+      title: summary?.users,
+      subtitle: " کل کاربران",
+      href: "/dashboard/manage-reserves",
+    },
+    {
+      id: 3,
+      title: summary?.averageRating,
+      subtitle: " میانگین امتیاز",
+      href: "/dashboard/favorites",
+    },
   ];
 
   useEffect(() => {
     getSummary();
   }, []);
+
+  if (loading)
+    return (
+      <div className="w-full h-full pt-[250px] flex justify-center items-center">
+        <div className="w-[250px] mx-auto">
+          <Loader />
+        </div>
+      </div>
+    );
 
   return (
     <div className="flex justify-center flex-col w-full gap-2">
@@ -66,7 +98,10 @@ const ContentDashboard = () => {
               className="w-full rounded-b-xl object-cover my-2 "
             />
             <div className="flex flex-row justify-between w-full items-center mt-2">
-              <Link href={item.href} className=" text-textComment dark:text-bacgkroundW">
+              <Link
+                href={item.href}
+                className=" text-textComment dark:text-bacgkroundW"
+              >
                 {t("details")}
               </Link>
 
