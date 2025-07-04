@@ -9,7 +9,7 @@ import CommonButton from "../common/buttons/common/CommonButton";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { schemaLoginValidation } from "@/utils/validations/login-validation";
 import { Button } from "../ui/button";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { showToast } from "@/core/toast/toast";
 import { redirect } from "next/navigation";
 import { signIn } from "next-auth/react";
@@ -17,6 +17,7 @@ import { fetchApi } from "@/core/interceptore/fetchApi";
 import { useTranslations } from "next-intl";
 import { useDirection } from "@/utils/hooks/useDirection";
 import { jwtDecode } from "jwt-decode";
+import ReCAPTCHA from "react-google-recaptcha";
 
 export interface LoginResponse {
   accessToken: string;
@@ -24,10 +25,11 @@ export interface LoginResponse {
 }
 
 const LoginForm = () => {
-  const t = useTranslations('auth.loginForm');
-  const dir = useDirection()
+  const t = useTranslations("auth.loginForm");
+  const dir = useDirection();
   const [showPassword, setShowPassword] = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   const {
     register,
@@ -40,47 +42,71 @@ const LoginForm = () => {
 
   const handleLogin = async (values: any) => {
     setIsLoading(true);
-    const user = await fetchApi.post("/auth/login", {
-      email: values.email,
-      password: values.password
-    }) as any;
 
-    let decoded: any = null;
+    if (!recaptchaRef.current) return;
 
-    if (user?.accessToken) {
-      decoded = jwtDecode(user.accessToken);
-    }
+    const token = await recaptchaRef.current.executeAsync();
+    recaptchaRef.current.reset();
 
-    const res = await signIn("credentials", {
-      redirect: false,
-      accessToken: user?.accessToken,
-      refreshToken: user?.refreshToken,
-      password: values.password
+    const response = await fetch("/api/submit-form", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        token,
+        email: values.email,
+      }),
     });
 
-    setIsLoading(false);
+    if (response.ok) {
+      const user = (await fetchApi.post("/auth/login", {
+        email: values.email,
+        password: values.password,
+      })) as any;
 
-    if (res) {
-      showToast("success", t("successTitle"), t("close"), "");
-      reset();
-      if (decoded?.role === "seller") {
-        redirect("/dashboard/seller");
-      } else if (decoded?.role === "buyer") {
-        redirect("/dashboard");
+      let decoded: any = null;
+
+      if (user?.accessToken) {
+        decoded = jwtDecode(user.accessToken);
+      }
+
+      const res = await signIn("credentials", {
+        redirect: false,
+        accessToken: user?.accessToken,
+        refreshToken: user?.refreshToken,
+        password: values.password,
+      });
+
+      setIsLoading(false);
+
+      if (res?.ok) {
+        showToast("success", t("successTitle"), t("close"), "");
+        reset();
+        if (decoded?.role === "seller") {
+          redirect("/dashboard/seller");
+        } else if (decoded?.role === "buyer") {
+          redirect("/dashboard");
+        }
       }
     } else {
-      showToast("error", t("errorTitle"), t("close"), t("errorMessage"));
+      showToast("error", " reCaptCHA failed, please try again.");
+      setIsLoading(false);
     }
+
+    setIsLoading(false);
   };
 
-
   return (
-    <div dir={dir} >
+    <div dir={dir}>
       <form
         className="mt-8 space-y-6 text-foreground"
         onSubmit={handleSubmit(handleLogin)}
       >
         <div className="rounded-md -space-y-px flex md:flex-nowrap flex-wrap gap-4">
+          <ReCAPTCHA
+            sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
+            size="invisible"
+            ref={recaptchaRef}
+          />
           <div className="md:w-1/2 w-full flex gap-1 flex-col text-card-foreground">
             <Label htmlFor="email" className={`text-[13px] flex gap-0.5`}>
               <span>{t("email")}</span>
@@ -117,7 +143,9 @@ const LoginForm = () => {
                 <Button
                   variant={"scale"}
                   onClick={() => setShowPassword(!showPassword)}
-                  className={`cursor-pointer bg-transparent text-card-foreground absolute top-2 ${dir === "rtl" ? "left-3" : "right-3"} `}
+                  className={`cursor-pointer bg-transparent text-card-foreground absolute top-2 ${
+                    dir === "rtl" ? "left-3" : "right-3"
+                  } `}
                   type="button"
                 >
                   {showPassword ? (
@@ -134,7 +162,11 @@ const LoginForm = () => {
                 )}
               </div>
               <span className="text-card-foreground flex gap-2 text-sm cursor-pointer">
-                <p>{t("forgotPassword")}</p> <ArrowLeft className={` ${dir === "ltr" && "rotate-180"} `} size={20} />
+                <p>{t("forgotPassword")}</p>{" "}
+                <ArrowLeft
+                  className={` ${dir === "ltr" && "rotate-180"} `}
+                  size={20}
+                />
               </span>
             </div>
           </div>
