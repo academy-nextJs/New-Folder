@@ -53,7 +53,7 @@ const SelectImageModal: React.FC<SelectImageModalProps> = ({ open, setOpen, setS
           <UploadButton<OurFileRouter, "imageUploader">
             endpoint="imageUploader"
             onClientUploadComplete={(res) => {
-              const url = res?.[0]?.url;
+              const url = res?.[0]?.serverData.url;
               if (url) {
                 setSelectedImage(url);
                 setOpen(false);

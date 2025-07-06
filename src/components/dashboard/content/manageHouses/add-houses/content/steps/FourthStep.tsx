@@ -1,49 +1,57 @@
 /* eslint-disable */
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
-import type { StaticImageData } from 'next/image'
-import mainImage from '@/assets/MainImage.png'
-import addImage from '@/assets/AddImage.png'
-import { ChevronLeft, ChevronRight, X } from 'lucide-react'
-import { useTranslations } from 'next-intl'
-import { useDirection } from '@/utils/hooks/useDirection'
-import CommonButton from '@/components/common/buttons/common/CommonButton'
-import { useHouseStore } from '@/utils/zustand/house'
-import { useUploadThing } from '@/utils/helper/uploadthing'
-import { Label } from '@/components/ui/label'
-import { showToast } from '@/core/toast/toast'
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import type { StaticImageData } from "next/image";
+import mainImage from "@/assets/MainImage.png";
+import addImage from "@/assets/AddImage.png";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { useDirection } from "@/utils/hooks/useDirection";
+import CommonButton from "@/components/common/buttons/common/CommonButton";
+import { useHouseStore } from "@/utils/zustand/house";
+import { useUploadThing } from "@/utils/helper/uploadthing";
+import { Label } from "@/components/ui/label";
+import { showToast } from "@/core/toast/toast";
 
 interface FileImageProps {
-  defaultImage: StaticImageData
-  selectedImage: string | null
-  onImageChange: (image: string | null) => void
+  defaultImage: StaticImageData;
+  selectedImage: string | null;
+  onImageChange: (image: string | null) => void;
 }
 
-const FileImage: React.FC<FileImageProps> = ({ defaultImage, selectedImage, onImageChange }) => {
+const FileImage: React.FC<FileImageProps> = ({
+  defaultImage,
+  selectedImage,
+  onImageChange,
+}) => {
   const { startUpload, isUploading } = useUploadThing("imageUploader");
 
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
-      const file = e.target.files[0]
+      const file = e.target.files[0];
 
       try {
-        const res = await startUpload([file])
-        if (res && res[0]?.url) {
-          onImageChange(res[0].url)
+        const res = await startUpload([file]);
+        if (res && res[0].serverData.url) {
+          onImageChange(res[0].serverData.url);
         }
       } catch (error) {
-        console.error("Upload failed:", error)
+        console.error("Upload failed:", error);
       }
     }
-  }
+  };
 
   const handleClear = () => {
-    onImageChange(null)
-  }
+    onImageChange(null);
+  };
 
-  const imgSrc = selectedImage || defaultImage.src
+  const imgSrc = selectedImage || defaultImage.src;
 
   return (
-    <label className={`relative w-[189px] h-[189px] ${!selectedImage ? 'cursor-pointer' : ''}`}>
+    <label
+      className={`relative w-[189px] h-[189px] ${
+        !selectedImage ? "cursor-pointer" : ""
+      }`}
+    >
       {selectedImage && (
         <div
           onClick={handleClear}
@@ -67,17 +75,24 @@ const FileImage: React.FC<FileImageProps> = ({ defaultImage, selectedImage, onIm
         className="object-cover rounded-2xl w-full h-full"
       />
     </label>
-  )
-}
+  );
+};
 
-const FourthStep: React.FC<{ setStep: Dispatch<SetStateAction<number>> }> = ({ setStep }) => {
-  const t = useTranslations('dashboardSeller.fourthStep')
-  const dir = useDirection()
-  const { data: house, setData } = useHouseStore()
+const FourthStep: React.FC<{ setStep: Dispatch<SetStateAction<number>> }> = ({
+  setStep,
+}) => {
+  const t = useTranslations("dashboardSeller.fourthStep");
+  const dir = useDirection();
+  const { data: house, setData } = useHouseStore();
 
-  const [selectedImages, setSelectedImages] = useState<(string | null)[]>([null, null, null, null])
+  const [selectedImages, setSelectedImages] = useState<(string | null)[]>([
+    null,
+    null,
+    null,
+    null,
+  ]);
   const [photos, setPhotos] = useState<string[]>(house.photos || []);
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState("");
 
   const removePhotos = (indexToRemove: any) => {
     setPhotos(photos.filter((_, index) => index !== indexToRemove));
@@ -85,58 +100,61 @@ const FourthStep: React.FC<{ setStep: Dispatch<SetStateAction<number>> }> = ({ s
 
   const handleSubmitPhotos = () => {
     setData({
-      photos: photos
-    })
-    showToast("success", " تصاویر با موفقیت ثبت شد ")
-  }
+      photos: photos,
+    });
+    showToast("success", " تصاویر با موفقیت ثبت شد ");
+  };
 
   const handleKeyDown = (e: any) => {
-    if ((e.key === 'Enter' || e.key === ',') && input.trim()) {
+    if ((e.key === "Enter" || e.key === ",") && input.trim()) {
       e.preventDefault();
-      const newTag = input.trim()
+      const newTag = input.trim();
       if (!photos.includes(newTag)) {
         setPhotos([...photos, newTag]);
       }
-      setInput('');
-    } else if (e.key === 'Backspace' && !input && photos.length) {
+      setInput("");
+    } else if (e.key === "Backspace" && !input && photos.length) {
       setPhotos(photos.slice(0, -1));
     }
   };
 
   useEffect(() => {
-    const initialPhotos = house.photos || []
-    const newImages: (string | null)[] = [null, null, null, null]
+    const initialPhotos = house.photos || [];
+    const newImages: (string | null)[] = [null, null, null, null];
     for (let i = 0; i < newImages.length; i++) {
-      newImages[i] = initialPhotos[i] || null
+      newImages[i] = initialPhotos[i] || null;
     }
-    setSelectedImages(newImages)
-  }, [house.photos])
+    setSelectedImages(newImages);
+  }, [house.photos]);
 
   const handleImageChange = (index: number, url: string | null) => {
-    setSelectedImages(prev => {
-      const newArr = [...prev]
-      newArr[index] = url
-      return newArr
-    })
-  }
+    setSelectedImages((prev) => {
+      const newArr = [...prev];
+      newArr[index] = url;
+      return newArr;
+    });
+  };
 
   const nextStep = () => {
-    const photos = selectedImages.filter((img): img is string => img !== null)
-    setData({ photos })
-    setStep(prev => prev + 1)
-  }
+    const photos = selectedImages.filter((img): img is string => img !== null);
+    setData({ photos });
+    setStep((prev) => prev + 1);
+  };
 
   return (
     <div dir={dir} className="flex flex-col gap-24">
       <div className="flex flex-col gap-4">
-        <h2>{t('title')}</h2>
+        <h2>{t("title")}</h2>
         <span>
-          <span className="text-primary">{t('desc1')}</span>
-          {t('desc2')}
+          <span className="text-primary">{t("desc1")}</span>
+          {t("desc2")}
         </span>
       </div>
-      <div className='flex gap-4 max-w-[800px] items-end'>
-        <CommonButton title=" ثبت تصاویر " onclick={() => handleSubmitPhotos()} />
+      <div className="flex gap-4 max-w-[800px] items-end">
+        <CommonButton
+          title=" ثبت تصاویر "
+          onclick={() => handleSubmitPhotos()}
+        />
         <div className="w-full flex flex-col gap-2">
           <Label htmlFor="tags" className="text-subText text-sm">
             تصاویر ملک
@@ -197,7 +215,7 @@ const FourthStep: React.FC<{ setStep: Dispatch<SetStateAction<number>> }> = ({ s
           title="مرحله قبل"
           classname="w-fit flex-row-reverse bg-subText text-[#000000]"
           icon={<ChevronRight size={16} />}
-          onclick={() => setStep(prev => prev - 1)}
+          onclick={() => setStep((prev) => prev - 1)}
         />
         <CommonButton
           type="button"
@@ -208,7 +226,7 @@ const FourthStep: React.FC<{ setStep: Dispatch<SetStateAction<number>> }> = ({ s
         />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default FourthStep
+export default FourthStep;

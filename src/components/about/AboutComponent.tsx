@@ -1,7 +1,7 @@
 "use client";
-import { motion } from "framer-motion";
 import { UserCircle2 } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { motion, easeOut } from "framer-motion";
 
 const container = {
   hidden: { opacity: 0, y: 40 },
@@ -12,7 +12,7 @@ const container = {
       when: "beforeChildren",
       staggerChildren: 0.2,
       duration: 0.8,
-      ease: "easeOut",
+      ease: easeOut,
     },
   },
 };
@@ -22,9 +22,10 @@ const item = {
   show: {
     opacity: 1,
     scale: 1,
-    transition: { duration: 0.5, ease: "easeOut" },
+    transition: { duration: 0.5, ease: easeOut },
   },
 };
+
 
 export default function AboutComponent() {
   const t = useTranslations("about");
@@ -43,7 +44,6 @@ export default function AboutComponent() {
       >
         <motion.h1
           className="text-5xl font-extrabold mb-6 bg-gradient-to-r from-primary to-cyan-400 text-transparent bg-clip-text drop-shadow-lg"
-          variants={item}
         >
           {t("title")}
         </motion.h1>

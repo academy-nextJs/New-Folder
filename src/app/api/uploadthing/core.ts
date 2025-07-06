@@ -19,9 +19,14 @@ export const ourFileRouter = {
       return { userId: user.id };
     })
     .onUploadComplete(async ({ metadata, file }) => {
+      console.log("Uploaded file data:", file);
+
+      const fileId = (file as any).id || (file as any).fileId || "unknown-id";
+      const url = `https://yourcdn.com/files/${fileId}`;
+
       return {
         uploadedBy: metadata.userId,
-        url: file.url,
+        url,
       };
     }),
 } satisfies FileRouter;
