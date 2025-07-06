@@ -2,10 +2,6 @@ import { withUt } from "uploadthing/tw";
 
 const config = withUt({
   content: ["./pages/**/*.{js,ts,jsx,tsx}", "./src/**/*.{js,ts,jsx,tsx}"],
-  safelist: [
-    { pattern: /before:content-\[/ },
-    { pattern: /after:content-\[/ },
-  ],
   darkMode: "class",
   theme: {
   	extend: {
