@@ -7,7 +7,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { MoreHorizontal, X } from 'lucide-react';
-import DeltaIcon from "@/app/[locale]/icon.png";
+import DeltaIcon from "@/assets/images/icon.png";
 import useClearPathname from '@/utils/helper/clearPathname/clearPathname';
 import { useTranslations } from 'next-intl';
 import { getProfileById } from '@/utils/service/api/profile/getProfileById';
